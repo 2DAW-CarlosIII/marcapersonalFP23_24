@@ -10,7 +10,7 @@
          </div>
          <div class="card-body" style="padding:30px">
 
-            <form action="{{ url('/catalog/create') }}" method="POST">
+            <form action="{{ url('/catalog/create') }}" method="POST" enctype="multipart/form-data">
 
 	            @csrf
 
@@ -36,6 +36,11 @@
                    <br /><small>Cada metadato irá separado del siguiente por una línea <br />
                    y la clave irá separada por : del valor</small>
 	            </div>
+
+                <div class="form-group">
+                    <label for="avatar">Avatar</label>
+                    <input type="file" class="form-control" id="avatar" name="avatar" placeholder="Avatar">
+                </div>
 
 	            <div class="form-group text-center">
 	               <button type="submit" class="btn btn-primary" style="padding:8px 100px;margin-top:25px;">
