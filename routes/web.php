@@ -24,3 +24,23 @@ Route::get('login', function () {
 Route::get('logout', function () {
     return 'Has cerrado sesión correctamente';
 });
+
+Route::prefix('proyectos')->group(function(){
+    Route::get('/', function () {
+    return 'Mostrando la lista de proyectos';
+    });
+
+    Route::get('/show/{id}', function ($id) {
+        return 'Mostrando el proyecto con id ' . $id;
+    });
+
+    Route::get('/create', function () {
+        return 'Creando un nuevo proyecto';
+    });
+
+    Route::get('/edit/{id}', function ($id) {
+        return 'Editando el proyecto con id ' . $id;
+    });
+
+});
+
