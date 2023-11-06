@@ -14,5 +14,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return 'Pantalla principal';
+});
+
+Route::get('login', function () {
+    return 'Has iniciado sesión correctamente';
+});
+
+Route::get('logout', function () {
+    return 'Has cerrado sesión correctamente';
 });
