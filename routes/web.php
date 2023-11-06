@@ -22,12 +22,10 @@ Route::get('login', function () {
 });
 
 Route::get('logout', function () {
-    return "Pantalla de Login usuario";
+    return "Pantalla de Logout usuario";
 });
 
-Route::get('logout', function () {
-    return "Pantalla de Login usuario";
-});
+
 
 Route::prefix('proyectos')->group(function () {
     Route::get('/', function () {
