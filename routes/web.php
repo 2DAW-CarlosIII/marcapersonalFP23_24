@@ -32,7 +32,7 @@ Route::prefix('proyectos')->group(function(){
 
     Route::get('/show/{id}', function ($id) {
         return 'Mostrando el proyecto con id ' . $id;
-    });
+    })->where('id', '[0-9]+');
 
     Route::get('/create', function () {
         return 'Creando un nuevo proyecto';
@@ -40,7 +40,15 @@ Route::prefix('proyectos')->group(function(){
 
     Route::get('/edit/{id}', function ($id) {
         return 'Editando el proyecto con id ' . $id;
-    });
+    })->where('id', '[0-9]+');
 
 });
 
+Route::get('perfil/{id?}', function ($id = null) {
+    if($id == null){
+        $salida = 'Visualizando tu curriculo';
+    }else{
+        $salida = 'Visualizando el curriculo del id ' . $id;
+    }
+    return $salida;
+})->where('id', '[0-9]+');
