@@ -27,23 +27,23 @@ Route::get('/', function () {
 });
 
 Route::get('/login', function () {
-    return "Login Usuario";
+    return "Login usuario";
 });
 
 Route::get('/logout', function () {
-    return "Logout Usuario";
+    return "Logout usuario";
 });
 
 Route::get('/proyectos', function () {
-    return "Login Usuario";
+    return "Login usuario";
 });
 
 Route::get('/proyectos', function () {
-    return "Listado de proyectos";
+    return "Listado proyectos";
 });
 
 Route::get('/proyectos/show/{id}', function ($id) {
-    return "Vista a detalle de proyecto " . $id;
+    return "Vista detalle proyecto " . $id;
 })->where('id', '[0-9]+');
 
 Route::get('/proyectos/create', function () {
@@ -55,7 +55,7 @@ Route::get('/proyectos/edit/{id}', function ($id) {
 })->where('id', '[0-9]+');
 
 Route::get('/perfil/{id?}', function ($id = null) {
-    $result = $id ? "Visualizar el currículo de " . $id : "Visualizar curriculo propio";
+    $result = $id ? "Visualizar el currículo de " . $id : "Visualizar el currículo propio";
     return $result;
 })->where('id', '[0-9]+');
 
