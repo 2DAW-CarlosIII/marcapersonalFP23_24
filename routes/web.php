@@ -41,5 +41,11 @@ Route::get('/proyectos/edit/{id}', function ($id) {
     return 'Modificar proyecto ' . $id;
 })->where('id', '[0-9]+');
 
-
+Route::get('/perfil/{id?}', function ($id="propio") {
+    if ($id=="propio") {
+        return 'Visualizar el currículo ' . $id;
+    }else {
+        return 'Visualizar el currículo de '.$id;
+    }
+})->where('id', '[0-9]+');
 
