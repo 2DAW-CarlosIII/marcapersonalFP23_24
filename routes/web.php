@@ -18,7 +18,7 @@ Route::get('/', function () {
 });
 
 Route::get('login', function () {
-    return "Pantalla de login usuario";
+    return "Login usuario";
 });
 
 Route::get('logout', function () {
@@ -48,8 +48,15 @@ Route::prefix('proyectos')->group(function () {
 
 });
 
-Route::get('perfil/{id?}', function ($id = "propio") {
-    return "Visualizar el currículo  ". $id;
+Route::get('perfil/{id?}', function ($id = null) {
+
+    if($id === null){
+        $id="propio";
+    }else{
+        $id = "de " . $id;
+    }
+
+    return "Visualizar el currículo " . $id;
 })->where('id', '[0-9]+');
 
 
