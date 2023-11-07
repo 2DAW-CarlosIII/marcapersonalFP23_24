@@ -30,17 +30,21 @@ Route::prefix('proyectos')->group(function () {
         return "Listado proyectos";
     });
     Route::get('/show/{id}', function ($id) {
-        return "Vista detalle proyecto id:" . $id;
-    });
-    Route::get('/create', function ($id) {
-        return "Añadir proyecto id:" . $id;
+        return "Vista detalle proyecto " . $id;
+    })->where('id', '[0-9]+');
+    Route::get('/create', function () {
+        return "Añadir proyecto";
     });
     Route::get('/edit/{id}', function ($id) {
-        return "Modificar proyecto id:" . $id;
-    });
+        return "Modificar proyecto " . $id;
+    })->where('id', '[0-9]+');
 
 });
 
-Route::get('perfil/{id}', function ($id) {
-    return "Visualizar el currículo de id:" . $id;
+Route::get('/perfil', function () {
+    return "Visualizar el currículo propio";
 });
+
+Route::get('/perfil/{id}', function ($id) {
+    return "Visualizar el currículo de " . $id;
+})->where('id', '[0-9]+');
