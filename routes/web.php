@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return "Pantalla principal";
 });
 
 Route::get('/login', function () {
@@ -28,7 +28,7 @@ Route::get('/logout', function () {
 Route::prefix('/proyectos')->group(function () {
 
     Route::get('/', function () {
-        return "Listado de proyectos";
+        return "Listado proyectos";
     });
 
     Route::get('/show/{id}', function ($id) {
@@ -43,7 +43,10 @@ Route::prefix('/proyectos')->group(function () {
         return "Modificar proyecto ". $id;
     })->where('id', '[0-9]+');
 });
+Route::get('/perfil', function () {
+    return "Visualizar el currículo propio";
+});
 
-Route::get('/perfil/{id}', function ($id) {
+Route::get('/perfil/{id}', function ($id="propio") {
     return "Visualizar el currículo de ". $id;
 })->where('id', '[0-9]+');
