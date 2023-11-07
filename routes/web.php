@@ -28,13 +28,15 @@ Route::prefix('proyectos')->group(function () {
     });
     Route::get('/show/{id}', function ($id) {
         return "Vista detalle proyecto " . $id;
-    });
+    })
+    ->where('id', '[0-9]+');
     Route::get('/create', function () {
         return "Añadir proyecto";
     });
     Route::get('/edit/{id}', function ($id) {
         return "Modificar proyecto " . $id;
-    });
+    })
+    ->where('id', '[0-9]+');
 });
 Route::get('/perfil/{id?}', function ($id = null) {
     if($id !== null){
@@ -42,4 +44,5 @@ Route::get('/perfil/{id?}', function ($id = null) {
     } else {
         return "Visualizar el currículo propio";
     }
-});
+})
+->where('id', '[0-9]+');
