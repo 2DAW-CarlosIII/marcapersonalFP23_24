@@ -19,11 +19,11 @@ Route::get('/', function () {
     return "Pantalla principal";
 });
 
-Route::get("/login",function(){
+Route::get("login",function(){
     return "Login usuario";
 });
 
-Route::get("/logout",function(){
+Route::get("logout",function(){
     return "Logout usuario";
 });
 
@@ -45,12 +45,6 @@ Route::prefix("proyectos")->group(function(){
     })->where("id","[0-9]+");
 });
 
-Route::get("/perfil/{id?}",function($id){
-    $salida = "Visualizar el currículo";
-    if(is_numeric($id)){
-        $salida = $salida + " de $id";
-    }else{
-        $salida = $salida + " propio";
-    }
-    return $salida;
-});
+Route::get("perfil/{id?}",function($id="propio"){
+    return "Visualizar el currículo $id";
+})->where("id","[0-9]+");
