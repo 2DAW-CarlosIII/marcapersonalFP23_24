@@ -15,40 +15,47 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return "Pantalla principal";
-});
+ });
 
-Route::get('login', function () {
+
+ Route::get('/login', function () {
     return "Login usuario";
-});
+ });
 
-Route::get('logout', function () {
+
+ Route::get('/logout', function () {
     return "Logout usuario";
-});
+ });
 
-Route::prefix('proyectos')->group(function () {
-    Route::get('/', function () {
-        return "Listado proyectos";
-    });
-    Route::get('/show/{id}', function ($id) {
-        return "Vista detalle proyecto " . $id;
-    })
-        ->where('id', '[0-9]+');
 
-    Route::get('/create', function () {
-        return "Añadir proyecto";
-    });
+ Route::get('/proyectos', function () {
+    return "Listado proyectos";
+ });
 
-    Route::get('/edit/{id}', function ($id) {
-        return "Modificar proyecto " . $id;
-    })
-        ->where('id', '[0-9]+');
-});
 
-Route::get('perfil/{id?}', function ($id = null) {
-    if ($id == null) {
-        return "Visualizar el currículo propio";
+ Route::get('/proyectos/show/{id}', function ($id) {
+    return "Vista detalle proyecto " . $id;
+ })
+    ->where('id', '[0-9]+');
+
+
+ Route::get('/proyectos/create', function () {
+    return "Añadir proyecto";
+ });
+
+
+ Route::get('/proyectos/edit/{id}', function ($id) {
+    return "Modificar proyecto " . $id;
+ })
+    ->where('id', '[0-9]+');
+
+
+ Route::get('perfil/{id?}', function ($id = "propio") {
+    if ($id == "propio") {
+        $salida = "Visualizar el currículo " . $id;
     } else {
-        return "Visualizar el currículo de " . $id;
+        $salida = "Visualizar el currículo de " . $id;
     }
-})
+    return $salida;
+ })
     ->where('id', '[0-9]+');
