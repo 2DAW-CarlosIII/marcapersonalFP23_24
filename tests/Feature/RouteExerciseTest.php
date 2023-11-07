@@ -90,6 +90,11 @@ class RouteExerciseTest extends TestCase
 
         $response->assertStatus(200)->assertSeeText($value, $escaped = true);
 
+        $value = "Visualizar el currículo propio";
+        $response = $this->get("/perfil");
+
+        $response->assertStatus(200)->assertSeeText($value, $escaped = true);
+
         $response = $this->get("/perfil/" . chr($id));
         $response->assertNotFound();
     }
