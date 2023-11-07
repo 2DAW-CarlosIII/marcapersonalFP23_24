@@ -35,7 +35,7 @@ Route::get('proyectos', function()
 Route::get('/proyectos/show/{id}', function ($id) {
 
     return 'Vista detalle proyecto ' . $id;
-});
+})->where('id', '[0-9]+');
 
 Route::get('proyectos/create', function()
 {
@@ -45,9 +45,17 @@ Route::get('proyectos/create', function()
 Route::get('/proyectos/edit/{id}', function ($id) {
 
     return 'Modificar proyecto ' . $id;
-});
+})->where('id', '[0-9]+');
 
-Route::get('/perfil/{id}', function ($id) {
 
-    return 'Visualizar el currículo de ' . $id;
-});
+Route::get('/perfil/{id?}', function ($id = null) {
+
+    if ($id == null) {
+        $salida = "Visualizar el currículo propio";
+    } else {
+        $salida = "Visualizar el currículo de " . $id;
+    }
+    
+
+    return $salida;
+})->where('id', '[0-9]+');
