@@ -18,37 +18,37 @@ Route::get('/', function () {
 });
 
 Route::get('login', function () {
-    return 'Has iniciado sesión correctamente';
+    return 'Login usuario';
 });
 
 Route::get('logout', function () {
-    return 'Has cerrado sesión correctamente';
+    return 'Logout usuario';
 });
 
 Route::prefix('proyectos')->group(function(){
     Route::get('/', function () {
-    return 'Mostrando la lista de proyectos';
+    return 'Listado proyectos';
     });
 
     Route::get('/show/{id}', function ($id) {
-        return 'Mostrando el proyecto con id ' . $id;
+        return 'Vista detalle proyecto ' . $id;
     })->where('id', '[0-9]+');
 
     Route::get('/create', function () {
-        return 'Creando un nuevo proyecto';
+        return 'Añadir proyecto';
     });
 
     Route::get('/edit/{id}', function ($id) {
-        return 'Editando el proyecto con id ' . $id;
+        return 'Modificar proyecto ' . $id;
     })->where('id', '[0-9]+');
 
 });
 
 Route::get('perfil/{id?}', function ($id = null) {
     if($id == null){
-        $salida = 'Visualizando tu curriculo';
+        $salida = 'Visualizar el currículo propio';
     }else{
-        $salida = 'Visualizando el curriculo del id ' . $id;
+        $salida = 'Visualizar el currículo de ' . $id;
     }
     return $salida;
 })->where('id', '[0-9]+');
