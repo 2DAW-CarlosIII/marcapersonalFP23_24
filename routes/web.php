@@ -59,3 +59,35 @@ Route::get('/', function () {
     return $salida;
  })
     ->where('id', '[0-9]+');
+
+//ejercicios de vistas
+
+Route::get('/', function()
+{
+    return view('home');
+});
+
+Route::get('login', function()
+{
+    return view('auth.login');
+});
+
+Route::get('/proyectos', function()
+{
+    return view('proyectos.index');
+});
+
+Route::get('/proyectos/show/{id}', function($id)
+{
+    return view('proyectos.show', array('id'=>$id));
+});
+
+Route::get('/proyectos/create', function()
+{
+    return view('proyectos.create');
+});
+
+Route::get('/proyectos/edit/{id}', function($id)
+{
+    return view('proyectos.edit', array('id' => $id));
+});
