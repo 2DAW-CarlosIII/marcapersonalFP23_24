@@ -13,11 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     return "Pantalla principal";
-});
+});*/
 
-Route::get('home/{nombre?}', function ($nombre = 'Jhon Doe') {
+Route::get('/{nombre?}', function ($nombre = 'Jhon Doe') {
     return view('home', array('nombre' => $nombre));
 });
 
@@ -34,21 +34,21 @@ Route::get('logout', function () {
     return view("auth.login");
 });
 
-Route::prefix('proyectos')->group(function () {
+Route::prefix('catalog')->group(function () {
     Route::get('/', function () {
-        return view("proyectos.index");
+        return view("catalog.index");
     });
     Route::get('/show/{id}', function ($id) {
-        return view('proyectos.show') ->with('id',$id);
+        return view('catalog.show') ->with('id',$id);
     })
      ->where('id', '[0-9]+');
 
     Route::get('/create', function () {
-        return view('proyectos.create');
+        return view('catalog.create');
     });
 
     Route::get('/edit/{id}', function ($id) {
-        return view('proyectos.edit') -> with('id', $id);
+        return view('catalog.edit') -> with('id', $id);
     })
         ->where('id', '[0-9]+');
 });

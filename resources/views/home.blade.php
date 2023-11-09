@@ -1,8 +1,7 @@
-<html>
-    <head>
-        <title>Mi Web</title>
-    </head>
-    <body>
-        <h1>¡Hola {{$nombre}}!</h1>
-    </body>
-</html>
+@extends('layouts.master')
+
+@section('content')
+
+    <h1>¡Hola {{$nombre}}!</h1>
+
+@stop
