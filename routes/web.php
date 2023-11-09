@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return "Pantalla principal";
+    return view('home');
 });
 
 Route::get('login', function () {
