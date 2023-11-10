@@ -2,6 +2,6 @@
 
 @section('content')
 
-    Pantalla principal
+    Pantalla principal proyectos
 
 @stop

@@ -29,19 +29,18 @@ Route::prefix('catalog')->group(function () {
     Route::get('/', function () {
         return view('catalog.index');
     });
-    Route::get('/show/{id}', function ($id) {
-        return "Vista detalle proyecto " . $id;
-    })
-        ->where('id', '[0-9]+');
+    Route::get('/show/{id}', function () {
+        return view('catalog.show');
+    });
 
     Route::get('/create', function () {
-        return "Añadir proyecto";
+        return view('catalog.create');
     });
 
     Route::get('/edit/{id}', function ($id) {
-        return "Modificar proyecto " . $id;
-    })
-        ->where('id', '[0-9]+');
+        return view('catalog.edit');
+    });
+
 });
 
 Route::get('perfil/{id?}', function ($id = null) {
