@@ -2,6 +2,6 @@
 
 @section('content')
 
-    Vista detalle proyecto <?php echo $id; ?>
+    Vista detalle proyecto {{$id}}
 
 @stop
