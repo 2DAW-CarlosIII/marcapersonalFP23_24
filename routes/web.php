@@ -18,7 +18,7 @@ Route::get('/', function () {
 });
 
 Route::get('login', function () {
-    return "Login usuario";
+    return view('auth.login');
 });
 
 Route::get('logout', function () {
@@ -52,3 +52,22 @@ Route::get('perfil/{id?}', function ($id = null) {
     }
 })
     ->where('id', '[0-9]+');
+
+Route::prefix('catalog')->group(function () {
+    Route::get('/', function () {
+        return view('catalog.index');
+    });
+    Route::get('/show/{id}', function ($id) {
+        return view('catalog.show', array('id'=>$id));
+    })
+        ->where('id', '[0-9]+');
+
+    Route::get('/create', function () {
+        return view('catalog.create');
+    });
+
+    Route::get('/edit/{id}', function ($id) {
+        return view('catalog.edit', array('id'=>$id));
+    })
+        ->where('id', '[0-9]+');
+});
