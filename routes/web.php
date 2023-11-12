@@ -13,12 +13,37 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+/*Ejercicios Vistas*/
 Route::get('/', function () {
-    return "Pantalla principal";
+    return view('home');
 });
 
 Route::get('login', function () {
-    return "Login usuario";
+    return view('auth.login');
+});
+
+
+Route::prefix('catalog')->group(function () {
+    Route::get('/', function () {
+        return view('catalog.index');
+    });
+    Route::get('/show/{id}', function ($id) {
+        return view('catalog.show', array('id'=>$id));
+    })
+        ->where('id', '[0-9]+');
+
+    Route::get('/create', function () {
+        return view('catalog.create');
+    });
+
+    Route::get('/edit/{id}', function ($id) {
+        return view('catalog.edit', array('id'=>$id));
+    })
+        ->where('id', '[0-9]+');
+});
+
+Route::get('logout', function () {
+    return "Logout usuario";
 });
 
 Route::get('logout', function () {
