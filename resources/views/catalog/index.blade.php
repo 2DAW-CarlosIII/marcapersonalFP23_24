@@ -2,6 +2,6 @@
 
 @section('content')
 
-    Pantalla principal proyectos
+    Listado proyectos
 
 @stop

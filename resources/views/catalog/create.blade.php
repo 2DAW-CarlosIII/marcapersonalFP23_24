@@ -2,6 +2,6 @@
 
 @section('content')
 
-    Crear proyecto
+    Añadir proyecto
 
 @stop

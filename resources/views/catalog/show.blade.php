@@ -2,6 +2,6 @@
 
 @section('content')
 
-    Ver Proyecto
+    Vista detalle proyecto <?=$id?>
 
 @stop
