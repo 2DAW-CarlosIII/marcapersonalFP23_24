@@ -125,7 +125,7 @@
                 </p>
                 <footer>
                     <ul class="actions">
-                        <li><a href="#" class="button alt">Más info</a></li>
+                        <li><a href="{{ action([App\Http\Controllers\CatalogController::class, 'getShow'], ['id' => $i] ) }}" class="button alt">Más info</a></li>
                     </ul>
                 </footer>
             </section>
