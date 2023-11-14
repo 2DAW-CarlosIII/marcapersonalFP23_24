@@ -2,7 +2,17 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-
+                 <!-- content -->
+                 <section>
+                    <header class="major">
+                        <h2>Content</h2>
+                    </header>
+                    <div class="row">
+                        <div class="container">
+                            @yield('content')
+                        </div>
+                    </div>
+                </section>
                 <!-- Portfolio -->
                 <section>
                     <header class="major">

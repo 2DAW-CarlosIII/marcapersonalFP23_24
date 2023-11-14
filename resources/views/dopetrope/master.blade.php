@@ -14,7 +14,10 @@
     <link rel="stylesheet" href="{{ asset('/dopetrope/assets/css/main.css') }}" />
 
 
+
+
 </head>
+
 <body class="homepage is-preload">
     <div id="page-wrapper">
 
