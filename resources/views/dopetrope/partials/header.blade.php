@@ -12,7 +12,6 @@
 
     <!-- Intro -->
         <section id="intro" class="container">
-            @include('dopetrope.partials.header.intro')
             <footer>
                 <ul class="actions">
                     <li><a href="#" class="button large">Get Started</a></li>
