@@ -102,7 +102,9 @@ $arrayProyectos = [
     ],
 ];
 @endphp
-
+{{-- TODO Falta implementar ordenar por las mejores clasificación
+    Realizado por Jose J, Maria del Mar Marin, Jose Alejandro, Carlos.
+--}}
 <section>
     <header>
         <h2>Mejores proyectos Marca Personal FP</h2>
