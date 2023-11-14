@@ -6,7 +6,7 @@
         <li><a class="icon brands fa-facebook-f" href="https://www.facebook.com/cifpcarlos3/?locale=es_ES"><span class="label">Facebook</span></a></li>
         <li><a class="icon brands fa-twitter" href="https://twitter.com/cifpcarlos3"><span class="label">Twitter</span></a></li>
         <li><a class="icon brands fa-instagram" href="https://www.instagram.com/explore/locations/468129984/cifp-carlos-iii/"><span class="label">Instagram</span></a></li>
-        <li><a class="icon brands fa-tiktok" href="https://www.tiktok.com/@cifpcarlos3"><span class="label">Tumblr</span></a></li>
+        <li><a class="icon brands fa-tiktok" href="https://www.tiktok.com/@cifpcarlos3"><span class="label">Tiktok</span></a></li>
     </ul>
     <ul class="contact">
         <li>
