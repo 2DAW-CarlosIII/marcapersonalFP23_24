@@ -108,44 +108,16 @@ $arrayProyectos = [
         <h2>Mejores proyectos Marca Personal FP</h2>
     </header>
     <ul class="dates">
-        @foreach ( $arrayProyectos as $proyecto)
+
+        @for ( $i = 0; $i < 5; $i++)
         <li>
-            <span class="date">Nota: <strong>{{ $proyecto['metadatos']['calificacion'] }}</strong></span>
-            <h3><a href="#">{{ $proyecto['nombre'] }}</a></h3>
-            <p> <a href="http://github.com/2DAW-CarlosIII/{{ $proyecto['dominio'] }}">
-                http://github.com/2DAW-CarlosIII/{{ $proyecto['dominio'] }}
+            <span class="date">Nota: <strong>{{ $arrayProyectos[$i]['metadatos']['calificacion'] }}</strong></span>
+            <h3><a href="#">{{ $arrayProyectos[$i]['nombre'] }}</a></h3>
+            <p> <a href="http://github.com/2DAW-CarlosIII/{{ $arrayProyectos[$i]['dominio'] }}">
+                http://github.com/2DAW-CarlosIII/{{ $arrayProyectos[$i]['dominio'] }}
                 </a>
             </p>
         </li>
-        @endforeach
-        {{--<li>
-            <span class="date">Jan <strong>27</strong></span>
-            <h3><a href="#">Lorem dolor sit amet veroeros</a></h3>
-            <p> <a href="http://github.com/2DAW-CarlosIII/{{ $proyecto['dominio'] }}">
-                http://github.com/2DAW-CarlosIII/{{ $proyecto['dominio'] }}
-                </a>
-            </p>
-        </li>
-        <li>
-            <span class="date">Jan <strong>23</strong></span>
-            <h3><a href="#">Ipsum sed blandit nisl consequat</a></h3>
-            <p>Blandit phasellus lorem ipsum dolor tempor sapien tortor hendrerit adipiscing feugiat lorem.</p>
-        </li>
-        <li>
-            <span class="date">Jan <strong>15</strong></span>
-            <h3><a href="#">Magna tempus lorem feugiat</a></h3>
-            <p>Dolore consequat sed phasellus lorem sed etiam nullam dolor etiam sed amet sit consequat.</p>
-        </li>
-        <li>
-            <span class="date">Jan <strong>12</strong></span>
-            <h3><a href="#">Dolore tempus ipsum feugiat nulla</a></h3>
-            <p>Feugiat lorem dolor sed nullam tempus lorem ipsum dolor sit amet nullam consequat.</p>
-        </li>
-        <li>
-            <span class="date">Jan <strong>10</strong></span>
-            <h3><a href="#">Blandit tempus aliquam?</a></h3>
-            <p>Feugiat sed tempus blandit tempus adipiscing nisl lorem ipsum dolor sit amet dolore.</p>
-        </li>
-        --}}
+        @endfor
     </ul>
 </section>
