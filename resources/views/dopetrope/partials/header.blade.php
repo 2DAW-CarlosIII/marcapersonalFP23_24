@@ -3,14 +3,10 @@
     @include('partials.navbar')
 
     <!-- Banner -->
-        <section id="banner">
-            <header>
-                <h2>Howdy. This is Dopetrope.</h2>
-                <p>A responsive template by HTML5 UP</p>
-            </header>
-        </section>
+    @include('dopetrope.partials.header.banner')
 
     <!-- Intro -->
+<<<<<<< HEAD
         <section id="intro" class="container">
             <footer>
                 <ul class="actions">
@@ -19,5 +15,13 @@
                 </ul>
             </footer>
         </section>
+=======
+
+    @include('dopetrope.partials.header.banner')
+
+    <!-- Footer -->
+
+    @include('dopetrope.partials.header.footer')
+>>>>>>> 1ab4edb14b0f665b32b35aac5d6365f7169f4370
 
 </section>
