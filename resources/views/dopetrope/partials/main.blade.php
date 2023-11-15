@@ -109,7 +109,8 @@
                             </div>
                         </div>
                     </section>
-                </div>
+
+            </div>
             <div class="col-12">
 
                 <!-- Blog -->
