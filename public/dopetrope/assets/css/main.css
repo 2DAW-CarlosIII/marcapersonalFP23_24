@@ -1975,6 +1975,22 @@ input, select, textarea {
 						background: #ea3723;
 					}
 
+                ul.social li a.fa-instagram {
+                    background: #44983c;
+                }
+
+                    ul.social li a.fa-instagram:hover {
+                        background: #6ebb64;
+                    }
+
+                ul.social li a.fa-tiktok {
+                    background: #893c98;
+                }
+
+                    ul.social li a.fa-tiktok:hover {
+                        background: #a54ca8;
+                    }
+
 /* Icons */
 
 	.icon {
