@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('dopetrope.master')
 
 @section('content')
 
