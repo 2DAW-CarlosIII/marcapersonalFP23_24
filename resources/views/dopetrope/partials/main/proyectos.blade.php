@@ -125,8 +125,8 @@
                 </p>
                 <footer>
                     <ul class="actions">
-                        //TODO enlazar el show de catalogController {{-- action([App\Http\Controllers\CatalogController::class, 'getShow'], ['id' => $i] ) --}}
-                        <li><a href="{{ url('/catalog/show/' . $i) }}" class="button alt">Más info</a></li>
+                        //TODO enlazar el show de catalogController {{-- action([App\Http\Controllers\CatalogController::class, 'show'], ['id' => $i] ) --}}
+                        <li><a href="{{ action([App\Http\Controllers\CatalogController::class, 'show'], ['id' => $i] ) }}" class="button alt">Más info</a></li>
                     </ul>
                 </footer>
             </section>
