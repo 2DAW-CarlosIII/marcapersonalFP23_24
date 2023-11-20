@@ -1,0 +1,5 @@
+Haz que la respuesta a la ruta /catalog/edit/{id} se haga pasar por el método getEdit del controlador CatalogController.
+
+El controlador debe verificar que el id es menor o igual que 10 * en el caso de que sea mayor que 10, se le asignará el valor 10.
+
+Una vez validado el id, se debe enviar a la vista 'catalog.edit';
