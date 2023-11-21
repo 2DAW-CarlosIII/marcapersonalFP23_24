@@ -3,9 +3,6 @@
         <div class="row">
             <div class="col-12">
 
-                <!-- Proyectos -->
-                @include('dopetrope.partials.main.proyectos')
-
                 <!-- content -->
                 <section>
                     <header class="major">
