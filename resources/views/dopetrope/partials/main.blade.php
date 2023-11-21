@@ -4,9 +4,9 @@
             <div class="col-12">
 
                 <!-- Proyectos -->
-                @include('dopetrope.partials.main.proyectos')
+               @include('dopetrope.partials.main.proyectos')
 
-                <!-- content -->
+               <!-- content -->
                 <section>
                     <header class="major">
                         <h2>Content</h2>

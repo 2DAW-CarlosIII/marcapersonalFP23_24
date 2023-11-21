@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\CatalogController;
+use App\Http\Controllers\HomeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,9 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
+Route::get('/', [HomeController::class, 'getHome']);
 
 Route::get('login', function () {
     return view('auth.login');
@@ -26,26 +25,18 @@ Route::get('logout', function () {
 });
 
 Route::prefix('catalog')->group(function () {
-    Route::get('/', function () {
-        return view('catalog.index');
-    });
-    Route::get('/show/{id}', function ($id) {
-        return view('catalog.show', array('id' => $id));
-    })->where('id', '[0-9]+');
+    Route::get('/', [CatalogController::class, 'getIndex']);
+
+    Route::get('/show/{id}', [CatalogController::class, 'getShow'])
+    ->where('id', '[0-9]+');
 
     Route::get('/create', function () {
         return view('catalog.create');
     });
+    Route::get('/edit/{id}', [CatalogController::class, 'getEdit'])
+    ->where('id', '[0-9]+');
 
-    Route::get('/edit/{id}', function ($id) {
-        return view('catalog.edit', array('id' => $id));
-    })->where('id', '[0-9]+');
+    Route::put('/edit/{id}', [CatalogController::class, 'putEdit'])
+    ->where('id', '[0-9]+');
+
 });
-
-Route::get('perfil/{id?}', function ($id = null) {
-    if ($id == null) {
-        return "Visualizar el currículo propio";
-    } else {
-        return "Visualizar el currículo de " . $id;
-    }
-})->where('id', '[0-9]+');
