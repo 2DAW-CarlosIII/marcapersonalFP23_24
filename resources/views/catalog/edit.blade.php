@@ -10,14 +10,14 @@
          </div>
          <div class="card-body" style="padding:30px">
 
-            <form action="{{ action([App\Http\Controllers\CatalogController::class, 'getEdit'], ['id' => $id]) }}" method="POST">
-                {{ method_field('PUT') }}
+            <form action="{{ action([App\Http\Controllers\CatalogController::class, 'putEdit'], ['id' => $id]) }}" method="POST">
+                @method('PUT')
 
 	            @csrf
 
 	            <div class="form-group">
 	               <label for="nombre">Nombre</label>
-	               <input type="text" name="nombre" id="nombre" class="form-control">
+	               <input type="text" name="nombre" id="nombre" value="{{$proyecto['nombre']}}" class="form-control">
 	            </div>
 
 	            <div class="form-group">

@@ -23,6 +23,10 @@ class CatalogController extends Controller
 
     }
 
+    public function putEdit($id){
+
+    }
+
     public function getCreate(){
         return view('catalog.create');//, ['id' => $id]) -> with('proyecto' , $this->arrayProyectos[$id]);
     }

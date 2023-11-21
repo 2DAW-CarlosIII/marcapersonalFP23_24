@@ -33,6 +33,8 @@ Route::prefix('catalog')->group(function () {
     Route::get('/create', [CatalogController::class , 'getCreate']);
 
     Route::get('/edit/{id}', [CatalogController::class , 'getEdit'])->where('id', '[0-9]+');
+
+    Route::put('/edit/{id}', [CatalogController::class , 'putEdit'])->where('id', '[0-9]+');
 });
 
 Route::get('perfil/{id?}', function ($id = null) {
