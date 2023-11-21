@@ -6,9 +6,9 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
-class ViewsExerciseTest extends TestCase
+class ControllersExerciseTest extends TestCase
 {
-    public function test_vistas(): void
+    public function test_controladores(): void
     {
         /**
          * main page test.
@@ -16,12 +16,8 @@ class ViewsExerciseTest extends TestCase
             $value = 'Pantalla principal';
             $response = $this->get('/');
 
-            $pieceOfNavBar = 'Marca Personal FP';
             $response
-                ->assertStatus(200)
-                ->assertViewIs('home')
-                ->assertSeeText($value, $escaped = true)
-                ->assertSeeText($pieceOfNavBar, $escaped = true);
+                ->assertRedirect('/catalog');
 
         /**
          * login test.
@@ -45,27 +41,41 @@ class ViewsExerciseTest extends TestCase
         /**
          * proyectos index test.
          */
-            $value = 'Listado proyectos';
             $response = $this->get('/catalog');
+            $nombres = [
+                'Tecnologías de la Información',
+                'Diseño Gráfico',
+                'Electrónica',
+                'Ingeniería Civil',
+                'Gastronomía',
+                'Medicina',
+                'Mecatrónica',
+                'Arquitectura',
+                'Automoción',
+                'Turismo',
+            ];
 
             $response
             ->assertStatus(200)
             ->assertViewIs('catalog.index')
-            ->assertSeeText($value, $escaped = true);
+            ->assertSeeTextInOrder($nombres, $escaped = true);
 
         /**
          * proyectos show test.
          */
-            $id = rand(1, 10);
-            $value = "Vista detalle proyecto $id";
-            $response = $this->get("/catalog/show/$id");
+            $response = $this->get("/catalog/show/1");
 
             $response
             ->assertStatus(200)
             ->assertViewIs('catalog.show')
-            ->assertSeeText($value, $escaped = true);
+            ->assertSeeText('Diseño Gráfico', $escaped = true);
 
-            $response = $this->get("/catalog/show/" . chr($id));
+            $response = $this->get("/catalog/show/2");
+
+            $response
+            ->assertSeeText('Electrónica', $escaped = true);
+
+            $response = $this->get("/catalog/show/A");
             $response->assertNotFound();
 
         /**
@@ -83,7 +93,7 @@ class ViewsExerciseTest extends TestCase
          * proyectos edit test.
          */
             $id = rand(1, 10);
-            $value = "Modificar proyecto $id";
+            $value = "Modificar proyecto";
             $response = $this->get("/catalog/edit/$id");
 
             $response
@@ -91,7 +101,7 @@ class ViewsExerciseTest extends TestCase
             ->assertViewIs('catalog.edit')
             ->assertSeeText($value, $escaped = true);
 
-            $response = $this->get("/catalog/edit/" . chr($id));
+            $response = $this->get("/catalog/edit/A");
             $response->assertNotFound();
 
         /**
