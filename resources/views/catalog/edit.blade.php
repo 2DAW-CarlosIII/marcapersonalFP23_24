@@ -32,7 +32,8 @@
 
 	            <div class="form-group">
 	               <label for="metadatos">Metadatos</label>
-	               <textarea name="metadatos" id="metadatos" class="form-control" rows="3"></textarea>
+	               <textarea name="metadatos" id="metadatos" class="form-control" rows="3">{{ print_r( $proyecto['metadatos'],true)}}</textarea>
+
                    <br /><small>Cada metadato irá separado del siguiente por una línea <br />
                    y la clave irá separada por : del valor</small>
 	            </div>
