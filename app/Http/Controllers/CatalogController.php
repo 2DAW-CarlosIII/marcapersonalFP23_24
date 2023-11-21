@@ -1,5 +1,38 @@
-@php
-    $arrayProyectos = [
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+class CatalogController extends Controller
+{
+    public function getIndex()
+    {
+        return view('catalog.index')
+        ->with('arrayProyectos', $this->arrayProyectos);
+    }
+
+    public function getShow($id)
+    {
+        return view('catalog.show')
+            ->with('proyecto', $this->arrayProyectos[$id])
+            ->with('id', $id);
+    }
+
+    public function getCreate()
+    {
+        return view('catalog.create')
+            ->with('proyecto', $this->arrayProyectos);
+    }
+
+    public function getEdit($id)
+    {
+        return view('catalog.edit')
+            ->with('proyecto', $this->arrayProyectos[$id])
+            ->with('id', $id);
+    }
+
+    private $arrayProyectos = [
         [
             'docente_id' => 1,
             'nombre' => 'Tecnologías de la Información',
@@ -101,38 +134,4 @@
             ]
         ],
     ];
-@endphp
-
-<section>
-    <header class="major">
-        <h2>My Portfolio</h2>
-    </header>
-
-    <div class="row">
-
-        @for ($i=0; $i<count($arrayProyectos); $i++)
-
-        <div class="col-4 col-6-medium col-12-small">
-            <section class="box">
-                <a href="#" class="image featured"><img src="{{ asset('/images/mp-logo.png') }}" alt="" /></a>
-                <header>
-                    <h3>{{ $arrayProyectos[$i]['nombre'] }}</h3>
-                </header>
-                <p>
-                    <a href="http://github.com/2DAW-CarlosIII/{{ $arrayProyectos[$i]['dominio'] }}">
-                        http://github.com/2DAW-CarlosIII/{{ $arrayProyectos[$i]['dominio'] }}
-                    </a>
-                </p>
-                <footer>
-                    <ul class="actions">
-                        //TODO enlazar el show de catalogController
-                        <li><a href="action([App\Http\Controllers\CatalogController::class, 'getShow'], ['id' => $i] )" class="button alt">Más info</a></li>
-                    </ul>
-                </footer>
-            </section>
-        </div>
-
-        @endfor
-
-    </div>
-</section>
+}
