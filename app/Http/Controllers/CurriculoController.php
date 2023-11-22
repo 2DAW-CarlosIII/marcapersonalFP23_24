@@ -22,7 +22,7 @@ class CurriculoController extends Controller
     }
 
     public function getEdit($id){
-        $id -= 1;
+        $id -= 1; //Cuando entra al metodo desde la vista show esto no funciona
         return view('curriculos.edit')
             ->with('curriculo', $this->arrayCurriculos[$id])
             ->with('id', $id);
