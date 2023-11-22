@@ -11,17 +11,21 @@ class CurriculoController extends Controller
     }
 
     public function getShow($id){
+        $id -= 1;
         return view('curriculos.show')
             ->with('curriculo', $this->arrayCurriculos[$id])
             ->with('id', $id);
     }
 
     public function getCreate(){
-
+        return view('curriculos.create');
     }
 
     public function getEdit($id){
-
+        $id -= 1;
+        return view('curriculos.edit')
+            ->with('curriculo', $this->arrayCurriculos[$id])
+            ->with('id', $id);
     }
 
     private $arrayCurriculos = [
