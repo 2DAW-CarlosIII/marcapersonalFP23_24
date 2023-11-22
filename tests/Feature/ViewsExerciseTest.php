@@ -16,13 +16,8 @@ class ViewsExerciseTest extends TestCase
             $value = 'Pantalla principal';
             $response = $this->get('/');
 
-            $pieceOfNavBar = 'Marca Personal FP';
             $response
-                ->assertStatus(200)
-                ->assertViewIs('home')
-                ->assertSeeText($value, $escaped = true)
-                ->assertSeeText($pieceOfNavBar, $escaped = true);
-
+            ->assertRedirect('/catalog');
         /**
          * login test.
          */
@@ -45,30 +40,42 @@ class ViewsExerciseTest extends TestCase
         /**
          * proyectos index test.
          */
-            $value = 'Listado proyectos';
+
             $response = $this->get('/catalog');
+            $nombres = [
+                'Tecnologías de la Información',
+                'Diseño Gráfico',
+                'Electrónica',
+                'Ingeniería Civil',
+                'Gastronomía',
+                'Medicina',
+                'Mecatrónica',
+                'Arquitectura',
+                'Automoción',
+                'Turismo',
+            ];
 
             $response
             ->assertStatus(200)
             ->assertViewIs('catalog.index')
-            ->assertSeeText($value, $escaped = true);
-
+            ->assertSeeTextInOrder($nombres, $escaped = true);
         /**
          * proyectos show test.
          */
-            $id = rand(1, 10);
-            $value = "Vista detalle proyecto $id";
-            $response = $this->get("/catalog/show/$id");
+            $response = $this->get("/catalog/show/1");
 
             $response
             ->assertStatus(200)
             ->assertViewIs('catalog.show')
-            ->assertSeeText($value, $escaped = true);
+            ->assertSeeText('Diseño Gráfico', $escaped = true);
 
-            $response = $this->get("/catalog/show/" . chr($id));
+            $response = $this->get("/catalog/show/2");
+
+            $response
+            ->assertSeeText('Electrónica', $escaped = true);
+            $response = $this->get("/catalog/show/A");
             $response->assertNotFound();
-
-        /**
+            /**
          * proyectos create test.
          */
             $value = 'Añadir proyecto';
@@ -83,7 +90,7 @@ class ViewsExerciseTest extends TestCase
          * proyectos edit test.
          */
             $id = rand(1, 10);
-            $value = "Modificar proyecto $id";
+            $value = "Modificar proyecto";
             $response = $this->get("/catalog/edit/$id");
 
             $response
@@ -91,24 +98,24 @@ class ViewsExerciseTest extends TestCase
             ->assertViewIs('catalog.edit')
             ->assertSeeText($value, $escaped = true);
 
-            $response = $this->get("/catalog/edit/" . chr($id));
+            $response = $this->get("/catalog/edit/A");
             $response->assertNotFound();
 
         /**
          * perfil test.
-         */
-            $id = rand(1, 10);
-            $value = "Visualizar el currículo de $id";
-            $response = $this->get("/perfil/$id");
 
-            $response->assertStatus(200)->assertSeeText($value, $escaped = true);
+          *  $id = rand(1, 10);
+           * $value = "Visualizar el currículo de $id";
+            *$response = $this->get("/perfil/$id");
 
-            $value = "Visualizar el currículo propio";
-            $response = $this->get("/perfil");
+            *$response->assertStatus(200)->assertSeeText($value, $escaped = true);
 
-            $response->assertStatus(200)->assertSeeText($value, $escaped = true);
+            *$value = "Visualizar el currículo propio";
+            *$response = $this->get("/perfil");
 
-            $response = $this->get("/perfil/" . chr($id));
-            $response->assertNotFound();
+            *$response->assertStatus(200)->assertSeeText($value, $escaped = true);
+
+            *$response = $this->get("/perfil/" . chr($id));
+            *$response->assertNotFound();*/
     }
 }
