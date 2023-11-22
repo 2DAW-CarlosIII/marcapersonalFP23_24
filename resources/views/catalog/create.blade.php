@@ -1,3 +1,4 @@
+@extends('layouts.master')
 @section('content')
 
 <div class="row" style="margin-top:40px">
