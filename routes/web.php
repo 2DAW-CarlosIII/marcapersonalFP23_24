@@ -55,6 +55,8 @@ Route::prefix('reconocimientos')->group(function () {
 
     Route::get('/create', [ReconocimientoController::class, 'getCreate']);
 
+    Route::put('/edit/{id}', [ReconocimientoController::class, 'getEdit'])->where('id', '[0-9]+');
+
     Route::get('/edit/{id}', [ReconocimientoController::class, 'getEdit'])->where('id', '[0-9]+');
 
 });
