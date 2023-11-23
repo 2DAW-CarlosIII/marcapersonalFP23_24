@@ -6,9 +6,9 @@
 
     @for ($i=0; $i<count($arrayReconocimientos); $i++)
 
-    <div class= "col-6-medium col-12-small">
+    <div class= "col-4 col-6-medium col-12-small">
         <section class="box">
-            <a href="#" class="image featured" title="Sakatsp, CC BY-SA 4.0 &lt;https://creativecommons.org/licenses/by-sa/4.0&gt;, via Wikimedia Commons"><img alt="Award icon" src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Award_icon.png" style="width:256px"></a>
+            <a href="#" class="image featured" title="Sakatsp, CC BY-SA 4.0 &lt;https://creativecommons.org/licenses/by-sa/4.0&gt;, via Wikimedia Commons"><img alt="Award icon" src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Award_icon.png"></a>
             <header>
                 <h3>Estudiante {{ $arrayReconocimientos[$i]['estudiante_id'] }}</h3>
             </header>
