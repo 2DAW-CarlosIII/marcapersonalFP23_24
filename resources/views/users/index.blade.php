@@ -12,8 +12,9 @@
             <header>
                 <h3>{{ $arrayUsers[$i]['first_name'] }} {{ $arrayUsers[$i]['last_name'] }}</h3>
             </header>
-            <p class="text-dark">
-                Email : {{ $arrayUsers[$i]['email']}}
+            <p class="text-dark ">
+                <i class="bi bi-envelope-at-fill"></i>
+                {{ $arrayUsers[$i]['email']}}
             </p>
             <footer>
                 <ul class="actions">

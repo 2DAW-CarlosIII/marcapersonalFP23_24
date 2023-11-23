@@ -18,13 +18,13 @@
                 </header>
 
 
-                <p class="text-dark">Email:  {{ $user['email'] }} </p>
-                <p class="text-dark">linkedin:  {{ $user['linkedin']}}</p>
+                <p class="text-dark"><i class="bi bi-envelope-at-fill"></i> {{ $user['email'] }} </p>
+                <p class="text-dark"><i class="bi bi-linkedin"></i>  {{ $user['linkedin']}}</p>
 
                 <footer>
                     <ul class="actions">
                         <li><a href="{{ action([App\Http\Controllers\UserController::class, 'getEdit'], ['id' => $id]) }}"
-                                class="button alt">Editar Usuario</a></li>
+                                class="button alt  bg-danger">Editar Usuario</a></li>
                         <li>
                             <a href="{{ action([App\Http\Controllers\UserController::class, 'getIndex']) }}"
                                 class="button alt">Listar Usuarios Usuario</a>
