@@ -22,11 +22,11 @@
             <h4><strong>Actividad: </strong>{{ $arrayReconocimientos['actividad_id'] }}</h4>
 
 
-            <a class="btn btn-warning" href="{{ action([App\Http\Controllers\CatalogController::class, 'getEdit'], ['id' => $id]) }}">
+            <a class="btn btn-warning" href="{{ action([App\Http\Controllers\ReconocimientoController::class, 'getEdit'], ['id' => $id]) }}">
                 <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                 Editar reconocimientos
             </a>
-            <a class="btn btn-outline-info" href="{{ action([App\Http\Controllers\CatalogController::class, 'getIndex']) }}">
+            <a class="btn btn-outline-info" href="{{ action([App\Http\Controllers\ReconocimientoController::class, 'getIndex']) }}">
                 Volver al listado
             </a>
 
