@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ActividadController;
 use App\Http\Controllers\CatalogController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
@@ -37,6 +38,21 @@ Route::prefix('catalog')->group(function () {
 
     Route::get('/edit/{id}', [CatalogController::class, 'getEdit'])->where('id', '[0-9]+');
 });
+
+Route::prefix('actividades')->group(function () {
+
+    Route::get('/', [ActividadController::class, 'getIndex']);
+
+    Route::get('/show/{id}', [ActividadController::class, 'getShow'])->where('id', '[0-9]+');
+
+    Route::get('/create', [ActividadController::class, 'getCreate']);
+
+    Route::put('/edit/{id}', [ActividadController::class, 'putEdit'])->where('id', '[0-9]+');
+
+    Route::get('/edit/{id}', [ActividadController::class, 'getEdit'])->where('id', '[0-9]+');
+});
+
+
 
 Route::get('perfil/{id?}', function ($id = null) {
     if ($id == null) {
