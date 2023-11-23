@@ -61,7 +61,7 @@ class CurriculoControllerTest extends TestCase
             ->assertSeeTextInOrder($texto_curriculum, $escaped = true);
 
         /**
-         * proyectos show test.
+         * curriculo show test.
          */
             $response = $this->get("/curriculos/show/1");
 
@@ -79,7 +79,7 @@ class CurriculoControllerTest extends TestCase
             $response->assertNotFound();
 
         /**
-         * proyectos create test.
+         * curriculo create test.
          */
             $value = 'Añadir Currículum';
             $response = $this->get('/curriculos/create');
@@ -90,7 +90,7 @@ class CurriculoControllerTest extends TestCase
             ->assertSeeText($value, $escaped = true);
 
         /**
-         * proyectos edit test.
+         * curriculo edit test.
          */
             $id = rand(1, 10);
             $value = "Modificar Currículum";
