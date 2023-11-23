@@ -29,8 +29,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="documento">Documento</label><br />
-                            https://github.com/2DAW-CarlosIII/
+                            <label for="documento">Documento</label>
                             <input type="text" name="documento" id="documento" value="{{ $reconocimiento['documento'] }}"
                                 class="form-control">
                         </div>

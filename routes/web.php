@@ -40,7 +40,7 @@ Route::prefix('catalog')->group(function () {
         ->where('id', '[0-9]+');
 
     Route::put('/edit/{id}', [CatalogController::class, 'putEdit'])
-    ->where('id', '[0-9]+');
+        ->where('id', '[0-9]+');
 });
 
 Route::prefix('reconocimientos')->group(function () {
@@ -50,7 +50,7 @@ Route::prefix('reconocimientos')->group(function () {
         ->where('id', '[0-9]+');
 
     Route::get('/create', function () {
-        return view('recon.create');
+        return view('reconocimientos.create');
     });
 
     Route::get('/edit/{id}', [ReconocimientoController::class, 'getEdit'])
@@ -60,7 +60,7 @@ Route::prefix('reconocimientos')->group(function () {
         ->where('id', '[0-9]+');
 
     Route::put('/edit/{id}', [[ReconocimientoController::class, 'putEdit']])
-    ->where('id', '[0-9]+');
+        ->where('id', '[0-9]+');
 });
 
 Route::get('perfil/{id?}', function ($id = null) {

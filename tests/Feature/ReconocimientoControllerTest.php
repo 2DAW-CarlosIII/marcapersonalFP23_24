@@ -31,7 +31,7 @@ class ReconocimientoControllerTest extends TestCase
          * proyectos index test.
          */
         $response = $this->get('/reconocimientos');
-        /*$nombres = [
+        $nombres = [
             'Tecnologías de la Información',
             'Diseño Gráfico',
             'Electrónica',
@@ -42,12 +42,12 @@ class ReconocimientoControllerTest extends TestCase
             'Arquitectura',
             'Automoción',
             'Turismo',
-        ];*/
+        ];
 
         $response
             ->assertStatus(200)
-            ->assertViewIs('reconocimientos.index');
-        /*->assertSeeTextInOrder($nombres, $escaped = true);*/
+            ->assertViewIs('reconocimientos.index')
+            ->assertSeeTextInOrder($nombres, $escaped = true);
 
         /**
          * proyectos show test.
@@ -56,8 +56,8 @@ class ReconocimientoControllerTest extends TestCase
 
         $response
             ->assertStatus(200)
-            ->assertViewIs('reconocimientos.show');
-        /*->assertSeeText('Diseño Gráfico', $escaped = true);*/
+            ->assertViewIs('reconocimientos.show')
+            ->assertSeeText('Diseño Gráfico', $escaped = true);
 
         $response = $this->get("/reconocimientos/show/2");
 
@@ -70,13 +70,13 @@ class ReconocimientoControllerTest extends TestCase
         /**
          * proyectos create test.
          */
-        /*$value = 'Añadir proyecto';*/
+        $value = 'Añadir proyecto';
         $response = $this->get('/reconocimientos/create');
 
-        /*$response
+        $response
             ->assertStatus(200)
             ->assertViewIs('reconocimientos.create')
-            ->assertSeeText($value, $escaped = true);*/
+            ->assertSeeText($value, $escaped = true);
 
         /**
          * proyectos edit test.
@@ -87,8 +87,8 @@ class ReconocimientoControllerTest extends TestCase
 
         $response
             ->assertStatus(200)
-            ->assertViewIs('reconocimientos.edit');
-        /*->assertSeeText($value, $escaped = true);*/
+            ->assertViewIs('reconocimientos.edit')
+            ->assertSeeText($value, $escaped = true);
 
         $response = $this->get("/reconocimientos/edit/A");
         $response->assertNotFound();
