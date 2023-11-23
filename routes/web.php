@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CatalogController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -50,6 +51,8 @@ Route::prefix('users')->group(function () {
     Route::get('/create', [UserController::class, 'getCreate']);
 
     Route::get('/edit/{id}', [UserController::class, 'getEdit'])->where('id', '[0-9]+');
+
+    Route::put('/edit/{id}', [UserController::class, 'putEdit'])->where('id', '[0-9]+');
 });
 
 Route::get('perfil/{id?}', function ($id = null) {

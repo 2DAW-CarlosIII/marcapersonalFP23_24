@@ -82,19 +82,30 @@ class UserController extends Controller
 
 
     public function getIndex() {
-
+        return view('users.index')
+        ->with('arrayUsers', $this->arrayUsers);
     }
 
     public function getShow($id) {
-        
+        return view('users.show')
+        ->with('arrayUsers', $this->arrayUsers[$id])
+        ->with('id', $id);
     }
 
     public function getCreate() {
-        
+        return view('users.create');
     }
 
     public function getEdit($id) {
-        
+        return view('users.edit')
+        ->with('arrayUsers', $this->arrayUsers[$id])
+        ->with('id', $id);
+    }
+
+    public function putEdit($id) {
+        return view('users.edit')
+            ->with("proyecto",$this->arrayUsers[$id])
+            ->with("id",$id);
     }
 
 
