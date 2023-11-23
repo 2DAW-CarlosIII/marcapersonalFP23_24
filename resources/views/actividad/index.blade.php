@@ -6,7 +6,7 @@
 
     @for ($i=0; $i<count($arrayActividades); $i++)
 
-    <div classUcol- col-6-medium col-12-small">
+    <div class="col-4 col-6-medium col-12-small">
         <section class="box">
             <a href="#" title="SleaY, CC BY 4.0 &lt;https://creativecommons.org/licenses/by/4.0&gt;, via Wikimedia Commons"><img width="250" alt="Curriculum-vitae-warning-icon" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Curriculum-vitae-warning-icon.svg/256px-Curriculum-vitae-warning-icon.svg.png"></a>
             <header>
