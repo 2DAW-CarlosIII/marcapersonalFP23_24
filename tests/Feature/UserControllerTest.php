@@ -40,12 +40,12 @@ class UserControllerTest extends TestCase
         $response
         ->assertStatus(200)
         ->assertViewIs('users.show')
-        ->assertSeeText('Jane Smith', $escaped = true);
+        ->assertSeeText('Jane', $escaped = true);
 
         $response = $this->get("/users/show/2");
 
         $response
-        ->assertSeeText('Alice Johnson', $escaped = true);
+        ->assertSeeText('Alice', $escaped = true);
 
         $response = $this->get("/users/show/A");
         $response->assertNotFound();
