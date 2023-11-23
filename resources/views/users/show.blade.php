@@ -12,18 +12,18 @@
             </a>
 
         </div>
-        <div class="col-sm-8">
+        <div class="col-sm-8 align-self-center">
 
             <h3><strong>Nombre: </strong>{{ $user['first_name'] }}</h3>
             <h3><strong>Apellido: </strong>{{ $user['last_name'] }}</h3>
-
+            <br/>
             <h4><strong>Email: </strong>
                 <a href="{{ $user['email'] }}">{{ $user['email'] }}</a>
             </h4>
             <h4><strong>Linkedin: </strong>
                 <a href="{{ $user['linkedin'] }}">{{ $user['linkedin'] }}</a>
             </h4>
-
+            <br/>
             <a class="btn btn-warning" href="{{ action([App\Http\Controllers\UserController::class, 'getEdit'], ['id' => $id]) }}">
                 <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                 Editar proyecto
