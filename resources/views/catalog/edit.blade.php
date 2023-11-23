@@ -8,7 +8,7 @@
                 </div>
                 <div class="card-body" style="padding:30px">
 
-                    <form action="{{ action([App\Http\Controllers\CatalogController::class, 'putEdit'], ['id' => $id]) }}"
+                    <form action="{{ action([App\Http\Controllers\CatalogController::class, 'getEdit'], ['id' => $id]) }}"
                         method="POST">
 
                         @method('PUT')
