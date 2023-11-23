@@ -47,6 +47,8 @@ Route::prefix('actividades')->group(function () {
 
     Route::get('/create', [ActividadController::class, 'getCreate']);
 
+    Route::put('/edit/{id}', [ActividadController::class, 'putEdit'])->where('id', '[0-9]+');
+
     Route::get('/edit/{id}', [ActividadController::class, 'getEdit'])->where('id', '[0-9]+');
 });
 
