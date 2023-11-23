@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CatalogController;
+use App\Http\Controllers\CurriculoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,3 +49,15 @@ Route::get('perfil/{id?}', function ($id = null) {
         return "Visualizar el currículo de " . $id;
     }
 })->where('id', '[0-9]+');
+
+Route::prefix('curriculos')->group(function () {
+    Route::get('/', [CurriculoController::class, 'getIndex']);
+
+    Route::get('/show/{id}', [CurriculoController::class, 'getShow'])
+    ->where('id', '[1-10]+');
+
+    Route::get('/create', [CurriculoController::class, 'getCreate']);
+
+    Route::get('/edit/{id}	', [CurriculoController::class, 'getEdit'])
+    ->where('id', '[1-10]+');
+});

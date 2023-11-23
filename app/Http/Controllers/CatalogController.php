@@ -8,11 +8,6 @@ use Illuminate\Http\Request;
 
 class CatalogController extends Controller
 {
-    /**
-     * Mostrar información de un proyecto.
-     * @param  int  $id
-     * @return Response
-     */
 
     public function getIndex()
     {
