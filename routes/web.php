@@ -26,7 +26,6 @@ Route::get('logout', function () {
 });
 
 Route::prefix('catalog')->group(function () {
-
     Route::get('/', [CatalogController::class, 'getIndex']);
 
     Route::get('/show/{id}', [CatalogController::class, 'getShow'])->where('id', '[0-9]+');
@@ -41,21 +40,13 @@ Route::prefix('catalog')->group(function () {
 Route::prefix('reconocimientos')->group(function () {
     Route::get('/', [ReconocimientoController::class, 'getIndex']);
 
-    Route::get('/show/{id}', [ReconocimientoController::class, 'getShow'])
-        ->where('id', '[0-9]+');
+    Route::get('/show/{id}', [ReconocimientoController::class, 'getShow'])->where('id', '[0-9]+');
 
-    Route::get('/create', function () {
-        return view('reconocimientos.create');
-    });
+    Route::get('/create', [ReconocimientoController::class, 'getCreate']);
 
-    Route::get('/edit/{id}', [ReconocimientoController::class, 'getEdit'])
-        ->where('id', '[0-9]+');
+    Route::get('/edit/{id}', [ReconocimientoController::class, 'getEdit'])->where('id', '[0-9]+');
 
-    Route::put('/edit/{id}', [ReconocimientoController::class, 'putEdit'])
-        ->where('id', '[0-9]+');
-
-    Route::put('/edit/{id}', [[ReconocimientoController::class, 'putEdit']])
-        ->where('id', '[0-9]+');
+    Route::put('/edit/{id}', [ReconocimientoController::class, 'putEdit'])->where('id', '[0-9]+');
 });
 
 Route::get('perfil/{id?}', function ($id = null) {

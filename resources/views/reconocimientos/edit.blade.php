@@ -9,7 +9,7 @@
                 <div class="card-body" style="padding:30px">
 
                     <form
-                        action="{{ action([App\Http\Controllers\ReconocimientoController::class, 'getEdit'], ['id' => $id]) }}"
+                        action="{{ action([App\Http\Controllers\ReconocimientoController::class, 'putEdit'], ['id' => $id]) }}"
                         method="POST">
 
                         @method('PUT')

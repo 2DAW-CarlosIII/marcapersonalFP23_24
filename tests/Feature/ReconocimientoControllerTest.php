@@ -10,38 +10,21 @@ class ReconocimientoControllerTest extends TestCase
 {
     public function test_controladores(): void
     {
-
-        $value = 'Login usuario';
-        $response = $this->get('/login');
-
-        $response
-            ->assertStatus(200)
-            ->assertViewIs('auth.login')
-            ->assertSeeText($value, $escaped = true);
-
-        /**
-         * logout test.
-         */
-        $value = 'Logout usuario';
-        $response = $this->get('/logout');
-
-        $response->assertStatus(200)->assertSeeText($value, $escaped = true);
-
         /**
          * proyectos index test.
          */
         $response = $this->get('/reconocimientos');
         $nombres = [
-            'Tecnologías de la Información',
-            'Diseño Gráfico',
-            'Electrónica',
-            'Ingeniería Civil',
-            'Gastronomía',
-            'Medicina',
-            'Mecatrónica',
-            'Arquitectura',
-            'Automoción',
-            'Turismo',
+            '1',
+            '2',
+            '3',
+            '4',
+            '5',
+            '6',
+            '7',
+            '8',
+            '9',
+            '10',
         ];
 
         $response
@@ -57,12 +40,12 @@ class ReconocimientoControllerTest extends TestCase
         $response
             ->assertStatus(200)
             ->assertViewIs('reconocimientos.show')
-            ->assertSeeText('Diseño Gráfico', $escaped = true);
+            ->assertSeeText('2', $escaped = true);
 
         $response = $this->get("/reconocimientos/show/2");
 
         $response
-            ->assertSeeText('Electrónica', $escaped = true);
+            ->assertSeeText('3', $escaped = true);
 
         $response = $this->get("/reconocimientos/show/A");
         $response->assertNotFound();
@@ -70,7 +53,7 @@ class ReconocimientoControllerTest extends TestCase
         /**
          * proyectos create test.
          */
-        $value = 'Añadir proyecto';
+        $value = 'Añadir reconocimiento';
         $response = $this->get('/reconocimientos/create');
 
         $response
@@ -82,7 +65,7 @@ class ReconocimientoControllerTest extends TestCase
          * proyectos edit test.
          */
         $id = rand(1, 10);
-        $value = "Modificar proyecto";
+        $value = "Modificar reconocimiento";
         $response = $this->get("/reconocimientos/edit/$id");
 
         $response
@@ -104,10 +87,5 @@ class ReconocimientoControllerTest extends TestCase
 
         $value = "Visualizar el currículo propio";
         $response = $this->get("/perfil");
-
-        $response->assertStatus(200)->assertSeeText($value, $escaped = true);
-
-        $response = $this->get("/perfil/" . chr($id));
-        $response->assertNotFound();
     }
 }

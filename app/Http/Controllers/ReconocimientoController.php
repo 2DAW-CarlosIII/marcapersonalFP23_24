@@ -31,6 +31,13 @@ class ReconocimientoController extends Controller
             ->with('id', $id);
     }
 
+    public function putEdit($id)
+    {
+        return view('reconocimientos.edit')
+            ->with('reconocimiento', $this->arrayReconocimientos[$id])
+            ->with('id', $id);
+    }
+
     private $arrayReconocimientos = [
         [
             'estudiante_id' => 1,

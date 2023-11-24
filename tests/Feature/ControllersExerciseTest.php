@@ -92,7 +92,7 @@ class ControllersExerciseTest extends TestCase
         /**
          * proyectos edit test.
          */
-            $id = rand(1, 10);
+            $id = rand(0, 9);
             $value = "Modificar proyecto";
             $response = $this->get("/catalog/edit/$id");
 
