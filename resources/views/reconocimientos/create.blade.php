@@ -15,23 +15,27 @@
 
                         <div class="form-group">
                             <label for="id_estudiante">Id estudiante</label>
-                            <input type="text" name="id_estudiante" id="id_estudiante" class="form-control">
+                            <input type="number" name="id_estudiante" id="id_estudiante" class="form-control">
                         </div>
 
                         <div class="form-group">
-                            <label for="docente_validador">Docente</label>
-                            <input type="number" name="docente_validador" id="docente_validador">
+                            <label for="actividad_id">Id actividad</label>
+                            <input type="number" name="actividad_id" id="form-control">
                         </div>
 
                         <div class="form-group">
-                            <label for="dominio">Documento</label>
-                            <input type="text" name="dominio" id="dominio" class="form-control">
+                            <label for="documento">Documento</label>
+                            <input type="text" name="documento" id="documento" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="fecha">Fecha</label>
+                            <input type="date" name="fecha" id="fecha" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="docente_validador">Docente validador</label>
+                            <input type="number" name="docente_validador" id="docente_validador" class="form-control">
                         </div>
 
-                        <div class="form-group">
-                            <label for="metadatos">Observaciones</label>
-                            <textarea name="metadatos" id="metadatos" class="form-control" rows="3"></textarea>
-                        </div>
                         <div class="form-group text-center">
                             <button type="submit" class="btn btn-primary" style="padding:8px 100px;margin-top:25px;">
                                 Añadir reconocimiento
