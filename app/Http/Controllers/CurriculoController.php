@@ -22,8 +22,7 @@ class CurriculoController extends Controller
 
     public function getCreate()
     {
-        return view('curriculos.create')
-            ->with('arrayCurriculos', $this->arrayCurriculos);
+        return view('curriculos.create');
     }
 
     public function getEdit($id)

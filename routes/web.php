@@ -54,10 +54,10 @@ Route::prefix('curriculos')->group(function () {
     Route::get('/', [CurriculoController::class, 'getIndex']);
 
     Route::get('/show/{id}', [CurriculoController::class, 'getShow'])
-    ->where('id', '[1-10]+');
+    ->where('id', '[0-9]+');
 
     Route::get('/create', [CurriculoController::class, 'getCreate']);
 
     Route::get('/edit/{id}	', [CurriculoController::class, 'getEdit'])
-    ->where('id', '[1-10]+');
+    ->where('id', '[0-9]+');
 });
