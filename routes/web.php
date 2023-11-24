@@ -3,6 +3,7 @@
 use App\Http\Controllers\CatalogController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,3 +46,13 @@ Route::get('perfil/{id?}', function ($id = null) {
         return "Visualizar el currículo de " . $id;
     }
 })->where('id', '[0-9]+');
+
+Route::get('/', [UserController::class, 'getIndex']);
+
+Route::get('/show/{id}', [UserController::class, 'getShow'])->where('id', '[0-9]+');
+
+Route::get('/create', [UserController::class, 'getCreate']);
+
+Route::put('/edit/{id}', [UserController::class, 'putEdit'])->where('id', '[0-9]+');
+
+Route::get('/edit/{id}', [UserController::class, 'getEdit'])->where('id', '[0-9]+');
