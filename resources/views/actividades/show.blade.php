@@ -13,7 +13,7 @@
             <h3><strong>Docente: </strong>{{ $actividad['docente_id'] }}</h3>
             <h4><strong>Insignia: </strong>
                 <a href="http://github.com/2DAW-CarlosIII/{{ $actividad['docente_id'] }}">
-                    http://github.com/2DAW-CarlosIII/{{ $actividad['insignia'] }}
+                    {{ $actividad['insignia'] }}
                 </a>
             </h4>
             <a class="btn btn-warning"
