@@ -15,11 +15,7 @@
             <h3><strong>Nombre: </strong>{{ $arrayUsers['first_name'] }}</h3>
             <h3><strong>Apellido: </strong>{{ $arrayUsers['last_name'] }}</h3>
             <h3><strong>Email: </strong>{{ $arrayUsers['email'] }}</h3>
-            <h4><strong>Dominio: </strong>
-                <a href="http://github.com/2DAW-CarlosIII/{{ $arrayUsers['linkedin'] }}">
-                    http://github.com/2DAW-CarlosIII/{{ $arrayUsers['linkedin'] }}
-                </a>
-            </h4>
+            <h3><strong>Perfil Linkedin: </strong>{{ $arrayUsers['linkedin'] }}</h3>
 
             <a class="btn btn-warning" href="{{ action([App\Http\Controllers\UserController::class, 'getEdit'], ['id' => $id]) }}">
                 <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
