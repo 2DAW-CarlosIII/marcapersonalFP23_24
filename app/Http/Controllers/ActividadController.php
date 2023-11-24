@@ -30,6 +30,12 @@ class ActividadController extends Controller
             ->with("actividad", $this->arrayActividades[$id])
             ->with("id", $id);
     }
+    public function putEdit($id)
+    {
+        return view('actividades.edit')
+            ->with("actividad", $this->arrayActividades[$id])
+            ->with("id", $id);
+    }
 
     private $arrayActividades = [
         [
