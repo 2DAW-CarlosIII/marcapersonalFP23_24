@@ -14,17 +14,17 @@
                         @csrf
 
                         <div class="form-group">
-                            <label for="id_estudiante">Id estudiante</label>
+                            <label for="id_estudiante">Estudiante</label>
                             <input type="number" name="id_estudiante" id="id_estudiante" class="form-control">
                         </div>
 
                         <div class="form-group">
-                            <label for="actividad_id">Id actividad</label>
+                            <label for="actividad_id">Actividad</label>
                             <input type="number" name="actividad_id" id="form-control">
                         </div>
 
                         <div class="form-group">
-                            <label for="documento">Documento</label>
+                            <label for="documento">URL del documento</label>
                             <input type="text" name="documento" id="documento" class="form-control">
                         </div>
                         <div class="form-group">
