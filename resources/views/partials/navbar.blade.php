@@ -22,20 +22,7 @@
                             <span>&#10010</span> Nuevo proyecto
                         </a>
                     </li>
-                    <li
-                        class="nav-item {{ Request::is('reeconocimientos') && !Request::is('reconocimientos/create') ? 'active' : '' }}">
-                        <a class="nav-link" href="{{ url('/reconocimientos') }}">
-                            <span class="glyphicon glyphicon-film" aria-hidden="true"></span>
-                            Reconocimientos
-                        </a>
-                    </li>
-                    <li class="nav-item {{ Request::is('reconocimientos/create') ? 'active' : '' }}">
-                        <a class="nav-link" href="{{ url('/reconocimientos/create') }}">
-                            <span>&#10010</span> Nuevo reconocimiento
-                        </a>
-                    </li>
                 </ul>
-
                 <ul class="navbar-nav navbar-right">
                     <li class="nav-item">
                         <form action="{{ url('/logout') }}" method="POST" style="display:inline">

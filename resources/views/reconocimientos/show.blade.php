@@ -10,13 +10,10 @@
         </div>
         <div class="col-sm-8">
 
-            <h3><strong>Id Estudiante: </strong>{{ $reconocimiento['estudiante_id'] }}</h3>
-            <h4><strong>Documento: </strong>
-                <a href="{{ $reconocimiento['documento'] }}">
-                    {{ $reconocimiento['documento'] }}
-                </a>
-            </h4>
-            <h4><strong>Id Actividad: </strong>{{ $reconocimiento['actividad_id'] }}</h4>
+            <h3><strong>Estudiante: </strong>{{ $reconocimiento['estudiante_id'] }}</h3>
+            <h4><strong>Actividad: </strong>{{ $reconocimiento['actividad_id'] }}</h4>
+            <h4><strong>Documento: </strong>{{ $reconocimiento['documento'] }}</h4>
+            <h4><strong>Fecha: </strong>{{ $reconocimiento['fecha'] }}</h4>
             <h4><strong>Docente: </strong>{{ $reconocimiento['docente_validador'] }}</h4>
 
             <footer>
