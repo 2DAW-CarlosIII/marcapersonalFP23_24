@@ -7,19 +7,11 @@
 
         <div class="col-sm-4">
 
-        <a href="#" class="image featured"><img src="{{ asset('/images/mp-logo.png') }}" alt="" /></a>
-            <header>
-                <h3>{{ $arrayProyectos[$i]['nombre'] }}</h3>
-            </header>
-            <p>
-                <a href="http://github.com/2DAW-CarlosIII/{{ $arrayProyectos[$i]['dominio'] }}">
-                    http://github.com/2DAW-CarlosIII/{{ $arrayProyectos[$i]['dominio'] }}
-                </a>
-            </p>
+            <a href="#" class="image featured"><img src="{{ asset('/images/mp-logo.png') }}" alt="" /></a>
         </div>
         <div class="col-sm-8">
-            <h4><strong>Docente: </strong>{{ $proyecto['docente_id'] }}</h4>
-            <h4><strong>Insignia: </strong>{{ $proyecto['insignia'] }} </h4>
+            <h4><strong>Docente: </strong>{{ $actividad['docente_id'] }}</h4>
+            <h4><strong>Insignia: </strong>{{ $actividad['insignia'] }} </h4>
             <a class="btn btn-warning" href="{{ action([App\Http\Controllers\ActividadController::class, 'getEdit'], ['id' => $id]) }}">
                 <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                 Editar actividad
