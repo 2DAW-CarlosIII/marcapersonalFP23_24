@@ -14,21 +14,28 @@ class ActividadController extends Controller
     public function getShow($id)
     {
         return view('actividades.show')
-            ->with('proyecto', $this->arrayActividades[$id])
+            ->with('actividad', $this->arrayActividades[$id])
             ->with('id', $id);
     }
 
     public function getEdit($id) {
         return view('actividades.edit')
-            ->with("proyecto",$this->arrayActividades[$id])
+            ->with("actividad",$this->arrayActividades[$id])
             ->with("id",$id);
     }
+
+    public function putEdit($id) {
+        return view('actividades.edit')
+            ->with("actividad",$this->arrayProyectos[$id])
+            ->with("id",$id);
+    }
+
 
     public function getCreate(){
         return view('actividades.create');
     }
 
-    <?php
+   
     private $arrayActividades = [
         [
             'docente_id' => 1,

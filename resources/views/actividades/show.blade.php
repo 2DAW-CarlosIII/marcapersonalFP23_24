@@ -7,8 +7,15 @@
 
         <div class="col-sm-4">
 
-            <img src="/images/mp-logo.png" style="height:200px"/>
-
+        <a href="#" class="image featured"><img src="{{ asset('/images/mp-logo.png') }}" alt="" /></a>
+            <header>
+                <h3>{{ $arrayProyectos[$i]['nombre'] }}</h3>
+            </header>
+            <p>
+                <a href="http://github.com/2DAW-CarlosIII/{{ $arrayProyectos[$i]['dominio'] }}">
+                    http://github.com/2DAW-CarlosIII/{{ $arrayProyectos[$i]['dominio'] }}
+                </a>
+            </p>
         </div>
         <div class="col-sm-8">
             <h4><strong>Docente: </strong>{{ $proyecto['docente_id'] }}</h4>

@@ -16,12 +16,12 @@
 
 	            <div class="form-group">
 	            	<label for="docente_id">Docente</label>
-	               <input type="number" name="docente_id" id="docente_id">
+	               <input type="number" name="docente_id" id="docente_id" value="{{ $actividad['docente_id'] }}">
 	            </div>
 
                 <div class="form-group">
 	            	<label for="insignia">Insignia</label>
-	               <input type="number" name="insignia" id="insignia">
+	               <input type="url" name="insignia" id="insignia" value="{{ $actividad['insignia'] }}">
 	            </div>
 
 

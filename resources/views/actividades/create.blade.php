@@ -21,7 +21,7 @@
 
                 <div class="form-group">
 	            	<label for="insignia">Insignia</label>
-	               <input type="number" name="insignia" id="insignia">
+	               <input type="url" name="insignia" id="insignia">
 	            </div>
 
 
