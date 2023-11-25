@@ -12,7 +12,7 @@
 
             <h3><strong>Docente: </strong>{{ $actividad['docente_id'] }}</h3>
             <h4><strong>Insignia: </strong>
-                <a href="http://github.com/2DAW-CarlosIII/{{ $actividad['docente_id'] }}">
+                <a href="{{ $actividad['insignia'] }}">
                     {{ $actividad['insignia'] }}
                 </a>
             </h4>
