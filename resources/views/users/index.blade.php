@@ -14,7 +14,7 @@
             </header>
             <p>
 
-                <a href="http://github.com/2DAW-CarlosIII/{{ $arrayUsers[$i]['linkedin'] }}">
+                <a href="{{ $arrayUsers[$i]['linkedin'] }}">
                     {{ $arrayUsers[$i]['linkedin'] }}
                 </a>
             </p>
