@@ -15,8 +15,8 @@
                     </header>
                     <p>
 
-                        <a href="http://github.com/2DAW-CarlosIII/{{ $arrayActividades[$i]['insignia'] }}">
-                            http://github.com/2DAW-CarlosIII/{{ $arrayActividades[$i]['insignia'] }}
+                        <a href="{{ $arrayActividades[$i]['insignia'] }}">
+                            {{ $arrayActividades[$i]['insignia'] }}
                         </a>
                     </p>
                     <footer>
