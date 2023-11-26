@@ -15,19 +15,18 @@
 	            @csrf
 
 	            <div class="form-group">
-	               <label for="idEstudiante">ID de Estudiante</label>
+	               <label for="idEstudiante">Estudiante</label>
 	               <input type="number" name="idEstudiante" id="idEstudiante" class="form-control">
 	            </div>
 
 	            <div class="form-group">
-	                <label for="idActividad">ID de Actividad</label>
+	                <label for="idActividad">Actividad</label>
 	                <input type="number" name="idActividad" id="idActividad">
 	            </div>
 
 	            <div class="form-group">
 	            	<label for="documento">Documento</label>
-                    https://drive.google.com/document/
-	               <input type="text" name="documento" id="documento" class="form-control">
+	               <input type="url" name="documento" id="documento" class="form-control">
 	            </div>
 
 	            <div class="form-group">

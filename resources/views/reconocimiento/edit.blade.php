@@ -10,26 +10,25 @@
             </div>
             <div class="card-body" style="padding:30px">
 
-                <form action="{{ action([App\Http\Controllers\CatalogController::class, 'putEdit'], ['id' => $idReconocimiento]) }}" method="POST">
+                <form action="{{ action([App\Http\Controllers\ReconocimientoController::class, 'putEdit'], ['id' => $idReconocimiento]) }}" method="POST">
 
                     @csrf
                     @method('PUT')
 
 
                     <div class="form-group">
-                        <label for="idEstudiante">ID de Estudiante</label>
+                        <label for="idEstudiante">Estudiante</label>
                         <input type="number" name="idEstudiante" id="idEstudiante" value="{{$reconocimiento['estudiante_id']}}" class="form-control">
                      </div>
 
                      <div class="form-group">
-                         <label for="idActividad">ID de Actividad</label>
+                         <label for="idActividad">Actividad</label>
                          <input type="number" name="idActividad" id="idActividad" value="{{$reconocimiento['actividad_id']}}">
                      </div>
 
                      <div class="form-group">
                          <label for="documento">Documento</label>
-                         https://drive.google.com/document/
-                        <input type="text" name="documento" id="documento" value="{{$reconocimiento['documento']}}" class="form-control">
+                        <input type="url" name="documento" id="documento" value="{{$reconocimiento['documento']}}" class="form-control">
                      </div>
 
                      <div class="form-group">
