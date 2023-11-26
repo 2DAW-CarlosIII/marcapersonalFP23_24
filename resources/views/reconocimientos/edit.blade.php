@@ -15,12 +15,12 @@
 	            @csrf
 
 	            <div class="form-group">
-	               <label for="Estudiante">ID estudiante</label>
+	               <label for="estudiante_id">ID estudiante</label>
 	               <input type="number" name="estudiante_id" id="estudiante_id" class="form-control">
 	            </div>
 
 	            <div class="form-group">
-	            	<label for="Actividad"> ID Docente</label>
+	            	<label for="actividad_id">Actividad</label>
 	               <input type="number" name="actividad_id" id="actividad_id">
 	            </div>
 
@@ -31,12 +31,12 @@
 	            </div>
 
 	            <div class="form-group">
-	               <label for="Fecha">fecha</label>
+	               <label for="fecha">Fecha</label>
 	               <input type ="date" name="fecha" id="fecha" class="form-control" rows="3">
 	            </div>
 
                 <div class="form-group">
-	            	<label for="Docente Validador">Docente</label>
+	            	<label for="docente_validador">Docente Validador</label>
 	               <input type="number" name="docente_validador" id="docente_validador">
 	            </div>
 
