@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ActividadController;
 use App\Http\Controllers\CatalogController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -60,4 +61,15 @@ Route::get('perfil/{id?}', function ($id = null) {
     }
 })->where('id', '[0-9]+');
 
+Route::prefix('user')->group(function () {
 
+    Route::get('/', [UserController::class, 'getIndex']);
+
+    Route::get('/show/{id}', [UserController::class, 'getShow'])->where('id', '[0-9]+');
+
+    Route::get('/create', [UserController::class, 'getCreate']);
+
+    Route::put('/edit/{id}', [UserController::class, 'putEdit'])->where('id', '[0-9]+');
+
+    Route::get('/edit/{id}', [UserController::class, 'getEdit'])->where('id', '[0-9]+');
+});
