@@ -1,6 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
+    <div class="row m-4">
 
 
     <div class="row m-4">
@@ -50,5 +51,4 @@
 
         </div>
     </div>
-
 @endsection
