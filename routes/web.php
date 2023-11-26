@@ -1,11 +1,11 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CatalogController;
 use App\Http\Controllers\ActividadController;
 use App\Http\Controllers\HomeController;
-use App\Models\User;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ReconocimientoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,16 +29,28 @@ Route::get('logout', function () {
 });
 
 Route::prefix('catalog')->group(function () {
-
     Route::get('/', [CatalogController::class, 'getIndex']);
 
     Route::get('/show/{id}', [CatalogController::class, 'getShow'])->where('id', '[0-9]+');
 
     Route::get('/create', [CatalogController::class, 'getCreate']);
 
-    Route::put('/edit/{id}', [CatalogController::class, 'putEdit'])->where('id', '[0-9]+');
-
     Route::get('/edit/{id}', [CatalogController::class, 'getEdit'])->where('id', '[0-9]+');
+
+    Route::put('/edit/{id}', [CatalogController::class, 'putEdit'])->where('id', '[0-9]+');
+});
+
+Route::prefix('reconocimientos')->group(function () {
+    Route::get('/', [ReconocimientoController::class, 'getIndex']);
+
+    Route::get('/show/{id}', [ReconocimientoController::class, 'getShow'])->where('id', '[0-9]+');
+
+    Route::get('/create', [ReconocimientoController::class, 'getCreate']);
+
+
+    Route::put('/edit/{id}', [ReconocimientoController::class, 'putEdit'])->where('id', '[0-9]+');
+
+    Route::get('/edit/{id}', [ReconocimientoController::class, 'getEdit'])->where('id', '[0-9]+');
 });
 
 Route::prefix('users')->group(function () {
