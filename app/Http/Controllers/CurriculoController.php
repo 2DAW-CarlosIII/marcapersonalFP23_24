@@ -11,7 +11,6 @@ class CurriculoController extends Controller
     }
 
     public function getShow($id){
-        $id -= 1;
         return view('curriculos.show')
             ->with('curriculo', $this->arrayCurriculos[$id])
             ->with('id', $id);
@@ -22,7 +21,6 @@ class CurriculoController extends Controller
     }
 
     public function getEdit($id){
-        $id -= 1; //Cuando entra al metodo desde la vista show esto no funciona
         return view('curriculos.edit')
             ->with('curriculo', $this->arrayCurriculos[$id])
             ->with('id', $id);

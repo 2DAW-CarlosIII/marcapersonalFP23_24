@@ -21,7 +21,7 @@
 
 	            <div class="form-group">
 	            	<label for="video_curriculum">URL Videocurrículo</label>
-	               <input type="text" name="video_curriculum" id="video_curriculum">
+	               <input type="url" name="video_curriculum" id="video_curriculum">
 	            </div>
 
 	            <div class="form-group">

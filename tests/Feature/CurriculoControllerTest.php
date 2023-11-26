@@ -63,14 +63,14 @@ class CurriculoControllerTest extends TestCase
         /**
          * curriculo show test.
          */
-            $response = $this->get("/curriculos/show/1");
+            $response = $this->get("/curriculos/show/0");
 
             $response
             ->assertStatus(200)
             ->assertViewIs("curriculos.show")
             ->assertSeeText('Experiencia en desarrollo web con enfoque en tecnologías front-end.', $escaped = true);
 
-            $response = $this->get("/curriculos/show/2");
+            $response = $this->get("/curriculos/show/1");
 
             $response
             ->assertSeeText('Habilidades avanzadas en HTML, CSS y JavaScript.', $escaped = true);
