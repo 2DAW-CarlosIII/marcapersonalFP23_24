@@ -43,6 +43,7 @@ Route::prefix('catalog')->group(function () {
 
 
 
+
 //Rutas de usuarios
 Route::prefix('users')->group(function () {
 
@@ -57,6 +58,8 @@ Route::prefix('users')->group(function () {
     Route::put('/edit/{id}', [UserController::class, 'putEdit'])->where('id', '[0-9]+');
 });
 
+
+
 Route::prefix('curriculos')->group(function () {
 
     Route::get('/', [CurriculoController::class, 'getIndex']);
@@ -68,6 +71,9 @@ Route::prefix('curriculos')->group(function () {
     Route::put('/edit/{id}', [CurriculoController::class, 'putEdit'])->where('id', '[0-9]+');
 
     Route::get('/edit/{id}', [CurriculoController::class, 'getEdit'])->where('id', '[0-9]+');
+
+
+
 
 });
 
