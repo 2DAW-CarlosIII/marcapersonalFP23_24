@@ -6,7 +6,7 @@
    <div class="offset-md-3 col-md-6">
       <div class="card">
          <div class="card-header text-center">
-            Añadir usuario
+            Añadir Usuario
          </div>
          <div class="card-body" style="padding:30px">
 

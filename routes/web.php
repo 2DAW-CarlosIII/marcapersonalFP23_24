@@ -6,6 +6,7 @@ use App\Http\Controllers\CatalogController;
 use App\Http\Controllers\ActividadController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ReconocimientoController;
+use App\Http\Controllers\CurriculoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -66,14 +67,6 @@ Route::prefix('users')->group(function () {
     Route::get('/edit/{id}', [UserController::class, 'getEdit'])->where('id', '[0-9]+');
 });
 
-Route::get('perfil/{id?}', function ($id = null) {
-    if ($id == null) {
-        return "Visualizar el currículo propio";
-    } else {
-        return "Visualizar el currículo de " . $id;
-    }
-})->where('id', '[0-9]+');
-
 Route::prefix('actividades')->group(function () {
 
     Route::get('/', [ActividadController::class, 'getIndex']);
@@ -86,3 +79,24 @@ Route::prefix('actividades')->group(function () {
 
     Route::put('/edit/{id}', [ActividadController::class, 'putEdit'])->where('id', '[0-9]+');
 });
+
+Route::prefix('curriculos')->group(function () {
+
+    Route::get('/', [CurriculoController::class, 'getIndex']);
+
+    Route::get('/show/{id}', [CurriculoController::class, 'getShow'])->where('id', '[0-9]+');
+
+    Route::get('/create', [CurriculoController::class, 'getCreate']);
+
+    Route::get('/edit/{id}', [CurriculoController::class, 'getEdit'])->where('id', '[0-9]+');
+
+    Route::put('/edit/{id}', [CurriculoController::class, 'putEdit'])->where('id', '[0-9]+');
+});
+
+Route::get('perfil/{id?}', function ($id = null) {
+    if ($id == null) {
+        return "Visualizar el currículo propio";
+    } else {
+        return "Visualizar el currículo de " . $id;
+    }
+})->where('id', '[0-9]+');

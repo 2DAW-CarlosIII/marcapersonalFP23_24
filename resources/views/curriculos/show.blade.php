@@ -14,7 +14,8 @@
         <h4><strong>Texto Curriculum:</strong> {{ $curriculo['texto_curriculum'] }}</h4>
         </br>
         <a class="btn btn-warning" href="{{ action([App\Http\Controllers\CurriculoController::class, 'getEdit'], ['id' => $id]) }}">
-            <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Editar curriculum
+            <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+            Editar Curriculum
         </a>
 
         <a class="btn btn-outline-info" href="{{ action([App\Http\Controllers\CurriculoController::class, 'getIndex']) }}">

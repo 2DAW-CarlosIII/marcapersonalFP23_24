@@ -53,7 +53,7 @@ class ReconocimientoControllerTest extends TestCase
         /**
          * proyectos create test.
          */
-            $value = 'Añadir reconocimiento';
+            $value = 'Añadir Reconocimiento';
             $response = $this->get('/reconocimientos/create');
 
             $response
@@ -65,7 +65,7 @@ class ReconocimientoControllerTest extends TestCase
          * proyectos edit test.
          */
             $id = rand(1, 10);
-            $value = "Modificar reconocimiento";
+            $value = "Modificar Reconocimiento";
             $response = $this->get("/reconocimientos/edit/$id");
 
             $response

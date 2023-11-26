@@ -56,7 +56,7 @@ class UserControllerTest extends TestCase
     /**
      * proyectos create test.
      */
-        $value = 'Añadir usuario';
+        $value = 'Añadir Usuario';
         $response = $this->get('/users/create');
 
         $response
@@ -68,7 +68,7 @@ class UserControllerTest extends TestCase
      * proyectos edit test.
      */
         $id = rand(1, 10);
-        $value = "Modificar usuario";
+        $value = "Modificar Usuario";
         $response = $this->get("/users/edit/$id");
 
         $response
