@@ -104,7 +104,7 @@ class UserController extends Controller
 
     public function putEdit($id) {
         return view('users.edit')
-            ->with("proyecto",$this->arrayUsers[$id])
+            ->with("arrayUsers",$this->arrayUsers[$id])
             ->with("id",$id);
     }
 

@@ -23,6 +23,9 @@
 	            	<label for="last_name">Apellidos</label>
 	               <input type="text" name="last_name" id="last_name">
 	            </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="email"> </div>
 
                 <div class="form-group">
 	            	<label for="password1">Contraseña</label>
