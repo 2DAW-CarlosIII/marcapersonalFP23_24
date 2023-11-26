@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ActividadController;
+use App\Http\Controllers\ReconocimientoController;
 use App\Http\Controllers\CatalogController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\HomeController;
@@ -87,9 +88,20 @@ Route::prefix('curriculos')->group(function () {
 
     Route::get('/edit/{id}', [CurriculoController::class, 'getEdit'])->where('id', '[0-9]+');
 
+});
 
 
+Route::prefix('reconocimientos')->group(function () {
 
+    Route::get('/', [ReconocimientoController::class, 'getIndex']);
+
+    Route::get('/show/{id}', [ReconocimientoController::class, 'getShow'])->where('id', '[0-9]+');
+
+    Route::get('/create', [ReconocimientoController::class, 'getCreate']);
+
+    Route::put('/edit/{id}', [ReconocimientoController::class, 'putEdit'])->where('id', '[0-9]+');
+
+    Route::get('/edit/{id}', [ReconocimientoController::class, 'getEdit'])->where('id', '[0-9]+');
 });
 
 Route::get('perfil/{id?}', function ($id = null) {
