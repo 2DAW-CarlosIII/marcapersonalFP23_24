@@ -14,8 +14,8 @@
             <h3><strong>ID del estudiante: </strong>{{ $reconocimiento['estudiante_id'] }}</h3>
             <h4><strong>ID de la actividad: </strong>{{ $reconocimiento['actividad_id'] }}</h3>
             <h4><strong>Documento: </strong>
-                <a href="http://github.com/2DAW-CarlosIII/{{ $reconocimiento['documento'] }}">
-                    http://github.com/2DAW-CarlosIII/{{ $reconocimiento['documento'] }}
+                <a href="{{ $reconocimiento['documento'] }}">
+                    {{ $reconocimiento['documento'] }}
                 </a>
             </h4>
             <h4><strong>Fecha: </strong>{{ $reconocimiento['fecha'] }}</h3>

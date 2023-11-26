@@ -44,7 +44,7 @@ class ReconocimientoExerciseTest extends TestCase
         /**
          * proyectos index test.
          */
-            $response = $this->get('/reconocimiento');
+            $response = $this->get('/reconocimientos');
             $estudiante_id = [
                 '1',
                 '2',
@@ -66,26 +66,26 @@ class ReconocimientoExerciseTest extends TestCase
         /**
          * proyectos show test.
          */
-            $response = $this->get("/reconocimiento/show/1");
+            $response = $this->get("/reconocimientos/show/1");
 
             $response
             ->assertStatus(200)
             ->assertViewIs('reconocimiento.show')
             ->assertSeeText('3', $escaped = true);
 
-            $response = $this->get("/reconocimiento/show/2");
+            $response = $this->get("/reconocimientos/show/2");
 
             $response
             ->assertSeeText('4', $escaped = true);
 
-            $response = $this->get("/reconocimiento/show/A");
+            $response = $this->get("/reconocimientos/show/A");
             $response->assertNotFound();
 
         /**
          * proyectos create test.
          */
             $value = 'Añadir reconocimiento';
-            $response = $this->get('/reconocimiento/create');
+            $response = $this->get('/reconocimientos/create');
 
             $response
             ->assertStatus(200)
@@ -95,16 +95,16 @@ class ReconocimientoExerciseTest extends TestCase
         /**
          * proyectos edit test.
          */
-            $id = rand(1, 10);
+            $id = rand(0, 9);
             $value = "Modificar reconocimiento";
-            $response = $this->get("/reconocimiento/edit/1");
+            $response = $this->get("/reconocimientos/edit/1");
 
             $response
             ->assertStatus(200)
             ->assertViewIs('reconocimiento.edit')
             ->assertSeeText($value, $escaped = true);
 
-            $response = $this->get("/reconocimiento/edit/A");
+            $response = $this->get("/reconocimientos/edit/A");
             $response->assertNotFound();
 
 

@@ -39,7 +39,7 @@ Route::prefix('catalog')->group(function () {
 });
 
 
-Route::prefix('reconocimiento')->group(function () {
+Route::prefix('reconocimientos')->group(function () {
 
     Route::get('/', [ReconocimientoController::class, 'getIndex']);
 
