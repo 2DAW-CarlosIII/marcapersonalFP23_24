@@ -14,12 +14,11 @@ class ReconocimientoController extends Controller
     }
 
     public function getShow($id)
-{
-    return view('reconocimientos.show')
-    ->with('reconocimiento', $this->arrayReconocimientos[$id])
-    ->with('idReconocimiento', $id);
-}
-
+    {
+        return view('reconocimientos.show')
+        ->with('reconocimiento', $this->arrayReconocimientos[$id])
+        ->with('id', $id);
+    }
 
     public function getCreate()
     {
@@ -28,18 +27,17 @@ class ReconocimientoController extends Controller
 
     public function getEdit($id)
     {
-        $reconocimiento = $this->arrayReconocimientos[$id];
         return view('reconocimientos.edit')
-        ->with('reconocimiento', $id)
-        ->with('reconocimientos', $this->arrayReconocimientos);
+        ->with('reconocimiento', $this->arrayReconocimientos[$id])
+        ->with('id', $id);
     }
 
-
-
-   public function generateRandomString($length = 11) {
-        return substr(str_shuffle(str_repeat($x = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil(11 / strlen($x)))), 1, 11);
+    public function putEdit($id)
+    {
+        return view('reconocimientos.edit')
+        ->with('reconocimiento', $this->arrayReconocimientos[$id])
+        ->with('id', $id);
     }
-
 
     private $arrayReconocimientos = [
     [

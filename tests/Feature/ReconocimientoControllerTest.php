@@ -6,14 +6,14 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
-class ControllersExerciseTest extends TestCase
+class ReconocimientoControllerTest extends TestCase
 {
     public function test_controladores(): void
     {
         /**
          * proyectos index test.
          */
-            $response = $this->get('/reconocimiento');
+            $response = $this->get('/reconocimientos');
             $estudiante_id = [
                 '1',
                 '2',
@@ -35,26 +35,26 @@ class ControllersExerciseTest extends TestCase
         /**
          * proyectos show test.
          */
-            $response = $this->get("/reconocimiento/show/1");
+            $response = $this->get("/reconocimientos/show/1");
 
             $response
             ->assertStatus(200)
             ->assertViewIs('reconocimientos.show')
             ->assertSeeText('2', $escaped = true);
 
-            $response = $this->get("/reconocimiento/show/2");
+            $response = $this->get("/reconocimientos/show/2");
 
             $response
             ->assertSeeText('3', $escaped = true);
 
-            $response = $this->get("/reconocimiento/show/A");
+            $response = $this->get("/reconocimientos/show/A");
             $response->assertNotFound();
 
         /**
          * proyectos create test.
          */
             $value = 'Añadir reconocimiento';
-            $response = $this->get('/reconocimiento/create');
+            $response = $this->get('/reconocimientos/create');
 
             $response
             ->assertStatus(200)
@@ -66,14 +66,14 @@ class ControllersExerciseTest extends TestCase
          */
             $id = rand(1, 10);
             $value = "Modificar reconocimiento";
-            $response = $this->get("/reconocimiento/edit/$id");
+            $response = $this->get("/reconocimientos/edit/$id");
 
             $response
             ->assertStatus(200)
             ->assertViewIs('reconocimientos.edit')
             ->assertSeeText($value, $escaped = true);
 
-            $response = $this->get("/reconocimiento/edit/A");
+            $response = $this->get("/reconocimientos/edit/A");
             $response->assertNotFound();
 
     }

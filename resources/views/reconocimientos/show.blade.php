@@ -7,7 +7,7 @@
 
         <div class="col-sm-4">
 
-            <img src="/images/mp-logo.png" style="height:200px"/>
+            <a href="#" class="image featured" title="Sakatsp, CC BY-SA 4.0 &lt;https://creativecommons.org/licenses/by-sa/4.0&gt;, via Wikimedia Commons"><img width="256" alt="Award icon" src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Award_icon.png"></a>
 
         </div>
         <div class="col-sm-8">
@@ -20,7 +20,7 @@
 
 
 
-            <a class="btn btn-warning" href="{{ action([App\Http\Controllers\ReconocimientoController::class, 'getEdit'], ['id' => $idReconocimiento]) }}">
+            <a class="btn btn-warning" href="{{ action([App\Http\Controllers\ReconocimientoController::class, 'getEdit'], ['id' => $id]) }}">
                 <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                 Editar reconocimiento
             </a>

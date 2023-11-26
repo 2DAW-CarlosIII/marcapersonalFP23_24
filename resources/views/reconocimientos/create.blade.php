@@ -10,7 +10,7 @@
          </div>
          <div class="card-body" style="padding:30px">
 
-            <form action="{{ url('/reconocimiento/create') }}" method="POST">
+            <form action="{{ url('/reconocimientos/create') }}" method="POST">
 
 	            @csrf
 
@@ -21,12 +21,11 @@
 
 	            <div class="form-group">
 	            	<label for="Actividad">Docente</label>
-	               <input type="number" name="actividad_id" id="actividad_id">
+	               <input type="number" name="actividad_id" id="actividad_id" class="form-control">
 	            </div>
 
 	            <div class="form-group">
-	            	<label for="URL del documento">documento</label><br/>
-                    https://github.com/2DAW-CarlosIII/
+	            	<label for="documento">URL del documento</label>
 	               <input type="url" name="documento" id="documento" class="form-control">
 	            </div>
 
@@ -37,7 +36,7 @@
 
                 <div class="form-group">
 	            	<label for="Docente Validador">Docente</label>
-	               <input type="number" name="docente_validador" id="docente_validador">
+	               <input type="number" name="docente_validador" id="docente_validador" class="form-control">
 	            </div>
 
 	            <div class="form-group text-center">
