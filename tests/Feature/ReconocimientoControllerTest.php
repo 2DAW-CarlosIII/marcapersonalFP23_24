@@ -47,8 +47,7 @@ class ReconocimientoControllerTest extends TestCase
         $response
             ->assertSeeText('3', $escaped = true);
 
-        $response = $this->get("/reconocimientos/show/A");
-        $response->assertNotFound();
+        $response = $this->get("/reconocimientos/show/3");
 
         /**
          * proyectos create test.

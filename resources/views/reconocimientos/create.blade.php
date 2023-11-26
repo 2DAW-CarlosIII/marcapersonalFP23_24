@@ -17,7 +17,6 @@
                             <label for="id_estudiante">Estudiante</label>
                             <input type="number" name="id_estudiante" id="id_estudiante" class="form-control">
                         </div>
-
                         <div class="form-group">
                             <label for="actividad_id">Actividad</label>
                             <input type="number" name="actividad_id" id="form-control">

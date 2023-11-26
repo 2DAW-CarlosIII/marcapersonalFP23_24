@@ -9,8 +9,8 @@
 
         </div>
         <div class="col-sm-8">
-
-            <h3><strong>Estudiante: </strong>{{ $reconocimiento['estudiante_id'] }}</h3>
+            <h3>Reconocimiento</h3>
+            <h4><strong>Estudiante: </strong>{{ $reconocimiento['estudiante_id'] }}</h4>
             <h4><strong>Actividad: </strong>{{ $reconocimiento['actividad_id'] }}</h4>
             <h4><strong>Documento: </strong>{{ $reconocimiento['documento'] }}</h4>
             <h4><strong>Fecha: </strong>{{ $reconocimiento['fecha'] }}</h4>
@@ -19,15 +19,15 @@
             <footer>
                 <ul class="actions">
                     <li>
-                        <a href="{{ action([App\Http\Controllers\ReconocimientoController::class, 'getIndex']) }}"
-                            class="button alt">
-                            Más info
-                        </a>
-                    </li>
-                    <li>
                         <a href="{{ action([App\Http\Controllers\ReconocimientoController::class, 'getEdit'], ['id' => $id]) }}"
                             class="button alt">
                             Editar
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ action([App\Http\Controllers\ReconocimientoController::class, 'getIndex']) }}"
+                            class="button alt">
+                            Volver al listado
                         </a>
                     </li>
                 </ul>
