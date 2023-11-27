@@ -12,11 +12,11 @@ class ActividadControllerTest extends TestCase
     {
 
             $response = $this->get('/actividad');
-            $arrayActividades = [
+            $arrayActividades =
                 [
                     1,2,3,4,5,6,7,8,9
                 ]
-            ];
+            ;
 
             $response
             ->assertStatus(200)
@@ -56,7 +56,7 @@ class ActividadControllerTest extends TestCase
          * proyectos edit test.
          */
             $id = rand(0, 9);
-            $value = "Modificar actividad";
+            $value = "Modificar Actividad";
             $response = $this->get("/actividad/edit/$id");
 
             $response
