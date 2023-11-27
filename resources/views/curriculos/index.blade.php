@@ -12,7 +12,7 @@
         </ul>
 
         @for ($i = 0; $i < count($arrayCurriculos); $i++)
-            <div class="Ucol- col-6-medium col-12-small">
+            <div class="col-4 col-6-medium col-12-small">
                 <section class="box">
                     <a href="#"
                         title="SleaY, CC BY 4.0 &lt;https://creativecommons.org/licenses/by/4.0&gt;, via Wikimedia Commons"><img
