@@ -8,6 +8,7 @@ use Tests\TestCase;
 
 class UserControllerTest extends TestCase
 {
+<<<<<<< HEAD
     /**
      * A basic feature test example.
      */
@@ -80,6 +81,76 @@ class UserControllerTest extends TestCase
         $response->assertNotFound();
 
 
+=======
+    public function test_controladores(): void
+    {
+
+        /**
+         * proyectos index test.
+         */
+            $response = $this->get('/users');
+            $nombres = [
+                'John Doe',
+                'Jane Smith',
+                'Alice Johnson',
+                'Bob Williams',
+                'Eva Brown',
+                'Michael Taylor',
+                'Sophie Miller',
+                'David Davis',
+                'Emily White',
+                'Tom Wilson',
+            ];
+
+            $response
+            ->assertStatus(200)
+            ->assertViewIs('users.index')
+            ->assertSeeTextInOrder($nombres, $escaped = true);
+
+        /**
+         * proyectos show test.
+         */
+            $response = $this->get("/users/show/1");
+
+            $response
+            ->assertStatus(200)
+            ->assertViewIs('users.show')
+            ->assertSeeText('Jane', $escaped = true);
+
+            $response = $this->get("/users/show/2");
+
+            $response
+            ->assertSeeText('Alice', $escaped = true);
+
+            $response = $this->get("/users/show/A");
+            $response->assertNotFound();
+
+        /**
+         * proyectos create test.
+         */
+            $value = 'Añadir usuario';
+            $response = $this->get('/users/create');
+
+            $response
+            ->assertStatus(200)
+            ->assertViewIs('users.create')
+            ->assertSeeText($value, $escaped = true);
+
+        /**
+         * proyectos edit test.
+         */
+            $id = rand(1, 10);
+            $value = "Modificar usuario";
+            $response = $this->get("/users/edit/$id");
+
+            $response
+            ->assertStatus(200)
+            ->assertViewIs('users.edit')
+            ->assertSeeText($value, $escaped = true);
+
+            $response = $this->get("/users/edit/A");
+            $response->assertNotFound();
+>>>>>>> 824fc149a9afd56b31838ad4421e0337c2c1abdd
 
     }
 }

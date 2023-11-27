@@ -3,7 +3,11 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CatalogController;
+<<<<<<< HEAD
 use App\Http\Controllers\ActividadController;
+=======
+use App\Http\Controllers\UserController;
+>>>>>>> 824fc149a9afd56b31838ad4421e0337c2c1abdd
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ReconocimientoController;
 use App\Http\Controllers\CurriculoController;
@@ -91,6 +95,22 @@ Route::prefix('curriculos')->group(function () {
     Route::get('/edit/{id}', [CurriculoController::class, 'getEdit'])->where('id', '[0-9]+');
 
     Route::put('/edit/{id}', [CurriculoController::class, 'putEdit'])->where('id', '[0-9]+');
+});
+
+
+
+//Rutas de usuarios
+Route::prefix('users')->group(function () {
+
+    Route::get('/', [UserController::class, 'getIndex']);
+
+    Route::get('/show/{id}', [UserController::class, 'getShow'])->where('id', '[0-9]+');
+
+    Route::get('/create', [UserController::class, 'getCreate']);
+
+    Route::get('/edit/{id}', [UserController::class, 'getEdit'])->where('id', '[0-9]+');
+
+    Route::put('/edit/{id}', [UserController::class, 'putEdit'])->where('id', '[0-9]+');
 });
 
 Route::get('perfil/{id?}', function ($id = null) {
