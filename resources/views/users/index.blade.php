@@ -16,7 +16,7 @@
                 <h3>{{ $arrayUsers[$i]['first_name'] }} {{ $arrayUsers[$i]['last_name'] }}</h3>
             </header>
             <p class="text-dark">
-                Linkedin:{{$arrayUsers[$i]['linkedin']}}</p>
+                Linkedin: <a href="{{$arrayUsers[$i]['linkedin']}}">{{$arrayUsers[$i]['linkedin']}}</a> </p>
             <!--
                 El siguiente código debe ser adaptado.
                 Una vez adaptado, elimina este comentario.
