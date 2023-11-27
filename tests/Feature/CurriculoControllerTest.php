@@ -64,7 +64,7 @@ class CurriculoControllerTest extends TestCase
         /**
          * proyectos edit test.
          */
-        $id = rand(1, 10);
+        $id = rand(0,9);
         $value = "Modificar Currículum";
         $response = $this->get("/curriculos/edit/$id");
 
