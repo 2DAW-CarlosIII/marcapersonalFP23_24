@@ -15,7 +15,7 @@
             <h3 class='text-left'>{{ $user['first_name'] }} {{ $user['last_name'] }}</h3>
 
             <p class="text-dark">Linkedin: <a href="{{ $user['linkedin'] }}">{{ $user['linkedin'] }}</a><br>
-                Email: <a href="{{ $user['linkedin'] }}">{{ $user['linkedin'] }}</p></a>
+                Email: <a href="{{$user['email'] }}">{{ $user['email'] }}</p></a>
 
             <footer>
                 <ul class="actions">
