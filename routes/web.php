@@ -1,13 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserController;
 use App\Http\Controllers\CatalogController;
-<<<<<<< HEAD
 use App\Http\Controllers\ActividadController;
-=======
 use App\Http\Controllers\UserController;
->>>>>>> 824fc149a9afd56b31838ad4421e0337c2c1abdd
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ReconocimientoController;
 use App\Http\Controllers\CurriculoController;
