@@ -2,18 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Proyecto;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CatalogController extends Controller
 {
     public function getIndex(){
-        return view('catalog.index',['arrayProyectos'=>$this->arrayProyectos]);
+        $proyectos = Proyecto::all();
+
+        return view('catalog.index',['arrayProyectos'=>$proyectos]);
     }
 
     public function getShow($id)
     {
+        $proyectos = Proyecto::findOrFail($id);
+
         return view('catalog.show')
-            ->with('proyecto', $this->arrayProyectos[$id])
+            ->with('proyecto', $proyectos)
             ->with('id', $id);
     }
 

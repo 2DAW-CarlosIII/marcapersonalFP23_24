@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('docente_id')->nullable();
             $table->string('nombre',120);
             $table->string('dominio',30)->nullable();
-            $table->
+            $table->text('metadatos')->nullable();
             $table->timestamps();
         });
     }
