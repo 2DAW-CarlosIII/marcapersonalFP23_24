@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('nombre', 32);
             $table->string('apellidos', 32);
             $table->string('direccion');
-            $table->integer('votos');
+            $table->integer('votos')->nullable();
             $table->boolean('confirmado')->default(false);
             $table->timestamps();
         });
