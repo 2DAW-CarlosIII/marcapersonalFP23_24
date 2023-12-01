@@ -30,7 +30,7 @@ class CatalogController extends Controller
         $proyecto->metadatos = unserialize($proyecto->metadatos);
 
         return view('catalog.edit')
-            ->with('proyecto', $proyecto)
+        ->with('proyecto', $proyecto)
             ->with("id", $id);
     }
 
@@ -39,7 +39,7 @@ class CatalogController extends Controller
         $proyecto = Proyecto::findorfail($id);
         $proyecto->metadatos = unserialize($proyecto->metadatos);
         return view('catalog.edit')
-            ->with('proyecto', $proyecto)
+        ->with('proyecto', $proyecto)
             ->with("id", $id);
     }
 
