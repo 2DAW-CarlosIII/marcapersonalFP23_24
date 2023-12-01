@@ -20,7 +20,7 @@
             <footer>
                 <ul class="actions">
                     //TODO enlazar el show de catalogController
-                    <li><a href="{{ action([App\Http\Controllers\CatalogController::class, 'getShow'], ['id' => $i] ) }}" class="button alt">Más info</a></li>
+                    <li><a href="{{ action([App\Http\Controllers\CatalogController::class, 'getShow'], $arrayProyectos[$i]->id ) }}" class="button alt">Más info</a></li>
                 </ul>
             </footer>
         </section>
