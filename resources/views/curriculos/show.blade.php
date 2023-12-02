@@ -8,12 +8,12 @@
     </div>
 
     <div class="col-sm-8  align-self-center">
-        <h3><strong>Identificador del usuario:</strong> {{ $curriculo['user_id'] }}</h3>
+        <h3><strong>Identificador del usuario:</strong> {{ $curriculo->user_id }}</h3>
         </br>
-        <h4><strong>Video Curriculum:</strong> <a href="{{ $curriculo['video_curriculum'] }}">{{ $curriculo['video_curriculum'] }}</a></h4>
-        <h4><strong>Texto Curriculum:</strong> {{ $curriculo['texto_curriculum'] }}</h4>
+        <h4><strong>Video Curriculum:</strong> <a href="{{ $curriculo->video_curriculum }}">{{ $curriculo->video_curriculum }}</a></h4>
+        <h4><strong>Texto Curriculum:</strong> {{ $curriculo->texto_curriculum }}</h4>
         </br>
-        <a class="btn btn-warning" href="{{ action([App\Http\Controllers\CurriculoController::class, 'getEdit'], ['id' => $id]) }}">
+        <a class="btn btn-warning" href="{{ action([App\Http\Controllers\CurriculoController::class, 'getEdit'], ['id' => $curriculo->id]) }}">
             <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
             Editar Curriculum
         </a>
