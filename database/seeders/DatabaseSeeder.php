@@ -30,6 +30,16 @@ class DatabaseSeeder extends Seeder
         Model::reguard();
 
         Schema::enableForeignKeyConstraints();
+        Model::unguard();
+        Schema::disableForeignKeyConstraints();
+
+        // llamadas a otros ficheros de seed
+        $this->call(ActividadesTableSeeder::class);
+        // llamadas a otros ficheros de seed
+
+        Model::reguard();
+
+        Schema::enableForeignKeyConstraints();
 
     }
 }
