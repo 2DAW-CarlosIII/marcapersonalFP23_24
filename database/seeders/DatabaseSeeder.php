@@ -28,12 +28,16 @@ class DatabaseSeeder extends Seeder
             'email' => env('ADMIN_EMAIL', 'admin@email.com'),
             'password' => env('ADMIN_PASSWORD', 'password'),
         ]);
-        Model::reguard();
-
-        Schema::enableForeignKeyConstraints();
 
         self::seedProyectos();
         $this->command->info('Tabla catálogo inicializada con datos!');
+
+        $this->call(ReconocimientosTableSeeder::class);
+
+
+        Model::reguard();
+
+        Schema::enableForeignKeyConstraints();
 
     }
 
@@ -51,7 +55,7 @@ class DatabaseSeeder extends Seeder
         }
     }
 
-    private $arrayProyectos = [
+    private static $arrayProyectos = [
         [
             'docente_id' => 1,
             'nombre' => 'Tecnologías de la Información',
