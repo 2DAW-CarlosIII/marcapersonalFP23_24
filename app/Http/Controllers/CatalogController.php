@@ -19,7 +19,7 @@ class CatalogController extends Controller
         $proyecto->metadatos = unserialize($proyecto->metadatos);
         return view('catalog.show')
             ->with('proyecto', $proyecto)
-            ->with('id', $id);
+            ->with('id', $proyecto->id);
     }
 
     public function putEdit($id) {
@@ -27,7 +27,7 @@ class CatalogController extends Controller
         $proyecto->metadatos = unserialize($proyecto->metadatos);
         return view('catalog.edit')
             ->with("proyecto",$proyecto)
-            ->with("id",$id);
+            ->with("id",$proyecto->id);
     }
 
     public function getEdit($id) {
@@ -35,7 +35,7 @@ class CatalogController extends Controller
         $proyecto->metadatos = unserialize($proyecto->metadatos);
         return view('catalog.edit')
             ->with("proyecto",$proyecto)
-            ->with("id",$id);
+            ->with("id",$proyecto->id);
     }
 
     public function getCreate(){
