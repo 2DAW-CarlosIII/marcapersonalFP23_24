@@ -16,18 +16,18 @@
 
                     <div class="form-group">
                         <label for="user_id">Estudiante</label>
-                        <input type="number" name="user_id" id="user_id" class="form-control" value="{{ $curriculo['user_id'] }}">
+                        <input type="number" name="user_id" id="user_id" class="form-control" value="{{ $curriculo->user_id }}">
                     </div>
 
                     <div class="form-group">
                         <label for="video_curriculum">URL Videocurrículo</label>
-                        <input type="url" name="video_curriculum" id="video_curriculum" class="form-control" value="{{ $curriculo['video_curriculum'] }}">
+                        <input type="url" name="video_curriculum" id="video_curriculum" class="form-control" value="{{ $curriculo->video_curriculum }}">
                     </div>
 
                     <div class="form-group">
                         <label for="texto_curriculum">Texto del currículo</label>
                         <textarea name="texto_curriculum" id="texto_curriculum" class="form-control">
-{{print_r($curriculo['texto_curriculum'],true)}}
+{{print_r($curriculo->texto_curriculum,true)}}
                         </textarea>
                     </div>
 
