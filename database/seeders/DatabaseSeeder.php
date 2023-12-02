@@ -16,11 +16,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        Model::unguard();
+        /* Model::unguard();
         Schema::disableForeignKeyConstraints();
 
         $this->call(EstudiantesTableSeeder::class);
-        // \App\Models\User::factory(10)->create();
+        \App\Models\User::factory(10)->create();
 
         \App\Models\User::factory()->create([
             'name' => 'Test User',
@@ -29,7 +29,19 @@ class DatabaseSeeder extends Seeder
         ]);
         Model::reguard();
 
+        Schema::enableForeignKeyConstraints(); */
+
+        Model::unguard();
+        Schema::disableForeignKeyConstraints();
+
+        // llamadas a otros ficheros de seed
+        $this->call(CurriculosTableSeeder::class);
+        // llamadas a otros ficheros de seed
+
+        Model::reguard();
+
         Schema::enableForeignKeyConstraints();
 
     }
+
 }
