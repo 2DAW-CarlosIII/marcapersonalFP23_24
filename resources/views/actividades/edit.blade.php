@@ -16,12 +16,12 @@
 
 	            <div class="form-group">
 	            	<label for="docente_id">Docente</label>
-	               <input type="number" name="docente_id" id="docente_id" class="form-control" value="{{ $actividad['docente_id'] }}">
+	               <input type="number" name="docente_id" id="docente_id" class="form-control" value="{{ $actividad->docente_id }}">
 	            </div>
 
                 <div class="form-group">
 	            	<label for="insignia">Insignia</label>
-	               <input type="url" name="insignia" id="insignia" class="form-control" value="{{ $actividad['insignia'] }}">
+	               <input type="url" name="insignia" id="insignia" class="form-control" value="{{ $actividad->insignia }}">
 	            </div>
 
 

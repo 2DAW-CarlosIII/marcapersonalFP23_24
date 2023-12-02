@@ -20,6 +20,8 @@ class DatabaseSeeder extends Seeder
         Schema::disableForeignKeyConstraints();
 
         $this->call(EstudiantesTableSeeder::class);
+        $this->call(ActividadesTableSeeder::class);
+
         // \App\Models\User::factory(10)->create();
 
         \App\Models\User::factory()->create([
@@ -30,6 +32,8 @@ class DatabaseSeeder extends Seeder
         Model::reguard();
 
         Schema::enableForeignKeyConstraints();
+
+
 
     }
 }

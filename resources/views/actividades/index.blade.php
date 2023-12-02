@@ -4,17 +4,17 @@
 
 <div class="row">
 
-    @for ($i=0; $i<count($arrayActividades); $i++)
+    @for ($i=0; $i<count($actividades); $i++)
 
     <div class="col-4 col-6-medium col-12-small">
         <section class="box">
             <a href="#" class="image featured" title="SleaY, CC BY 4.0 &lt;https://creativecommons.org/licenses/by/4.0&gt;, via Wikimedia Commons"><img width="256" alt="Curriculum-vitae-warning-icon" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Curriculum-vitae-warning-icon.svg/256px-Curriculum-vitae-warning-icon.svg.png"></a>
             <header>
-                <h3>Docente {{ $arrayActividades[$i]['docente_id'] }}</h3>
+                <h3>Docente {{ $actividades[$i]->docente_id }}</h3>
             </header>
-            <p>          
-                <a href="{{ $arrayActividades[$i]['insignia'] }}"> 
-                   {{ $arrayActividades[$i]['insignia'] }}
+            <p>
+                <a href="{{ $actividades[$i]->insignia}}">
+                   {{ $actividades[$i]->insignia }}
                 </a>
             </p>
             <footer>
