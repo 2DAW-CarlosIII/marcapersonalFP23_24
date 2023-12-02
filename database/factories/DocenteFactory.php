@@ -20,7 +20,7 @@ class DocenteFactory extends Factory
             "nombre" => fake()->firstName(),
             "apellidos" => fake()->lastName(),
             "direccion" => fake()->address(),
-            "ciclo" => fake()->randomElement(
+            "departamento" => fake()->randomElement(
                 [
                     'Administración',
                     'Comercio, Informática',

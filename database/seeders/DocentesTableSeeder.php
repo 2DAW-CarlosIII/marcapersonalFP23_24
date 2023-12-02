@@ -13,6 +13,6 @@ class DocentesTableSeeder extends Seeder
     public function run(): void
     {
         Docente::truncate();
-        Docente::factory(10);
+        Docente::factory(10)->create();
     }
 }
