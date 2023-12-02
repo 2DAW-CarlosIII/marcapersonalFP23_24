@@ -12,11 +12,11 @@
         </div>
         <div class="col-sm-8">
 
-            <p><strong>ID EStudiante: </strong>{{ $reconocimiento['estudiante_id'] }}</p>
-            <p><strong>ID Actividad </strong>{{ $reconocimiento['actividad_id'] }}</p>
-            <p><strong>Documento: </strong>{{ $reconocimiento['documento'] }}</p>
-            <p><strong>Fecha: </strong>{{ $reconocimiento['fecha'] }}</p>
-            <p><strong>Docente Validador: </strong>{{ $reconocimiento['docente_validador'] }}</p>
+            <p><strong>ID EStudiante: </strong>{{ $reconocimiento->estudiante_id }}</p>
+            <p><strong>ID Actividad </strong>{{ $reconocimiento->actividad_id }}</p>
+            <p><strong>Documento: </strong>{{ $reconocimiento->documento }}</p>
+            <p><strong>Fecha: </strong>{{ ($reconocimiento->created_at)->format('d/m/Y') }}</p>
+            <p><strong>Docente Validador: </strong>{{ $reconocimiento->docente_validador }}</p>
 
 
 

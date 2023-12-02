@@ -16,27 +16,27 @@
 
 	            <div class="form-group">
 	               <label for="estudiante_id">ID estudiante</label>
-	               <input type="number" name="estudiante_id" id="estudiante_id" class="form-control" value="{{ $reconocimiento['estudiante_id'] }}">
+	               <input type="number" name="estudiante_id" id="estudiante_id" class="form-control" value="{{ $reconocimiento->estudiante_id }}">
 	            </div>
 
 	            <div class="form-group">
 	            	<label for="actividad_id">Actividad</label>
-	               <input type="number" name="actividad_id" id="actividad_id" class="form-control" value="{{ $reconocimiento['actividad_id'] }}">
+	               <input type="number" name="actividad_id" id="actividad_id" class="form-control" value="{{ $reconocimiento->actividad_id }}">
 	            </div>
 
 	            <div class="form-group">
 	            	<label for="documento">URL del documento</label>
-	               <input type="url" name="documento" id="documento" class="form-control" value="{{ $reconocimiento['documento'] }}">
+	               <input type="url" name="documento" id="documento" class="form-control" value="{{ $reconocimiento->documento }}">
 	            </div>
 
 	            <div class="form-group">
 	               <label for="fecha">Fecha</label>
-	               <input type ="date" name="fecha" id="fecha" class="form-control">
+	               <input type ="date" name="fecha" id="fecha" value="{{ ($reconocimiento->created_at)->format('Y-m-d')  }}" class="form-control">
 	            </div>
 
                 <div class="form-group">
 	            	<label for="docente_validador">Docente Validador</label>
-	               <input type="number" name="docente_validador" id="docente_validador" class="form-control" value="{{ $reconocimiento['docente_validador'] }}">
+	               <input type="number" name="docente_validador" id="docente_validador" class="form-control" value="{{ $reconocimiento->docente_validador }}">
 	            </div>
 
 	            <div class="form-group text-center">
