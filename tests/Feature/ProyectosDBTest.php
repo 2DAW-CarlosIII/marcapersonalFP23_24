@@ -119,5 +119,12 @@ class ProyectosDBTest extends TestCase
             'dominio' => 'dominio1prueba',
         ]);
 
+        $proyecto = Proyecto::find($proyecto2->id);
+        $proyecto->delete();
+
+        $this->assertDatabaseMissing('proyectos', [
+            'dominio' => 'dominio2prueba',
+        ]);
+
     }
 }
