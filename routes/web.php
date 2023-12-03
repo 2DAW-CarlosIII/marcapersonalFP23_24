@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\EstudianteController;
 use App\Http\Controllers\CatalogController;
 use App\Http\Controllers\ActividadController;
 use App\Http\Controllers\HomeController;
@@ -28,6 +29,18 @@ Route::get('login', function () {
 
 Route::get('logout', function () {
     return "Logout usuario";
+});
+Route::prefix('estudiantes')->group(function () {
+
+    Route::get('/', [EstudianteController::class, 'getIndex']);
+
+    Route::get('/show/{id}', [EstudianteController::class, 'getShow'])->where('id', '[0-9]+');
+
+    Route::get('/create', [EstudianteController::class, 'getCreate']);
+
+    Route::get('/edit/{id}', [EstudianteController::class, 'getEdit'])->where('id', '[0-9]+');
+
+    Route::put('/edit/{id}', [EstudianteController::class, 'putEdit'])->where('id', '[0-9]+');
 });
 
 Route::prefix('catalog')->group(function () {
