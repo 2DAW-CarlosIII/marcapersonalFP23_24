@@ -21,7 +21,7 @@
                 @endif
             </p>
 
-            <a class="btn btn-warning" href="{{ action([App\Http\Controllers\EstudianteController::class, 'getEdit'], ['id' => $id]) }}">
+            <a class="btn btn-warning" href="{{ action([App\Http\Controllers\EstudianteController::class, 'getEdit'], ['id' => $estudiante->id]) }}">
                 <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                 Editar estudiante
             </a>
