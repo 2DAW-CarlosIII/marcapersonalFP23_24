@@ -20,17 +20,19 @@ class CatalogController extends Controller
             ->with('id', $id);
     }
 
-    public function putEdit($id)
-    {
+    public function putEdit($id) {
+        $proyecto=Proyecto::findOrfail($id);
+        $proyecto->metadatos = unserialize($proyecto['metadatos']);
         return view('catalog.edit')
-            ->with('proyecto', $proyecto = Proyecto::findOrFail($id))
+            ->with('proyecto', $proyecto)
             ->with('id', $id);
     }
 
-    public function getEdit($id)
-    {
+    public function getEdit($id) {
+        $proyecto=Proyecto::findOrfail($id);
+        $proyecto->metadatos = unserialize($proyecto['metadatos']);
         return view('catalog.edit')
-            ->with('proyecto', $proyecto = Proyecto::findOrFail($id))
+            ->with('proyecto', $proyecto)
             ->with('id', $id);
     }
 
