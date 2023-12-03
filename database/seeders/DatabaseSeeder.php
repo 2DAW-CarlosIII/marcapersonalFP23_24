@@ -6,6 +6,7 @@ namespace Database\Seeders;
 
 use App\Models\Estudiante;
 use App\Models\Proyecto;
+use App\Models\Docente;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Schema;
@@ -124,6 +125,7 @@ class DatabaseSeeder extends Seeder
         Schema::disableForeignKeyConstraints();
 
         $this->call(EstudiantesTableSeeder::class);
+        $this->call(DocentesTableSeeder::class);
 
         self::seedProyectos();
         $this->command->info('Tabla catálogo inicializada con datos!');
