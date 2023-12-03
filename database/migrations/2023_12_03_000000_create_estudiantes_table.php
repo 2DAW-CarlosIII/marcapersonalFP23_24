@@ -11,17 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('proyectos', function (Blueprint $table) {
+        Schema::create('estudiantes', function($table)
+        {
             $table->id();
-
-            $table->unsignedBigInteger('docente_id')->nullable();
-            $table->string('nombre', 120);
-            $table->string('dominio', 30)->nullable();
-            $table->text('metadatos')->nullable();
-
-
+            $table->string('nombre', 32);
+            $table->string('apellidos', 32);
+            $table->string('direccion');
+            $table->integer('votos');
+            $table->boolean('confirmado')->default(false);
             $table->timestamps();
-
         });
     }
 
@@ -30,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('proyectos');
+        Schema::dropIfExists('estudiantes');
     }
 };
