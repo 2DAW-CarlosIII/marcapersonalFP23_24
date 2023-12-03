@@ -13,7 +13,7 @@
                 {{ $estudiante->apellidos}};
             </p>
             <p>
-                {{ $estudiante->campo->direccion}};
+                {{ $estudiante->direccion}};
             </p>
             <footer>
                 <ul class="actions">
