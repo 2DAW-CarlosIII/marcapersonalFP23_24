@@ -45,16 +45,19 @@ class DatabaseSeeder extends Seeder
         $this->call(ActividadesTableSeeder::class);
         // llamadas a otros ficheros de seed
 
+        //self::seedProyectos();
+        //$this->command->info('Tabla catálogo inicializada con datos!');
+
+        $this->call(DocentesTableSeeder::class);
+
         Model::reguard();
 
         Schema::enableForeignKeyConstraints();
-
     }
 
-    public function seedProyectos(){
-
+    private static function seedProyectos(): void
+    {
         Proyecto::truncate();
-
         foreach( self::$arrayProyectos as $proyecto ) {
             $p = new Proyecto;
             $p->docente_id = $proyecto['docente_id'];
