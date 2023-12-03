@@ -130,6 +130,14 @@ class DatabaseSeeder extends Seeder
         self::seedProyectos();
         $this->command->info('Tabla catálogo inicializada con datos!');
 
+        $this->call(CurriculosTableSeeder::class);
+        // \App\Models\User::factory(10)->create();
+
+        //\App\Models\User::factory()->create([
+        //    'name' => 'Test User',
+        //    'email' => env('ADMIN_EMAIL', 'admin@email.com'),
+        //    'password' => env('ADMIN_PASSWORD', 'password'),
+        //]);
         Model::reguard();
 
         Schema::enableForeignKeyConstraints();
