@@ -23,7 +23,8 @@ class DocenteFactory extends Factory
             "departamento" => fake()->randomElement(
                 [
                     'Administración',
-                    'Comercio, Informática',
+                    'Comercio',
+                    'Informática',
                     'Relaciones con las empresas',
                     'DIOP',
                     'Innovación'
