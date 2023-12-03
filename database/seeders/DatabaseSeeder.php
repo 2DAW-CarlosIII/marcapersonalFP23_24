@@ -5,6 +5,8 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\Estudiante;
+use App\Models\Curriculo;
+
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Schema;
@@ -21,6 +23,9 @@ class DatabaseSeeder extends Seeder
 
         $this->call(EstudiantesTableSeeder::class);
         // \App\Models\User::factory(10)->create();
+
+        // llamadas a otros ficheros de seed
+        $this->call(CurriculosTableSeeder::class);
 
         \App\Models\User::factory()->create([
             'name' => 'Test User',
