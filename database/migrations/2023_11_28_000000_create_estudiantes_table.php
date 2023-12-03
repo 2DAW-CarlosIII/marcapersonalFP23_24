@@ -11,8 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('estudiantes', function (Blueprint $table)
+<<<<<<<<< Temporary merge branch 1
+        Schema::create('estudiantes', function($table)
         {
+=========
+        Schema::create('estudiantes', function (Blueprint $table) {
+>>>>>>>>> Temporary merge branch 2
             $table->id();
             $table->string('nombre', 32);
             $table->string('apellidos', 32);
