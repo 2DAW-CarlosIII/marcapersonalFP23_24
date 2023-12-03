@@ -10,7 +10,7 @@
             </div>
             <div class="card-body p-4">
 
-                <form action="{{ action([App\Http\Controllers\CurriculoController::class, 'putEdit'], ['id' => $id]) }}" method="POST">
+                <form action="{{ action([App\Http\Controllers\CurriculoController::class, 'putEdit'], ['id' =>$curriculo->id]) }}" method="POST">
                     @csrf
                     @method('PUT')
 
