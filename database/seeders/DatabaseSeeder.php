@@ -7,6 +7,7 @@ namespace Database\Seeders;
 use App\Models\Estudiante;
 use App\Models\Proyecto;
 use App\Models\Docente;
+use App\Models\Reconocimiento;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Schema;
@@ -132,6 +133,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call(CurriculosTableSeeder::class);
         $this->call(ActividadesTableSeeder::class);
+        $this->call(ReconocimientosTableSeeder::class);
         // \App\Models\User::factory(10)->create();
 
         //\App\Models\User::factory()->create([
