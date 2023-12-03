@@ -20,7 +20,7 @@
                 <footer>
                     <ul class="actions">
                         <li>
-                            <a href="{{ action([App\Http\Controllers\CurriculoController::class, 'getShow'], ['id' => $curriculo->id]) }}" class="button alt">Más info</a>
+                            <a href="{{ action([App\Http\Controllers\CurriculoController::class, 'getShow'], ['id' => $curriculo->id] ) }}" class="button alt">Más info</a>
                         </li>
                     </ul>
                 </footer>

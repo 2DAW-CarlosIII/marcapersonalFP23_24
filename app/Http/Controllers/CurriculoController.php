@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -9,17 +8,17 @@ use App\Models\Curriculo;
 class CurriculoController extends Controller
 {
     public function getIndex(){
-        $curriculos = Curriculo::all();
 
-        return view('curriculos.index',['arrayCurriculos'=>$curriculos]);
+        $curriculos = Curriculo::all();
+        return view('curriculos.index', ['curriculos' => $curriculos]);
     }
 
     public function getShow($id){
-        $curriculo = Curriculo::findOrFail($id);
+        $curriculos = Curriculo::findOrFail($id);
 
         return view('curriculos.show')
-            ->with('curriculo', $curriculo)
-            ->with('id', $id);
+            ->with('curriculo', $curriculos)
+            ->with('id', $curriculos->id);
     }
 
     public function getCreate(){
@@ -27,18 +26,18 @@ class CurriculoController extends Controller
     }
 
     public function putEdit($id){
-        $curriculo = Curriculo::findOrFail($id);
+        $curriculos = Curriculo::findOrFail($id);
 
         return view('curriculos.edit')
-        ->with('curriculo', $curriculo)
-        ->with('id', $id);
+        ->with('curriculo', $curriculos)
+        ->with('id', $curriculos->id);
     }
 
     public function getEdit($id){
-        $curriculo = Curriculo::findOrFail($id);
+        $curriculos = Curriculo::findOrFail($id);
 
         return view('curriculos.edit')
-        ->with('curriculo', $curriculo)
-        ->with('id', $id);
+        ->with('curriculo', $curriculos)
+        ->with('id', $curriculos->id);
     }
 }
