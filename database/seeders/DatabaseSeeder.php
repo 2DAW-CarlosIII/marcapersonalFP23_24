@@ -125,11 +125,14 @@ class DatabaseSeeder extends Seeder
         Schema::disableForeignKeyConstraints();
 
         $this->call(EstudiantesTableSeeder::class);
-        $this->call(DocentesTableSeeder::class);
+        $this->call(CurriculosTableSeeder::class);
+        // \App\Models\User::factory(10)->create();
 
-        self::seedProyectos();
-        $this->command->info('Tabla catálogo inicializada con datos!');
-
+        //\App\Models\User::factory()->create([
+        //    'name' => 'Test User',
+        //    'email' => env('ADMIN_EMAIL', 'admin@email.com'),
+        //    'password' => env('ADMIN_PASSWORD', 'password'),
+        //]);
         Model::reguard();
 
         Schema::enableForeignKeyConstraints();
