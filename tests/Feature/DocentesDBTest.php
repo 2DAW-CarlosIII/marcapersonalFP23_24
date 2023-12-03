@@ -95,6 +95,9 @@ class DocentesDBTest extends TestCase
         $docente = Docente::find($docente1->id);
         $docente->delete();
 
+        $docente = Docente::find($docente2->id);
+        $docente->delete();
+
         $this->assertDatabaseMissing('docentes', [
             'direccion' => 'Direccion1',
         ]);

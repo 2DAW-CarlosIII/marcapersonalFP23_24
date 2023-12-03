@@ -17,7 +17,6 @@
             </h4>
             <footer>
                 <ul class="actions">
-                    //TODO enlazar el show de catalogController
                     <li><a href="{{ action([App\Http\Controllers\DocenteController::class, 'getShow'], ['id' => $docente[$i]->id] ) }}" class="button alt">Más info</a></li>
                 </ul>
             </footer>
