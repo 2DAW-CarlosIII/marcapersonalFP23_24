@@ -131,6 +131,7 @@ class DatabaseSeeder extends Seeder
         $this->command->info('Tabla catálogo inicializada con datos!');
 
         $this->call(CurriculosTableSeeder::class);
+        $this->call(ActividadesTableSeeder::class);
         // \App\Models\User::factory(10)->create();
 
         //\App\Models\User::factory()->create([
