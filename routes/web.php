@@ -7,6 +7,7 @@ use App\Http\Controllers\ActividadController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ReconocimientoController;
 use App\Http\Controllers\CurriculoController;
+use App\Http\Controllers\EstudianteController;
 use App\Models\Estudiante;
 
 /*
@@ -101,3 +102,16 @@ Route::get('perfil/{id?}', function ($id = null) {
         return "Visualizar el currículo de " . $id;
     }
 })->where('id', '[0-9]+');
+
+Route::prefix('estudiantes')->group(function () {
+
+    Route::get('/', [EstudianteController::class, 'getIndex']);
+
+    Route::get('/show/{id}', [EstudianteController::class, 'getShow'])->where('id', '[0-9]+');
+
+    Route::get('/create', [EstudianteController::class, 'getCreate']);
+
+    Route::get('/edit/{id}', [EstudianteController::class, 'getEdit'])->where('id', '[0-9]+');
+
+    Route::put('/edit/{id}', [EstudianteController::class, 'putEdit'])->where('id', '[0-9]+');
+});
