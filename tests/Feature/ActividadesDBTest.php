@@ -40,7 +40,7 @@ class ActividadesDBTest extends TestCase
         /**
          * actividads index test.
          */
-        $response = $this->get('/adtividades');
+        $response = $this->get('/actividades');
         $insignias = [
             'actividad1 de prueba',
             'actividad2 de prueba',
