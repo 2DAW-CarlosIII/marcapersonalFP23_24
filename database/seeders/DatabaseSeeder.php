@@ -126,6 +126,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call(EstudiantesTableSeeder::class);
         $this->call(CurriculosTableSeeder::class);
+        $this->call(ReconocimientosTableSeeder::class);
         // \App\Models\User::factory(10)->create();
 
         //\App\Models\User::factory()->create([
