@@ -21,7 +21,8 @@ return new class extends Migration
             $table->enum("departamento",
                 [
                     'Administración',
-                    'Comercio, Informática',
+                    'Comercio',
+                    'Informática',
                     'Relaciones con las empresas',
                     'DIOP',
                     'Innovación'
