@@ -10,7 +10,7 @@
          </div>
          <div class="card-body" style="padding:30px">
 
-            <form href="{{ action([App\Http\Controllers\ActividadController::class, 'getEdit'], ['id' => $id]) }}" method="POST">
+            <form href="{{ action([App\Http\Controllers\ActividadController::class, 'putEdit'], ['id' => $id]) }}" method="POST">
                 @method('PUT')
 	            @csrf
 
