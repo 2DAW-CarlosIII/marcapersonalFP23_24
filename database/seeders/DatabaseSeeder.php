@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
         Schema::disableForeignKeyConstraints();
 
         $this->call(EstudiantesTableSeeder::class);
+        $this->call(ReconocimientosTableSeeder::class);
 
         Model::reguard();
 
