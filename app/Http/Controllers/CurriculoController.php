@@ -65,7 +65,8 @@ class CurriculoController extends Controller
     public function getIndex(){
         $curriculos = Curriculo::all();
 
-        return view('curriculos.index',['arrayCurriculos'=>$curriculos]);
+        return view('curriculos.index')
+        ->with('arrayCurriculos', $curriculos);
     }
 
     public function getShow($id){
@@ -73,7 +74,7 @@ class CurriculoController extends Controller
 
 
         return view('curriculos.show')
-            ->with('curriculo', $this->$curriculo)
+            ->with('curriculo', $curriculo)
             ->with('id', $id);
     }
 
@@ -87,7 +88,7 @@ class CurriculoController extends Controller
 
 
         return view('curriculos.edit')
-        ->with('curriculo', $this->$curriculo)
+        ->with('curriculo', $curriculo)
         ->with('id', $id);
     }
 
@@ -96,7 +97,7 @@ class CurriculoController extends Controller
 
 
         return view('curriculos.edit')
-        ->with('curriculo', $this->$curriculo)
+        ->with('curriculo', $curriculo)
         ->with('id', $id);
     }
 
