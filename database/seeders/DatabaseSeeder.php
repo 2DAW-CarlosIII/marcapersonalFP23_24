@@ -22,9 +22,11 @@ class DatabaseSeeder extends Seeder
         $this->call(EstudiantesTableSeeder::class);
         $this->call(ReconocimientosTableSeeder::class);
 
+        $this->call(CurriculosTableSeeder::class);
+        // \App\Models\User::factory(10)->create();
+
         Model::reguard();
 
         Schema::enableForeignKeyConstraints();
-
     }
 }
