@@ -20,13 +20,17 @@ class DatabaseSeeder extends Seeder
         Schema::disableForeignKeyConstraints();
 
         $this->call(EstudiantesTableSeeder::class);
+        $this->call(ActividadesTableSeeder::class);
+        $this->call(DocentesTableSeeder::class);
+        $this->call(CurriculosTableSeeder::class);
+        $this->call(ReconocimientosTableSeeder::class);
         // \App\Models\User::factory(10)->create();
 
-        \App\Models\User::factory()->create([
+        /*\App\Models\User::factory()->create([
             'name' => 'Test User',
             'email' => env('ADMIN_EMAIL', 'admin@email.com'),
             'password' => env('ADMIN_PASSWORD', 'password'),
-        ]);
+        ]);*/
         Model::reguard();
 
         Schema::enableForeignKeyConstraints();

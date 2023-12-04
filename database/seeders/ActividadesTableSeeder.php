@@ -1,46 +1,17 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Database\Seeders;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use App\Models\Actividad;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Seeder;
 
-class ActividadController extends Controller
+class ActividadesTableSeeder extends Seeder
 {
-
-
-    public function getIndex(){
-        $actividades = DB::table('actividades')->get();
-        return view('actividades.index',['actividades'=>$actividades]);
-    }
-
-    public function getShow($id)
-    {
-        $actividadSeleccionada = DB::table('actividades')->findOr($id);
-        return view('actividades.show')
-            ->with('actividad', $actividadSeleccionada);
-    }
-
-    public function getEdit($id) {
-        $actividadSeleccionada = DB::table('actividades')->findOr($id);
-        return view('actividades.edit')
-            ->with("actividad",$actividadSeleccionada);
-
-    }
-
-    public function putEdit($id) {
-        $actividadSeleccionada = DB::table('actividades')->findOr($id);
-        return view('actividades.edit')
-            ->with("actividad",$actividadSeleccionada);
-
-    }
-
-
-    public function getCreate(){
-        return view('actividades.create');
-    }
-
-    /*private $arrayActividades = [
+    /**
+     * Run the database seeds.
+     */
+    private static $arrayActividades = [
         [
             'docente_id' => 1,
             'insignia' => 'https://marcapersonalFP.es/badge?v=u54uern',
@@ -81,7 +52,16 @@ class ActividadController extends Controller
             'docente_id' => 10,
             'insignia' => 'https://marcapersonalFP.es/badge?v=mnbvc90',
         ],
-    ];*/
-
+    ];
+    public function run(): void
+    {
+        Actividad::truncate();
+        foreach( self::$arrayActividades as $actividad ) {
+            $act = new Actividad;
+            $act->docente_id = $actividad['docente_id'];
+            $act->insignia = $actividad['insignia'];
+            $act->save();
+        }
+    }
 
 }
