@@ -7,6 +7,7 @@ use App\Http\Controllers\ActividadController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ReconocimientoController;
 use App\Http\Controllers\CurriculoController;
+use App\Http\Controllers\DocenteController;
 use App\Models\Estudiante;
 
 /*
