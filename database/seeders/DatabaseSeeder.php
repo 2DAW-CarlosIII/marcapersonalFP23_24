@@ -23,7 +23,11 @@ class DatabaseSeeder extends Seeder
         $this->call(ActividadesTableSeeder::class);
 
         // \App\Models\User::factory(10)->create();
+<<<<<<< HEAD
         $this->call(ReconocimientosTableSeeder::class);
+=======
+        $this->call(DocentesTableSeeder::class);
+>>>>>>> ejerciciosBBDDdocentes
 
         \App\Models\User::factory()->create([
             'name' => 'Test User',
