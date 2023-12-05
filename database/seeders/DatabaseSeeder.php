@@ -54,6 +54,10 @@ class DatabaseSeeder extends Seeder
         Model::reguard();
 
         Schema::enableForeignKeyConstraints();
+      
+        self::seedProyectos();
+        $this->command->info('Tabla catálogo inicializada con datos!');
+
     }
 
     private static function seedProyectos(): void
@@ -68,7 +72,7 @@ class DatabaseSeeder extends Seeder
             $p->save();
         }
     }
-
+  
     private static $arrayProyectos = [
         [
             'docente_id' => 1,
@@ -172,3 +176,4 @@ class DatabaseSeeder extends Seeder
         ],
     ];
 }
+

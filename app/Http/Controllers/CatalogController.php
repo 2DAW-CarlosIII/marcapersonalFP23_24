@@ -39,12 +39,12 @@ class CatalogController extends Controller
         return view('catalog.edit')
             ->with("proyecto",$proyecto)
             ->with("id",$id);
+
     }
 
     public function getCreate()
     {
         return view('catalog.create');
     }
-
 
 }
