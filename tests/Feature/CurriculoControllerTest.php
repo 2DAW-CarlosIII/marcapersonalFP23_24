@@ -40,12 +40,12 @@ class CurriculoControllerTest extends TestCase
         $response
             ->assertStatus(200)
             ->assertViewIs('curriculos.show')
-            ->assertSeeText('https://www.youtube.com/watch?v=v87dfg2', $escaped = true);
+            ->assertSeeText('https://www.youtube.com/watch?v=u54uern', $escaped = true);
 
         $response = $this->get("/curriculos/show/2");
 
         $response
-            ->assertSeeText('https://www.youtube.com/watch?v=frt32qe', $escaped = true);
+            ->assertSeeText('https://www.youtube.com/watch?v=v87dfg2', $escaped = true);
 
         $response = $this->get("/curriculos/show/A");
         $response->assertNotFound();
@@ -64,7 +64,7 @@ class CurriculoControllerTest extends TestCase
         /**
          * proyectos edit test.
          */
-        $id = rand(0,9);
+        $id = rand(1,10);
         $value = "Modificar Currículum";
         $response = $this->get("/curriculos/edit/$id");
 
