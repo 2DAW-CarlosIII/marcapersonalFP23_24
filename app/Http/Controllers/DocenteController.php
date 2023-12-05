@@ -8,22 +8,26 @@ use Illuminate\Http\Request;
 class DocenteController extends Controller
 {
     public function getIndex() {
-        $docente = Docente::all();
-        return view('docentes.index',['docente'=>$docente]);
+        $docentes = Docente::all();
+        return view('docentes.index',['docente'=>$docentes]);
     }
 
     public function getShow($id) {
-        $docente = Docente::findOrFail($id);
-        return view('docentes.show',['docente'=>$docente]);
+        $docentes = Docente::findOrFail($id);
+        return view('docentes.show',['docente'=>$docentes]);
+    }
+
+    public function getCreate(){
+        return view('docentes.create');
     }
 
     public function putEdit($id) {
-        $docente = Docente::findOrFail($id);
-        return view('docentes.edit',['docente'=>$docente]);
+        $docentes = Docente::findOrFail($id);
+        return view('docentes.edit',['docente'=>$docentes]);
     }
 
     public function getEdit($id) {
-        $docente = Docente::findOrFail($id);
-        return view('docentes.edit',['docente'=>$docente]);
+        $docentes = Docente::findOrFail($id);
+        return view('docentes.edit',['docente'=>$docentes]);
     }
 }

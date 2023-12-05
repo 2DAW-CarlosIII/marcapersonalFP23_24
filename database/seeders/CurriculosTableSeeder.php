@@ -8,7 +8,7 @@ use Illuminate\Database\Seeder;
 
 class CurriculosTableSeeder extends Seeder
 {
-    private  $arrayCurriculos = [
+    private static $arrayCurriculos = [
         [
             'user_id' => 1,
             'video_curriculum' => 'https://www.youtube.com/watch?v=u54uern',

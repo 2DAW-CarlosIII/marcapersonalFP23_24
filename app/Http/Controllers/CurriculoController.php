@@ -9,16 +9,15 @@ class CurriculoController extends Controller
 {
     public function getIndex(){
 
-        $curriculos = Curriculo::all();
-        return view('curriculos.index', ['curriculos' => $curriculos]);
+        $curriculo = Curriculo::all();
+        return view('curriculos.index', ['curriculos' => $curriculo]);
     }
 
     public function getShow($id){
-        $curriculos = Curriculo::findOrFail($id);
+        $curriculo = Curriculo::findOrFail($id);
 
         return view('curriculos.show')
-            ->with('curriculo', $curriculos)
-            ->with('id', $curriculos->id);
+            ->with('curriculo', $curriculo);
     }
 
     public function getCreate(){
@@ -26,18 +25,16 @@ class CurriculoController extends Controller
     }
 
     public function putEdit($id){
-        $curriculos = Curriculo::findOrFail($id);
+        $curriculo = Curriculo::findOrFail($id);
 
         return view('curriculos.edit')
-        ->with('curriculo', $curriculos)
-        ->with('id', $curriculos->id);
+        ->with('curriculo', $curriculo);
     }
 
     public function getEdit($id){
-        $curriculos = Curriculo::findOrFail($id);
+        $curriculo = Curriculo::findOrFail($id);
 
         return view('curriculos.edit')
-        ->with('curriculo', $curriculos)
-        ->with('id', $curriculos->id);
+        ->with('curriculo', $curriculo);
     }
 }
