@@ -8,6 +8,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ReconocimientoController;
 use App\Http\Controllers\CurriculoController;
 use App\Http\Controllers\EstudianteController;
+use App\Http\Controllers\DocentesController;
 use App\Models\Estudiante;
 
 /*
@@ -107,6 +108,20 @@ Route::prefix('estudiantes')->group(function () {
 
     Route::put('/edit/{id}', [EstudianteController::class, 'putEdit'])->where('id', '[0-9]+');
 });
+
+Route::prefix('docentes')->group(function () {
+
+    Route::get('/', [DocentesControllerController::class, 'getIndex']);
+
+    Route::get('/show/{id}', [DocentesController::class, 'getShow'])->where('id', '[0-9]+');
+
+    Route::get('/create', [DocentesController::class, 'getCreate']);
+
+    Route::get('/edit/{id}', [DocentesController::class, 'getEdit'])->where('id', '[0-9]+');
+
+    Route::put('/edit/{id}', [DocentesController::class, 'putEdit'])->where('id', '[0-9]+');
+});
+
 
 Route::get('perfil/{id?}', function ($id = null) {
     if ($id == null) {

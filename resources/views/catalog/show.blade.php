@@ -21,11 +21,8 @@
             <h4><strong>Docente: </strong>{{ $proyecto->docente_id }}</h4>
             <p><strong>Metadatos: </strong>
                 <ul>
-<<<<<<< HEAD
+
                    @foreach ($proyecto->metadatos as $indice => $metadato)
-=======
-                    @foreach ($proyecto->metadatos as $indice => $metadato)
->>>>>>> issueDocentes
                         <li>{{ $indice }}: {{ $metadato }}</li>
                     @endforeach
                 </ul>
