@@ -92,9 +92,9 @@ class ControllersExerciseTest extends TestCase
         /**
          * proyectos edit test.
          */
-            $id = rand(1, 10);
+            $id = rand(0, 9);
             $value = "Modificar proyecto";
-            $response = $this->get("/catalog/edit/$id");
+            $response = $this->get("/catalog/edit/" . $id);
 
             $response
             ->assertStatus(200)
@@ -107,7 +107,7 @@ class ControllersExerciseTest extends TestCase
         /**
          * perfil test.
          */
-            $id = rand(1, 10);
+            $id = rand(0, 9);
             $value = "Visualizar el currículo de $id";
             $response = $this->get("/perfil/$id");
 
