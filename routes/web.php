@@ -7,6 +7,9 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ReconocimientoController;
 use App\Http\Controllers\CurriculoController;
+use App\Http\Controllers\EstudianteController;
+use App\Http\Controllers\DocenteController;
+use App\Models\Docente;
 use App\Models\Estudiante;
 
 /*
@@ -43,12 +46,12 @@ Route::prefix('catalog')->group(function () {
 });
 
 Route::prefix('reconocimientos')->group(function () {
+
     Route::get('/', [ReconocimientoController::class, 'getIndex']);
 
     Route::get('/show/{id}', [ReconocimientoController::class, 'getShow'])->where('id', '[0-9]+');
 
     Route::get('/create', [ReconocimientoController::class, 'getCreate']);
-
 
     Route::put('/edit/{id}', [ReconocimientoController::class, 'putEdit'])->where('id', '[0-9]+');
 
@@ -117,3 +120,16 @@ Route::get('perfil/{id?}', function ($id = null) {
         return "Visualizar el currículo de " . $id;
     }
 })->where('id', '[0-9]+');
+
+Route::prefix('docentes')->group(function () {
+
+    Route::get('/', [DocenteController::class, 'getIndex']);
+
+    Route::get('/show/{id}', [DocenteController::class, 'getShow'])->where('id', '[0-9]+');
+
+    Route::get('/create', [DocenteController::class, 'getCreate']);
+
+    Route::get('/edit/{id}', [DocenteController::class, 'getEdit'])->where('id', '[0-9]+');
+
+    Route::put('/edit/{id}', [DocenteController::class, 'putEdit'])->where('id', '[0-9]+');
+});
