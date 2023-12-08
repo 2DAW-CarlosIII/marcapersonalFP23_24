@@ -9,7 +9,7 @@ class DocenteController extends Controller
 {
     public function getIndex() {
         $docentes = Docente::all();
-        return view('docentes.index',['docente'=>$docentes]);
+        return view('docentes.index',['docentes'=>$docentes]);
     }
 
     public function getShow($id) {

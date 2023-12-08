@@ -16,6 +16,7 @@
 	<body class="homepage is-preload">
 		<div id="page-wrapper">
 
+            @include('partials.navbar')
 			<!-- Header -->
             @include('dopetrope.partials.header')
 

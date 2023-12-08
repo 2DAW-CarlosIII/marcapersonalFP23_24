@@ -1,6 +1,5 @@
 <section id="header">
 
-    @include('partials.navbar')
 
     <!-- Banner -->
     @include('dopetrope.partials.header.banner')
