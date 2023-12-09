@@ -66,16 +66,15 @@
   width: 200px;
   padding: 0px;
   margin: auto;
-  font-family: "Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif;
   text-align: center;
   border-radius: 4px;
   background: white;
   box-shadow: 0 1px 8px rgba(0,0,0,0.05);
-  /* just for this demo */
   opacity: 0;
   visibility: hidden;
-  transition: opacity .4s, width 2s, height 4s;
+  transition: all .4s;
 }
+
 #menu:after {
   position: absolute;
   top: -20px;
@@ -112,12 +111,13 @@ nav.p, nav.p a { font-size: 12px;text-align: center; color: #888; }
     <a href="#menu" id="toggle"><span></span></a>
     <div id="menu">
         <ul>
-            <li><a href="/catalog" >Proyectos</a></li>
-            <li><a href="/estudiantes" >Estudiantes</a></li>
-            <li><a href="/curriculos" >Currículos</a></li>
-            <li><a href="/actividades" >Actividades</a></li>
-            <li><a href="/reconocimientos" >Reconocimientos</a></li>
-            <li><a href="/docentes" >Docentes</a></li>
+            <li><a href="{{ route('home') }}" >Home</a></li>
+            <li><a href="{{ route('proyectos') }}" >Proyectos</a></li>
+            <li><a href="{{ route('estudiantes') }}" >Estudiantes</a></li>
+            <li><a href="{{ route('curriculos') }}" >Currículos</a></li>
+            <li><a href="{{ route('actividades') }}" >Actividades</a></li>
+            <li><a href="{{ route('reconocimientos') }}" >Reconocimientos</a></li>
+            <li><a href="{{ route('docentes') }}" >Docentes</a></li>
         </ul>
     </div>
   </nav>
