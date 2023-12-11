@@ -4,20 +4,21 @@
             <div class="col-12">
 
                 <!-- Proyectos -->
-                {{--@include('dopetrope.partials.main.proyectos')--}}
 
                 <!-- content -->
                 <section>
-                    <header class="major">
-                        <h2>Content</h2>
-                    </header>
+                    @if(Route::currentRouteName() != '' && Route::currentRouteName() != 'home')
+                        <header class="major">
+                            <h2>{{ Route::currentRouteName() }}</h2>
+                        </header>
+                    @endif
                     <div class="row">
                         <div class="container">
                             @yield('content')
                         </div>
                     </div>
                 </section>
-                <!-- Portfolio -->
+                <!-- Portfolio
                     <section>
                         <header class="major">
                             <h2>My Portfolio</h2>
@@ -109,13 +110,14 @@
                             </div>
                         </div>
                     </section>
-
+                -->
             </div>
             <div class="col-12">
+                @if(Route::currentRouteName() == 'home')
+                    <!-- Blog -->
+                    @include('dopetrope.partials.main.blog')
 
-                <!-- Blog -->
-                @include('dopetrope.partials.main.blog')
-
+                @endif
             </div>
         </div>
     </div>

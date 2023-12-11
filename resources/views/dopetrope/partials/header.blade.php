@@ -1,16 +1,15 @@
 <section id="header">
 
-    @include('partials.navbar')
 
     <!-- Banner -->
     @include('dopetrope.partials.header.banner')
 
     <!-- Intro -->
+    @if(Route::currentRouteName() == 'home')
+        @include('dopetrope.partials.header.intro')
 
-    @include('dopetrope.partials.header.intro')
+        <!-- Footer -->
 
-    <!-- Footer -->
-
-    @include('dopetrope.partials.header.footer')
-
+        @include('dopetrope.partials.header.footer')
+    @endif
 </section>

@@ -4,7 +4,7 @@
 
 <div class="row">
 
-    @foreach ($docentees as $docente)
+    @foreach ($docentes as $docente)
 
     <div class="col-4 col-6-medium col-12-small">
         <section class="box">
