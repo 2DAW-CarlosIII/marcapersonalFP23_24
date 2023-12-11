@@ -107,6 +107,9 @@ Route::prefix('estudiantes')->group(function () {
     Route::get('/edit/{id}', [EstudianteController::class, 'getEdit'])->where('id', '[0-9]+');
 
     Route::put('/edit/{id}', [EstudianteController::class, 'putEdit'])->where('id', '[0-9]+');
+
+    Route::post('/', [EstudianteController::class, 'store']);
+
 });
 
 Route::prefix('docentes')->group(function () {
