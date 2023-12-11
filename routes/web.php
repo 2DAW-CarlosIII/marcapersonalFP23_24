@@ -1,13 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\CatalogController;
 use App\Http\Controllers\ActividadController;
-<<<<<<< HEAD
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\HomeController;
-=======
->>>>>>> 17a548082840322e1aac93a91169a3ed15e4a420
 use App\Http\Controllers\ReconocimientoController;
 use App\Http\Controllers\CurriculoController;
 use App\Http\Controllers\EstudianteController;
@@ -100,29 +96,17 @@ Route::prefix('curriculos')->group(function () {
     Route::put('/edit/{id}', [CurriculoController::class, 'putEdit'])->where('id', '[0-9]+');
 });
 
+Route::prefix('estudiantes')->group(function () {
 
-<<<<<<< HEAD
-=======
     Route::get('/', [EstudianteController::class, 'getIndex'])->name('estudiantes');
->>>>>>> 17a548082840322e1aac93a91169a3ed15e4a420
 
-//Rutas de usuarios
-Route::prefix('users')->group(function () {
+    Route::get('/show/{id}', [EstudianteController::class, 'getShow'])->where('id', '[0-9]+');
 
-    Route::get('/', [UserController::class, 'getIndex']);
+    Route::get('/create', [EstudianteController::class, 'getCreate']);
 
-    Route::get('/show/{id}', [UserController::class, 'getShow'])->where('id', '[0-9]+');
+    Route::get('/edit/{id}', [EstudianteController::class, 'getEdit'])->where('id', '[0-9]+');
 
-    Route::get('/create', [UserController::class, 'getCreate']);
-
-    Route::get('/edit/{id}', [UserController::class, 'getEdit'])->where('id', '[0-9]+');
-
-<<<<<<< HEAD
-    Route::put('/edit/{id}', [UserController::class, 'putEdit'])->where('id', '[0-9]+');
-});
-=======
     Route::put('/edit/{id}', [EstudianteController::class, 'putEdit'])->where('id', '[0-9]+');
->>>>>>> 17a548082840322e1aac93a91169a3ed15e4a420
 
     Route::post('/', [EstudianteController::class, 'store']);
 
