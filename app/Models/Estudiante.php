@@ -16,4 +16,5 @@ class Estudiante extends Model
         'votos',
         'ciclo'
     ];
+
 }

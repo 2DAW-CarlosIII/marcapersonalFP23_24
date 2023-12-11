@@ -10,7 +10,7 @@
             </div>
             <div class="card-body p-4">
 
-                <form action="{{ action([App\Http\Controllers\EstudianteController::class, 'putEdit'], ['id' => $estudiante->id]) }}" method="POST">
+                <form action="{{ action([App\Http\Controllers\EstudianteController::class, 'putEdit'], ['id' => $estudiante->id]) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
 
@@ -41,6 +41,10 @@
                     <div class="form-group">
                         <label for="ciclo">Ciclo</label>
                         <input type="text" name="ciclo" id="ciclo" class="form-control" value="{{$estudiante->ciclo}}">
+                    </div>
+                    <div class="form-group">
+                        <label for="avatar">Avatar</label>
+                        <input type="file" class="form-control" id="avatar" name="avatar" placeholder="Avatar">
                     </div>
 
                     <div class="form-group text-center">
