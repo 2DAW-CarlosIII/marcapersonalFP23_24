@@ -3,14 +3,15 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CatalogController;
 use App\Http\Controllers\ActividadController;
+<<<<<<< HEAD
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\HomeController;
+=======
+>>>>>>> 17a548082840322e1aac93a91169a3ed15e4a420
 use App\Http\Controllers\ReconocimientoController;
 use App\Http\Controllers\CurriculoController;
 use App\Http\Controllers\EstudianteController;
 use App\Http\Controllers\DocenteController;
-use App\Models\Docente;
-use App\Models\Estudiante;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,7 +24,9 @@ use App\Models\Estudiante;
 |
 */
 
-Route::get('/', [HomeController::class, 'getHome']);
+Route::get('/', function () {
+    return view('home');
+})->name('home');
 
 Route::get('login', function () {
     return view('auth.login');
@@ -34,7 +37,7 @@ Route::get('logout', function () {
 });
 
 Route::prefix('catalog')->group(function () {
-    Route::get('/', [CatalogController::class, 'getIndex']);
+    Route::get('/', [CatalogController::class, 'getIndex'])->name('proyectos');
 
     Route::get('/show/{id}', [CatalogController::class, 'getShow'])->where('id', '[0-9]+');
 
@@ -47,7 +50,7 @@ Route::prefix('catalog')->group(function () {
 
 Route::prefix('reconocimientos')->group(function () {
 
-    Route::get('/', [ReconocimientoController::class, 'getIndex']);
+    Route::get('/', [ReconocimientoController::class, 'getIndex'])->name('reconocimientos');
 
     Route::get('/show/{id}', [ReconocimientoController::class, 'getShow'])->where('id', '[0-9]+');
 
@@ -60,7 +63,7 @@ Route::prefix('reconocimientos')->group(function () {
 
 Route::prefix('users')->group(function () {
 
-    Route::get('/', [UserController::class, 'getIndex']);
+    Route::get('/', [UserController::class, 'getIndex'])->name('usuarios');
 
     Route::get('/show/{id}', [UserController::class, 'getShow'])->where('id', '[0-9]+');
 
@@ -73,7 +76,7 @@ Route::prefix('users')->group(function () {
 
 Route::prefix('actividades')->group(function () {
 
-    Route::get('/', [ActividadController::class, 'getIndex']);
+    Route::get('/', [ActividadController::class, 'getIndex'])->name('actividades');
 
     Route::get('/show/{id}', [ActividadController::class, 'getShow'])->where('id', '[0-9]+');
 
@@ -86,7 +89,7 @@ Route::prefix('actividades')->group(function () {
 
 Route::prefix('curriculos')->group(function () {
 
-    Route::get('/', [CurriculoController::class, 'getIndex']);
+    Route::get('/', [CurriculoController::class, 'getIndex'])->name('curriculos');
 
     Route::get('/show/{id}', [CurriculoController::class, 'getShow'])->where('id', '[0-9]+');
 
@@ -98,6 +101,10 @@ Route::prefix('curriculos')->group(function () {
 });
 
 
+<<<<<<< HEAD
+=======
+    Route::get('/', [EstudianteController::class, 'getIndex'])->name('estudiantes');
+>>>>>>> 17a548082840322e1aac93a91169a3ed15e4a420
 
 //Rutas de usuarios
 Route::prefix('users')->group(function () {
@@ -110,20 +117,20 @@ Route::prefix('users')->group(function () {
 
     Route::get('/edit/{id}', [UserController::class, 'getEdit'])->where('id', '[0-9]+');
 
+<<<<<<< HEAD
     Route::put('/edit/{id}', [UserController::class, 'putEdit'])->where('id', '[0-9]+');
 });
+=======
+    Route::put('/edit/{id}', [EstudianteController::class, 'putEdit'])->where('id', '[0-9]+');
+>>>>>>> 17a548082840322e1aac93a91169a3ed15e4a420
 
-Route::get('perfil/{id?}', function ($id = null) {
-    if ($id == null) {
-        return "Visualizar el currículo propio";
-    } else {
-        return "Visualizar el currículo de " . $id;
-    }
-})->where('id', '[0-9]+');
+    Route::post('/', [EstudianteController::class, 'store']);
+
+});
 
 Route::prefix('docentes')->group(function () {
 
-    Route::get('/', [DocenteController::class, 'getIndex']);
+    Route::get('/', [DocenteController::class, 'getIndex'])->name('docentes');
 
     Route::get('/show/{id}', [DocenteController::class, 'getShow'])->where('id', '[0-9]+');
 
@@ -133,3 +140,11 @@ Route::prefix('docentes')->group(function () {
 
     Route::put('/edit/{id}', [DocenteController::class, 'putEdit'])->where('id', '[0-9]+');
 });
+
+Route::get('perfil/{id?}', function ($id = null) {
+    if ($id == null) {
+        return "Visualizar el currículo propio";
+    } else {
+        return "Visualizar el currículo de " . $id;
+    }
+})->where('id', '[0-9]+')->name('perfil');
