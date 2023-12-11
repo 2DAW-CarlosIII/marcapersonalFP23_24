@@ -10,7 +10,7 @@
             </div>
             <div class="card-body p-4">
 
-                <form action="{{ url('/estudiantes/create') }}" method="POST">
+                <form action="{{ action([App\Http\Controllers\EstudianteController::class, 'store']) }}" method="POST">
                     @csrf
 
                     <div class="form-group">
