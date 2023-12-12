@@ -10,6 +10,7 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Schema;
+use App\Http\Controllers\UserController;
 
 class DatabaseSeeder extends Seeder
 {
@@ -34,6 +35,7 @@ class DatabaseSeeder extends Seeder
         $this->call(DocentesTableSeeder::class);
         $this->call(CurriculosTableSeeder::class);
         $this->call(ActividadesTableSeeder::class);
+        $this->call(UsersTableSeeder::class);
 
         self::seedUsers();
         $this->command->info('Tabla usuarios inicializada con datos!');
