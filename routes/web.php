@@ -9,6 +9,7 @@ use App\Http\Controllers\ReconocimientoController;
 use App\Http\Controllers\CurriculoController;
 use App\Http\Controllers\EstudianteController;
 use App\Http\Controllers\DocenteController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -140,3 +141,7 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
