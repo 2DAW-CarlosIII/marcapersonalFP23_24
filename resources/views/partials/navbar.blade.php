@@ -118,6 +118,7 @@ nav.p, nav.p a { font-size: 12px;text-align: center; color: #888; }
             <li><a href="{{ route('actividades') }}" >Actividades</a></li>
             <li><a href="{{ route('reconocimientos') }}" >Reconocimientos</a></li>
             <li><a href="{{ route('docentes') }}" >Docentes</a></li>
+            <li><a href="{{ route('login') }}" >Login</a></li>
         </ul>
     </div>
   </nav>
