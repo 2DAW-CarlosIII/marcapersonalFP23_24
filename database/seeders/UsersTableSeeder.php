@@ -11,9 +11,6 @@ class UsersTableSeeder extends Seeder
 {
     public function run(): void
     {
-        Model::unguard();
-        Schema::disableForeignKeyConstraints();
-
         User::truncate();
 
         \App\Models\User::factory(10)->create();
@@ -23,9 +20,5 @@ class UsersTableSeeder extends Seeder
             'email' => env('ADMIN_EMAIL', 'admin@email.com'),
             'password' => env('ADMIN_PASSWORD', 'password'),
         ]);
-
-        Model::reguard();
-
-        Schema::enableForeignKeyConstraints();
     }
 }
