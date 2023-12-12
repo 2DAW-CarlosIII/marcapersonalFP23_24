@@ -46,11 +46,14 @@ Route::prefix('reconocimientos')->group(function () {
 
     Route::get('/show/{id}', [ReconocimientoController::class, 'getShow'])->where('id', '[0-9]+');
 
-    Route::get('/create', [ReconocimientoController::class, 'getCreate']);
+    Route::get('/create', [ReconocimientoController::class, 'getCreate'])
+    ->middleware('auth');
 
-    Route::put('/edit/{id}', [ReconocimientoController::class, 'putEdit'])->where('id', '[0-9]+');
+    Route::put('/edit/{id}', [ReconocimientoController::class, 'putEdit'])->where('id', '[0-9]+')
+    ->middleware('auth');
 
-    Route::get('/edit/{id}', [ReconocimientoController::class, 'getEdit'])->where('id', '[0-9]+');
+    Route::get('/edit/{id}', [ReconocimientoController::class, 'getEdit'])->where('id', '[0-9]+')
+    ->middleware('auth');
 });
 
 Route::prefix('users')->group(function () {
@@ -61,9 +64,11 @@ Route::prefix('users')->group(function () {
 
     Route::get('/create', [UserController::class, 'getCreate']);
 
-    Route::put('/edit/{id}', [UserController::class, 'putEdit'])->where('id', '[0-9]+');
+    Route::put('/edit/{id}', [UserController::class, 'putEdit'])->where('id', '[0-9]+')
+    ->middleware('auth');
 
-    Route::get('/edit/{id}', [UserController::class, 'getEdit'])->where('id', '[0-9]+');
+    Route::get('/edit/{id}', [UserController::class, 'getEdit'])->where('id', '[0-9]+')
+    ->middleware('auth');
 });
 
 Route::prefix('actividades')->group(function () {
@@ -72,11 +77,14 @@ Route::prefix('actividades')->group(function () {
 
     Route::get('/show/{id}', [ActividadController::class, 'getShow'])->where('id', '[0-9]+');
 
-    Route::get('/create', [ActividadController::class, 'getCreate']);
+    Route::get('/create', [ActividadController::class, 'getCreate'])
+    ->middleware('auth');
 
-    Route::get('/edit/{id}', [ActividadController::class, 'getEdit'])->where('id', '[0-9]+');
+    Route::get('/edit/{id}', [ActividadController::class, 'getEdit'])->where('id', '[0-9]+')
+    ->middleware('auth');
 
-    Route::put('/edit/{id}', [ActividadController::class, 'putEdit'])->where('id', '[0-9]+');
+    Route::put('/edit/{id}', [ActividadController::class, 'putEdit'])->where('id', '[0-9]+')
+    ->middleware('auth');
 });
 
 Route::prefix('curriculos')->group(function () {
@@ -85,11 +93,14 @@ Route::prefix('curriculos')->group(function () {
 
     Route::get('/show/{id}', [CurriculoController::class, 'getShow'])->where('id', '[0-9]+');
 
-    Route::get('/create', [CurriculoController::class, 'getCreate']);
+    Route::get('/create', [CurriculoController::class, 'getCreate'])
+    ->middleware('auth');
 
-    Route::get('/edit/{id}', [CurriculoController::class, 'getEdit'])->where('id', '[0-9]+');
+    Route::get('/edit/{id}', [CurriculoController::class, 'getEdit'])->where('id', '[0-9]+')
+    ->middleware('auth');
 
-    Route::put('/edit/{id}', [CurriculoController::class, 'putEdit'])->where('id', '[0-9]+');
+    Route::put('/edit/{id}', [CurriculoController::class, 'putEdit'])->where('id', '[0-9]+')
+    ->middleware('auth');
 });
 
 Route::prefix('estudiantes')->group(function () {
@@ -98,11 +109,14 @@ Route::prefix('estudiantes')->group(function () {
 
     Route::get('/show/{id}', [EstudianteController::class, 'getShow'])->where('id', '[0-9]+');
 
-    Route::get('/create', [EstudianteController::class, 'getCreate']);
+    Route::get('/create', [EstudianteController::class, 'getCreate'])
+    ->middleware('auth');
 
-    Route::get('/edit/{id}', [EstudianteController::class, 'getEdit'])->where('id', '[0-9]+');
+    Route::get('/edit/{id}', [EstudianteController::class, 'getEdit'])->where('id', '[0-9]+')
+    ->middleware('auth');
 
-    Route::put('/edit/{id}', [EstudianteController::class, 'putEdit'])->where('id', '[0-9]+');
+    Route::put('/edit/{id}', [EstudianteController::class, 'putEdit'])->where('id', '[0-9]+')
+    ->middleware('auth');
 
     Route::post('/', [EstudianteController::class, 'store']);
 
@@ -114,11 +128,14 @@ Route::prefix('docentes')->group(function () {
 
     Route::get('/show/{id}', [DocenteController::class, 'getShow'])->where('id', '[0-9]+');
 
-    Route::get('/create', [DocenteController::class, 'getCreate']);
+    Route::get('/create', [DocenteController::class, 'getCreate'])
+    ->middleware('auth');
 
-    Route::get('/edit/{id}', [DocenteController::class, 'getEdit'])->where('id', '[0-9]+');
+    Route::get('/edit/{id}', [DocenteController::class, 'getEdit'])->where('id', '[0-9]+')
+    ->middleware('auth');
 
-    Route::put('/edit/{id}', [DocenteController::class, 'putEdit'])->where('id', '[0-9]+');
+    Route::put('/edit/{id}', [DocenteController::class, 'putEdit'])->where('id', '[0-9]+')
+    ->middleware('auth');
 });
 
 Route::get('perfil/{id?}', function ($id = null) {
