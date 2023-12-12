@@ -20,23 +20,16 @@ class DatabaseSeeder extends Seeder
         Model::unguard();
         Schema::disableForeignKeyConstraints();
 
-        // \App\Models\User::factory(10)->create();
-
-        \App\Models\User::factory()->create([
-            'name' => 'Test User',
-            'email' => env('ADMIN_EMAIL', 'admin@email.com'),
-            'password' => env('ADMIN_PASSWORD', 'password'),
-        ]);
-      
         $this->call(EstudiantesTableSeeder::class);
         $this->call(ReconocimientosTableSeeder::class);
         $this->call(DocentesTableSeeder::class);
         $this->call(CurriculosTableSeeder::class);
         $this->call(ActividadesTableSeeder::class);
+        $this->call(UsersTableSeeder::class);
 
         self::seedProyectos();
         $this->command->info('Tablas inicializadas con datos!');
-      
+
         Model::reguard();
         Schema::enableForeignKeyConstraints();
     }
