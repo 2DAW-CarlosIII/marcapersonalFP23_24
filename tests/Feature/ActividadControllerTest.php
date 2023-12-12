@@ -61,9 +61,9 @@ class ActividadControllerTest extends TestCase
     /**
      * proyectos edit test.
      */
-        $id = rand(0,9);
+        $id = rand(0, 9);
         $value = "Modificar Actividad";
-        $response = $this->get("/actividades/edit/$id");
+        $response = $this->get("/actividades/edit/" . $id);
 
         $response
         ->assertStatus(200)
