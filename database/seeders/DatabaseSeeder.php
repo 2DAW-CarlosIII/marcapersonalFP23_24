@@ -6,6 +6,7 @@ namespace Database\Seeders;
 
 use App\Models\Estudiante;
 use App\Models\Proyecto;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Schema;
@@ -27,19 +28,48 @@ class DatabaseSeeder extends Seeder
             'email' => env('ADMIN_EMAIL', 'admin@email.com'),
             'password' => env('ADMIN_PASSWORD', 'password'),
         ]);
-      
+
         $this->call(EstudiantesTableSeeder::class);
         $this->call(ReconocimientosTableSeeder::class);
         $this->call(DocentesTableSeeder::class);
         $this->call(CurriculosTableSeeder::class);
         $this->call(ActividadesTableSeeder::class);
 
+        self::seedUsers();
+        $this->command->info('Tabla usuarios inicializada con datos!');
+
         self::seedProyectos();
         $this->command->info('Tablas inicializadas con datos!');
-      
+
         Model::reguard();
         Schema::enableForeignKeyConstraints();
     }
+
+private function seedUsers()
+{
+
+    $usuarios = [
+        [
+            'name' => 'NombreUsuario1',
+            'apellidos' => 'ApellidosUsuario1',
+            'email' => 'usuario1@example.com',
+            'password' => bcrypt('contraseña1'),
+        ],
+        [
+            'name' => 'NombreUsuario2',
+            'apellidos' => 'ApellidosUsuario2',
+            'email' => 'usuario2@example.com',
+            'password' => bcrypt('contraseña2'),
+        ],
+
+    ];
+
+        // Inserta los usuarios en la base de datos
+        foreach ($usuarios as $usuario) {
+            User::create($usuario);
+        }
+
+}
 
     private static function seedProyectos(): void
     {
