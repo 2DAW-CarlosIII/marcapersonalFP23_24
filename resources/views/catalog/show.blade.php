@@ -13,6 +13,7 @@
         <div class="col-sm-8">
 
             <h3><strong>Nombre: </strong>{{ $proyecto['nombre'] }}</h3>
+            <h4><strong>Calificacion: </strong>{{ $proyecto['calificacion'] }}</h4>
             <h4><strong>Dominio: </strong>
                 <a href="http://github.com/2DAW-CarlosIII/{{ $proyecto['dominio'] }}">
                     http://github.com/2DAW-CarlosIII/{{ $proyecto['dominio'] }}
