@@ -17,18 +17,30 @@
 
 	            <div class="form-group">
 	               <label for="nombre">Nombre</label>
-	               <input type="text" name="nombre" id="nombre" value="{{$proyecto['nombre']}}" class="form-control">
+	               <input type="text" name="nombre" id="nombre" value="{{$proyecto->nombre}}" class="form-control">
 	            </div>
 
 	            <div class="form-group">
 	            	<label for="docente_id">Docente</label>
-	               <input type="number" name="docente_id" value="{{ $proyecto['docente_id'] }}" id="docente_id">
+                    <select name="docentes" id="docentes">
+                        @for ($iterador = 0; $iterador<count($docentes); $iterador++)
+                            <option value="{{$docentes[$iterador]->id}}"
+                                {{$docentes[$iterador]->id == $proyecto->docente_id ? "selected" : null }}>
+                                {{$docentes[$iterador]->nombre."".$docentes[$iterador]->apellidos}}
+                            </option>
+                        @endfor
+                    </select>
 	            </div>
 
 	            <div class="form-group">
 	            	<label for="dominio">Dominio</label><br />
                     https://github.com/2DAW-CarlosIII/
-	               <input type="text" name="dominio" id="dominio" value="{{ $proyecto['dominio'] }}" class="form-control">
+	               <input type="number" name="dominio" id="dominio" value="{{ $proyecto->dominio }}" class="form-control">
+	            </div>
+
+                <div class="form-group">
+	            	<label for="calificacion">Calificación</label>
+	                <input type="number" name="calificacion" id="calificacion" min="1" max="10" value="{{ $proyecto->calificacion }}">
 	            </div>
 
 	            <div class="form-group">
@@ -36,12 +48,6 @@
 	               <textarea name="metadatos" id="metadatos" class="form-control" value rows="3">
                     {{print_r($proyecto['metadatos'],true)}}
                    </textarea>
-	            </div>
-
-
-                <div class="form-group">
-	            	<label for="calificacion">Calificación</label>
-	               <input min="1" max="10" type="number" name="calificacion" id="calificacion" value="{{ $proyecto['calificacion'] }}">
 	            </div>
 
 	            <div class="form-group text-center">
