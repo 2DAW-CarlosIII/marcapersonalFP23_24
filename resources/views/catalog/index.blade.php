@@ -12,6 +12,7 @@
             <header>
                 <h3>{{ $arrayProyectos[$i]['nombre'] }}</h3>
             </header>
+            <p>Calificación: {{ $arrayProyectos[$i]['calificacion'] }}</p>
             <p>
                 <a href="http://github.com/2DAW-CarlosIII/{{ $arrayProyectos[$i]['dominio'] }}">
                     http://github.com/2DAW-CarlosIII/{{ $arrayProyectos[$i]['dominio'] }}
