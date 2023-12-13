@@ -45,11 +45,10 @@ class CatalogController extends Controller
         return view('catalog.create');
     }
 
-    public function putEditCalificacion($id)
+    public function putEditCalificacion($id,$calificacion)
     {
         $proyecto = Proyecto::FindOrFail($id);
-        $proyecto->calificacion = 4;
-        $proyecto->save();
+        $proyecto->calificacion = $calificacion;
 
         return view('catalog.show')
             ->with('proyecto', $proyecto)
