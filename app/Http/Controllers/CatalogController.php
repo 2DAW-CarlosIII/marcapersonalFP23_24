@@ -22,10 +22,15 @@ class CatalogController extends Controller
             ->with('id', $proyecto->id);
     }
 
-    public function putEdit($id)
+    public function putEdit(Request $request,$id)
     {
         $proyecto = Proyecto::FindOrFail($id);
         $proyecto->metadatos = unserialize($proyecto->metadatos);
+        $proyecto->metadatos = serialize($proyecto->metadatos);
+
+        $proyecto->update($request->all());
+
+
         return view('catalog.edit')
             ->with('proyecto', $proyecto)
             ->with('id', $proyecto->id);

@@ -32,6 +32,12 @@
 	            </div>
 
 	            <div class="form-group">
+	            	<label for="comprimido">Archivo comprimido del proyecto</label><br />
+                    <input type="file" name="comprimido" id="comprimido" class="form-control" placeholder="Comprimido">
+
+                </div>
+
+	            <div class="form-group">
 	               <label for="metadatos">Metadatos</label>
 	               <textarea name="metadatos" id="metadatos" class="form-control" value rows="3">
                     {{print_r($proyecto['metadatos'],true)}}
