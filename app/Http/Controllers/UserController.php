@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -20,6 +21,19 @@ class UserController extends Controller
         return view('users.edit')
             ->with("user",$this->arrayUsers[$id])
             ->with("id",$id);
+    }
+
+    public function putAvatar(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+
+        // TODO: Eliminar el avatar anterior si existiera
+        $path = $request->file('avatar')->store('avatars', ['disk' => 'public']);
+        $user->avatar = $path;
+        $user->save();
+
+        $user->update($request->all());
+        return back()->with('status', 'avatar-updated');
     }
 
     public function getEdit($id) {
