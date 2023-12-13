@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class UserController extends Controller
 {
@@ -33,7 +34,7 @@ class UserController extends Controller
         $user->save();
 
         $user->update($request->all());
-        return back()->with('status', 'avatar-updated');
+        return Redirect::route('profile.edit')->with('status', 'avatar-updated');
     }
 
     public function getEdit($id) {
