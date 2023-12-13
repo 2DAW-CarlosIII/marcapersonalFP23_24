@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('nombre', 120);
             $table->string('dominio',30)->nullable();
             $table->text('metadatos')->nullable();
+            $table->unsignedBigInteger('calificacion')->nullable();
             $table->timestamps();
         });
     }
