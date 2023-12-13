@@ -23,6 +23,6 @@ class UsersTableSeeder extends Seeder
             'password' => env('ADMIN_PASSWORD', 'password'),
         ]);
 
-        User::factory(9)->create();
+        User::factory(10)->create();
     }
 }
