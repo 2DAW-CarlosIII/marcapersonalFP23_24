@@ -11,10 +11,10 @@ class Proyecto extends Model
 
 
     protected $fillable = [
-        'name',
+        'docente_id',
         'nombre',
-        'apellidos',
-        'email',
-        'password',
+        'dominio',
+        'metadatos',
+        'compressedFile',
     ];
 }

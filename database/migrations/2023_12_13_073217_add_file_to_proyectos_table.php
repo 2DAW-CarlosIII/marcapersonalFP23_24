@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('proyectos', function (Blueprint $table) {
-            $table->string('compressedFile')->nullable();
+            $table->string('archivoProyecto')->after('metadatos')->nullable();
         });
     }
 
@@ -22,7 +22,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('proyectos', function (Blueprint $table) {
-            $table->dropColumn('compressedFile');
+            $table->dropColumn('archivoProyecto');
         });
     }
 };

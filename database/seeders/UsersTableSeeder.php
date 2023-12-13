@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\User;
 
 class UsersTableSeeder extends Seeder
 {
@@ -16,9 +16,13 @@ class UsersTableSeeder extends Seeder
         User::truncate();
 
         User::factory()->create([
-            'name' => 'Test User',
+            'name' => 'admin',
             'email' => env('ADMIN_EMAIL', 'admin@email.com'),
             'password' => env('ADMIN_PASSWORD', 'password'),
         ]);
+
+        User::factory(10)->create();
+
+
     }
 }

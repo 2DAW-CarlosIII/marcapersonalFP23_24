@@ -15,6 +15,10 @@
             <x-text-input id="nombre" class="block mt-1 w-full" type="text" name="nombre" :value="old('nombre')" required autofocus autocomplete="nombre" />
             <x-input-error :messages="$errors->get('nombre')" class="mt-2" />
         </div>
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
         <!-- Apellidos -->
         <div>
             <x-input-label for="apellidos" :value="__('Apellidos')" />
@@ -22,6 +26,10 @@
             <x-input-error :messages="$errors->get('apellidos')" class="mt-2" />
         </div>
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
         <!-- Email Address -->
         <div class="mt-4">
             <x-input-label for="email" :value="__('Email')" />

@@ -39,8 +39,8 @@
 	            </div>
 
                 <div class="form-group">
-                    <label for="avatar">Avatar</label>
-                    <input type="file" class="form-control" id="avatar" name="avatar" placeholder="Avatar">
+                    <label for="archivoProyecto">Archivo Proyecto (comprimido)</label>
+                    <input type="file" accept=".zip,.rar,.7z,.gz" class="form-control" id="archivoProyecto" name="archivoProyecto" placeholder="archivoProyecto">
                 </div>
 
 	            <div class="form-group text-center">

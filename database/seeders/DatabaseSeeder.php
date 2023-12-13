@@ -20,7 +20,9 @@ class DatabaseSeeder extends Seeder
         Model::unguard();
         Schema::disableForeignKeyConstraints();
 
-        // \App\Models\User::factory(10)->create();
+        // llamadas a otros ficheros de seed
+        $this->call(UsersTableSeeder::class);
+        // llamadas a otros ficheros de seed
 
         $this->call(EstudiantesTableSeeder::class);
         $this->call(ReconocimientosTableSeeder::class);

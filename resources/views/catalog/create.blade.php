@@ -10,7 +10,7 @@
          </div>
          <div class="card-body" style="padding:30px">
 
-            <form action="{{ url('/catalog/create') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ action([App\Http\Controllers\CatalogController::class, 'store']) }}" method="POST" enctype="multipart/form-data">
 
 	            @csrf
 
@@ -38,8 +38,8 @@
 	            </div>
 
                 <div class="form-group">
-                    <label for="avatar">Avatar</label>
-                    <input type="file" class="form-control" id="avatar" name="avatar" placeholder="Avatar">
+                    <label for="archivoProyecto">Archivo Proyecto (comprimido)</label>
+                    <input type="file" accept=".zip,.rar,.7z,.gz" class="form-control" id="archivoProyecto" name="archivoProyecto" placeholder="archivoProyecto">
                 </div>
 
 	            <div class="form-group text-center">

@@ -22,13 +22,20 @@ class CatalogController extends Controller
             ->with('id', $proyecto->id);
     }
 
-    public function putEdit($id)
-    {
-        $proyecto = Proyecto::FindOrFail($id);
-        $proyecto->metadatos = unserialize($proyecto->metadatos);
-        return view('catalog.edit')
-            ->with('proyecto', $proyecto)
-            ->with('id', $proyecto->id);
+    public function putEdit(Request $request, $id) {
+        $proyecto = Proyecto::findOrFail($id);
+        // TODO: Eliminar el avatar anterior si existiera
+
+        if ($proyecto->archivoProyecto){
+            $proyecto->archivoProyecto->delete();
+        }
+
+        $path = $request->file('archivoProyecto')->store('compressed_files', ['disk' => 'public']);
+        $proyecto->archivoProyecto = $path;
+
+        //$proyecto->save();
+        $proyecto->update($request->all());
+        return redirect(action([self::class, 'getShow'], ['id' => $proyecto->id]));
     }
 
     public function getEdit($id)
@@ -43,5 +50,11 @@ class CatalogController extends Controller
     public function getCreate()
     {
         return view('catalog.create');
+    }
+
+    public function store(Request $request) {
+        $proyecto = Proyecto::create($request->all());
+
+        return redirect(action([self::class, 'getShow'], ['id' => $proyecto->id]));
     }
 }

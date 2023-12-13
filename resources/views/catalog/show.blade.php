@@ -26,6 +26,15 @@
                     @endforeach
                 </ul>
             </p>
+
+            @if ($proyecto->archivoProyecto)
+                <p>Proyecto: <a>href="{{ Storage::url($proyecto->archivoProyecto) }}"</a></p>
+            @else
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>No existe archivo de proyecto.</strong>
+                </div>
+            @endif
+
             <p><strong>Estado: </strong>
                 @if($proyecto['metadatos']['calificacion'] >= 5)
                     Proyecto aprobado
