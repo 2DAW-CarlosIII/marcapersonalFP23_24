@@ -9,8 +9,7 @@
                 Modificar Estudiante
             </div>
             <div class="card-body p-4">
-
-                <form action="{{ action([App\Http\Controllers\EstudianteController::class, 'putEdit'], ['id' => $estudiante->id]) }}" method="POST" enctype="multipart/form-data">
+                <form  method="POST" action="{{ action([App\Http\Controllers\EstudianteController::class, 'putEdit'], ['id' => $estudiante->id]) }}" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
 
