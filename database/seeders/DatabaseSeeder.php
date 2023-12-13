@@ -22,26 +22,14 @@ class DatabaseSeeder extends Seeder
         Model::unguard();
         Schema::disableForeignKeyConstraints();
 
-        // \App\Models\User::factory(10)->create();
-
-        $this->call(UsersTableSeeder::class);
-        $this->command->info('Tabla usuarios inicializada con datos!');
-
-        \App\Models\User::factory()->create([
-            'name' => 'Test User',
-            'nombre' => 'Usuario1',
-            'apellidos' => 'Prueba1',
-            'email' => env('ADMIN_EMAIL', 'admin@email.com'),
-            'password' => env('ADMIN_PASSWORD', 'password'),
-        ]);
-
         $this->call(EstudiantesTableSeeder::class);
         $this->call(ReconocimientosTableSeeder::class);
         $this->call(DocentesTableSeeder::class);
         $this->call(CurriculosTableSeeder::class);
         $this->call(ActividadesTableSeeder::class);
 
-
+        $this->call(UsersTableSeeder::class);
+        $this->command->info('Tabla usuarios inicializada con datos!');
 
         self::seedProyectos();
         $this->command->info('Tablas inicializadas con datos!');
