@@ -35,9 +35,9 @@
             </p>
 
             @if($proyecto['metadatos']['calificacion'] >= 5)
-                <a class="btn btn-danger" href="#">Suspender proyecto</a>
+                <a class="btn btn-danger" href="{{ action([App\Http\Controllers\CatalogController::class, 'putEditCalificacion'], ['id' => $id, 'calificacion' => 4]) }}">Suspender proyecto</a>
             @else
-                <a class="btn btn-primary" href="#">Aprobar proyecto</a>
+                <a class="btn btn-primary" href="{{ action([App\Http\Controllers\CatalogController::class, 'putEditCalificacion'], ['id' => $id, 'calificacion' => 5]) }}">Aprobar proyecto</a>
             @endif
             <a class="btn btn-warning" href="{{ action([App\Http\Controllers\CatalogController::class, 'getEdit'], ['id' => $id]) }}">
                 <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>

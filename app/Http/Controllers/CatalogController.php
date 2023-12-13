@@ -44,4 +44,15 @@ class CatalogController extends Controller
     {
         return view('catalog.create');
     }
+
+    public function putEditCalificacion($id)
+    {
+        $proyecto = Proyecto::FindOrFail($id);
+        $proyecto->calificacion = 4;
+        $proyecto->save();
+
+        return view('catalog.show')
+            ->with('proyecto', $proyecto)
+            ->with('id', $proyecto->id);
+    }
 }
