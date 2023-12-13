@@ -55,15 +55,20 @@ Route::prefix('reconocimientos')->group(function () {
 
 Route::prefix('users')->group(function () {
 
-    Route::get('/', [UserController::class, 'getIndex'])->name('usuarios');
+    Route::get('/', [UserController::class, 'getIndex'])->name('usuarios')
+    ->middleware('auth');;
 
-    Route::get('/show/{id}', [UserController::class, 'getShow'])->where('id', '[0-9]+');
+    Route::get('/show/{id}', [UserController::class, 'getShow'])->where('id', '[0-9]+')
+    ->middleware('auth');;
 
-    Route::get('/create', [UserController::class, 'getCreate']);
+    Route::get('/create', [UserController::class, 'getCreate'])
+    ->middleware('auth');;
 
-    Route::put('/edit/{id}', [UserController::class, 'putEdit'])->where('id', '[0-9]+');
+    Route::put('/edit/{id}', [UserController::class, 'putEdit'])->where('id', '[0-9]+')
+    ->middleware('auth');;
 
-    Route::get('/edit/{id}', [UserController::class, 'getEdit'])->where('id', '[0-9]+');
+    Route::get('/edit/{id}', [UserController::class, 'getEdit'])->where('id', '[0-9]+')
+    ->middleware('auth');;
 });
 
 Route::prefix('actividades')->group(function () {
