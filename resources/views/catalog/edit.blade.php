@@ -31,6 +31,11 @@
 	               <input type="text" name="dominio" id="dominio" value="{{ $proyecto['dominio'] }}" class="form-control">
 	            </div>
 
+                <div class="form-group">
+	                <label for="calificacion">Calificacion</label><br />
+	                <input type="number" min="1" max="10" name="calificacion" id="calificacion" value="{{ $proyecto['calificacion'] }}" class="form-control">
+	            </div>
+
 	            <div class="form-group">
 	               <label for="metadatos">Metadatos</label>
 	               <textarea name="metadatos" id="metadatos" class="form-control" value rows="3">
