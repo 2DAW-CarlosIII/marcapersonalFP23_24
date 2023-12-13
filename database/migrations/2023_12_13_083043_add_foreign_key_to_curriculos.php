@@ -11,20 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('curriculos', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->string('video_curriculum')->nullable();
-            $table->mediumText('texto_curriculum')->nullable();
-            $table->timestamps();
+        Schema::table('curriculos', function (Blueprint $table) {
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
     /**
+
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('curriculos');
+        Schema::table('curriculos', function (Blueprint $table) {
+            $table->dropForeign(['user_id']);
+        });
     }
 };
