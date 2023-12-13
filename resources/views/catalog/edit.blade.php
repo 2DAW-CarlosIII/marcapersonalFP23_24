@@ -38,6 +38,11 @@
                    </textarea>
 	            </div>
 
+                <div class="form-group">
+	            	<label for="calificacion">Calificacion</label>
+	               <input type="number" name="calificacion" value="{{ $proyecto['calificacion'] }}" id="calificacion">
+	            </div>
+
 	            <div class="form-group text-center">
 	               <button type="submit" class="btn btn-primary" style="padding:8px 100px;margin-top:25px;">
 	                   Modificar proyecto
