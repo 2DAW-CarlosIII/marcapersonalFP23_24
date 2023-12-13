@@ -24,10 +24,6 @@ class DatabaseSeeder extends Seeder
         $this->call(UsersTableSeeder::class);
         // llamadas a otros ficheros de seed
 
-        Model::reguard();
-
-        Schema::enableForeignKeyConstraints();
-
         $this->call(EstudiantesTableSeeder::class);
         $this->call(ReconocimientosTableSeeder::class);
         $this->call(DocentesTableSeeder::class);
