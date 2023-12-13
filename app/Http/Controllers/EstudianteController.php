@@ -23,9 +23,17 @@ class EstudianteController extends Controller
             ->with("estudiante", Estudiante::findOrFail($id));
     }
 
-    public function putEdit($id) {
-        return view('estudiantes.edit')
-            ->with("estudiante", Estudiante::findOrFail($id));
+    public function putEdit(Request $request, $id)
+    {
+        $estudiante = Estudiante::findOrFail($id);
+
+        // TODO: Eliminar el avatar anterior si existiera
+        $path = $request->file('avatar')->store('avatars', ['disk' => 'public']);
+        $estudiante->avatar = $path;
+        $estudiante->save();
+
+        $estudiante->update($request->all());
+        return redirect()->action([self::class, 'getShow'], ['id' => $estudiante->id]);
     }
 
     public function getCreate(){
