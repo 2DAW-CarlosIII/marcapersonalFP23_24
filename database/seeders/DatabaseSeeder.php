@@ -6,6 +6,7 @@ namespace Database\Seeders;
 
 use App\Models\Estudiante;
 use App\Models\Proyecto;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Schema;
@@ -20,14 +21,6 @@ class DatabaseSeeder extends Seeder
         Model::unguard();
         Schema::disableForeignKeyConstraints();
 
-        // \App\Models\User::factory(10)->create();
-
-        \App\Models\User::factory()->create([
-            'name' => 'Test User',
-            'email' => env('ADMIN_EMAIL', 'admin@email.com'),
-            'password' => env('ADMIN_PASSWORD', 'password'),
-        ]);
-      
         $this->call(EstudiantesTableSeeder::class);
         $this->call(ReconocimientosTableSeeder::class);
         $this->call(DocentesTableSeeder::class);
@@ -36,10 +29,14 @@ class DatabaseSeeder extends Seeder
 
         self::seedProyectos();
         $this->command->info('Tablas inicializadas con datos!');
-      
+
+        $this->call(UsersTableSeeder::class);
+        $this->command->info('Tabla usuarios inicializada con datos!');
+
         Model::reguard();
         Schema::enableForeignKeyConstraints();
     }
+
 
     private static function seedProyectos(): void
     {
