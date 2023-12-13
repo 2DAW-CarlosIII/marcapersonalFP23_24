@@ -47,7 +47,7 @@ class EstudianteController extends Controller
 
     public function store(Request $request)
     {
-        dd($request->all());
+        // dd($request->all());
         $estudiante = Estudiante::create($request->all());
         return redirect(action([self::class, 'getShow'], ['id' => $estudiante->id]));
     }
