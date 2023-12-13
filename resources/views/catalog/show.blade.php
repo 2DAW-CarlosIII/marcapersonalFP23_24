@@ -19,6 +19,8 @@
                 </a>
             </h4>
             <h4><strong>Docente: </strong>{{ $proyecto['docente_id'] }}</h4>
+            <h4><strong>Nombre: </strong>{{ $user->nombre }}</h4>
+            <h4><strong>Apellidos: </strong>{{ $user->apellidos }}</h4>
             <p><strong>Metadatos: </strong>
                 <ul>
                     @foreach ($proyecto['metadatos'] as $indice => $metadato)
@@ -27,7 +29,7 @@
                 </ul>
             </p>
             <p><strong>Estado: </strong>
-                @if($proyecto['metadatos']['calificacion'] >= 5)
+                @if($proyecto['calificacion'] >= 5)
                     Proyecto aprobado
                 @else
                     Proyecto suspenso

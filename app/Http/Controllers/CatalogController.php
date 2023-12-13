@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Proyecto;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class CatalogController extends Controller
@@ -15,11 +16,16 @@ class CatalogController extends Controller
 
     public function getShow($id)
     {
+
         $proyecto = Proyecto::FindOrFail($id);
         $proyecto->metadatos = unserialize($proyecto->metadatos);
+
+        $user = User::FindOrFail($proyecto->docente_id);
+
         return view('catalog.show')
             ->with('proyecto', $proyecto)
-            ->with('id', $proyecto->id);
+            ->with('id', $proyecto->id)
+            ->with('user', $user);
     }
 
     public function putEdit($id)
