@@ -34,6 +34,16 @@
                 @endif
             </p>
 
+            <p>
+                <h4>
+                    @if ($proyecto->fichero)
+                        <a href="{{ Storage::url($proyecto->fichero) }}" download="proyecto.rar">Fichero Comprimido</a>
+                    @else
+                        No se ha subisdo el proyecto aún.
+                    @endif
+                </h4>
+            </p>
+
             @if($proyecto['metadatos']['calificacion'] >= 5)
                 <a class="btn btn-danger" href="#">Suspender proyecto</a>
             @else
