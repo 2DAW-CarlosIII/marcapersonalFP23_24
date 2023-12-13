@@ -10,7 +10,7 @@
          </div>
          <div class="card-body" style="padding:30px">
 
-            <form action="{{ url('/catalog/create') }}" method="POST">
+            <form action="{{ action([App\Http\Controllers\CatalogController::class, 'store']) }}" method="POST">
 
 	            @csrf
 
@@ -35,6 +35,11 @@
 	               <textarea name="metadatos" id="metadatos" class="form-control" rows="3"></textarea>
                    <br /><small>Cada metadato irá separado del siguiente por una línea <br />
                    y la clave irá separada por : del valor</small>
+	            </div>
+
+                <div class="form-group">
+	            	<label for="calificacion">Calificación</label>
+	               <input type="number" name="calificacion" id="calificacion">
 	            </div>
 
 	            <div class="form-group text-center">
