@@ -2,33 +2,43 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class UserController extends Controller
 {
-    public function getIndex() {
-        return view('users.index',['arrayUsers'=>$this->arrayUsers]);
+    public function getIndex()
+    {
+        return view('users.index', ['arrayUsers' => $this->arrayUsers]);
     }
 
-    public function getShow($id) {
+    public function getShow($id)
+    {
         return view('users.show')
             ->with('user', $this->arrayUsers[$id])
             ->with('id', $id);
     }
 
-    public function putEdit($id) {
-        return view('users.edit')
-            ->with("user",$this->arrayUsers[$id])
-            ->with("id",$id);
+    public function putEdit(Request $request, $id) {
+        $user = User::findOrFail($id);
+        // TODO: Eliminar el avatar anterior si existiera
+        $path = $request->file('avatar')->store('avatars', ['disk' => 'public']);
+        $user->avatar = $path;
+        $user->save();
+        $user->update($request->all());
+        return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }
 
-    public function getEdit($id) {
+    public function getEdit($id)
+    {
         return view('users.edit')
-            ->with("user",$this->arrayUsers[$id])
-            ->with('id',$id);
+            ->with("user", $this->arrayUsers[$id])
+            ->with('id', $id);
     }
 
-    public function getCreate() {
+    public function getCreate()
+    {
         return view('users.create');
     }
 
@@ -105,5 +115,4 @@ class UserController extends Controller
             'linkedin' => 'https://www.linkedin.com/in/user9'
         ],
     ];
-
 }
