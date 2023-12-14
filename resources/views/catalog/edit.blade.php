@@ -28,7 +28,7 @@
 	            <div class="form-group">
 	            	<label for="dominio">Dominio</label><br />
                     https://github.com/2DAW-CarlosIII/
-	               <input type="text" name="dominio" id="dominio" value="{{ $proyecto['dominio'] }}" class="form-control">
+	               <input type="text" name="dominio" id="dominio" value="{{ $proyecto['dominio'] }}"accept=".zip , .bz , .bz2 , .7z" class="form-control">
 	            </div>
 
 	            <div class="form-group">
