@@ -120,8 +120,6 @@ Route::prefix('docentes')->group(function () {
 
     Route::put('/edit/{id}', [DocenteController::class, 'putEdit'])->where('id', '[0-9]+');
 
-    Route::put('/edit/{id}', [DocenteController::class, 'putAvatar'])->where('id', '[0-9]+');
-
 });
 
 Route::get('perfil/{id?}', function ($id = null) {
