@@ -10,7 +10,7 @@
          </div>
          <div class="card-body" style="padding:30px">
 
-            <form action="{{ action([App\Http\Controllers\UserController::class, 'getEdit'], ['id' => $id]) }}" method="POST">
+            <form action="{{ action([App\Http\Controllers\UserController::class, 'putEdit'], ['id' => $user['id']]) }}" method="POST" enctype="multipart/form-data">
 
 	            @csrf
                 @method('PUT')
@@ -44,6 +44,11 @@
 	            	<label for="linkedin">Perfil Linkedin:</label>
                     <input type="url" id="linkedin" name="linkedin" class="form-control" value="{{ $user['linkedin'] }}">
 	            </div>
+
+                <div class="form-group">
+                    <label for="avatar">Avatar</label>
+                    <input type="file" class="form-control" id="avatar" name="avatar" placeholder="Avatar">
+                </div>
 
 	            <div class="form-group text-center">
 	               <button type="submit" class="btn btn-primary" style="padding:8px 100px;margin-top:25px;" >
