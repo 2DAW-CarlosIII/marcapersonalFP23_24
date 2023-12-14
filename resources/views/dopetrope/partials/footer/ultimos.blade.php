@@ -8,15 +8,16 @@ $arrayProyectos = \App\Models\Proyecto::mejoresProyectos(5);
     </header>
     <ul class="dates">
 
-        @for ( $i = 0; $i < count($arrayProyectos); $i++)
+        @foreach ($arrayProyectos as $proyecto)
+
         <li>
-            <span class="date">Nota: <strong>{{ $arrayProyectos[$i]->calificacion }}</strong></span>
-            <h3><a href="#">{{ $arrayProyectos[$i]->nombre }}</a></h3>
-            <p> <a href="http://github.com/2DAW-CarlosIII/{{ $arrayProyectos[$i]->dominio}}">
-                http://github.com/2DAW-CarlosIII/{{ $arrayProyectos[$i]->dominio }}
+            <span class="date">Nota: <strong>{{ $proyecto->calificacion }}</strong></span>
+            <h3><a href="#">{{ $proyecto->nombre }}</a></h3>
+            <p> <a href="http://github.com/2DAW-CarlosIII/{{ $proyecto->dominio}}">
+                http://github.com/2DAW-CarlosIII/{{ $proyecto->dominio }}
                 </a>
             </p>
         </li>
-        @endfor
+        @endforeach
     </ul>
 </section>

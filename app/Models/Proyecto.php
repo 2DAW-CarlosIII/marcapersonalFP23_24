@@ -11,7 +11,7 @@ class Proyecto extends Model
 
     public static function mejoresProyectos($nProyectos)
     {
-        $nProyectos = Proyecto::orderByDesc('calificacion')->take(5)->get();
+        $nProyectos = self::orderByDesc('calificacion')->take(5)->get();
         return $nProyectos;
     }
 }
