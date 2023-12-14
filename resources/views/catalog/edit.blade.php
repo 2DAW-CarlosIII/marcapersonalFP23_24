@@ -22,7 +22,11 @@
 
 	            <div class="form-group">
 	            	<label for="docente_id">Docente</label>
-	               <input type="number" name="docente_id" value="{{ $proyecto['docente_id'] }}" id="docente_id">
+                    <select name="docente_id">
+                        @foreach ($docentes as $docente)
+                        <option value="{{$docente['id']}}">{{$docente['nombre']}} {{$docente['apellidos']}}</option>
+                        @endforeach
+                    </select>
 	            </div>
 
 	            <div class="form-group">
