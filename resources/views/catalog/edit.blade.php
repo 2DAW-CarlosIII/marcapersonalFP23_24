@@ -22,7 +22,18 @@
 
 	            <div class="form-group">
 	            	<label for="docente_id">Docente</label>
-	               <input type="number" name="docente_id" value="{{ $proyecto['docente_id'] }}" id="docente_id">
+	               <select name="docente_id" id="docente_id">
+                        @foreach ($docentes as $docente)
+                            <option value="{{ $docente->id }}">
+                                {{ $docente->nombre }} {{ $docente->apellidos }}
+                            </option>
+                        @endforeach
+                   </select>
+	            </div>
+
+                <div class="form-group">
+	            	<label for="calificacion">Calificación</label>
+	               <input type="number" name="calificacion" id="calificacion" min="1" max="10" value="{{ $proyecto['calificacion'] }}">
 	            </div>
 
 	            <div class="form-group">
@@ -36,12 +47,6 @@
 	               <textarea name="metadatos" id="metadatos" class="form-control" value rows="3">
                     {{print_r($proyecto['metadatos'],true)}}
                    </textarea>
-	            </div>
-
-
-                <div class="form-group">
-	            	<label for="calificacion">Calificación</label>
-	               <input min="1" max="10" type="number" name="calificacion" id="calificacion" value="{{ $proyecto['calificacion'] }}">
 	            </div>
 
 	            <div class="form-group text-center">
