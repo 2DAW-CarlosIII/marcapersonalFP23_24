@@ -61,6 +61,11 @@
             <x-input-error :messages="$errors->get('apellidos')" class="mt-2" />
         </div>
 
+        <div class="form-group">
+            <label for="avatar">Avatar</label>
+            <input type="file" class="block mt-1 w-full" id="avatar" name="avatar" placeholder="Avatar">
+        </div>
+
 
 
         <div class="flex items-center gap-4">
