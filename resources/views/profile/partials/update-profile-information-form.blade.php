@@ -50,18 +50,23 @@
         <!-- Nombre -->
         <div>
             <x-input-label for="nombre" :value="__('Nombre')" />
-            <x-text-input id="nombre" class="block mt-1 w-full" type="text" name="nombre" :value="old('nombre')" required autofocus autocomplete="nombre" />
+            <x-text-input id="nombre" class="block mt-1 w-full" type="text" name="nombre" :value="old('nombre', $user->nombre)" required autofocus autocomplete="nombre" />
             <x-input-error :messages="$errors->get('nombre')" class="mt-2" />
         </div>
 
         <!-- Apellidos -->
         <div>
             <x-input-label for="apellidos" :value="__('Apellidos')" />
-            <x-text-input id="apellidos" class="block mt-1 w-full" type="text" name="apellidos" :value="old('apellidos')" required autofocus autocomplete="apellidos" />
+            <x-text-input id="apellidos" class="block mt-1 w-full" type="text" name="apellidos" :value="old('apellidos', $user->apellidos)" required autofocus autocomplete="apellidos" />
             <x-input-error :messages="$errors->get('apellidos')" class="mt-2" />
         </div>
 
-
+        <!-- Avatar -->
+        <div>
+            <x-input-label for="avatar" :value="__('Avatar')" />
+            <x-text-input id="avatar" class="block mt-1 w-full" type="file" name="avatar" :value="old('avatar',)" autofocus autocomplete="avatar" />
+            <x-input-error :messages="$errors->get('avatar')" class="mt-2" />
+        </div>
 
         <div class="flex items-center gap-4">
             <x-primary-button>{{ __('Save') }}</x-primary-button>
