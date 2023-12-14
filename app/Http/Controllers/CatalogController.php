@@ -17,13 +17,11 @@ class CatalogController extends Controller
     public function getShow($id)
     {
         $proyecto = Proyecto::FindOrFail($id);
-        $docente = Docente::FindOrFail($id);
-
-        $proyecto->metadatos = unserialize($proyecto->metadatos);
+        $docente = Docente::FindOrFail($proyecto->docente_id);
         return view('catalog.show')
             ->with('proyecto', $proyecto)
-            ->with('docente', $docente)
-            ->with('id', $proyecto->id);
+            ->with('docente', $docente);
+
     }
 
     public function putEdit($id)
@@ -38,7 +36,6 @@ class CatalogController extends Controller
     public function getEdit($id)
     {
         $proyecto = Proyecto::FindOrFail($id);
-        $proyecto->metadatos = unserialize($proyecto->metadatos);
         return view('catalog.edit')
             ->with('proyecto', $proyecto)
             ->with('id', $proyecto->id);
@@ -47,5 +44,12 @@ class CatalogController extends Controller
     public function getCreate()
     {
         return view('catalog.create');
+    }
+
+    public function store(Request $request)
+    {
+        $proyecto = Proyecto::create($request->all());
+
+        return redirect(action([self::class, 'getShow'], ['id' => $proyecto->id]));
     }
 }
