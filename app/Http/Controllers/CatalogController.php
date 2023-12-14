@@ -26,8 +26,11 @@ class CatalogController extends Controller
     {
         $proyecto = Proyecto::FindOrFail($id);
         $proyecto->metadatos = unserialize($proyecto->metadatos);
-        $proyecto->metadatos = serialize($proyecto->metadatos);
-
+        if($request->file('comprimido')){
+            $path = $request->file('comprimido')->store('comprimidos', ['disk' => 'public']);
+            $proyecto->comprimido = $path;
+        }
+        $proyecto->save();
         $proyecto->update($request->all());
 
 
