@@ -40,7 +40,7 @@
 
                 <div class="form-group">
                     <label for="archivoProyecto">Archivo Proyecto (comprimido)</label>
-                    <input type="file" accept=".zip,.rar,.7z,.gz" class="form-control" id="archivoProyecto" name="archivoProyecto" placeholder="archivoProyecto">
+                    <input type="file" accept=".zip,.rar,.7z,.tar" class="form-control" id="archivoProyecto" name="archivoProyecto" placeholder="archivoProyecto">
                 </div>
 
 	            <div class="form-group text-center">

@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Proyecto;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Validator;
+//use App\Http\Requests\ProyectoFormRequest;
+use Illuminate\Support\Facades\Validator;
+
 
 class CatalogController extends Controller
 {
@@ -27,9 +29,20 @@ class CatalogController extends Controller
         $proyecto = Proyecto::findOrFail($id);
         // TODO: Eliminar el avatar anterior si existiera
 
-        if ($proyecto->archivoProyecto && $proyecto->archivoProyecto != $request->file('archivoProyecto')){
+        //$archivoVar = $request->validate();
+
+        if ($proyecto->archivoProyecto && isset($archivoVar)){
 
             $proyecto->archivoProyecto->delete();
+
+            $validator = Validator::make(
+                array(
+                    'archivoProyecto' => $request('archivoProyecto'),
+                ),
+                array(
+                    'archivoProyecto' => 'file|max:5000|mimes:zip,7z,tar,rar',
+                )
+            );
             $path = $request->file('archivoProyecto')->store('compressed_files', ['disk' => 'public']);
             $proyecto->archivoProyecto->update($path);
         }

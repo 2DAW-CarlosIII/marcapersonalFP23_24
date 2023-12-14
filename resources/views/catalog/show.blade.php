@@ -37,18 +37,18 @@
             @endif
 
             <p><strong>Estado: </strong>
-                @if($proyecto['metadatos']['calificacion'] >= 5)
+                {{--@if($proyecto->metadatos['calificacion'] >= 5)
                     Proyecto aprobado
                 @else
                     Proyecto suspenso
-                @endif
+                @endif--}}
             </p>
 
-            @if($proyecto['metadatos']['calificacion'] >= 5)
+            {{--@if($proyecto->metadatos['calificacion'] >= 5)
                 <a class="btn btn-danger" href="#">Suspender proyecto</a>
             @else
                 <a class="btn btn-primary" href="#">Aprobar proyecto</a>
-            @endif
+            @endif--}}
             <a class="btn btn-warning" href="{{ action([App\Http\Controllers\CatalogController::class, 'getEdit'], ['id' => $id]) }}">
                 <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                 Editar proyecto
