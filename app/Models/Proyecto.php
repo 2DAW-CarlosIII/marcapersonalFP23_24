@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Proyecto extends Model
 {
     use HasFactory;
+
+    public static function mejoresProyectos($nProyectos)
+    {
+        $nProyectos = self::orderByDesc('calificacion')->take(5)->get();
+        return $nProyectos;
+    }
 }
