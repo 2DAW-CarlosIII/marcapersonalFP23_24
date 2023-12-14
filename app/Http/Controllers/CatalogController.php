@@ -17,7 +17,7 @@ class CatalogController extends Controller
     public function getShow($id)
     {
         $proyecto = Proyecto::FindOrFail($id);
-        $docente = Docente::FindOrFail($id);
+        $docente = Docente::FindOrFail($proyecto->docente_id);
 
         $proyecto->metadatos = unserialize($proyecto->metadatos);
         return view('catalog.show')
