@@ -8,12 +8,7 @@
             <a href="#" class="image featured" title="Nice and Serious, CC0, via Wikimedia Commons"><img width="256"
                     alt="User (89041) - The Noun Project"
                     src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/User_%2889041%29_-_The_Noun_Project.svg/256px-User_%2889041%29_-_The_Noun_Project.svg.png">
-                @if ($user['avatar'])
-                    <img src="{{ Storage::url($user['avatar']) }}" alt="Avatar" class="img-thumbnail">
-                @else
-                    <img width="300" style="height:300px" alt="Curriculum-vitae-warning-icon"
-                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Curriculum-vitae-warning-icon.svg/256px-Curriculum-vitae-warning-icon.svg.png">
-                @endif
+
             </a>
 
         </div>

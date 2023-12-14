@@ -44,6 +44,11 @@
                     <input type="url" id="linkedin" name="linkedin">
 	            </div>
 
+                <div class="form-group">
+                    <label for="avatar">Avatar</label>
+                    <input type="file" class="form-control" id="avatar" name="avatar" placeholder="Avatar">
+                </div>
+
 	            <div class="form-group text-center">
 	               <button type="submit" class="btn btn-primary" style="padding:8px 100px;margin-top:25px;">
 	                   Añadir Usuario
