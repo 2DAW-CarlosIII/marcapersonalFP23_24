@@ -1,4 +1,4 @@
-  <nav id="nav">
+<nav id="nav">
     <ul>
         <li @if (Route::currentRouteName() == 'home')
             class="current"
@@ -24,17 +24,26 @@
             <a href="#">Usuario</a>
 
             <ul style="user-select: none; display: none; position: absolute;" class="">
-                <li style="white-space: nowrap;"><a href="{{ route('login') }}" style="display: block;">Login</a></li>
                 <li style="white-space: nowrap;"><a href="{{ route('register') }}" style="display: block;">Register</a></li>
                 <li style="user-select: none; cursor: pointer; white-space: nowrap;" class="opener">
                     <a href="#" style="display: block;">Más opciones de usuario</a>
                     <ul style="user-select: none; display: none; position: absolute;" class="dropotron">
-                        <li style="white-space: nowrap;"><a href="{{ route('dashboard') }}" style="display: block;">Dashboard</a></li>
                         <li style="white-space: nowrap;"><a href="{{ route('profile.edit') }}" style="display: block;">Profile</a></li>
-                        <li style="white-space: nowrap;"><a href="{{ route('logout') }}" style="display: block;">Logout</a></li>
                     </ul>
                 </li>
             </ul>
         </li>
+        @if (Auth::check())
+           <li style="white-space: nowrap;"><a href="{{ route('dashboard') }}" style="display: block;">Dashboard</a></li>
+           <li style="white-space: nowrap;">
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <a href="#"
+                onclick="event.preventDefault(); this.closest('form').submit();">Logout</a>
+            </form>
+        </li>
+        @else
+        <li style="white-space: nowrap;"><a href="{{ route('login') }}" style="display: block;">Login</a></li>
+        @endif
     </ul>
 </nav>
