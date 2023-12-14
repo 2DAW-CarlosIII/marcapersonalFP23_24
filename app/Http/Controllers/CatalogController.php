@@ -18,8 +18,6 @@ class CatalogController extends Controller
     {
         $proyecto = Proyecto::FindOrFail($id);
         $docente = Docente::FindOrFail($proyecto->docente_id);
-
-        $proyecto->metadatos = unserialize($proyecto->metadatos);
         return view('catalog.show')
             ->with('proyecto', $proyecto)
             ->with('docente', $docente);
@@ -38,7 +36,6 @@ class CatalogController extends Controller
     public function getEdit($id)
     {
         $proyecto = Proyecto::FindOrFail($id);
-        $proyecto->metadatos = unserialize($proyecto->metadatos);
         return view('catalog.edit')
             ->with('proyecto', $proyecto)
             ->with('id', $proyecto->id);

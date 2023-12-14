@@ -27,21 +27,17 @@
             </p>
             {{-- METADATOS --}}
             <p><strong>Metadatos: </strong>
-                <ul>
-                    @foreach ($proyecto['metadatos'] as $indice => $metadato)
-                        <li>{{ $indice }}: {{ $metadato }}</li>
-                    @endforeach
-                </ul>
+                {{ $proyecto->metadatos }}
             </p>
             <p><strong>Estado: </strong>
-                @if($proyecto['metadatos']['calificacion'] >= 5)
+                @if($proyecto->calificacion >= 5)
                     Proyecto aprobado
                 @else
                     Proyecto suspenso
                 @endif
             </p>
 
-            @if($proyecto['metadatos']['calificacion'] >= 5)
+            @if($proyecto->calificacion >= 5)
                 <a class="btn btn-danger" href="#">Suspender proyecto</a>
             @else
                 <a class="btn btn-primary" href="#">Aprobar proyecto</a>
