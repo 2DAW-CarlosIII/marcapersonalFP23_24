@@ -27,7 +27,7 @@ class CatalogController extends Controller
     {
         $proyecto = Proyecto::FindOrFail($id);
         $proyecto->metadatos = $proyecto->metadatos;
-        $docentes = Docente::all();
+        $docentes = Docente::all('id', 'nombre', 'apellidos');
         return view('catalog.edit')
             ->with('proyecto', $proyecto)
             ->with('docentes', $docentes)
@@ -38,7 +38,7 @@ class CatalogController extends Controller
     {
         $proyecto = Proyecto::FindOrFail($id);
         $proyecto->metadatos = $proyecto->metadatos;
-        $docentes = Docente::all();
+        $docentes = Docente::all('id', 'nombre', 'apellidos');
         return view('catalog.edit')
             ->with('proyecto', $proyecto)
             ->with('docentes', $docentes)
