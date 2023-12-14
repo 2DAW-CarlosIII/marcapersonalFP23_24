@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Docente;
 use App\Models\Proyecto;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class CatalogController extends Controller
@@ -17,9 +19,12 @@ class CatalogController extends Controller
     {
         $proyecto = Proyecto::FindOrFail($id);
         $proyecto->metadatos = unserialize($proyecto->metadatos);
+        $docente = Docente::FindOrFail($proyecto->docente_id);
+
         return view('catalog.show')
             ->with('proyecto', $proyecto)
-            ->with('id', $proyecto->id);
+            ->with('id', $proyecto->id)
+            ->with('docente', $docente);
     }
 
     public function putEdit($id)
