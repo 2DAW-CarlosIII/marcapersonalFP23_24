@@ -38,6 +38,8 @@ Route::prefix('catalog')->group(function () {
 
     Route::put('/edit/{id}', [CatalogController::class, 'putEdit'])->where('id', '[0-9]+')
     ->middleware('auth');
+
+    Route::post('/', [CatalogController::class, 'store']);
 });
 
 Route::prefix('reconocimientos')->group(function () {

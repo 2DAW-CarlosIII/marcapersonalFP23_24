@@ -22,8 +22,8 @@ class CatalogController extends Controller
         $proyecto->metadatos = unserialize($proyecto->metadatos);
         return view('catalog.show')
             ->with('proyecto', $proyecto)
-            ->with('docente', $docente)
-            ->with('id', $proyecto->id);
+            ->with('docente', $docente);
+
     }
 
     public function putEdit($id)
@@ -47,5 +47,12 @@ class CatalogController extends Controller
     public function getCreate()
     {
         return view('catalog.create');
+    }
+
+    public function store(Request $request)
+    {
+        $proyecto = Proyecto::create($request->all());
+
+        return redirect(action([self::class, 'getShow'], ['id' => $proyecto->id]));
     }
 }
