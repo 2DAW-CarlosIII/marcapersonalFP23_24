@@ -18,7 +18,14 @@
                     http://github.com/2DAW-CarlosIII/{{ $proyecto['dominio'] }}
                 </a>
             </h4>
-            <h4><strong>Docente: </strong>{{ $proyecto['docente_id'] }}</h4>
+            <br>
+            <h4><strong>Docente: </strong>{{ $docente->nombre . ' ' . $docente->apellidos}}</h4>
+            <br>
+            {{-- CALIFICACIÓN --}}
+            <p><strong>Calificación: </strong>
+                {{$proyecto->calificacion}}
+            </p>
+            {{-- METADATOS --}}
             <p><strong>Metadatos: </strong>
                 <ul>
                     @foreach ($proyecto['metadatos'] as $indice => $metadato)
