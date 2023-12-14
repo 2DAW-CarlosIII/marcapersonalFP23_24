@@ -14,4 +14,12 @@ class Proyecto extends Model
         $nProyectos = self::orderByDesc('calificacion')->take(5)->get();
         return $nProyectos;
     }
+
+    protected $fillable = [
+        'docente_id',
+        'nombre',
+        'dominio',
+        'metadatos',
+        'calificacion',
+    ];
 }
