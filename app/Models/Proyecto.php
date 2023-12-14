@@ -15,6 +15,6 @@ class Proyecto extends Model
         'nombre',
         'dominio',
         'metadatos',
-        'compressedFile',
+        'archivoProyecto',
     ];
 }

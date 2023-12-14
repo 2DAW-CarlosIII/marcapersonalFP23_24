@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('proyectos', function (Blueprint $table) {
-            $table->string('archivoProyecto')->after('metadatos')->nullable();
+            $table->string('archivoProyecto')->nullable();
         });
     }
 

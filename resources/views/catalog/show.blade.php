@@ -20,11 +20,12 @@
             </h4>
             <h4><strong>Docente: </strong>{{ $proyecto['docente_id'] }}</h4>
             <p><strong>Metadatos: </strong>
-                <ul>
+                {{--<ul>
                     @foreach ($proyecto['metadatos'] as $indice => $metadato)
                         <li>{{ $indice }}: {{ $metadato }}</li>
                     @endforeach
-                </ul>
+                </ul>--}}
+                {{$proyecto->metadatos}}
             </p>
 
             @if ($proyecto->archivoProyecto)

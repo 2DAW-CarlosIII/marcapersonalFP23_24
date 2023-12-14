@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Proyecto;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Validator;
 
 class CatalogController extends Controller
 {
@@ -16,7 +17,7 @@ class CatalogController extends Controller
     public function getShow($id)
     {
         $proyecto = Proyecto::FindOrFail($id);
-        $proyecto->metadatos = unserialize($proyecto->metadatos);
+        //$proyecto->metadatos = unserialize($proyecto->metadatos);
         return view('catalog.show')
             ->with('proyecto', $proyecto)
             ->with('id', $proyecto->id);
@@ -26,22 +27,24 @@ class CatalogController extends Controller
         $proyecto = Proyecto::findOrFail($id);
         // TODO: Eliminar el avatar anterior si existiera
 
-        if ($proyecto->archivoProyecto){
+        if ($proyecto->archivoProyecto && $proyecto->archivoProyecto != $request->file('archivoProyecto')){
+
             $proyecto->archivoProyecto->delete();
+            $path = $request->file('archivoProyecto')->store('compressed_files', ['disk' => 'public']);
+            $proyecto->archivoProyecto->update($path);
         }
 
-        $path = $request->file('archivoProyecto')->store('compressed_files', ['disk' => 'public']);
-        $proyecto->archivoProyecto = $path;
+        //$metadatosVar = serialize($request->only('metadatos'));
+        //$proyecto->metadatos->update($metadatosVar);
 
-        //$proyecto->save();
-        $proyecto->update($request->all());
+        $proyecto->update($request->except('archivoProyecto'));
         return redirect(action([self::class, 'getShow'], ['id' => $proyecto->id]));
     }
 
     public function getEdit($id)
     {
         $proyecto = Proyecto::FindOrFail($id);
-        $proyecto->metadatos = unserialize($proyecto->metadatos);
+        //$proyecto->metadatos = unserialize($proyecto->metadatos);
         return view('catalog.edit')
             ->with('proyecto', $proyecto)
             ->with('id', $proyecto->id);
