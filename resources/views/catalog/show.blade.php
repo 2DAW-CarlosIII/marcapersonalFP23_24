@@ -34,11 +34,20 @@
                 @endif
             </p>
 
-            @if($proyecto->calificacion >= 5)
+            {{-- @if($proyecto->calificacion >= 5)
                 <a class="btn btn-danger" href="{{ action([App\Http\Controllers\CatalogController::class, 'editCalificacion'], ['id' => $proyecto->id]) }}">Suspender proyecto</a>
             @else
                 <a class="btn btn-primary" href="{{ action([App\Http\Controllers\CatalogController::class, 'editCalificacion'], ['id' => $proyecto->id]) }}">Aprobar proyecto</a>
-            @endif
+            @endif --}}
+            <form action="{{ action([App\Http\Controllers\CatalogController::class, 'editCalificacion'], ['id' => $proyecto->id]) }}" method="post" class="cambiarCalificacion">
+                @csrf
+                @method('PUT')
+                @if($proyecto->calificacion >= 5)
+                    <input class="btn btn-danger" value="Suspender proyecto" onclick="submit()">
+                @else
+                    <input class="btn btn-primary" value="Aprobar proyecto" onclick="submit()">
+                @endif
+            </form>
             <a class="btn btn-warning" href="{{ action([App\Http\Controllers\CatalogController::class, 'getEdit'], ['id' => $id]) }}">
                 <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                 Editar proyecto
