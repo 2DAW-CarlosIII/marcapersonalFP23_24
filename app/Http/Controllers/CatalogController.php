@@ -24,13 +24,11 @@ class CatalogController extends Controller
 
     }
 
-    public function putEdit($id)
+    public function putEdit(Request $request, $id)
     {
-        $proyecto = Proyecto::FindOrFail($id);
-        $proyecto->metadatos = unserialize($proyecto->metadatos);
-        return view('catalog.edit')
-            ->with('proyecto', $proyecto)
-            ->with('id', $proyecto->id);
+        $proyecto = Proyecto::findOrFail($id);
+        $proyecto->update($request->all());
+        return redirect(action([self::class, 'getShow'], ['id' => $proyecto->id]));
     }
 
     public function getEdit($id)
