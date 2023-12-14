@@ -38,6 +38,14 @@
                       </li>
                   </ul>
               @endif
+              <!--
+              <a href="#" style="display: block;">Más opciones de usuario</a>
+                    <ul style="user-select: none; display: none; position: absolute;" class="dropotron">
+                        <li style="white-space: nowrap;"> style="display: block;">Dashboard</a></li>
+                        <li style="white-space: nowrap;"> style="display: block;">Profile</a></li>
+                        <li style="white-space: nowrap;"> style="display: block;">Logout</a></li>
+                    </ul>
+                -->
 
           </li>
       </ul>
