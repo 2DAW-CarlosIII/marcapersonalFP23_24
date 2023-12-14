@@ -20,13 +20,14 @@
 	               <input type="text" name="nombre" id="nombre" value="{{$proyecto['nombre']}}" class="form-control">
 	            </div>
 
-	            <div class="form-group">
-	            	<label for="docente_id">Docente</label>
-	               <input type="number" name="docente_id" value="{{ $proyecto['docente_id'] }}" id="docente_id">
+
+                <div class="form-group">
+	            	<label for="docente_nombre">Nombre Docente</label>
+	               <input type="text" name="docente_nombre" value="{{ $docente->nombre}} {{ $docente->apellidos}}" id="docente_nombre">
 	            </div>
 
 	            <div class="form-group">
-	            	<label for="dominio">Dominio</label><br />
+	            	<label for="dominio">Dominio</label>
                     https://github.com/2DAW-CarlosIII/
 	               <input type="text" name="dominio" id="dominio" value="{{ $proyecto['dominio'] }}" class="form-control">
 	            </div>
