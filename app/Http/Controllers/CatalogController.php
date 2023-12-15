@@ -52,4 +52,17 @@ class CatalogController extends Controller
 
         return redirect(action([self::class, 'getShow'], ['id' => $proyecto->id]));
     }
+
+    public function editCalificacion(Request $request, $id)
+    {
+        $proyecto = Proyecto::FindOrFail($id);
+        if($proyecto->calificacion >= 5){
+            $proyecto->calificacion = 4;
+        }else{
+            $proyecto->calificacion = 5;
+        }
+        $proyecto->save();
+        $proyecto->update($request->all());
+        return redirect(action([self::class, 'getShow'], ['id' => $proyecto->id]));
+    }
 }
