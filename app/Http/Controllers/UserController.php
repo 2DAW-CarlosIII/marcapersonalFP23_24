@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class UserController extends Controller
 {
@@ -16,10 +18,14 @@ class UserController extends Controller
             ->with('id', $id);
     }
 
-    public function putEdit($id) {
-        return view('users.edit')
-            ->with("user",$this->arrayUsers[$id])
-            ->with("id",$id);
+    public function putEdit(Request $request, $id) {
+        $user = User::findOrFail($id);
+        // TODO: Eliminar el avatar anterior si existiera
+        $path = $request->file('avatar')->store('avatars', ['disk' => 'public']);
+        $user->avatar = $path;
+        $user->save();
+        $user->update($request->all());
+        return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }
 
     public function getEdit($id) {
