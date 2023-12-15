@@ -10,7 +10,7 @@
          </div>
          <div class="card-body" style="padding:30px">
 
-            <form action="{{ action([App\Http\Controllers\CatalogController::class, 'putEdit'], ['id' => $id]) }}" method="POST">
+            <form action="{{ action([App\Http\Controllers\CatalogController::class, 'putEdit'], ['id' => $id]) }}" method="POST" enctype="multipart/form-data">
 
 	            @csrf
                 @method('PUT')
@@ -38,11 +38,15 @@
                    </textarea>
 	            </div>
 
-
                 <div class="form-group">
 	            	<label for="calificacion">Calificación</label>
 	               <input min="1" max="10" type="number" name="calificacion" id="calificacion" value="{{ $proyecto['calificacion'] }}">
 	            </div>
+
+                <div class="form-group">
+                    <label for="fichero">Fichero Comprimido</label>
+                    <input type="file" class="form-control" id="fichero" name="fichero" placeholder="fichero">
+                </div>
 
 	            <div class="form-group text-center">
 	               <button type="submit" class="btn btn-primary" style="padding:8px 100px;margin-top:25px;">
