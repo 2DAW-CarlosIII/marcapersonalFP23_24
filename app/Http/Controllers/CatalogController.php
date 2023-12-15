@@ -47,9 +47,11 @@ class CatalogController extends Controller
     public function getEdit($id)
     {
         $proyecto = Proyecto::FindOrFail($id);
+        $docentes = Docente::all('id', 'nombre', 'apellidos');
         return view('catalog.edit')
             ->with('proyecto', $proyecto)
-            ->with('id', $proyecto->id);
+            ->with('id', $proyecto->id)
+            ->with('docentes', $docentes);
     }
 
     public function getCreate()
