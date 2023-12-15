@@ -27,31 +27,21 @@ class CatalogController extends Controller
 
     public function putEdit(Request $request, $id)
     {
-        $request->validate([
-            'fichero' => 'required|mimes:zip|max:5120', // Se permiten ficheros ZIP de hasta 5 MB
-        ], [
-            'fichero.required' => 'Por favor, selecciona un fichero.',
-            'fichero.mimes' => 'El fichero debe ser un fichero ZIP.',
-            'fichero.max' => 'El tamaño del fichero no debe ser mayor a 5 MB.',
-        ]);
-
-        // Lógica para manejar la carga del fichero
-
+        $proyecto = Proyecto::findOrFail($id);
         if ($request->file('fichero')){
+            $request->validate([
+                'fichero' => 'required|mimes:zip,rar,bz,bz2,7z|max:5120', // Se permiten ficheros comprimidos de hasta 5 MB
+            ], [
+                'fichero.required' => 'Por favor, selecciona un fichero.',
+                'fichero.mimes' => 'El fichero debe ser un fichero ZIP.',
+                'fichero.max' => 'El tamaño del fichero no debe ser mayor a 5 MB.',
+            ]);
 
-        }
-
-        if ($request->file('fichero')->isValid()) {
-            $proyecto = Proyecto::findOrFail($id);
             $path = $request->file('fichero')->store('ficheros', ['disk' => 'public']);
             $proyecto->fichero = $path;
-            $proyecto->save();
-            $proyecto->update($request->all());
-            return redirect(action([self::class, 'getShow'], ['id' => $proyecto->id]));
-        } else {
-            return 'Error al subir el archivo.';
         }
-
+        $proyecto->update($request->all());
+        return redirect(action([CatalogController::class, 'getShow'], ['id' => $proyecto->id]));
     }
 
     public function getEdit($id)
