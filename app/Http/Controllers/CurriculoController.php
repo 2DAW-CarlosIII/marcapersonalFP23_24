@@ -7,34 +7,54 @@ use App\Models\Curriculo;
 
 class CurriculoController extends Controller
 {
-    public function getIndex(){
+    public function getIndex()
+    {
 
         $curriculo = Curriculo::all();
         return view('curriculos.index', ['curriculos' => $curriculo]);
     }
 
-    public function getShow($id){
+    public function getShow($id)
+    {
         $curriculo = Curriculo::findOrFail($id);
 
         return view('curriculos.show')
             ->with('curriculo', $curriculo);
     }
 
-    public function getCreate(){
+    public function getCreate()
+    {
         return view('curriculos.create');
     }
 
-    public function putEdit($id){
+    public function putEdit(Request $request, $id)
+    {
         $curriculo = Curriculo::findOrFail($id);
-
-        return view('curriculos.edit')
-        ->with('curriculo', $curriculo);
+        if ($request->hasFile('pdf_curriculum')) {
+            $path = $request->file('pdf_curriculum')->store('curriculos', ['disk' => 'public']);
+            $curriculo->pdf_curriculum = $path;
+            $curriculo->save();
+        }
+        $curriculo->update($request->all());
+        return redirect(action([self::class, 'getShow'], ['id' => $curriculo->id]));
     }
 
-    public function getEdit($id){
+    public function getEdit($id)
+    {
         $curriculo = Curriculo::findOrFail($id);
 
         return view('curriculos.edit')
-        ->with('curriculo', $curriculo);
+            ->with('curriculo', $curriculo);
+    }
+
+    public function store(Request $request)
+    {
+        $curriculo = Curriculo::create($request->all());
+        if ($request->hasFile('pdf_curriculum')) {
+            $path = $request->file('pdf_curriculum')->store('curriculos', ['disk' => 'public']);
+            $curriculo->pdf_curriculum = $path;
+            $curriculo->save();
+        }
+        return redirect(action([self::class, 'getShow'], ['id' => $curriculo->id]));
     }
 }
