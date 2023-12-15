@@ -10,14 +10,16 @@ class ReconocimientoController extends Controller
 
     public function getIndex()
     {
-        return view('reconocimientos.index')
-        ->with('arrayReconocimientos', Reconocimiento::all());
+        $reconocimientos = Reconocimiento::with('estudiante', 'actividad')->get();
+
+        return view('reconocimientos.index', compact('reconocimientos'));
     }
 
     public function getShow($id)
     {
-        return view('reconocimientos.show')
-        ->with('reconocimiento', Reconocimiento::findOrFail($id));
+        $reconocimiento = Reconocimiento::with('estudiante', 'actividad', 'user')->findOrFail($id);
+
+        return view('reconocimientos.show', compact('reconocimiento'));
     }
 
     public function getCreate()
@@ -27,13 +29,23 @@ class ReconocimientoController extends Controller
 
     public function getEdit($id)
     {
-        return view('reconocimientos.edit')
-        ->with('reconocimiento', Reconocimiento::findOrFail($id));
+        $reconocimientos = Reconocimiento::findOrFail($id);
+        return view('reconocimientos.edit',['reconocimiento'=>$reconocimientos]);
     }
 
-    public function putEdit($id)
-    {
-        return view('reconocimientos.edit')
-        ->with('reconocimiento', Reconocimiento::findOrFail($id));
+    public function putEdit($id) {
+        $reconocimientos = Reconocimiento::findOrFail($id);
+        return view('reconocimientos.edit',['reconocimiento'=>$reconocimientos]);
     }
+
+    public function putValidador(Request $request, $id){
+    $reconocimiento = Reconocimiento::findOrFail($id);
+
+    $reconocimiento->docente_validador = $request->input('docente_validador');
+
+    $reconocimiento->save();
+
+    return redirect()->back();
+}
+
 }

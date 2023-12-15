@@ -38,8 +38,6 @@ Route::prefix('catalog')->group(function () {
 
     Route::put('/edit/{id}', [CatalogController::class, 'putEdit'])->where('id', '[0-9]+')
     ->middleware('auth');
-
-    Route::post('/', [CatalogController::class, 'store']);
 });
 
 Route::prefix('reconocimientos')->group(function () {
@@ -53,6 +51,10 @@ Route::prefix('reconocimientos')->group(function () {
     Route::put('/edit/{id}', [ReconocimientoController::class, 'putEdit'])->where('id', '[0-9]+');
 
     Route::get('/edit/{id}', [ReconocimientoController::class, 'getEdit'])->where('id', '[0-9]+')->middleware('auth');
+
+    Route::put('/show/{id}', [ReconocimientoController::class, 'putValidador'])->where('id', '[0-9]+')->middleware('auth');
+
+
 });
 
 Route::prefix('users')->group(function () {

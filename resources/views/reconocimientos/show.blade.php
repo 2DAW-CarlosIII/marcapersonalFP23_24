@@ -13,11 +13,25 @@
         <div class="col-sm-8">
 
             <p><strong>ID EStudiante: </strong>{{ $reconocimiento->estudiante_id }}</p>
-            <p><strong>ID Actividad </strong>{{ $reconocimiento->actividad_id }}</p>
+            <p><strong>ID Actividad: </strong>{{ $reconocimiento->actividad_id }}</p>
             <p><strong>Documento: </strong>{{ $reconocimiento->documento }}</p>
             <p><strong>Fecha: </strong>{{ $reconocimiento->fecha }}</p>
-            <p><strong>Docente Validador: </strong>{{ $reconocimiento->docente_validador }}</p>
 
+            @if ($reconocimiento->docente_validador)
+                <p><strong>Validado por: </strong>{{ $reconocimiento->user->nombre }} {{ $reconocimiento->user->apellidos}}</p>
+            @else
+            <form action="{{ action([App\Http\Controllers\ReconocimientoController::class, 'putValidador'], ['id' => $reconocimiento->id]) }}" method="POST">
+                @csrf
+                @method('PUT')
+
+                {{-- Input oculto para recoger valor de docente_validador --}}
+                <input type="hidden" name="docente_validador" id="docente_validador" value="{{ auth()->id() }}">
+
+                <button type="submit" class="btn btn-success">Validar</button>
+            </form>
+
+
+            @endif
 
 
             <a class="btn btn-warning" href="{{ action([App\Http\Controllers\ReconocimientoController::class, 'getEdit'], ['id' => $reconocimiento->id]) }}">
