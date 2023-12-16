@@ -10,7 +10,8 @@
     <div class="col-sm-8  align-self-center">
         <h3><strong>Identificador del usuario:</strong> {{ $curriculo->user_id }}</h3>
         </br>
-        <h4><strong>Video Curriculum:</strong> <a href="{{ $curriculo->video_curriculum }}">{{ $curriculo->video_curriculum }}</a></h4>
+        <h4><strong>Video Curriculum:</strong> </h4>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/{{ $curriculo->video_curriculum }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
         <h4><strong>Texto Curriculum:</strong> {{ $curriculo->texto_curriculum }}</h4>
         </br>
         <a class="btn btn-warning" href="{{ action([App\Http\Controllers\CurriculoController::class, 'getEdit'], ['id' => $curriculo->id]) }}">
