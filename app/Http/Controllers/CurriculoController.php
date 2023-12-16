@@ -30,13 +30,16 @@ class CurriculoController extends Controller
     public function putEdit(Request $request, $id)
     {
         $curriculo = Curriculo::findOrFail($id);
-        if ($request->hasFile('pdf_curriculum')) {
+        if ($request->hasFile('pdf_curriculum') && $request->pdf_curriculum->getClientOriginalExtension() === 'pdf') {
             $path = $request->file('pdf_curriculum')->store('curriculos', ['disk' => 'public']);
             $curriculo->pdf_curriculum = $path;
             $curriculo->save();
+            $curriculo->update($request->all());
+            return redirect(action([self::class, 'getShow'], ['id' => $curriculo->id]));
+        }else{
+            return redirect(action([self::class, 'getEdit'], ['id' => $curriculo->id]));
         }
-        $curriculo->update($request->all());
-        return redirect(action([self::class, 'getShow'], ['id' => $curriculo->id]));
+
     }
 
     public function getEdit($id)
@@ -50,11 +53,13 @@ class CurriculoController extends Controller
     public function store(Request $request)
     {
         $curriculo = Curriculo::create($request->all());
-        if ($request->hasFile('pdf_curriculum')) {
+        if ($request->hasFile('pdf_curriculum') && $request->pdf_curriculum->getClientOriginalExtension() === 'pdf') {
             $path = $request->file('pdf_curriculum')->store('curriculos', ['disk' => 'public']);
             $curriculo->pdf_curriculum = $path;
             $curriculo->save();
+            return redirect(action([self::class, 'getShow'], ['id' => $curriculo->id]));
+        } else {
+            return redirect(action([self::class, 'getCreate']));
         }
-        return redirect(action([self::class, 'getShow'], ['id' => $curriculo->id]));
     }
 }
