@@ -48,6 +48,8 @@ Route::prefix('reconocimientos')->group(function () {
 
     Route::get('/show/{id}', [ReconocimientoController::class, 'getShow'])->where('id', '[0-9]+');
 
+    Route::put('/show/{id}', [ReconocimientoController::class, 'putValidate'])->where('id', '[0-9]+')->middleware('auth');
+
     Route::get('/create', [ReconocimientoController::class, 'getCreate'])->middleware('auth');
 
     Route::put('/edit/{id}', [ReconocimientoController::class, 'putEdit'])->where('id', '[0-9]+');

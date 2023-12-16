@@ -14,7 +14,7 @@ class ReconocimientosTableSeeder extends Seeder
     public function run(): void
     {
         Reconocimiento::truncate();
-        
+
         foreach( self::$arrayReconocimientos as $reconocimiento ) {
             $recon = new Reconocimiento();
             $recon->estudiante_id = $reconocimiento['estudiante_id'];
