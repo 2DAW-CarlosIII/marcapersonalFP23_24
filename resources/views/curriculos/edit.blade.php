@@ -10,7 +10,8 @@
             </div>
             <div class="card-body p-4">
 
-                <form action="{{ action([App\Http\Controllers\CurriculoController::class, 'putEdit'], ['id' =>$curriculo->id]) }}" method="POST">                @csrf
+                <form action="{{ action([App\Http\Controllers\CurriculoController::class, 'putEdit'], ['id' =>$curriculo->id]) }}" method="POST" enctype="multipart/form-data">
+                     @csrf
                     @method('PUT')
 
                     <div class="form-group">
@@ -19,15 +20,13 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="video_curriculum">URL Videocurrículo</label>
+                        <label for="video_curriculum">ID Videocurrículo</label>
                         <input type="url" name="video_curriculum" id="video_curriculum" class="form-control" value="{{ $curriculo->video_curriculum }}">
                     </div>
 
                     <div class="form-group">
-                        <label for="texto_curriculum">Texto del currículo</label>
-                        <textarea name="texto_curriculum" id="texto_curriculum" class="form-control">
-                        {{print_r($curriculo->texto_curriculum,true)}}
-                        </textarea>
+                        <label for="pdf_curriculum">Currículo</label>
+                        <input type="file" class="form-control" id="pdf_curriculum" name="pdf_curriculum" accept=".pdf" placeholder="pdf_curriculum">
                     </div>
 
                     <div class="form-group text-center">
