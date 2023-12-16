@@ -25,7 +25,7 @@
 
                     <div class="form-group">
                         <label for="pdf_curriculum">Curriculo</label>
-                        <input type="file" class="form-control" id="pdf_curriculum" name="pdf_curriculum" placeholder="pdf_curriculum">
+                        <input type="file" class="form-control" id="pdf_curriculum" name="pdf_curriculum" placeholder="pdf_curriculum" accept=".pdf">
                     </div>
 
                     <div class="form-group text-center">
