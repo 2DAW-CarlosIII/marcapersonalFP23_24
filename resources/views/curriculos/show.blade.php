@@ -21,6 +21,7 @@
                 title="YouTube video player" frameborder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 allowfullscreen></iframe>
+            </br>
             @if ($curriculo->pdf_curriculum)
                 <a href="{{ Storage::url($curriculo->pdf_curriculum) }}">Curriculo</a>
             @endif

@@ -34,7 +34,7 @@ class CurriculoController extends Controller
         $curriculo = Curriculo::findOrFail($id);
 
         $path = $request->file('pdf_curriculum')->store('curriculos', ['disk' => 'public']);
-        $curriculo->avatar = $path;
+        $curriculo->pdf_curriculum = $path;
         $curriculo->save();
 
         $curriculo->update($request->all());
@@ -46,7 +46,7 @@ class CurriculoController extends Controller
         $curriculo = Curriculo::create($request->all());
 
         $path = $request->file('pdf_curriculum')->store('curriculos', ['disk' => 'public']);
-        $curriculo->avatar = $path;
+        $curriculo->pdf_curriculum = $path;
         $curriculo->save();
 
         return redirect()->action([self::class, 'getShow'], ['id' => $curriculo->id]);
