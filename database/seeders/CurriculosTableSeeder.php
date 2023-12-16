@@ -11,43 +11,43 @@ class CurriculosTableSeeder extends Seeder
     private static $arrayCurriculos = [
         [
             'user_id' => 1,
-            'video_curriculum' => 'https://www.youtube.com/watch?v=u54uern',
+            'video_curriculum' => 'Ds8lRXWfoPE',
         ],
         [
             'user_id' => 2,
-            'video_curriculum' => 'https://www.youtube.com/watch?v=v87dfg2',
+            'video_curriculum' => 'fabDpTOfKns',
         ],
         [
             'user_id' => 3,
-            'video_curriculum' => 'https://www.youtube.com/watch?v=frt32qe',
+            'video_curriculum' => '2in5XMTlSWg',
         ],
         [
             'user_id' => 4,
-            'video_curriculum' => 'https://www.youtube.com/watch?v=wtrh2we',
+            'video_curriculum' => 'Sn-Za-l--e0',
         ],
         [
             'user_id' => 5,
-            'video_curriculum' => 'https://www.youtube.com/watch?v=qwer123',
+            'video_curriculum' => 'T72HF3a2xL4',
         ],
         [
             'user_id' => 6,
-            'video_curriculum' => 'https://www.youtube.com/watch?v=ytgfd32',
+            'video_curriculum' => 'uTgscfzdbCc',
         ],
         [
             'user_id' => 7,
-            'video_curriculum' => 'https://www.youtube.com/watch?v=zxvbn23',
+            'video_curriculum' => 'bIPgAncy3Q0',
         ],
         [
             'user_id' => 8,
-            'video_curriculum' => 'https://www.youtube.com/watch?v=asdf456',
+            'video_curriculum' => 'DCHp1F13R8k',
         ],
         [
             'user_id' => 9,
-            'video_curriculum' => 'https://www.youtube.com/watch?v=qwerty78',
+            'video_curriculum' => 'nL7dnv_egaI',
         ],
         [
             'user_id' => 10,
-            'video_curriculum' => 'https://www.youtube.com/watch?v=mnbvc90',
+            'video_curriculum' => 'AKLJxNRrvjc',
         ],
     ];
 
