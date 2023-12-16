@@ -17,9 +17,7 @@
                     <h3>{{ $curriculo->nombre }} {{ $curriculo->apellidos }}</h3>
                 </header>
                 <p>
-                    <a href="{{ $curriculo->video_curriculum }}">
-                        {{ $curriculo->video_curriculum }}
-                    </a>
+                    <img src="https://i.ytimg.com/vi/{{ $curriculo->video_curriculum }}/hqdefault.jpg" alt="Video_curriculum">
                 </p>
                 <footer>
                     <ul class="actions">
