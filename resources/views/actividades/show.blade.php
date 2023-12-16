@@ -13,8 +13,10 @@
 
         </div>
         <div class="col-sm-8 align-self-center">
-            <h3><strong>Docente: </strong>{{ $actividad->docente_id }}</h3></br>
-            <h4><strong>Insignia: </strong>{{ $actividad->insignia }} </h4></br>
+            <h3><strong>Actividad: </strong>{{ $actividad->id }}</h3></br>
+            <h4><strong>Docente: </strong>{{ $docente->nombre }} {{ $docente->apellidos }}</h4></br>
+            <h4><strong>Insignia: </strong><i class="{{ $actividad->insignia }}"></i> </h4></br>
+
             <a class="btn btn-warning" href="{{ action([App\Http\Controllers\ActividadController::class, 'getEdit'], ['id' => $actividad->id]) }}">
                 <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                 Editar Actividad

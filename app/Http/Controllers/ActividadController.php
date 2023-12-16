@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Actividad;
+use App\Models\Docente;
 use Illuminate\Http\Request;
 
 class ActividadController extends Controller
@@ -14,8 +15,12 @@ class ActividadController extends Controller
 
     public function getShow($id)
     {
+        $actividad = Actividad::findOrFail($id);
+        $docente =  Docente::findOrFail($actividad->docente_id);
+
         return view('actividades.show')
-            ->with('actividad', Actividad::findOrFail($id));
+            ->with('actividad', $actividad)
+            ->with('docente', $docente);
     }
 
     public function getEdit($id) {
