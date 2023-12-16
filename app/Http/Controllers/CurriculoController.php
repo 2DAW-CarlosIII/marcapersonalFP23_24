@@ -29,11 +29,27 @@ class CurriculoController extends Controller
         return view('curriculos.create');
     }
 
-    public function putEdit($id){
+    public function putEdit(Request $request, $id)
+    {
         $curriculo = Curriculo::findOrFail($id);
 
-        return view('curriculos.edit')
-        ->with('curriculo', $curriculo);
+        $path = $request->file('pdf_curriculum')->store('curriculos', ['disk' => 'public']);
+        $curriculo->avatar = $path;
+        $curriculo->save();
+
+        $curriculo->update($request->all());
+        return redirect()->action([self::class, 'getShow'], ['id' => $curriculo->id]);
+    }
+
+    public function store(Request $request)
+    {
+        $curriculo = Curriculo::create($request->all());
+
+        $path = $request->file('pdf_curriculum')->store('curriculos', ['disk' => 'public']);
+        $curriculo->avatar = $path;
+        $curriculo->save();
+
+        return redirect()->action([self::class, 'getShow'], ['id' => $curriculo->id]);
     }
 
     public function getEdit($id){
