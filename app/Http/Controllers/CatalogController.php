@@ -74,7 +74,6 @@ class CatalogController extends Controller
         }else{
             $proyecto->calificacion = 5;
         }
-        $proyecto->save();
         $proyecto->update($request->all());
         return redirect(action([self::class, 'getShow'], ['id' => $proyecto->id]));
     }
