@@ -10,7 +10,7 @@
          </div>
          <div class="card-body" style="padding:30px">
 
-            <form action="{{ action([App\Http\Controllers\CatalogController::class, 'store']) }}" method="POST">
+            <form action="{{ action([App\Http\Controllers\CatalogController::class, 'store']) }}" method="POST" enctype="multipart/form-data">
 
 	            @csrf
 
@@ -20,8 +20,12 @@
 	            </div>
 
 	            <div class="form-group">
-	            	<label for="docente_id">Docente</label>
-	               <input type="number" name="docente_id" id="docente_id">
+					<label for="docente_id">Docente</label>
+    				<select id="docente_id" name="docente_id">
+						@foreach ($docentes as $docente)
+                            <option value="{{ $docente->id }}">{{ $docente->nombre }} {{ $docente->apellidos }}</option>
+                        @endforeach
+    				</select>
 	            </div>
 
 	            <div class="form-group">
@@ -41,6 +45,12 @@
 	            	<label for="calificacion">Calificación</label>
 	               <input type="number" name="calificacion" id="calificacion">
 	            </div>
+
+				<div class="form-group">
+	            	<label for="reconocimientoImg">Documento de reonocimiento</label>
+					<input type="file" class="form-control" placeholder="reconocimientoImg"  id="reconocimientoImg" name="reconocimientoImg"  accept="image/*">
+	            </div>
+				
 
 	            <div class="form-group text-center">
 	               <button type="submit" class="btn btn-primary" style="padding:8px 100px;margin-top:25px;">

@@ -48,6 +48,11 @@
                 </div>
 
                 <div class="form-group">
+	            	<label for="reconocimientoImg">Documento de reonocimiento</label>
+					<input type="file" id="reconocimientoImg" name="reconocimientoImg"  accept="image/*">
+	            </div>
+
+                <div class="form-group">
                     <label for="fichero">Fichero Comprimido</label>
                     <input type="file" class="form-control" id="fichero" name="fichero" placeholder="fichero">
                 </div>

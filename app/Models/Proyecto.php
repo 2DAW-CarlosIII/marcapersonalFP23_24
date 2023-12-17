@@ -14,7 +14,8 @@ class Proyecto extends Model
         'docente_id',
         'dominio',
         'metadatos',
-        'calificacion'
+        'calificacion',
+        'reconocimientoImg'
     ];
 
     public static function mejoresProyectos($nProyectos)

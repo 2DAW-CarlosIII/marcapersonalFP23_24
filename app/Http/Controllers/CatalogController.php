@@ -27,6 +27,7 @@ class CatalogController extends Controller
 
     public function putEdit(Request $request, $id)
     {
+        $path = null;
         $proyecto = Proyecto::findOrFail($id);
         if ($request->file('fichero')){
             $request->validate([
@@ -40,7 +41,16 @@ class CatalogController extends Controller
             $path = $request->file('fichero')->store('ficheros', ['disk' => 'public']);
             $proyecto->fichero = $path;
         }
-        $proyecto->update($request->all());
+        $pathIMG = $request->file('reconocimientoImg')->store('reconocimientoImg', ['disk' => 'public']);
+        $proyecto->update([
+            'docente_id'=>$request->docente_id,
+            'nombre'=>$request->nombre,
+            'dominio'=>$request->dominio,
+            'metadatos'=>$request->metadatos,
+            'calificacion'=>$request->calificacion,
+            'fichero'=>$path,
+            'reconocimientoImg'=>$pathIMG
+        ]);
         return redirect(action([CatalogController::class, 'getShow'], ['id' => $proyecto->id]));
     }
 
@@ -56,13 +66,21 @@ class CatalogController extends Controller
 
     public function getCreate()
     {
-        return view('catalog.create');
+        $docentes = Docente::all('id', 'nombre', 'apellidos');
+        return view('catalog.create')->with('docentes', $docentes);
     }
 
     public function store(Request $request)
     {
-        $proyecto = Proyecto::create($request->all());
-
+        $pathIMG = $request->file('reconocimientoImg')->store('reconocimientoImg', ['disk' => 'public']);
+         $proyecto = Proyecto::create([
+            'docente_id'=>$request->docente_id,
+            'nombre'=>$request->nombre,
+            'dominio'=>$request->dominio,
+            'metadatos'=>$request->metadatos,
+            'calificacion'=>$request->calificacion,
+            'reconocimientoImg'=>$pathIMG
+        ]);
         return redirect(action([self::class, 'getShow'], ['id' => $proyecto->id]));
     }
 }
