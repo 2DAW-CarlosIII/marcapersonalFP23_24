@@ -11,7 +11,7 @@ class ProyectoFormRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -19,18 +19,23 @@ class ProyectoFormRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
-    public function rules(): array
+    public function rules()
     {
         return [
-            //
+            'nombre' => 'required',
+            'docente_id' => 'nullable',
+            'dominio' => 'nullable',
+            'metadatos' => 'nullable',
+            'archivoProyecto' => 'nullable|file|mimes:zip,rar,7z,gz,tar,tar.gz,tar.bz2',
         ];
+    }
 
-        if ($this->hasFile('archivoProyecto')){
-
-            $rules['archivoProyecto'] = ['max:2000','mimes: zip,rar,7z,gz'];
-        }
-
-        return $rules;
+    public function messages()
+    {
+        return [
+            'archivoProyecto.mimes' => 'El archivo del proyecto debe ser de tipo zip, rar, 7z o gz.',
+        ];
     }
 }
+
 

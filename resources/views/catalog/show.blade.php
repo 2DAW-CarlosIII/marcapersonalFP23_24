@@ -29,7 +29,7 @@
             </p>
 
             @if ($proyecto->archivoProyecto)
-                <p>Proyecto: <a>href="{{ Storage::url($proyecto->archivoProyecto) }}"</a></p>
+                <a href="{{ Storage::url($proyecto->archivoProyecto) }}" download> Archivo del proyecto</a>
             @else
                 <div class="alert alert-warning alert-dismissible fade show" role="alert">
                     <strong>No existe archivo de proyecto.</strong>
