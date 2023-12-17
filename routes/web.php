@@ -53,6 +53,7 @@ Route::prefix('reconocimientos')->group(function () {
     Route::put('/edit/{id}', [ReconocimientoController::class, 'putEdit'])->where('id', '[0-9]+');
 
     Route::get('/edit/{id}', [ReconocimientoController::class, 'getEdit'])->where('id', '[0-9]+')->middleware('auth');
+    Route::put('/show/{id}', [ReconocimientoController::class, 'putShow'])->where('id', '[0-9]+')->middleware('auth');
 });
 
 Route::prefix('users')->group(function () {
@@ -140,5 +141,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+
 
 require __DIR__.'/auth.php';

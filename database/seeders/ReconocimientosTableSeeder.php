@@ -14,24 +14,32 @@ class ReconocimientosTableSeeder extends Seeder
     public function run(): void
     {
         Reconocimiento::truncate();
-        
+
         foreach( self::$arrayReconocimientos as $reconocimiento ) {
             $recon = new Reconocimiento();
             $recon->estudiante_id = $reconocimiento['estudiante_id'];
             $recon->actividad_id = $reconocimiento['actividad_id'];
             $recon->documento = $reconocimiento['documento'];
             $recon->docente_validador = $reconocimiento['docente_validador'];
+            $recon->fecha = $reconocimiento['fecha'];
             $recon->save();
         }
     }
     private static $arrayReconocimientos = [
         [
-            'estudiante_id' => 1,
+            'estudiante_id' => 3,
             'actividad_id' => 2,
-            'documento' => 'https://drive.google.com/document/d/KPkTFrB1nub',
+            'documento' => 'https://drive.gooooogle.com/document/d/KPkTFr',
             'fecha' => '05/12/2022',
-            'docente_validador' => 2
+            'docente_validador' => null,
         ],
+        // [
+        //     'estudiante_id' => 1,
+        //     'actividad_id' => 2,
+        //     'documento' => 'https://drive.google.com/document/d/KPkTFrB1nub',
+        //     'fecha' => '05/12/2022',
+        //     'docente_validador' => 2
+        // ],
         [
             'estudiante_id' => 2,
             'actividad_id' => 3,
@@ -95,5 +103,6 @@ class ReconocimientosTableSeeder extends Seeder
             'fecha' => '23/08/2023',
             'docente_validador' => 1
         ],
+
     ];
 }
