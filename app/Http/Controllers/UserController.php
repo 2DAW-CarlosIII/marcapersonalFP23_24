@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -16,7 +17,11 @@ class UserController extends Controller
             ->with('id', $id);
     }
 
-    public function putEdit($id) {
+    public function putEdit(Request $request, $id) {
+        $user = User::findOrFail($id);
+        $path = $request->file('avatar')->store('avatars', ['disk' => 'public']);
+        $user->avatar = $path;
+        $user->save();
         return view('users.edit')
             ->with("user",$this->arrayUsers[$id])
             ->with("id",$id);
