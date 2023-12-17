@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Curriculo;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Schema;
 
 class CurriculosTableSeeder extends Seeder
 {
@@ -72,7 +73,7 @@ class CurriculosTableSeeder extends Seeder
             $curri = new Curriculo;
             $curri->user_id = $curriculo['user_id'];
             $curri->video_curriculum = $curriculo['video_curriculum'];
-            $curri->texto_curriculum = $curriculo['texto_curriculum'];
+            if(Schema::hasColumn('curriculos', 'texto_curriculum')) $curri->texto_curriculum = $curriculo['texto_curriculum'];
             $curri->save();
         }
     }
