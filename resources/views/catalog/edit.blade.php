@@ -21,13 +21,31 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="docente_id">Docente</label>
-                    <select name="docente_id" id="docente_id">
-                        @foreach ($docentes as $docente)
-                            <option value="{{ $docente->id }}">{{ $docente->nombre }} {{ $docente->apellidos }}</option>
+	            	<label for="actividad_id">Actividad</label>
+	               <select name="actividad_id" id="actividad_id">
+                        @foreach ( $actividades as $actividad )
+                            <option value="{{$actividad->id}}">{{ $actividad}}</option>
                         @endforeach
-                    </select>
-                </div>
+                   </select>
+	            </div>
+
+	            <div class="form-group">
+	            	<label for="estudiante_id">Estudiante</label>
+	               <select name="estudiante_id" id="estudiante_id">
+                        @foreach ( $estudiantes as $estudiante )
+                            <option value="{{$estudiante->id}}">{{ $estudiante->nombre }} {{ $estudiante->apellidos }}</option>
+                        @endforeach
+                   </select>
+	            </div>
+
+                <div class="form-group">
+	            	<label for="docente_id">Docente</label>
+	               <select name="docente_id" id="docente_id">
+                        @foreach ( $docentes as $docente )
+                            <option value="{{$docente->id}}">{{ $docente->nombre }} {{ $docente->apellidos }}</option>
+                        @endforeach
+                   </select>
+	            </div>
 
                 <div class="form-group">
                     <label for="dominio">Dominio</label><br />
@@ -50,6 +68,11 @@
                 <div class="form-group">
                     <label for="fichero">Fichero Comprimido</label>
                     <input type="file" class="form-control" id="fichero" name="fichero" placeholder="fichero">
+                </div>
+
+                <div class="form-group">
+                    <label for="imagen">Imagen</label>
+                    <input type="file" class="form-control" id="imagen" name="imagen" placeholder="Imagen">
                 </div>
 
                 <div class="form-group text-center">

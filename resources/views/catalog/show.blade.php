@@ -1,13 +1,11 @@
 @extends('layouts.master')
 
 @section('content')
-
-
     <div class="row m-4">
 
         <div class="col-sm-4">
 
-            <img src="/images/mp-logo.png" style="height:200px"/>
+            <img src="/images/mp-logo.png" style="height:200px" />
 
         </div>
         <div class="col-sm-8">
@@ -19,48 +17,56 @@
                 </a>
             </h4>
             <br>
-            <h4><strong>Docente: </strong>{{ $docente->nombre . ' ' . $docente->apellidos}}</h4>
+            <h4><strong>Docente: </strong>{{ $docente->nombre . ' ' . $docente->apellidos }}</h4>
             <br>
+
             {{-- CALIFICACIÓN --}}
             <p><strong>Calificación: </strong>
-                {{$proyecto->calificacion}}
+                {{ $proyecto->calificacion }}
             </p>
             {{-- METADATOS --}}
             <p><strong>Metadatos: </strong>
                 {{ $proyecto->metadatos }}
             </p>
             <p><strong>Estado: </strong>
-                @if($proyecto->calificacion >= 5)
+                @if ($proyecto->calificacion >= 5)
                     Proyecto aprobado
                 @else
                     Proyecto suspenso
                 @endif
             </p>
 
-            @if($proyecto->calificacion >= 5)
+            @if ($proyecto->calificacion >= 5)
                 <a class="btn btn-danger" href="#">Suspender proyecto</a>
             @else
                 <a class="btn btn-primary" href="#">Aprobar proyecto</a>
             @endif
             <p>
-                <h4>
-                    @if ($proyecto->fichero)
-                        <a href="{{ Storage::url($proyecto->fichero) }}" download="proyecto.rar">Fichero Comprimido</a>
-                    @else
-                        No se ha subido el proyecto aún.
-                    @endif
-                </h4>
+            <h4>
+                @if ($proyecto->fichero)
+                    <a href="{{ Storage::url($proyecto->fichero) }}" download="proyecto.rar">Fichero Comprimido</a>
+                @else
+                    No se ha subido el proyecto aún.
+                @endif
+            </h4>
             </p>
-            <a class="btn btn-warning" href="{{ action([App\Http\Controllers\CatalogController::class, 'getEdit'], ['id' => $proyecto->id]) }}">
+            @if ($proyecto->imagen)
+                <img src="{{ Storage::url($proyecto->imagen) }}" alt="Imagen" class="image featured">
+            @else
+                <img width="300" style="height:300px" alt="Curriculum-vitae-warning-icon"
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Curriculum-vitae-warning-icon.svg/256px-Curriculum-vitae-warning-icon.svg.png">
+            @endif
+            <a class="btn btn-warning"
+                href="{{ action([App\Http\Controllers\CatalogController::class, 'getEdit'], ['id' => $proyecto->id]) }}">
                 <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                 Editar proyecto
             </a>
-            <a class="btn btn-outline-info" href="{{ action([App\Http\Controllers\CatalogController::class, 'getIndex']) }}">
+            <a class="btn btn-outline-info"
+                href="{{ action([App\Http\Controllers\CatalogController::class, 'getIndex']) }}">
                 Volver al listado
             </a>
 
 
         </div>
     </div>
-
 @endsection
