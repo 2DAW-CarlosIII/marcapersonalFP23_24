@@ -70,7 +70,7 @@ class CatalogController extends Controller
         return view('catalog.create');
     }
 
-    public function store(Request $request) {
+    public function store(ProyectoFormRequest $request) {
 
         if ($request->hasFile('archivoProyecto') && $request->file('archivoProyecto')->isValid()) {
             $proyecto = Proyecto::create($request->all());

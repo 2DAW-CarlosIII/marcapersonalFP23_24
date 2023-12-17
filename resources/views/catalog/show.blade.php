@@ -27,16 +27,7 @@
             </p>
             {{-- METADATOS --}}
             <p><strong>Metadatos: </strong>
-<<<<<<< HEAD
-                {{--<ul>
-                    @foreach ($proyecto['metadatos'] as $indice => $metadato)
-                        <li>{{ $indice }}: {{ $metadato }}</li>
-                    @endforeach
-                </ul>--}}
-                {{$proyecto->metadatos}}
-=======
                 {{ $proyecto->metadatos }}
->>>>>>> master
             </p>
 
             @if ($proyecto->archivoProyecto)
@@ -48,25 +39,13 @@
             @endif
 
             <p><strong>Estado: </strong>
-<<<<<<< HEAD
-                {{--@if($proyecto->metadatos['calificacion'] >= 5)
-=======
                 @if($proyecto->calificacion >= 5)
->>>>>>> master
                     Proyecto aprobado
                 @else
                     Proyecto suspenso
                 @endif--}}
             </p>
 
-<<<<<<< HEAD
-            {{--@if($proyecto->metadatos['calificacion'] >= 5)
-                <a class="btn btn-danger" href="#">Suspender proyecto</a>
-            @else
-                <a class="btn btn-primary" href="#">Aprobar proyecto</a>
-            @endif--}}
-            <a class="btn btn-warning" href="{{ action([App\Http\Controllers\CatalogController::class, 'getEdit'], ['id' => $id]) }}">
-=======
             @if($proyecto->calificacion >= 5)
                 <a class="btn btn-danger" href="#">Suspender proyecto</a>
             @else
@@ -82,7 +61,6 @@
                 </h4>
             </p>
             <a class="btn btn-warning" href="{{ action([App\Http\Controllers\CatalogController::class, 'getEdit'], ['id' => $proyecto->id]) }}">
->>>>>>> master
                 <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                 Editar proyecto
             </a>
