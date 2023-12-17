@@ -13,8 +13,8 @@
                     <h3>Usuario {{ $curriculo->user_id }}</h3>
                 </header>
                 <p>
-                    <a href="{{ $curriculo->video_curriculum }}">
-                        {{ $curriculo->video_curriculum }}
+                    <a href="https://www.youtube.com/watch?v={{ $curriculo->video_curriculum }}">
+                        https://www.youtube.com/watch?v={{ $curriculo->video_curriculum }}
                     </a>
                 </p>
                 <footer>
