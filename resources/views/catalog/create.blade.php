@@ -10,7 +10,11 @@
          </div>
          <div class="card-body" style="padding:30px">
 
+<<<<<<< HEAD
             <form action="{{ action([App\Http\Controllers\CatalogController::class, 'store']) }}" method="POST" enctype="multipart/form-data">
+=======
+            <form action="{{ action([App\Http\Controllers\CatalogController::class, 'store']) }}" method="POST">
+>>>>>>> master
 
 	            @csrf
 
@@ -38,9 +42,15 @@
 	            </div>
 
                 <div class="form-group">
+<<<<<<< HEAD
                     <label for="archivoProyecto">Archivo Proyecto (comprimido)</label>
                     <input type="file" accept=".zip,.rar,.7z,.tar" class="form-control" id="archivoProyecto" name="archivoProyecto" placeholder="archivoProyecto">
                 </div>
+=======
+	            	<label for="calificacion">Calificación</label>
+	               <input type="number" name="calificacion" id="calificacion">
+	            </div>
+>>>>>>> master
 
 	            <div class="form-group text-center">
 	               <button type="submit" class="btn btn-primary" style="padding:8px 100px;margin-top:25px;">

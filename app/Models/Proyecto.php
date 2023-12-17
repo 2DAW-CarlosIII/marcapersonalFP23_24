@@ -9,6 +9,7 @@ class Proyecto extends Model
 {
     use HasFactory;
 
+<<<<<<< HEAD
 
     protected $fillable = [
         'docente_id',
@@ -17,4 +18,19 @@ class Proyecto extends Model
         'metadatos',
         'archivoProyecto',
     ];
+=======
+    protected $fillable = [
+        'nombre',
+        'docente_id',
+        'dominio',
+        'metadatos',
+        'calificacion'
+    ];
+
+    public static function mejoresProyectos($nProyectos)
+    {
+        $nProyectos = self::orderByDesc('calificacion')->take(5)->get();
+        return $nProyectos;
+    }
+>>>>>>> master
 }

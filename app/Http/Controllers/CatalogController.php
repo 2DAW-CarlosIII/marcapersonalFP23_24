@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Docente;
 use App\Models\Proyecto;
 use Illuminate\Http\Request;
 use App\Http\Requests\ProyectoFormRequest;
@@ -19,10 +20,11 @@ class CatalogController extends Controller
     public function getShow($id)
     {
         $proyecto = Proyecto::FindOrFail($id);
-        //$proyecto->metadatos = unserialize($proyecto->metadatos);
+        $docente = Docente::FindOrFail($proyecto->docente_id);
         return view('catalog.show')
             ->with('proyecto', $proyecto)
-            ->with('id', $proyecto->id);
+            ->with('docente', $docente);
+
     }
 
     public function putEdit(ProyectoFormRequest $request, $id) {
@@ -56,10 +58,11 @@ class CatalogController extends Controller
     public function getEdit($id)
     {
         $proyecto = Proyecto::FindOrFail($id);
-        //$proyecto->metadatos = unserialize($proyecto->metadatos);
+        $docentes = Docente::all('id', 'nombre', 'apellidos');
         return view('catalog.edit')
             ->with('proyecto', $proyecto)
-            ->with('id', $proyecto->id);
+            ->with('id', $proyecto->id)
+            ->with('docentes', $docentes);
     }
 
     public function getCreate()

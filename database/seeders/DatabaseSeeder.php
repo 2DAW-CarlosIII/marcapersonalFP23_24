@@ -47,6 +47,7 @@ class DatabaseSeeder extends Seeder
             $p->nombre = $proyecto['nombre'];
             $p->dominio = $proyecto['dominio'];
             $p->metadatos = serialize($proyecto['metadatos']);
+            $p->calificacion = rand(3,10);
             $p->save();
         }
     }
