@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 
+use function PHPUnit\Framework\fileExists;
+
 class ProfileController extends Controller
 {
     /**
@@ -32,8 +34,16 @@ class ProfileController extends Controller
             $request->user()->email_verified_at = null;
         }
 
-        $request->user()->save();
+        if ($request->hasFile('avatar') && (
+            $request->file('avatar')->getClientOriginalExtension() === 'png' ||
+            $request->file('avatar')->getClientOriginalExtension() === 'jpg' ||
+            $request->file('avatar')->getClientOriginalExtension() === 'jpeg')) {
 
+            $path = $request->file('avatar')->store('avatars', ['disk' => 'public']);
+            $request->user()->avatar = $path;
+        }
+
+        $request->user()->save();
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }
 
