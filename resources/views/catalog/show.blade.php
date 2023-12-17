@@ -46,6 +46,15 @@
                     <input class="btn btn-primary" value="Aprobar proyecto" onclick="submit()">
                 @endif
             </form>
+            <p>
+                <h4>
+                    @if ($proyecto->fichero)
+                        <a href="{{ Storage::url($proyecto->fichero) }}" download="proyecto.rar">Fichero Comprimido</a>
+                    @else
+                        No se ha subido el proyecto aún.
+                    @endif
+                </h4>
+            </p>
             <a class="btn btn-warning" href="{{ action([App\Http\Controllers\CatalogController::class, 'getEdit'], ['id' => $proyecto->id]) }}">
                 <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                 Editar proyecto

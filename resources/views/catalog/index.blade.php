@@ -17,6 +17,15 @@
                     http://github.com/2DAW-CarlosIII/{{ $arrayProyectos[$i]['dominio'] }}
                 </a>
             </p>
+            <p>
+                <h4>
+                    @if ($arrayProyectos[$i]['fichero'])
+                        <a href="{{ Storage::url($arrayProyectos[$i]['fichero']) }}" download="proyecto.rar">Fichero Comprimido</a>
+                    @else
+                        No se ha subisdo el proyecto aún.
+                    @endif
+                </h4>
+            </p>
             <footer>
                 <ul class="actions">
                     <li><a href="{{ action([App\Http\Controllers\CatalogController::class, 'getShow'], ['id' => $arrayProyectos[$i]['id']] ) }}" class="button alt">Más info</a></li>
