@@ -29,7 +29,7 @@ class ReconocimientoController extends Controller
         $reconocimiento = Reconocimiento::findOrFail($id);
         $estudiante = Estudiante::findOrFail($reconocimiento->estudiante_id);
         $actividad = Actividad::findOrFail($reconocimiento->actividad_id);
-        $user = User::findOrFail($reconocimiento->docente_validador);
+        $user = User::find($reconocimiento->docente_validador);
 
         return view('reconocimientos.show')
         ->with('reconocimiento', $reconocimiento)
