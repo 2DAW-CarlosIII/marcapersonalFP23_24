@@ -7,19 +7,13 @@
     @foreach ( $arrayActividades as $actividad)
 
     <div class="col-4 col-6-medium col-12-small">
-        <section class="box">
 
-            <a href="#" class="image featured" title="{{ $actividad->insignia }}">
-                <i style="font-size: 10rem" class='{{ $actividad->insignia }}'></i>
-            </a>
+        <section class="box text-center">
             <header>
-                <h3>Docente {{ $actividad->docente_id }}</h3>
+                <i style="font-size: 6.5rem;" class='{{ $actividad->insignia }} text-danger'></i>
+                <h3>Actividad {{ $actividad->docente_id }}</h3>
             </header>
-            <p>
-                <a href="{{ $actividad->insignia }}">
-                  {{ $actividad->insignia }}
-                </a>
-            </p>
+
             <footer>
                 <ul class="actions">
                     <li><a href="{{ action([App\Http\Controllers\ActividadController::class, 'getShow'], ['id' => $actividad->id] ) }}" class="button alt">Más info</a></li>
