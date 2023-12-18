@@ -11,7 +11,7 @@
         <section class="box text-center">
             <header>
                 <i style="font-size: 6.5rem;" class='{{ $actividad->insignia }} text-danger'></i>
-                <h3>Actividad {{ $actividad->docente_id }}</h3>
+                <h3>Actividad {{ $actividad->id }}</h3>
             </header>
 
             <footer>
