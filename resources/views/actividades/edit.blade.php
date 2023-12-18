@@ -28,6 +28,9 @@
 	               <button type="submit" class="btn btn-primary" style="padding:8px 100px;margin-top:25px;">
 	                   Modificar Actividad
 	               </button>
+                   <a class="btn btn btn-secondary" href="{{ action([App\Http\Controllers\ActividadController::class, 'getShow'], ['id' => $actividad->id]) }}" style="padding:8px 100px;margin-top:25px;">
+                       Volver
+                   </a>
 	            </div>
 
             </form>

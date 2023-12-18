@@ -56,6 +56,9 @@
                    <button type="submit" class="btn btn-primary" style="padding:8px 100px;margin-top:25px;">
                        Modificar proyecto
                    </button>
+                   <a class="btn btn btn-secondary" href="{{ action([App\Http\Controllers\CatalogController::class, 'getShow'], ['id' => $id]) }}" style="padding:8px 100px;margin-top:25px;">
+                       Volver
+                   </a>
                 </div>
 
             </form>
