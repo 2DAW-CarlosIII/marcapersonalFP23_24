@@ -15,13 +15,21 @@
 	            @csrf
 
 	            <div class="form-group">
-	               <label for="estudiante_id">ID estudiante</label>
-	               <input type="number" name="estudiante_id" id="estudiante_id" class="form-control" value="{{ $reconocimiento->estudiante_id }}">
+					<label for="estudiante_id">Estudiante</label>
+					<select id="estudiante_id" name="estudiante_id">
+					 @foreach($estudiantes as $estudiante)
+						 <option {{$reconocimiento->estudiante_id == $estudiante->id?"selected":"";}} value="{{$estudiante->id}}">{{$estudiante->nombre}} {{$estudiante->apellidos}}</option>
+					 @endforeach
+					 </select>
 	            </div>
 
 	            <div class="form-group">
 	            	<label for="actividad_id">Actividad</label>
-	               <input type="number" name="actividad_id" id="actividad_id" class="form-control" value="{{ $reconocimiento->actividad_id }}">
+	                <select id="actividad_id" name="actividad_id">
+						@foreach($actividades as $actividad)
+            				<option {{$reconocimiento->actividad_id == $actividad->id?"selected":"";}} value="{{$actividad->id}}">{{$actividad->insignia}}</option>
+						@endforeach
+       	 			</select>
 	            </div>
 
 	            <div class="form-group">
@@ -36,7 +44,11 @@
 
                 <div class="form-group">
 	            	<label for="docente_validador">Docente Validador</label>
-	               <input type="number" name="docente_validador" id="docente_validador" class="form-control" value="{{ $reconocimiento->docente_validador }}">
+					<select id="docente_validador" name="docente_validador">
+						@foreach($docentes as $docente)
+            				<option {{$reconocimiento->docente_validador == $docente->id?"selected":"";}} value="{{$docente->id}}">{{$docente->nombre}} {{$docente->apellidos}}</option>
+						@endforeach
+       	 			</select>
 	            </div>
 
 

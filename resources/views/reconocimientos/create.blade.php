@@ -15,13 +15,21 @@
 	            @csrf
 
 	            <div class="form-group">
-	               <label for="Estudiante">estudiante_id</label>
-	               <input type="number" name="estudiante_id" id="estudiante_id" class="form-control">
+	               	<label for="estudiante_id">Estudiante</label>
+	               	<select id="estudiante_id" name="estudiante_id">
+						@foreach($estudiantes as $estudiante)
+            				<option value="{{$estudiante->id}}">{{$estudiante->nombre}} {{$estudiante->apellidos}}</option>
+						@endforeach
+       	 			</select>
 	            </div>
 
 	            <div class="form-group">
-	            	<label for="Actividad">Docente</label>
-	               <input type="number" name="actividad_id" id="actividad_id" class="form-control">
+	            	<label for="actividad_id">Actividad</label>
+	                <select id="actividad_id" name="actividad_id">
+						@foreach($actividades as $actividad)
+            				<option value="{{$actividad->id}}">{{$actividad->insignia}}</option>
+						@endforeach
+       	 			</select>
 	            </div>
 
 	            <div class="form-group">
@@ -35,8 +43,12 @@
 	            </div>
 
                 <div class="form-group">
-	            	<label for="Docente Validador">Docente</label>
-	               <input type="number" name="docente_validador" id="docente_validador" class="form-control">
+	            	<label for="docente_validador">Docente Validador</label>
+					<select id="docente_validador" name="docente_validador">
+						@foreach($docentes as $docente)
+            				<option value="{{$docente->id}}">{{$docente->nombre}} {{$docente->apellidos}}</option>
+						@endforeach
+       	 			</select>
 	            </div>
 
                 <div class="form-group">
