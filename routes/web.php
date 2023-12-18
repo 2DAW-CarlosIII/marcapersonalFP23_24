@@ -9,6 +9,7 @@ use App\Http\Controllers\ReconocimientoController;
 use App\Http\Controllers\CurriculoController;
 use App\Http\Controllers\EstudianteController;
 use App\Http\Controllers\DocenteController;
+use App\Models\Actividad;
 
 /*
 |--------------------------------------------------------------------------
@@ -79,6 +80,8 @@ Route::prefix('actividades')->group(function () {
     Route::get('/edit/{id}', [ActividadController::class, 'getEdit'])->where('id', '[0-9]+')->middleware('auth');
 
     Route::put('/edit/{id}', [ActividadController::class, 'putEdit'])->where('id', '[0-9]+');
+
+    Route::post('/', [ActividadController::class, 'store']);
 });
 
 Route::prefix('curriculos')->group(function () {

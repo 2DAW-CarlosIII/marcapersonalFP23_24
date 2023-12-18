@@ -24,7 +24,9 @@ class ActividadController extends Controller
             ->with("iconos",$this->iconos);
     }
 
-    public function putEdit($id) {
+    public function putEdit(Request $request,$id) {
+        $actividad = Actividad::findOrFail($id);
+        $actividad->update($request->all());
         return view('actividades.edit')
             ->with("actividad", Actividad::findOrFail($id))
             ->with("iconos",$this->iconos);
@@ -33,6 +35,13 @@ class ActividadController extends Controller
     public function getCreate(){
         return view('actividades.create')
         ->with("iconos",$this->iconos);
+    }
+
+    public function store(Request $request)
+    {
+        $actividad = Actividad::create($request->all());
+
+        return redirect(action([self::class, 'getShow'], ['id' => $actividad->id]));
     }
     private $iconos = [
         "fab fa-500px",
