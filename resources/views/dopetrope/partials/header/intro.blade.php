@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-4 col-12-medium">
+    <div class="col-4 col-12-medium mt-3">
         <section class="first">
             <i class="icon solid featured fa-cog"></i>
             <header>
@@ -8,7 +8,7 @@
             <p>Los proyectos de fin de ciclo se almacenarán en repositorios de GitHub para posibilitar su reutilización y consulta.</p>
         </section>
     </div>
-    <div class="col-4 col-12-medium">
+    <div class="col-4 col-12-medium mt-3">
         <section class="middle">
             <i class="icon solid featured alt fa-bolt"></i>
             <header>
@@ -17,7 +17,7 @@
             <p>Cada estudiante podrá incluir un currículo en el que añada habilidades a las demostradas académicamente.</p>
         </section>
     </div>
-    <div class="col-4 col-12-medium">
+    <div class="col-4 col-12-medium mt-3">
         <section class="last">
             <i class="icon solid featured alt2 fa-star"></i>
             <header>
