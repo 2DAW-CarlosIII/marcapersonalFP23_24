@@ -18,11 +18,6 @@
                 <header>
                     <h3>{{ $curriculo->nombre }} {{ $curriculo->apellidos }}</h3>
                 </header>
-                <p>
-                    <a href="{{ $curriculo->video_curriculum }}">
-                        {{ $curriculo->video_curriculum }}
-                    </a>
-                </p>
                 <footer>
                     <ul class="actions">
                         <li>
