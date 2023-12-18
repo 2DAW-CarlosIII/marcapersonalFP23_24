@@ -30,6 +30,9 @@ Route::prefix('catalog')->group(function () {
 
     Route::get('/show/{id}', [CatalogController::class, 'getShow'])->where('id', '[0-9]+');
 
+    Route::put('/editcalificacion/{id}', [CatalogController::class, 'editCalificacion'])->where('id', '[0-9]+')
+    ->middleware('auth');
+
     Route::get('/create', [CatalogController::class, 'getCreate'])
     ->middleware('auth');
 

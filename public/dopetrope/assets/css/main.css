@@ -1687,6 +1687,12 @@ input, select, textarea {
 			padding: 0.75em 1.5em 0.75em 1.5em;
 		}
 
+/* Form cambiarCalificacion */
+
+.cambiarCalificacion{
+    display: inline;
+}
+
 /* Image */
 
 	.image {
