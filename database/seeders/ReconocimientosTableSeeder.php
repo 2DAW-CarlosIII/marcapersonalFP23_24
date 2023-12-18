@@ -14,13 +14,14 @@ class ReconocimientosTableSeeder extends Seeder
     public function run(): void
     {
         Reconocimiento::truncate();
-        
+
         foreach( self::$arrayReconocimientos as $reconocimiento ) {
             $recon = new Reconocimiento();
             $recon->estudiante_id = $reconocimiento['estudiante_id'];
             $recon->actividad_id = $reconocimiento['actividad_id'];
             $recon->documento = $reconocimiento['documento'];
             $recon->docente_validador = $reconocimiento['docente_validador'];
+            $recon->fecha = $reconocimiento['fecha'];
             $recon->save();
         }
     }

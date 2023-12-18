@@ -12,13 +12,21 @@
         </div>
         <div class="col-sm-8">
 
-            <p><strong>ID EStudiante: </strong>{{ $reconocimiento->estudiante_id }}</p>
-            <p><strong>ID Actividad: </strong>{{ $reconocimiento->actividad_id }}</p>
-            <p><strong>Documento: </strong>{{ $reconocimiento->documento }}</p>
-            <p><strong>Fecha: </strong>{{ $reconocimiento->fecha }}</p>
-
+            <h3>Estudiante</h3>
+                <h5>{{ $reconocimiento->estudiante->nombre }} {{ $reconocimiento->estudiante->apellidos }}</h5>
+                <br>
+                <h3>Nombre actividad</h3>
+                <h5>{{ $reconocimiento->actividad->nombre }}</h5>
+                <br>
+                <h3>Documento</h3>
+                <h5>{{ $reconocimiento->documento }}</h5>
+                <br>
+                <h3>Fecha</h3>
+                <h5>{{ $reconocimiento->fecha }}</h5>
+                <br>
             @if ($reconocimiento->docente_validador)
-                <p><strong>Validado por: </strong>{{ $reconocimiento->user->nombre }} {{ $reconocimiento->user->apellidos}}</p>
+                <h3>Validado por</h3>
+                <h5>{{ $reconocimiento->user->nombre }} {{ $reconocimiento->user->apellidos}}</h5>
             @else
             <form action="{{ action([App\Http\Controllers\ReconocimientoController::class, 'putValidador'], ['id' => $reconocimiento->id]) }}" method="POST">
                 @csrf
@@ -33,6 +41,7 @@
 
             @endif
 
+            <br>
 
             <a class="btn btn-warning" href="{{ action([App\Http\Controllers\ReconocimientoController::class, 'getEdit'], ['id' => $reconocimiento->id]) }}">
                 <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>

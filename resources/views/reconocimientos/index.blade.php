@@ -11,15 +11,13 @@
         <section class="box">
             <a href="#" class="image featured" title="Sakatsp, CC BY-SA 4.0 &lt;https://creativecommons.org/licenses/by-sa/4.0&gt;, via Wikimedia Commons"><img width="256" alt="Award icon" src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Award_icon.png"></a>
             <header>
-                <h3>Estudiante {{ $reconocimiento->estudiante->nombre }} {{ $reconocimiento->estudiante->apellidos }}</h3>
-                <h3>Nombre actividad: {{ $reconocimiento->actividad->nombre }}</h3>
+                <h3>Estudiante</h3>
+                <h5>{{ $reconocimiento->estudiante->nombre }} {{ $reconocimiento->estudiante->apellidos }}</h5>
+                <br>
+                <h3>Nombre actividad</h3>
+                <h5>{{ $reconocimiento->actividad->nombre }}</h5>
             </header>
-            <p>
-                Documento de participación
-                <a href="{{ $reconocimiento->documento }}">
-                    {{ $reconocimiento->documento }}
-                </a>
-            </p>
+
             <footer>
                 <ul class="actions">
                     <li><a href="{{ action([App\Http\Controllers\ReconocimientoController::class, 'getShow'], ['id' => $reconocimiento->id] ) }}" class="button alt">Más info</a></li>
