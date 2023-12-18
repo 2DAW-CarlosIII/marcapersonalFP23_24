@@ -58,6 +58,7 @@ class ReconocimientoController extends Controller
 
     public function getCreate()
     {
+
         return view('reconocimientos.create');
     }
 
@@ -67,9 +68,30 @@ class ReconocimientoController extends Controller
         ->with('reconocimiento', Reconocimiento::findOrFail($id));
     }
 
-    public function putEdit($id)
+    public function putEdit($id, Request $request)
     {
-        return view('reconocimientos.edit')
+        $reconocimiento = Reconocimiento::findOrFail($id);
+        $path = $request->file('reconocimientoIMG')->store('reconocimientoIMG', ['disk' => 'public']);
+        $reconocimiento->update([
+            'estudiante_id'=>$request->estudiante_id,
+            'actividad_id'=>$request->actividad_id,
+            'documento'=>$request->documento,
+            'docente_validador'=>$request->docente_validador,
+            'reconocimientoIMG'=>$path
+        ]);
+        return view('reconocimientos.show')
         ->with('reconocimiento', Reconocimiento::findOrFail($id));
+    }
+
+    public function store(Request $request) {
+        $path = $request->file('reconocimientoIMG')->store('reconocimientoIMG', ['disk' => 'public']);
+        $reconocimiento = Reconocimiento::create([
+            'estudiante_id'=>$request->estudiante_id,
+            'actividad_id'=>$request->actividad_id,
+            'documento'=>$request->documento,
+            'docente_validador'=>$request->docente_validador,
+            'reconocimientoIMG'=>$path
+        ]);
+        return redirect(action([self::class, 'getShow'], ['id' => $reconocimiento->id]));
     }
 }
