@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use App\Models\Curriculo;
 
 class ProfileController extends Controller
 {
@@ -16,8 +17,11 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): View
     {
+        $user = $request->user();
+        $curriculo = Curriculo::where('user_id', $user->id)->first();
         return view('profile.edit', [
-            'user' => $request->user(),
+            'user' => $user,
+            'curriculo' => $curriculo
         ]);
     }
 
