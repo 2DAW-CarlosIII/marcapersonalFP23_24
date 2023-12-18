@@ -10,7 +10,7 @@
          </div>
          <div class="card-body" style="padding:30px">
 
-            <form action="{{action([App\Http\Controllers\ReconocimientoController::class, 'getEdit'], ['id' => $reconocimiento->id])}}" method="POST">
+            <form action="{{action([App\Http\Controllers\ReconocimientoController::class, 'putEdit'], ['id' => $reconocimiento->id])}}" method="POST" enctype="multipart/form-data">
                 @method('PUT')
 	            @csrf
 
@@ -38,6 +38,12 @@
 	            	<label for="docente_validador">Docente Validador</label>
 	               <input type="number" name="docente_validador" id="docente_validador" class="form-control" value="{{ $reconocimiento->docente_validador }}">
 	            </div>
+
+
+                <div class="form-group">
+                    <label for="reconocimientoIMG">Documento de reconocimiento</label>
+                    <input type="file" class="form-control" id="reconocimientoIMG" name="reconocimientoIMG" placeholder="documento de reconocimiento">
+                </div>
 
 	            <div class="form-group text-center">
 	               <button type="submit" class="btn btn-primary" style="padding:8px 100px;margin-top:25px;">
