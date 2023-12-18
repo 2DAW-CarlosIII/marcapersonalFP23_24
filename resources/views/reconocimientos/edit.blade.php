@@ -43,7 +43,11 @@
 	               <button type="submit" class="btn btn-primary" style="padding:8px 100px;margin-top:25px;">
 	                   Modificar Reconocimiento
 	               </button>
+                   <a class="btn btn-secondary" href="{{ action([App\Http\Controllers\ActividadController::class, 'getIndex']) }}"style="padding:8px 100px;margin-top:25px;">
+                    Cancelar edición
+                </a>
 	            </div>
+
 
             </form>
 
