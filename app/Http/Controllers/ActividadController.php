@@ -24,15 +24,22 @@ class ActividadController extends Controller
             ->with("insignias", $this->insignias);
     }
 
-    public function putEdit($id) {
-        return view('actividades.edit')
-            ->with("actividad", Actividad::findOrFail($id))
-            ->with("insignias", $this->insignias);
+    public function putEdit(Request $request, $id) {
+        $actividad = Actividad::findOrFail($id);
+        $actividad->update($request->all());
+
+        return redirect(action([ActividadController::class, 'getShow'], ['id' => $actividad->id]));
     }
 
     public function getCreate(){
         return view('actividades.create')
         ->with("insignias", $this->insignias);
+    }
+
+    public function store(Request $request){
+        $actividad = Actividad::create($request->all());
+
+        return redirect(action([self::class, 'getShow'], ['id' => $actividad->id]));
     }
 
     private $insignias = [
