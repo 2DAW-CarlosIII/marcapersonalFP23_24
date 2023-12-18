@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Reconocimiento;
+use App\Models\Estudiante;
+use App\Models\Actividad;
+use App\Models\Docente;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -59,13 +62,19 @@ class ReconocimientoController extends Controller
     public function getCreate()
     {
 
-        return view('reconocimientos.create');
+        return view('reconocimientos.create')
+        ->with('estudiantes', Estudiante::all())
+        ->with('actividades', Actividad::all())
+        ->with('docentes', Docente::all());
     }
 
     public function getEdit($id)
     {
         return view('reconocimientos.edit')
-        ->with('reconocimiento', Reconocimiento::findOrFail($id));
+        ->with('reconocimiento', Reconocimiento::findOrFail($id))
+        ->with('estudiantes', Estudiante::all())
+        ->with('actividades', Actividad::all())
+        ->with('docentes', Docente::all());
     }
 
     public function putEdit($id, Request $request)
