@@ -26,7 +26,8 @@ class ActividadController extends Controller
 
     public function putEdit($id) {
         return view('actividades.edit')
-            ->with("actividad", Actividad::findOrFail($id));
+            ->with("actividad", Actividad::findOrFail($id))
+            ->with("iconos",$this->iconos);
     }
 
     public function getCreate(){

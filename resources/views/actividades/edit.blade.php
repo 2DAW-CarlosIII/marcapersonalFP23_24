@@ -22,7 +22,7 @@
                 <input type="hidden" name="icono">
                 <div class="form-group">
                     <label for="insignia">Insignia</label>
-                    <i class="$actividad->insignia"></i>
+                    <i class="{{$actividad->insignia}}"></i>
                     <select name="insignia" id="insignia">
                     @foreach ($iconos as $icono)
                         <option value="{{$icono}}"><span class="{{$icono}}">{{$icono}}</span></option>
