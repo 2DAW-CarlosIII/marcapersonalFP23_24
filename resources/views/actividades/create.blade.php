@@ -21,7 +21,11 @@
 
                 <div class="form-group">
 	            	<label for="insignia">Insignia</label>
-	               <input type="url" name="insignia" id="insignia" class="form-control">
+                    <select name="insignia" id="insignia">
+                        @foreach ($iconos as $icono)
+                            <option value="{{$icono}}"><span class="{{$icono}}">{{$icono}}</span></option>
+                        @endforeach
+                    </select>
 	            </div>
 
 

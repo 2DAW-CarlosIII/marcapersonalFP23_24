@@ -19,10 +19,16 @@
 	               <input type="number" name="docente_id" id="docente_id" class="form-control" value="{{ $actividad->docente_id }}">
 	            </div>
 
+                <input type="hidden" name="icono">
                 <div class="form-group">
-	            	<label for="insignia">Insignia</label>
-	               <input type="url" name="insignia" id="insignia" class="form-control" value="{{ $actividad->insignia }}">
-	            </div>
+                    <label for="insignia">Insignia</label>
+                    <i class="$actividad->insignia"></i>
+                    <select name="insignia" id="insignia">
+                    @foreach ($iconos as $icono)
+                        <option value="{{$icono}}"><span class="{{$icono}}">{{$icono}}</span></option>
+                    @endforeach
+                    </select>
+                </div>
 
 	            <div class="form-group text-center">
 	               <button type="submit" class="btn btn-primary" style="padding:8px 100px;margin-top:25px;">
