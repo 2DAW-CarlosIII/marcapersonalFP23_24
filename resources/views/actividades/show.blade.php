@@ -7,15 +7,14 @@
 
         <div class="col-sm-4">
 
-            <a href="#" class="image featured" title="SleaY, CC BY 4.0 &lt;https://creativecommons.org/licenses/by/4.0&gt;, via Wikimedia Commons">
-                <img width="256" alt="Curriculum-vitae-warning-icon" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Curriculum-vitae-warning-icon.svg/256px-Curriculum-vitae-warning-icon.svg.png">
+            <a href="#" class="image featured text-center" title="SleaY, CC BY 4.0 &lt;https://creativecommons.org/licenses/by/4.0&gt;, via Wikimedia Commons">
+                <i style="font-size: 10rem;"  class="{{ $actividad->insignia }}"></i>
             </a>
 
         </div>
         <div class="col-sm-8 align-self-center">
             <h3><strong>Actividad: </strong>{{ $actividad->id }}</h3></br>
             <h4><strong>Docente: </strong>{{ $docente->nombre }} {{ $docente->apellidos }}</h4></br>
-            <h4><strong>Insignia: </strong><i class="{{ $actividad->insignia }}"></i> </h4></br>
 
             <a class="btn btn-warning" href="{{ action([App\Http\Controllers\ActividadController::class, 'getEdit'], ['id' => $actividad->id]) }}">
                 <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
