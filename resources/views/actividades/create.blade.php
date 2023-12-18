@@ -21,7 +21,11 @@
 
                 <div class="form-group">
 	            	<label for="insignia">Insignia</label>
-	               <input type="url" name="insignia" id="insignia" class="form-control">
+                    <select name="insignia" id="insignia">
+                        @foreach ($insignias as $insignia)
+                            <option value="{{ $insignia }}">{{ $insignia}}</option>
+                        @endforeach
+                    </select>
 	            </div>
 
 
