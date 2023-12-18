@@ -18,28 +18,44 @@
                     http://github.com/2DAW-CarlosIII/{{ $proyecto['dominio'] }}
                 </a>
             </h4>
-            <h4><strong>Docente: </strong>{{ $proyecto['docente_id'] }}</h4>
+            <br>
+            <h4><strong>Docente: </strong>{{ $docente->nombre . ' ' . $docente->apellidos}}</h4>
+            <br>
+            {{-- CALIFICACIÓN --}}
+            <p><strong>Calificación: </strong>
+                {{$proyecto->calificacion}}
+            </p>
+            {{-- METADATOS --}}
             <p><strong>Metadatos: </strong>
-                <ul>
-                    @foreach ($proyecto['metadatos'] as $indice => $metadato)
-                        <li>{{ $indice }}: {{ $metadato }}</li>
-                    @endforeach
-                </ul>
+                {{ $proyecto->metadatos }}
             </p>
             <p><strong>Estado: </strong>
-                @if($proyecto['metadatos']['calificacion'] >= 5)
+                @if($proyecto->calificacion >= 5)
                     Proyecto aprobado
                 @else
                     Proyecto suspenso
                 @endif
             </p>
 
-            @if($proyecto['metadatos']['calificacion'] >= 5)
-                <a class="btn btn-danger" href="#">Suspender proyecto</a>
-            @else
-                <a class="btn btn-primary" href="#">Aprobar proyecto</a>
-            @endif
-            <a class="btn btn-warning" href="{{ action([App\Http\Controllers\CatalogController::class, 'getEdit'], ['id' => $id]) }}">
+            <form action="{{ action([App\Http\Controllers\CatalogController::class, 'editCalificacion'], ['id' => $proyecto->id]) }}" method="post" class="cambiarCalificacion">
+                @csrf
+                @method('PUT')
+                @if($proyecto->calificacion >= 5)
+                    <input class="btn btn-danger" value="Suspender proyecto" onclick="submit()">
+                @else
+                    <input class="btn btn-primary" value="Aprobar proyecto" onclick="submit()">
+                @endif
+            </form>
+            <p>
+                <h4>
+                    @if ($proyecto->fichero)
+                        <a href="{{ Storage::url($proyecto->fichero) }}" download="proyecto.rar">Fichero Comprimido</a>
+                    @else
+                        No se ha subido el proyecto aún.
+                    @endif
+                </h4>
+            </p>
+            <a class="btn btn-warning" href="{{ action([App\Http\Controllers\CatalogController::class, 'getEdit'], ['id' => $proyecto->id]) }}">
                 <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                 Editar proyecto
             </a>

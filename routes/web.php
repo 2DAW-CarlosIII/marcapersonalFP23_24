@@ -30,6 +30,9 @@ Route::prefix('catalog')->group(function () {
 
     Route::get('/show/{id}', [CatalogController::class, 'getShow'])->where('id', '[0-9]+');
 
+    Route::put('/editcalificacion/{id}', [CatalogController::class, 'editCalificacion'])->where('id', '[0-9]+')
+    ->middleware('auth');
+
     Route::get('/create', [CatalogController::class, 'getCreate'])
     ->middleware('auth');
 
@@ -38,6 +41,8 @@ Route::prefix('catalog')->group(function () {
 
     Route::put('/edit/{id}', [CatalogController::class, 'putEdit'])->where('id', '[0-9]+')
     ->middleware('auth');
+
+    Route::post('/', [CatalogController::class, 'store']);
 });
 
 Route::prefix('reconocimientos')->group(function () {
@@ -90,6 +95,9 @@ Route::prefix('curriculos')->group(function () {
     Route::get('/edit/{id}', [CurriculoController::class, 'getEdit'])->where('id', '[0-9]+')->middleware('auth');
 
     Route::put('/edit/{id}', [CurriculoController::class, 'putEdit'])->where('id', '[0-9]+');
+
+    Route::post('/', [CurriculoController::class, 'store']);
+
 });
 
 Route::prefix('estudiantes')->group(function () {
