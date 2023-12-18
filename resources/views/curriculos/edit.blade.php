@@ -33,7 +33,11 @@
                         <button type="submit" class="btn btn-primary" style="padding:8px 100px;margin-top:25px;">
                             Modificar Currículum
                         </button>
+                        <a class="btn btn btn-secondary" href="{{ action([App\Http\Controllers\CurriculoController::class, 'getShow'], ['id' => $curriculo->id]) }}" style="padding:8px 100px;margin-top:25px;">
+                            Candecelar edición
+                        </a>
                     </div>
+
 
                 </form>
 
