@@ -10,7 +10,7 @@
         <section class="box">
 
             <a href="#" class="image featured" title="{{ $actividad->insignia }}">
-                <i class='{{ $actividad->insignia }}'></i>
+                <i style="font-size: 10rem" class='{{ $actividad->insignia }}'></i>
             </a>
             <header>
                 <h3>Docente {{ $actividad->docente_id }}</h3>

@@ -8,7 +8,7 @@
         <div class="col-sm-4">
 
             <a href="#" class="image featured" title="SleaY, CC BY 4.0 &lt;https://creativecommons.org/licenses/by/4.0&gt;, via Wikimedia Commons">
-                <i class='{{ $actividad->insignia }}'></i>
+                <i style="font-size: 10rem" class='{{ $actividad->insignia }}'></i>
             </a>
 
         </div>
