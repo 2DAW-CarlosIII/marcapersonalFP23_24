@@ -3,7 +3,6 @@
 @section('content')
 
 <div class="row">
-    @for ($i=0; $i<4; ++$i)
         <div class="col-4 col-6-medium col-12-small">
             <section class="box">
                 <a href="" class="image featured" title="SleaY, CC BY 4.0 &lt;https://creativecommons.org/licenses/by/4.0&gt;, via Wikimedia Commons">
@@ -11,17 +10,10 @@
                 </a>
                 <header>
                     <h3>encuentro emprasarial</h3>
+                    <p>Descripción el taller</p>
                 </header>
-                <footer>
-                    <ul class="actions">
-                        <li>
-                            <a href="" class="button alt">Más info</a>
-                        </li>
-                    </ul>
-                </footer>
             </section>
         </div>
-    @endfor
 </div>
 
 @endsection
