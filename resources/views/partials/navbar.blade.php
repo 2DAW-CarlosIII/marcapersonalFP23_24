@@ -1,4 +1,4 @@
-  <nav id="nav">
+<nav id="nav">
       <ul>
           <li @if (Route::currentRouteName() == 'home') class="current" @endif style="white-space: nowrap;"><a
                   href="{{ route('home') }}"><img src="{{ asset('/images/mp-logo.png') }}" height="64px" alt=""
