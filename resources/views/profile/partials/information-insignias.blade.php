@@ -6,9 +6,9 @@
         </h2>
     </header>
 
-    @foreach ($insignias as $insignia)
+    @foreach ($actividades as $actividad)
 
-    <i class="{{$insignia}} fa-3x"></i>
+    <i class="{{$actividad->insignia}} fa-3x" style="margin-right: 10px" data-toggle="tooltip" data-placement="top" title="{{$actividad->nombre}}"> </i>
 
     @endforeach
 
