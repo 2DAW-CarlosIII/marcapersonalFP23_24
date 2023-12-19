@@ -4,7 +4,7 @@ $arrayProyectos = \App\Models\Proyecto::mejoresProyectos(5);
 
 <section>
     <header>
-        <h2>Mejores proyectos Marca Personal FP</h2>
+        <h2>Mejores proyectos Marca Personal F.P.</h2>
     </header>
     <ul class="dates">
 

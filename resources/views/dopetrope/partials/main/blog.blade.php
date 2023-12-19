@@ -13,7 +13,7 @@
                 <p>En Marca Personal FP se permite la gestión de proyectos finales de fin de ciclo...</p>
                 <footer>
                     <ul class="actions">
-                        <li><a href="{{ action([App\Http\Controllers\CatalogController::class, 'getIndex']) }}" class="button icon solid fa-file-alt">Continue Reading</a></li>
+                        <li><a href="{{ action([App\Http\Controllers\CatalogController::class, 'getIndex']) }}" class="button icon solid fa-file-alt">Más información...</a></li>
                     </ul>
                 </footer>
             </section>
@@ -28,7 +28,7 @@
                 <p>Talleres de desarrollo de competencias básicas para desarrollar marca personal.</p>
                 <footer>
                     <ul class="actions">
-                        <li><a href="{{ action([App\Http\Controllers\TallerController::class, 'getIndex']) }}" class="button icon solid fa-file-alt">Continue Reading</a></li>
+                        <li><a href="{{ action([App\Http\Controllers\TallerController::class, 'getIndex']) }}" class="button icon solid fa-file-alt">Más información...</a></li>
                     </ul>
                 </footer>
             </section>
