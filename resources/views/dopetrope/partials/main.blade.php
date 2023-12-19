@@ -9,7 +9,7 @@
                 <section>
                     @if(Route::currentRouteName() != '' && Route::currentRouteName() != 'home')
                         <header class="major">
-                            <h2>{{ Route::currentRouteName() }}</h2>
+                            <h2>{{ucfirst(Route::currentRouteName())}}</h2>
                         </header>
                     @endif
                     <div class="row">

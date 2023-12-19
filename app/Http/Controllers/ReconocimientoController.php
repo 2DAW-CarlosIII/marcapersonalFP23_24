@@ -7,21 +7,57 @@ use App\Models\Estudiante;
 use App\Models\Actividad;
 use App\Models\Docente;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ReconocimientoController extends Controller
 {
 
     public function getIndex()
     {
+        // return view('reconocimientos.index')
+        // ->with('arrayReconocimientos', Reconocimiento::all());
+        $reconocimientos = DB::table('reconocimientos')
+        ->join('estudiantes', 'reconocimientos.estudiante_id', '=', 'estudiantes.id')
+        ->join('actividades', 'reconocimientos.actividad_id', '=', 'actividades.id')
+        ->leftjoin('docentes', 'reconocimientos.docente_validador', '=', 'docentes.id')
+        ->select('reconocimientos.*', 'estudiantes.nombre as estudiante_nombre', 'estudiantes.apellidos as estudiante_apellidos', 'actividades.nombre as actividad_nombre')
+        ->get();
+
         return view('reconocimientos.index')
-        ->with('arrayReconocimientos', Reconocimiento::all());
+            ->with ('reconocimientos', $reconocimientos);
+
+    // return view('reconocimientos.index', compact('arrayReconocimientos'));
     }
 
     public function getShow($id)
     {
-        return view('reconocimientos.show')
-        ->with('reconocimiento', Reconocimiento::findOrFail($id));
+        $reconocimientos = DB::table('reconocimientos')
+        ->join('estudiantes', 'reconocimientos.estudiante_id', '=', 'estudiantes.id')
+        ->join('actividades', 'reconocimientos.actividad_id', '=', 'actividades.id')
+        ->leftjoin('docentes', 'reconocimientos.docente_validador', '=', 'docentes.id')
+        ->select('reconocimientos.*', 'estudiantes.nombre as estudiante_nombre', 'estudiantes.apellidos as estudiante_apellidos', 'actividades.nombre as actividad_nombre', 'docentes.nombre as docente_nombre', 'docentes.apellidos as docente_apellidos', 'reconocimientos.fecha as fecha')
+        ->where('reconocimientos.id', $id)
+        ->first();
+
+    return view('reconocimientos.show')
+        ->with('reconocimiento', $reconocimientos);
     }
+
+
+    public function putShow($id)
+{
+    $reconocimiento = Reconocimiento::findOrFail($id);
+
+    // Verifica si la participación aún no ha sido validada
+        // Asigna el ID del usuario autenticado como validador
+        $reconocimiento->docente_validador = Auth::user()->id;
+        $reconocimiento->save();
+
+        return redirect()->back();
+
+}
+
 
     public function getCreate()
     {
