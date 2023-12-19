@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="{{ asset('/dopetrope/assets/css/main.css') }}" />
+<link rel="stylesheet" href="{{ asset('/dopetrope/assets/css/fontawesome-all.min.css') }}" />
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">

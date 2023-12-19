@@ -22,11 +22,11 @@ class ProfileController extends Controller
         $user = $request->user();
         $curriculo = Curriculo::find($user->id);
         $actividad_id = Reconocimiento::where('estudiante_id', $user->id)->pluck('actividad_id');
-        $insignias = Actividad::whereIn('id', $actividad_id)->pluck('insignia');
+        $actividades = Actividad::whereIn('id', $actividad_id)->get();
         return view('profile.edit', [
             'user' => $user,
             'curriculo' => $curriculo,
-            'insignias' => $insignias
+            'actividades' => $actividades
         ]);
     }
 
