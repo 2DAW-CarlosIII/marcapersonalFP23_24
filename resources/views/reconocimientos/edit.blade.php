@@ -23,11 +23,20 @@
 					 </select>
 	            </div>
 
+                <div class="form-group">
+	            	<label for="docente_validador">Docente Validador</label>
+					<select id="docente_validador" name="docente_validador">
+						@foreach($docentes as $docente)
+            				<option {{$reconocimiento->docente_validador == $docente->id?"selected":"";}} value="{{$docente->id}}">{{$docente->nombre}} {{$docente->apellidos}}</option>
+						@endforeach
+       	 			</select>
+	            </div>
+
 	            <div class="form-group">
 	            	<label for="actividad_id">Actividad</label>
 	                <select id="actividad_id" name="actividad_id">
 						@foreach($actividades as $actividad)
-            				<option {{$reconocimiento->actividad_id == $actividad->id?"selected":"";}} value="{{$actividad->id}}">{{$actividad->insignia}}</option>
+            				<option {{$reconocimiento->actividad_id == $actividad->id?"selected":"";}} value="{{$actividad->id}}">{{$actividad->nombre}}</option>
 						@endforeach
        	 			</select>
 	            </div>
@@ -42,18 +51,11 @@
 	               <input type ="date" name="fecha" id="fecha" class="form-control">
 	            </div>
 
-                <div class="form-group">
-	            	<label for="docente_validador">Docente Validador</label>
-					<select id="docente_validador" name="docente_validador">
-						@foreach($docentes as $docente)
-            				<option {{$reconocimiento->docente_validador == $docente->id?"selected":"";}} value="{{$docente->id}}">{{$docente->nombre}} {{$docente->apellidos}}</option>
-						@endforeach
-       	 			</select>
-	            </div>
+
 
 
                 <div class="form-group">
-                    <label for="reconocimientoIMG">Documento de reconocimiento</label>
+                    <label for="reconocimientoIMG">Imagen participación</label>
                     <input type="file" class="form-control" id="reconocimientoIMG" name="reconocimientoIMG" placeholder="documento de reconocimiento">
                 </div>
 
