@@ -11,15 +11,15 @@
     </header>
 
 
-    <form action="{{ action([App\Http\Controllers\CurriculoController::class, 'putEdit'], ['id' => $user->id]) }}"
+    <form action="{{ action([App\Http\Controllers\CurriculoController::class, 'putEdit'], ['id' => $curriculo->id]) }}"
         method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
 
         <br>
         <div class="form-group">
-            <label for="curriculo">Curriculo</label>
-            <input type="file" class="form-control" id="curriculo" name="curriculo" placeholder="Curriculo">
+            <label for="pdf_curriculum">Currículo</label>
+            <input type="file" class="form-control" id="pdf_curriculum" name="pdf_curriculum" accept=".pdf" placeholder="pdf_curriculum">
         </div>
         <br>
 

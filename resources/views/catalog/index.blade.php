@@ -22,7 +22,7 @@
                     @if ($arrayProyectos[$i]['fichero'])
                         <a href="{{ Storage::url($arrayProyectos[$i]['fichero']) }}" download="proyecto.rar">Fichero Comprimido</a>
                     @else
-                        No se ha subisdo el proyecto aún.
+                        No se ha subido el proyecto aún.
                     @endif
                 </h4>
             </p>
