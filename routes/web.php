@@ -57,6 +57,11 @@ Route::prefix('reconocimientos')->group(function () {
     Route::put('/edit/{id}', [ReconocimientoController::class, 'putEdit'])->where('id', '[0-9]+');
 
     Route::get('/edit/{id}', [ReconocimientoController::class, 'getEdit'])->where('id', '[0-9]+')->middleware('auth');
+
+    Route::post('/', [ReconocimientoController::class, 'store']);
+  
+    Route::put('/show/{id}', [ReconocimientoController::class, 'putShow'])->where('id', '[0-9]+')->middleware('auth');
+  
     Route::put('/show/{id}', [ReconocimientoController::class, 'valida'])->where('id', '[0-9]+')->middleware('auth');
 });
 
