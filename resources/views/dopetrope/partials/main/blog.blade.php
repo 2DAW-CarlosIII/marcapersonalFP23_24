@@ -23,12 +23,12 @@
                 <a href="#" class="image featured"><img src="{{ asset('/dopetrope/images/pic09.jpg') }}"
                         alt="" /></a>
                 <header>
-                    <h3>Gestión de currículos</h3>
+                    <h3>Talleres</h3>
                 </header>
-                <p>Marca Personal FP permite la gestión de los currículos del alumnado de Formación Profesional...</p>
+                <p>Talleres de desarrollo de competencias básicas para desarrollar marca personal.</p>
                 <footer>
                     <ul class="actions">
-                        <li><a href="{{ action([App\Http\Controllers\CurriculoController::class, 'getIndex']) }}" class="button icon solid fa-file-alt">Continue Reading</a></li>
+                        <li><a href="{{ action([App\Http\Controllers\TallerController::class, 'getIndex']) }}" class="button icon solid fa-file-alt">Continue Reading</a></li>
                     </ul>
                 </footer>
             </section>
