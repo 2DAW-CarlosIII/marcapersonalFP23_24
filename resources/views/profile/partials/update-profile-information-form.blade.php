@@ -1,14 +1,5 @@
 <section>
     <header>
-
-        <!--Avatar-->
-        @if ($user->avatar)
-            <img width="300" style="height:300px" src="{{ Storage::url($user->avatar) }}" alt="Avatar"
-                class="img-thumbnail">
-        @else
-            <img width="300" style="height:300px" alt="Curriculum-vitae-warning-icon"
-                src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Curriculum-vitae-warning-icon.svg/256px-Curriculum-vitae-warning-icon.svg.png">
-        @endif
         <br>
 
         <h2 class="text-lg font-medium text-gray-900">
@@ -64,7 +55,7 @@
         <!-- Nombre -->
         <div>
             <x-input-label for="nombre" :value="__('Nombre')" />
-            <x-text-input id="nombre" class="block mt-1 w-full" type="text" name="nombre" :value="old('nombre')"
+            <x-text-input id="nombre" class="block mt-1 w-full" type="text" name="nombre" :value="old('nombre',  $user->nombre)"
                 required autofocus autocomplete="nombre" />
             <x-input-error :messages="$errors->get('nombre')" class="mt-2" />
         </div>
@@ -72,7 +63,7 @@
         <!-- Apellidos -->
         <div>
             <x-input-label for="apellidos" :value="__('Apellidos')" />
-            <x-text-input id="apellidos" class="block mt-1 w-full" type="text" name="apellidos" :value="old('apellidos')"
+            <x-text-input id="apellidos" class="block mt-1 w-full" type="text" name="apellidos" :value="old('apellidos',$user->apellidos)"
                 required autofocus autocomplete="apellidos" />
             <x-input-error :messages="$errors->get('apellidos')" class="mt-2" />
         </div>
@@ -84,23 +75,6 @@
                 <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 2000)"
                     class="text-sm text-gray-600">{{ __('Saved.') }}</p>
             @endif
-        </div>
-    </form>
-
-    <form action="{{ action([App\Http\Controllers\UserController::class, 'putEdit'], ['id' => $user->id]) }}"
-        method="POST" enctype="multipart/form-data">
-        @csrf
-        @method('PUT')
-
-        <br>
-        <div class="form-group">
-            <label for="avatar">Avatar</label>
-            <input type="file" class="form-control" id="avatar" name="avatar" placeholder="Avatar">
-        </div>
-        <br>
-
-        <div class="flex items-center gap-4">
-            <x-primary-button>{{ 'Cambiar Avatar' }}</x-primary-button>
         </div>
     </form>
 </section>

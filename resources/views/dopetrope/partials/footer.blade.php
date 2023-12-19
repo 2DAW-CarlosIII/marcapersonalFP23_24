@@ -10,36 +10,32 @@
                 @include('dopetrope.partials.footer.mpinfo')
             </div>
             <div class="col-4 col-6-medium col-12-small">
+                <section style="text-align: center">
+                    <header>
+                        <h2>Usuarios registrados</h2>
+                    </header>
+                    <br>
+                    <br>
+                    <p style="font-size: 10em;">
+                        {{$userCount}}
+                    </p>
+                </section>
+            </div>
+            <div class="col-4 col-6-medium col-12-small mt-sm-5 mt-md-0">
                 <section>
                     <header>
-                        <h2>Tempus consequat</h2>
+                        <h2 style="text-align: center">Proyectos almacenados</h2>
                     </header>
                     <ul class="divided">
-                        <li><a href="#">Lorem ipsum dolor sit amet sit veroeros</a></li>
-                        <li><a href="#">Sed et blandit consequat sed tlorem blandit</a></li>
-                        <li><a href="#">Adipiscing feugiat phasellus sed tempus</a></li>
-                        <li><a href="#">Hendrerit tortor vitae mattis tempor sapien</a></li>
-                        <li><a href="#">Sem feugiat sapien id suscipit magna felis nec</a></li>
-                        <li><a href="#">Elit class aptent taciti sociosqu ad litora</a></li>
+                        @php
+                            $proyectos=\App\Models\Proyecto::contarProyectos();
+                        @endphp
+                            <li style="text-align: center"> <br><br><a href="/catalog" style="font-size: 10em;text-decoration:none">{{$proyectos}}</a></li>
+
                     </ul>
                 </section>
             </div>
-            <div class="col-4 col-6-medium col-12-small">
-                <section>
-                    <header>
-                        <h2>Ipsum et phasellus</h2>
-                    </header>
-                    <ul class="divided">
-                        <li><a href="#">Lorem ipsum dolor sit amet sit veroeros</a></li>
-                        <li><a href="#">Sed et blandit consequat sed tlorem blandit</a></li>
-                        <li><a href="#">Adipiscing feugiat phasellus sed tempus</a></li>
-                        <li><a href="#">Hendrerit tortor vitae mattis tempor sapien</a></li>
-                        <li><a href="#">Sem feugiat sapien id suscipit magna felis nec</a></li>
-                        <li><a href="#">Elit class aptent taciti sociosqu ad litora</a></li>
-                    </ul>
-                </section>
-            </div>
-            <div class="col-4 col-12-medium">
+            <div class="col-4 col-12-medium mt-0">
                 <!-- Info CIFP Carlos III -->
                 @include('dopetrope.partials.footer.c3info')
             </div>
