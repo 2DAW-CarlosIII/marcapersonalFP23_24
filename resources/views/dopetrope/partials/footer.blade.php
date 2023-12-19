@@ -33,7 +33,7 @@
                         @php
                             $proyectos=\App\Models\Proyecto::contarProyectos();
                         @endphp
-                            <li style="text-align: center"><a href="#" style="font-size: 10em">{{$proyectos}}</a></li>
+                            <li style="text-align: center"><a href="/catalog" style="font-size: 10em">{{$proyectos}}</a></li>
 
 
                     </ul>
