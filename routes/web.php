@@ -60,6 +60,8 @@ Route::prefix('reconocimientos')->group(function () {
     Route::post('/', [ReconocimientoController::class, 'store']);
   
     Route::put('/show/{id}', [ReconocimientoController::class, 'putShow'])->where('id', '[0-9]+')->middleware('auth');
+  
+    Route::put('/show/{id}', [ReconocimientoController::class, 'valida'])->where('id', '[0-9]+')->middleware('auth');
 });
 
 Route::prefix('users')->group(function () {

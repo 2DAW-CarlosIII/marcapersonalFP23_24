@@ -27,9 +27,9 @@ class ReconocimientosTableSeeder extends Seeder
     }
     private static $arrayReconocimientos = [
         [
-            'estudiante_id' => 3,
+            'estudiante_id' => 1,
             'actividad_id' => 2,
-            'documento' => 'https://drive.gooooogle.com/document/d/KPkTFr',
+            'documento' => 'https://drive.google.com/document/d/KPkTFrB1nub',
             'fecha' => '05/12/2022',
             'docente_validador' => null,
         ],
@@ -38,7 +38,7 @@ class ReconocimientosTableSeeder extends Seeder
         //     'actividad_id' => 2,
         //     'documento' => 'https://drive.google.com/document/d/KPkTFrB1nub',
         //     'fecha' => '05/12/2022',
-        //     'docente_validador' => 2
+        //     'docente_validador' => null
         // ],
         [
             'estudiante_id' => 2,
