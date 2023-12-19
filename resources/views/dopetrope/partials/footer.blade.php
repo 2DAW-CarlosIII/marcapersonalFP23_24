@@ -12,16 +12,13 @@
             <div class="col-4 col-6-medium col-12-small">
                 <section>
                     <header>
-                        <h2>Tempus consequat</h2>
+                        <h2>Usuarios registrados</h2>
                     </header>
-                    <ul class="divided">
-                        <li><a href="#">Lorem ipsum dolor sit amet sit veroeros</a></li>
-                        <li><a href="#">Sed et blandit consequat sed tlorem blandit</a></li>
-                        <li><a href="#">Adipiscing feugiat phasellus sed tempus</a></li>
-                        <li><a href="#">Hendrerit tortor vitae mattis tempor sapien</a></li>
-                        <li><a href="#">Sem feugiat sapien id suscipit magna felis nec</a></li>
-                        <li><a href="#">Elit class aptent taciti sociosqu ad litora</a></li>
-                    </ul>
+                    <br>
+                    <br>
+                    <p style="font-size: 10em">
+                        {{$userCount}}
+                    </p>
                 </section>
             </div>
             <div class="col-4 col-6-medium col-12-small">
