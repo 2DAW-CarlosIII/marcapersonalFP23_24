@@ -48,7 +48,7 @@ class ReconocimientoController extends Controller
         // Verifica si la participación aún no ha sido validada
             // Asigna el ID del usuario autenticado como validador
             $reconocimiento->docente_validador = Auth::user()->id;
-            $reconocimiento->fecha = date('Y-m-d H:i:s');
+            $reconocimiento->fecha = date('d/m/Y');
             $reconocimiento->save();
 
             return redirect()->back();
