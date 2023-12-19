@@ -12,18 +12,15 @@
         </div>
         <div class="col-sm-8">
 
-            <p><strong>EStudiante: </strong>{{ $reconocimiento->estudiante_nombre}} {{ $reconocimiento->estudiante_apellidos}}</p>
+            <p><strong>Estudiante: </strong>{{ $reconocimiento->estudiante_nombre}} {{ $reconocimiento->estudiante_apellidos}}</p>
             <p><strong>Actividad: </strong>{{ $reconocimiento->actividad_nombre }}</p>
             <p><strong>Documento: </strong><a href="{{ $reconocimiento->documento }}">{{ $reconocimiento->documento }}</a></p>
-            <p><strong>Fecha: </strong>{{ $reconocimiento->fecha }}</p>
-            {{-- <p><strong>Docente Validador: </strong>{{ $reconocimiento->docente_nombre}} {{ $reconocimiento->docente_apellidos }}</p> --}}
-
-
 
             @if ($reconocimiento->docente_validador !== null)
                 <p><strong>Validado por: </strong>{{ $reconocimiento->docente_nombre}} {{ $reconocimiento->docente_apellidos }}</p>
+                <p><strong>Fecha: </strong>{{ $reconocimiento->fecha }}</p>
             @else
-                <form action="{{ action([App\Http\Controllers\ReconocimientoController::class, 'putShow'], ['id' => $reconocimiento->id]) }}" method="post">
+                <form action="{{ action([App\Http\Controllers\ReconocimientoController::class, 'valida'], ['id' => $reconocimiento->id]) }}" method="post">
                 @csrf
                 @method('PUT')
                 <button type="submit" class="btn btn-primary">Validar</button>
