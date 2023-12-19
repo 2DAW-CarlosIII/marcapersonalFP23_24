@@ -48,7 +48,7 @@
 
 	            <div class="form-group">
 	               <label for="fecha">Fecha</label>
-	               <input type ="date" name="fecha" id="fecha" class="form-control">
+	               <input type ="date" name="fecha" id="fecha" class="form-control" value="{{ $reconocimiento->fecha }}">
 	            </div>
 
 

@@ -6,6 +6,7 @@ use App\Models\Reconocimiento;
 use App\Models\Estudiante;
 use App\Models\Actividad;
 use App\Models\Docente;
+use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -15,27 +16,23 @@ class ReconocimientoController extends Controller
 
     public function getIndex()
     {
-        // return view('reconocimientos.index')
-        // ->with('arrayReconocimientos', Reconocimiento::all());
         $reconocimientos = Reconocimiento::
-            join('users as estudiantes', 'reconocimientos.estudiante_id', '=', 'estudiantes.id')
+            join('estudiantes as estudiantes', 'reconocimientos.estudiante_id', '=', 'estudiantes.id')
             ->join('actividades', 'reconocimientos.actividad_id', '=', 'actividades.id')
-            ->leftjoin('users as docentes', 'reconocimientos.docente_validador', '=', 'docentes.id')
+            ->leftjoin('docentes as docentes', 'reconocimientos.docente_validador', '=', 'docentes.id')
             ->select('reconocimientos.*', 'estudiantes.nombre as estudiante_nombre', 'estudiantes.apellidos as estudiante_apellidos', 'actividades.nombre as actividad_nombre')
             ->get();
 
         return view('reconocimientos.index')
             ->with ('reconocimientos', $reconocimientos);
-
-    // return view('reconocimientos.index', compact('arrayReconocimientos'));
     }
 
     public function getShow($id)
     {
         $reconocimientos = Reconocimiento::
-            join('users as estudiantes', 'reconocimientos.estudiante_id', '=', 'estudiantes.id')
+            join('estudiantes as estudiantes', 'reconocimientos.estudiante_id', '=', 'estudiantes.id')
             ->join('actividades', 'reconocimientos.actividad_id', '=', 'actividades.id')
-            ->leftjoin('users as docentes', 'reconocimientos.docente_validador', '=', 'docentes.id')
+            ->leftjoin('docentes as docentes', 'reconocimientos.docente_validador', '=', 'docentes.id')
             ->select('reconocimientos.*', 'estudiantes.nombre as estudiante_nombre', 'estudiantes.apellidos as estudiante_apellidos', 'actividades.nombre as actividad_nombre', 'docentes.nombre as docente_nombre', 'docentes.apellidos as docente_apellidos', 'reconocimientos.fecha as fecha')
             ->findOrFail($id);
 
@@ -80,33 +77,64 @@ class ReconocimientoController extends Controller
     public function putEdit($id, Request $request)
     {
         $reconocimiento = Reconocimiento::findOrFail($id);
-        $path = null;
+
         if ($request->file('reconocimientoIMG')){
-        $path = $request->file('reconocimientoIMG')->store('reconocimientoIMG', ['disk' => 'public']);
+            $path = $request->file('reconocimientoIMG')->store('reconocimientoIMG', ['disk' => 'public']);
+            $reconocimiento->reconocimientoIMG = $path;
         }
+        if ($request->fecha){ //si se modifica la fecha, hay que parsearla para que se vea igual al resto en la BBDD
+            $fechaOriginalString = $request->fecha; //fecha recibida del input-date formato año/mes/dia
+
+            $fechaObjeto = DateTime::createFromFormat('Y-m-d', $fechaOriginalString);
+
+            if ($fechaObjeto !== false) {
+                $nuevaFechaString = $fechaObjeto->format('d/m/Y'); // Nuevo formato: día/mes/año
+                echo $nuevaFechaString;
+            } else {
+                echo "Error al parsear la fecha.";
+            }
+
+            $reconocimiento->fecha = $nuevaFechaString; //y aquí se actualiza en la BBDD, pk con ->update() no lo hace bien
+        }
+
         $reconocimiento->update([
             'estudiante_id'=>$request->estudiante_id,
             'actividad_id'=>$request->actividad_id,
             'documento'=>$request->documento,
-            'docente_validador'=>$request->docente_validador,
-            'reconocimientoIMG'=>$path
+            'docente_validador'=>$request->docente_validador
         ]);
-        return view('reconocimientos.show')
-        ->with('reconocimiento', Reconocimiento::findOrFail($id));
+        return redirect(action([self::class, 'getShow'], ['id' => $reconocimiento->id]));
+
     }
 
     public function store(Request $request) {
+
+        $reconocimiento = new Reconocimiento();
+
         $path = null;
         if ($request->file('reconocimientoIMG')){
-        $path = $request->file('reconocimientoIMG')->store('reconocimientoIMG', ['disk' => 'public']);
+            $path = $request->file('reconocimientoIMG')->store('reconocimientoIMG', ['disk' => 'public']);
+            $reconocimiento->reconocimientoIMG = $path;
         }
-        $reconocimiento = Reconocimiento::create([
-            'estudiante_id'=>$request->estudiante_id,
-            'actividad_id'=>$request->actividad_id,
-            'documento'=>$request->documento,
-            'docente_validador'=>$request->docente_validador,
-            'reconocimientoIMG'=>$path
-        ]);
+        if ($request->fecha){ //si se modifica la fecha, hay que parsearla para que se vea igual al resto en la BBDD
+            $fechaOriginalString = $request->fecha; //fecha recibida del input-date formato año/mes/dia
+
+            $fechaObjeto = DateTime::createFromFormat('Y-m-d', $fechaOriginalString);
+
+            if ($fechaObjeto !== false) {
+                $nuevaFechaString = $fechaObjeto->format('d/m/Y'); // Nuevo formato: día/mes/año
+                echo $nuevaFechaString;
+            } else {
+                echo "Error al parsear la fecha.";
+            }
+
+            $reconocimiento->fecha = $nuevaFechaString; //y aquí se actualiza en la BBDD, pk con ->update() no lo hace bien
+        }
+        $reconocimiento->estudiante_id = $request->estudiante_id;
+        $reconocimiento->actividad_id = $request->actividad_id;
+        $reconocimiento->documento = $request->documento;
+        $reconocimiento->docente_validador = $request->docente_validador;
+        $reconocimiento->save();
         return redirect(action([self::class, 'getShow'], ['id' => $reconocimiento->id]));
     }
 }
