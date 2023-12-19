@@ -27,15 +27,15 @@
             <div class="col-4 col-6-medium col-12-small">
                 <section>
                     <header>
-                        <h2>Ipsum et phasellus</h2>
+                        <h2 style="text-align: center">Proyectos almacenados</h2>
                     </header>
                     <ul class="divided">
-                        <li><a href="#">Lorem ipsum dolor sit amet sit veroeros</a></li>
-                        <li><a href="#">Sed et blandit consequat sed tlorem blandit</a></li>
-                        <li><a href="#">Adipiscing feugiat phasellus sed tempus</a></li>
-                        <li><a href="#">Hendrerit tortor vitae mattis tempor sapien</a></li>
-                        <li><a href="#">Sem feugiat sapien id suscipit magna felis nec</a></li>
-                        <li><a href="#">Elit class aptent taciti sociosqu ad litora</a></li>
+                        @php
+                            $proyectos=\App\Models\Proyecto::contarProyectos();
+                        @endphp
+                            <li style="text-align: center"><a href="#" style="font-size: 10em">{{$proyectos}}</a></li>
+
+
                     </ul>
                 </section>
             </div>
