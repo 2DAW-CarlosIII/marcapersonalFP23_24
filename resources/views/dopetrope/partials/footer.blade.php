@@ -10,18 +10,18 @@
                 @include('dopetrope.partials.footer.mpinfo')
             </div>
             <div class="col-4 col-6-medium col-12-small">
-                <section>
+                <section style="text-align: center">
                     <header>
                         <h2>Usuarios registrados</h2>
                     </header>
                     <br>
                     <br>
-                    <p style="font-size: 10em">
+                    <p style="font-size: 10em;">
                         {{$userCount}}
                     </p>
                 </section>
             </div>
-            <div class="col-4 col-6-medium col-12-small">
+            <div class="col-4 col-6-medium col-12-small mt-sm-5 mt-md-0">
                 <section>
                     <header>
                         <h2 style="text-align: center">Proyectos almacenados</h2>
@@ -30,13 +30,12 @@
                         @php
                             $proyectos=\App\Models\Proyecto::contarProyectos();
                         @endphp
-                            <li style="text-align: center"><a href="/catalog" style="font-size: 10em">{{$proyectos}}</a></li>
-
+                            <li style="text-align: center"> <br><br><a href="/catalog" style="font-size: 10em;text-decoration:none">{{$proyectos}}</a></li>
 
                     </ul>
                 </section>
             </div>
-            <div class="col-4 col-12-medium">
+            <div class="col-4 col-12-medium mt-0">
                 <!-- Info CIFP Carlos III -->
                 @include('dopetrope.partials.footer.c3info')
             </div>
