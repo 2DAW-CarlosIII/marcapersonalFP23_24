@@ -14,7 +14,15 @@
 
             <p><strong>Estudiante: </strong>{{ $reconocimiento->estudiante_nombre}} {{ $reconocimiento->estudiante_apellidos}}</p>
             <p><strong>Actividad: </strong>{{ $reconocimiento->actividad_nombre }}</p>
-            <p><strong>Documento: </strong><a href="{{ $reconocimiento->documento }}">{{ $reconocimiento->documento }}</a></p>
+            <p><strong>Documento: </strong>
+                @if($reconocimiento->documento)
+                    <a href="{{ Storage::url($reconocimiento->documento) }}"
+                        download="reconocimiento_{{ $reconocimiento->id }}.{{ pathinfo($reconocimiento->documento, PATHINFO_EXTENSION) }}">
+                        documento actual</a>
+                @else
+                    No hay documento
+                @endif
+            </p>
 
             @if ($reconocimiento->docente_validador !== null)
                 <p><strong>Validado por: </strong>{{ $reconocimiento->docente_nombre}} {{ $reconocimiento->docente_apellidos }}</p>

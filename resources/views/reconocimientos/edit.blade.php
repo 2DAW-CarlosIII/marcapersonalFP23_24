@@ -41,22 +41,17 @@
        	 			</select>
 	            </div>
 
-	            <div class="form-group">
-	            	<label for="documento">URL del documento</label>
-	               <input type="url" name="documento" id="documento" class="form-control" value="{{ $reconocimiento->documento }}">
-	            </div>
-
-	            <div class="form-group">
-	               <label for="fecha">Fecha</label>
-	               <input type ="date" name="fecha" id="fecha" class="form-control">
-	            </div>
-
-
-
-
                 <div class="form-group">
-                    <label for="reconocimientoIMG">Imagen participación</label>
-                    <input type="file" class="form-control" id="reconocimientoIMG" name="reconocimientoIMG" placeholder="documento de reconocimiento">
+                    <label for="documento">Imagen participación</label>
+                    <input type="file" class="form-control" id="documento" name="documento" placeholder="documento de reconocimiento">
+
+
+                @if($reconocimiento->documento)
+                    <p>Descargar
+                        <a href="{{ Storage::url($reconocimiento->documento) }}"
+                            download="reconocimiento_{{ $reconocimiento->id }}.{{ pathinfo($reconocimiento->documento, PATHINFO_EXTENSION) }}">documento actual</a>
+                    </p>
+                @endif
                 </div>
 
 	            <div class="form-group text-center">

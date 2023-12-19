@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Reconocimiento;
-use App\Models\Estudiante;
+use App\Models\User;
 use App\Models\Actividad;
-use App\Models\Docente;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -63,49 +62,61 @@ class ReconocimientoController extends Controller
     {
 
         return view('reconocimientos.create')
-        ->with('estudiantes', Estudiante::all())
+        ->with('estudiantes', User::all())
         ->with('actividades', Actividad::all())
-        ->with('docentes', Docente::all());
+        ->with('docentes', User::all());
     }
 
     public function getEdit($id)
     {
         return view('reconocimientos.edit')
         ->with('reconocimiento', Reconocimiento::findOrFail($id))
-        ->with('estudiantes', Estudiante::all())
+        ->with('estudiantes', User::all())
         ->with('actividades', Actividad::all())
-        ->with('docentes', Docente::all());
+        ->with('docentes', User::all());
     }
 
     public function putEdit($id, Request $request)
     {
         $reconocimiento = Reconocimiento::findOrFail($id);
         $path = null;
-        if ($request->file('reconocimientoIMG')){
-        $path = $request->file('reconocimientoIMG')->store('reconocimientoIMG', ['disk' => 'public']);
+
+        if ($request->hasFile('documento')){
+            $request->validate([
+                'reconocimientoIMG' => 'nullable|mimes:jpg,jpeg,png|max:5120', // Se permiten ficheros comprimidos de hasta 5 MB
+            ], [
+                'reconocimientoIMG.mimes' => 'El fichero debe ser una imagen.',
+                'reconocimientoIMG.max' => 'El tamaño del fichero no debe ser mayor a 5 MB.',
+            ]);
+
+            $path = $request->file('documento')->store('reconocimientoIMG', ['disk' => 'public']);
         }
         $reconocimiento->update([
             'estudiante_id'=>$request->estudiante_id,
             'actividad_id'=>$request->actividad_id,
-            'documento'=>$request->documento,
+            'documento'=>$path ?? $reconocimiento->documento,
             'docente_validador'=>$request->docente_validador,
-            'reconocimientoIMG'=>$path
         ]);
-        return view('reconocimientos.show')
-        ->with('reconocimiento', Reconocimiento::findOrFail($id));
+        return redirect(action([self::class, 'getShow'], ['id' => $reconocimiento->id]));
     }
 
     public function store(Request $request) {
         $path = null;
-        if ($request->file('reconocimientoIMG')){
-        $path = $request->file('reconocimientoIMG')->store('reconocimientoIMG', ['disk' => 'public']);
+        if ($request->file('documento')){
+            $request->validate([
+                'reconocimientoIMG' => 'nullable|mimes:jpg,jpeg,png|max:5120', // Se permiten ficheros comprimidos de hasta 5 MB
+            ], [
+                'reconocimientoIMG.mimes' => 'El fichero debe ser una imagen.',
+                'reconocimientoIMG.max' => 'El tamaño del fichero no debe ser mayor a 5 MB.',
+            ]);
+
+        $path = $request->file('documento')->store('reconocimientoIMG', ['disk' => 'public']);
         }
         $reconocimiento = Reconocimiento::create([
             'estudiante_id'=>$request->estudiante_id,
             'actividad_id'=>$request->actividad_id,
-            'documento'=>$request->documento,
+            'documento'=>$path,
             'docente_validador'=>$request->docente_validador,
-            'reconocimientoIMG'=>$path
         ]);
         return redirect(action([self::class, 'getShow'], ['id' => $reconocimiento->id]));
     }

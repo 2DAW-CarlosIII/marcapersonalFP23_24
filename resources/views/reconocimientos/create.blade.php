@@ -41,21 +41,9 @@
        	 			</select>
 	            </div>
 
-	            <div class="form-group">
-	            	<label for="documento">URL del documento</label>
-	               <input type="url" name="documento" id="documento" class="form-control">
-	            </div>
-
-	            <div class="form-group">
-	               <label for="Fecha">fecha</label>
-	               <input type ="date" name="fecha" id="fecha" class="form-control" rows="3">
-	            </div>
-
-
-
                 <div class="form-group">
-                    <label for="reconocimientoIMG">Imagen participación</label>
-                    <input type="file" class="form-control" id="reconocimientoIMG" name="reconocimientoIMG" placeholder="documento de reconocimiento">
+                    <label for="documento">Imagen participación</label>
+                    <input type="file" class="form-control" id="documento" name="documento" placeholder="documento de reconocimiento">
                 </div>
 
 	            <div class="form-group text-center">
