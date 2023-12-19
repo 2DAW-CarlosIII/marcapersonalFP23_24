@@ -10,7 +10,7 @@
          </div>
          <div class="card-body" style="padding:30px">
 
-            <form action="{{ url('/actividades/create') }}" method="POST">
+            <form action="{{ action([App\Http\Controllers\ActividadController::class, 'store']) }}" method="POST">
 
 	            @csrf
 
@@ -21,7 +21,11 @@
 
                 <div class="form-group">
 	            	<label for="insignia">Insignia</label>
-	               <input type="url" name="insignia" id="insignia" class="form-control">
+                    <select name="insignia" id="insignia">
+                        @foreach ($insignias as $insignia)
+                            <option value="{{ $insignia }}">{{ $insignia}}</option>
+                        @endforeach
+                    </select>
 	            </div>
 
 

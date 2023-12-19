@@ -12,7 +12,7 @@ $arrayProyectos = \App\Models\Proyecto::mejoresProyectos(5);
 
         <li>
             <span class="date">Nota: <strong>{{ $proyecto->calificacion }}</strong></span>
-            <h3><a href="#">{{ $proyecto->nombre }}</a></h3>
+            <h3><a href="{{ action([App\Http\Controllers\CatalogController::class, 'getShow'], ['id' => $proyecto['id']] ) }}">{{ $proyecto->nombre }}</a></h3>
             <p> <a href="http://github.com/2DAW-CarlosIII/{{ $proyecto->dominio}}">
                 http://github.com/2DAW-CarlosIII/{{ $proyecto->dominio }}
                 </a>
