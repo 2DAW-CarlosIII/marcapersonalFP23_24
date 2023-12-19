@@ -55,7 +55,7 @@
         <!-- Nombre -->
         <div>
             <x-input-label for="nombre" :value="__('Nombre')" />
-            <x-text-input id="nombre" class="block mt-1 w-full" type="text" name="nombre" :value="old('nombre')"
+            <x-text-input id="nombre" class="block mt-1 w-full" type="text" name="nombre" :value="old('nombre',  $user->nombre)"
                 required autofocus autocomplete="nombre" />
             <x-input-error :messages="$errors->get('nombre')" class="mt-2" />
         </div>
@@ -63,7 +63,7 @@
         <!-- Apellidos -->
         <div>
             <x-input-label for="apellidos" :value="__('Apellidos')" />
-            <x-text-input id="apellidos" class="block mt-1 w-full" type="text" name="apellidos" :value="old('apellidos')"
+            <x-text-input id="apellidos" class="block mt-1 w-full" type="text" name="apellidos" :value="old('apellidos',$user->apellidos)"
                 required autofocus autocomplete="apellidos" />
             <x-input-error :messages="$errors->get('apellidos')" class="mt-2" />
         </div>
