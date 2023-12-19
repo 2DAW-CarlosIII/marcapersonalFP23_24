@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\Actividad;
 use App\Models\Curriculo;
+use App\Models\Reconocimiento;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,9 +21,12 @@ class ProfileController extends Controller
     {
         $user = $request->user();
         $curriculo = Curriculo::find($user->id);
+        $actividad_id = Reconocimiento::where('estudiante_id', $user->id)->pluck('actividad_id');
+        $insignias = Actividad::whereIn('id', $actividad_id)->pluck('insignia');
         return view('profile.edit', [
             'user' => $user,
-            'curriculo' => $curriculo
+            'curriculo' => $curriculo,
+            'insignias' => $insignias
         ]);
     }
 
