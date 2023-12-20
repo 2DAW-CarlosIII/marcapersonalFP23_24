@@ -58,8 +58,10 @@ class CurriculoController extends Controller
         if ($request->hasFile('pdf_curriculum') && $request->pdf_curriculum->getClientOriginalExtension() === 'pdf') {
             $path = $request->file('pdf_curriculum')->store('curriculos', ['disk' => 'public']);
             $curriculo->pdf_curriculum = $path;
-            $curriculo->save();
         }
+
+        $curriculo->save();
+
         return redirect(action([self::class, 'getShow'], ['id' => $curriculo->id]));
 
     }
