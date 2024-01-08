@@ -9,6 +9,7 @@ use App\Http\Controllers\ReconocimientoController;
 use App\Http\Controllers\CurriculoController;
 use App\Http\Controllers\EstudianteController;
 use App\Http\Controllers\DocenteController;
+use App\Http\Controllers\TallerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -56,6 +57,11 @@ Route::prefix('reconocimientos')->group(function () {
     Route::put('/edit/{id}', [ReconocimientoController::class, 'putEdit'])->where('id', '[0-9]+');
 
     Route::get('/edit/{id}', [ReconocimientoController::class, 'getEdit'])->where('id', '[0-9]+')->middleware('auth');
+
+    Route::post('/', [ReconocimientoController::class, 'store']);
+  
+    Route::put('/show/{id}', [ReconocimientoController::class, 'putShow'])->where('id', '[0-9]+')->middleware('auth');
+  
     Route::put('/show/{id}', [ReconocimientoController::class, 'valida'])->where('id', '[0-9]+')->middleware('auth');
 });
 
@@ -132,6 +138,8 @@ Route::prefix('docentes')->group(function () {
 
     Route::put('/edit/{id}', [DocenteController::class, 'putEdit'])->where('id', '[0-9]+');
 });
+
+Route::get('/talleres', [TallerController::class, 'getIndex']);
 
 Route::get('perfil/{id?}', function ($id = null) {
     if ($id == null) {

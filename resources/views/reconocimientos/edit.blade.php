@@ -10,34 +10,49 @@
          </div>
          <div class="card-body" style="padding:30px">
 
-            <form action="{{action([App\Http\Controllers\ReconocimientoController::class, 'getEdit'], ['id' => $reconocimiento->id])}}" method="POST">
+            <form action="{{action([App\Http\Controllers\ReconocimientoController::class, 'putEdit'], ['id' => $reconocimiento->id])}}" method="POST" enctype="multipart/form-data">
                 @method('PUT')
 	            @csrf
 
 	            <div class="form-group">
-	               <label for="estudiante_id">ID estudiante</label>
-	               <input type="number" name="estudiante_id" id="estudiante_id" class="form-control" value="{{ $reconocimiento->estudiante_id }}">
-	            </div>
-
-	            <div class="form-group">
-	            	<label for="actividad_id">Actividad</label>
-	               <input type="number" name="actividad_id" id="actividad_id" class="form-control" value="{{ $reconocimiento->actividad_id }}">
-	            </div>
-
-	            <div class="form-group">
-	            	<label for="documento">URL del documento</label>
-	               <input type="url" name="documento" id="documento" class="form-control" value="{{ $reconocimiento->documento }}">
-	            </div>
-
-	            <div class="form-group">
-	               <label for="fecha">Fecha</label>
-	               <input type ="date" name="fecha" id="fecha" class="form-control">
+					<label for="estudiante_id">Estudiante</label>
+					<select id="estudiante_id" name="estudiante_id">
+					 @foreach($estudiantes as $estudiante)
+						 <option {{$reconocimiento->estudiante_id == $estudiante->id?"selected":"";}} value="{{$estudiante->id}}">{{$estudiante->nombre}} {{$estudiante->apellidos}}</option>
+					 @endforeach
+					 </select>
 	            </div>
 
                 <div class="form-group">
 	            	<label for="docente_validador">Docente Validador</label>
-	               <input type="number" name="docente_validador" id="docente_validador" class="form-control" value="{{ $reconocimiento->docente_validador }}">
+					<select id="docente_validador" name="docente_validador">
+						@foreach($docentes as $docente)
+            				<option {{$reconocimiento->docente_validador == $docente->id?"selected":"";}} value="{{$docente->id}}">{{$docente->nombre}} {{$docente->apellidos}}</option>
+						@endforeach
+       	 			</select>
 	            </div>
+
+	            <div class="form-group">
+	            	<label for="actividad_id">Actividad</label>
+	                <select id="actividad_id" name="actividad_id">
+						@foreach($actividades as $actividad)
+            				<option {{$reconocimiento->actividad_id == $actividad->id?"selected":"";}} value="{{$actividad->id}}">{{$actividad->nombre}}</option>
+						@endforeach
+       	 			</select>
+	            </div>
+
+                <div class="form-group">
+                    <label for="documento">Imagen participación</label>
+                    <input type="file" class="form-control" id="documento" name="documento" placeholder="documento de reconocimiento">
+
+
+                @if($reconocimiento->documento)
+                    <p>Descargar
+                        <a href="{{ Storage::url($reconocimiento->documento) }}"
+                            download="reconocimiento_{{ $reconocimiento->id }}.{{ pathinfo($reconocimiento->documento, PATHINFO_EXTENSION) }}">documento actual</a>
+                    </p>
+                @endif
+                </div>
 
 	            <div class="form-group text-center">
 	               <button type="submit" class="btn btn-primary" style="padding:8px 100px;margin-top:25px;">

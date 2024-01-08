@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="{{ asset('/dopetrope/assets/css/fontawesome-all.min.css') }}" />
+
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -10,6 +12,20 @@
             <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
                 <div class="max-w-xl">
                     @include('profile.partials.update-profile-information-form')
+                </div>
+            </div>
+
+
+            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
+                <div class="max-w-xl">
+                    @include('profile.partials.update-avatar-form')
+                </div>
+            </div>
+
+
+            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
+                <div class="max-w-xl">
+                    @include('profile.partials.information-insignias')
                 </div>
             </div>
 

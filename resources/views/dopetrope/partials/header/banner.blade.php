@@ -1,6 +1,10 @@
 <section id="banner">
+    <a href="{{ route('home') }}" style="text-decoration: none">
     <header>
-        <h2><a href="{{ route('home') }}">Marca Personal F.P.</a></h2>
-        <p>Desarrollo del REA multimodular marcapersonalFP.es</p>
+        <div>
+            <h2>Marca Personal F.P.</h2>
+            <p>Desarrollo del REA multimodular marcapersonalFP.es</p>
+        </div>
     </header>
+    </a>
 </section>

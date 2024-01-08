@@ -8,7 +8,7 @@
 
     <div class="col-4 col-6-medium col-12-small">
         <section class="box">
-            <a href="#" class="image featured"><img src="{{ asset('/images/mp-logo.png') }}" alt="" /></a>
+            <a href="{{ action([App\Http\Controllers\CatalogController::class, 'getShow'], ['id' => $arrayProyectos[$i]['id']] ) }}" class="image featured"><img src="{{ asset('/images/mp-logo.png') }}" alt="" /></a>
             <header>
                 <h3>{{ $arrayProyectos[$i]['nombre'] }}</h3>
             </header>
