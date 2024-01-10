@@ -9,7 +9,9 @@ export const App = () => (
 		authProvider={authProvider}
 	>
         <Resource name="proyectos" list={ListGuesser} edit={EditGuesser} show={ShowGuesser} />
+        <Resource name="users" list={ListGuesser} edit={EditGuesser} show={ShowGuesser} />
+        <Resource name="actividades" list={ListGuesser} edit={EditGuesser} show={ShowGuesser} />
+
     </Admin>
 );
 
-    
