@@ -10,6 +10,13 @@ use App\Http\Controllers\CurriculoController;
 use App\Http\Controllers\EstudianteController;
 use App\Http\Controllers\DocenteController;
 use App\Http\Controllers\TallerController;
+use Psr\Http\Message\ServerRequestInterface;
+use Tqdev\PhpCrudApi\Api;
+use Tqdev\PhpCrudApi\Config\Config;
+
+use Illuminate\Foundation\Application;
+use Inertia\Inertia;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -17,14 +24,25 @@ use App\Http\Controllers\TallerController;
 |--------------------------------------------------------------------------
 |
 | Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
 |
 */
 
 Route::get('/', function () {
     return view('home');
 })->name('home');
+
+/*
+Route::get('/', function () {
+    return Inertia::render('Welcome', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
+        'laravelVersion' => Application::VERSION,
+        'phpVersion' => PHP_VERSION,
+    ]);
+})->name('home');
+*/
 
 Route::prefix('catalog')->group(function () {
     Route::get('/', [CatalogController::class, 'getIndex'])->name('proyectos');
@@ -59,9 +77,9 @@ Route::prefix('reconocimientos')->group(function () {
     Route::get('/edit/{id}', [ReconocimientoController::class, 'getEdit'])->where('id', '[0-9]+')->middleware('auth');
 
     Route::post('/', [ReconocimientoController::class, 'store']);
-  
+
     Route::put('/show/{id}', [ReconocimientoController::class, 'putShow'])->where('id', '[0-9]+')->middleware('auth');
-  
+
     Route::put('/show/{id}', [ReconocimientoController::class, 'valida'])->where('id', '[0-9]+')->middleware('auth');
 });
 
@@ -73,7 +91,7 @@ Route::prefix('users')->group(function () {
 
     Route::get('/create', [UserController::class, 'getCreate'])->middleware('auth');
 
-    Route::put('/edit/{id}', [UserController::class, 'putEdit'])->where('id', '[0-9]+');
+    Route::put('/edit/{id}', [UserController::class, 'putEdit'])->name('user.putEdit')->where('id', '[0-9]+');
 
     Route::get('/edit/{id}', [UserController::class, 'getEdit'])->where('id', '[0-9]+')->middleware('auth');
 });
@@ -150,7 +168,7 @@ Route::get('perfil/{id?}', function ($id = null) {
 })->where('id', '[0-9]+')->name('perfil');
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -159,6 +177,25 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::any('/{any}', function (ServerRequestInterface $request) {
+    $config = new Config([
+        'address' => env('DB_HOST', '127.0.0.1'),
+        'database' => env('DB_DATABASE', 'forge'),
+        'username' => env('DB_USERNAME', 'forge'),
+        'password' => env('DB_PASSWORD', ''),
+        'basePath' => '/api',
+    ]);
+    $api = new Api($config);
+    $response = $api->handle($request);
 
+    try {
+        $records = json_decode($response->getBody()->getContents())->records;
+        $response = response()->json($records, 200, $headers = ['X-Total-Count' => count($records)]);
+    } catch (\Throwable $th) {
+
+    }
+    return $response;
+
+})->where('any', '.*');
 
 require __DIR__.'/auth.php';
