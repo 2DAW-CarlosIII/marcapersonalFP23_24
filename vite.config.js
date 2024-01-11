@@ -10,4 +10,11 @@ export default defineConfig({
         }),
         react(),
     ],
+    define: {
+        'process.env': process.env,
+    },
+    server: {
+        host: true,
+    },
+    base: './',
 });
