@@ -8,9 +8,12 @@
         "php": "^8.1",
         "guzzlehttp/guzzle": "^7.2",
         "inertiajs/inertia-laravel": "^0.6.3",
+        "laminas/laminas-diactoros": "^3.3",
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.2",
         "laravel/tinker": "^2.8",
+        "mevdschee/php-crud-api": "^2.14",
+        "symfony/psr-http-message-bridge": "^7.0",
         "tightenco/ziggy": "^1.0"
     },
     "require-dev": {
