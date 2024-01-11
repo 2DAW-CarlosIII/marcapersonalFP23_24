@@ -10,9 +10,6 @@ use App\Http\Controllers\CurriculoController;
 use App\Http\Controllers\EstudianteController;
 use App\Http\Controllers\DocenteController;
 use App\Http\Controllers\TallerController;
-use Psr\Http\Message\ServerRequestInterface;
-use Tqdev\PhpCrudApi\Api;
-use Tqdev\PhpCrudApi\Config\Config;
 
 use Illuminate\Foundation\Application;
 use Inertia\Inertia;
@@ -176,26 +173,5 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-
-Route::any('/{any}', function (ServerRequestInterface $request) {
-    $config = new Config([
-        'address' => env('DB_HOST', '127.0.0.1'),
-        'database' => env('DB_DATABASE', 'forge'),
-        'username' => env('DB_USERNAME', 'forge'),
-        'password' => env('DB_PASSWORD', ''),
-        'basePath' => '/api',
-    ]);
-    $api = new Api($config);
-    $response = $api->handle($request);
-
-    try {
-        $records = json_decode($response->getBody()->getContents())->records;
-        $response = response()->json($records, 200, $headers = ['X-Total-Count' => count($records)]);
-    } catch (\Throwable $th) {
-
-    }
-    return $response;
-
-})->where('any', '.*');
 
 require __DIR__.'/auth.php';
