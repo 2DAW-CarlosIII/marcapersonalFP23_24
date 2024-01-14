@@ -1,0 +1,122 @@
+import {
+    List,
+    SimpleList,
+    Datagrid,
+    TextField,
+    ReferenceField,
+    EditButton,
+    Edit,
+    Create,
+    SimpleForm,
+    ReferenceInput,
+    TextInput,
+    NumberField,
+    NumberInput,
+    FunctionField,
+    SelectInput,
+    ShowButton,
+    Show,
+    SimpleShowLayout
+} from 'react-admin';
+
+import { useRecordContext } from 'react-admin';
+import { useMediaQuery } from '@mui/material';
+
+export const CicloList = () => {
+    const isSmall = useMediaQuery((theme) => theme.breakpoints.down('sm'));
+    return (
+        <List>
+            {isSmall ? (
+                <SimpleList
+                    primaryText="%{nombre}"
+                    secondaryText="%{grado}"
+                    tertiaryText="%{codFamilia}"
+                    linkType={(record) => (record.canEdit ? 'edit' : 'show')}
+                >
+                    <EditButton />
+                </SimpleList>
+            ) : (
+                <Datagrid bulkActionButtons={false} >
+                    <NumberField source="id" />
+                    <TextField source='codCiclo' />
+                    <TextField source="nombre" />
+                    <TextField source="grado" />
+                    <ReferenceField label="Cod Familia" source="familia_id" reference="familias_profesionales">
+                        <FunctionField render={record => record && `${record.codigo}`} />
+                    </ReferenceField>
+                    <ReferenceField label="Nombre Familia" source="familia_id" reference="familias_profesionales">
+                        <FunctionField render={record => record && `${record.nombre}`} />
+                    </ReferenceField>
+                    <ShowButton />
+                    <EditButton />
+                </Datagrid>
+            )}
+        </List>
+    );
+}
+
+const FamiliaInput = () => (
+    <ReferenceInput label="Nombre Familia" source="familia_id" reference="familias_profesionales">
+        <SelectInput
+            label="Nombre Familia"
+            source="familia_id"
+            optionText={record => record && `${record.nombre}`} />
+    </ReferenceInput>
+)
+
+const CodFamiliaInput = () => (
+    <ReferenceInput label="Nombre Familia" source="familia_id" reference="familias_profesionales">
+        <SelectInput
+            label="Cod Familia"
+            source="familia_id"
+            optionText={record => record && `${record.codigo}`} />
+    </ReferenceInput>
+)
+
+export const CicloTitle = () => {
+    const record = useRecordContext();
+    return <span>Ciclo {record ? `"${record.nombre}"` : ''}</span>;
+};
+
+export const CicloEdit = () => (
+    <Edit title={<CicloTitle />}>
+        <SimpleForm>
+            <NumberInput source="id" />
+            <TextInput source="codCiclo" />
+            <CodFamiliaInput />
+            <FamiliaInput />
+            <TextInput source="grado" />
+            <TextInput source="nombre" />
+        </SimpleForm>
+    </Edit>
+);
+
+export const CicloShow = () => (
+    <Show>
+        <SimpleShowLayout>
+            <NumberField source="id" />
+            <TextField source='codCiclo' />
+            <TextField source="nombre" />
+            <TextField source="grado" />
+            <ReferenceField label="Cod Familia" source="familia_id" reference="familias_profesionales">
+                <FunctionField render={record => record && `${record.codigo}`} />
+            </ReferenceField>
+            <ReferenceField label="Nombre Familia" source="familia_id" reference="familias_profesionales">
+                <FunctionField render={record => record && `${record.nombre}`} />
+            </ReferenceField>
+        </SimpleShowLayout>
+    </Show>
+);
+
+export const CicloCreate = () => (
+    <Create>
+        <SimpleForm>
+            <NumberInput source="id" />
+            <TextInput source="codCiclo" />
+            <CodFamiliaInput />
+            <FamiliaInput />
+            <TextInput source="grado" />
+            <TextInput source="nombre" />
+        </SimpleForm>
+    </Create>
+);
