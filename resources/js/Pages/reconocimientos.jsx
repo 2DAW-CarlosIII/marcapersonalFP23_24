@@ -40,7 +40,7 @@ const DocenteInput = () => (
 )
 
 const ActividadInput = () => (
-    <ReferenceInput label="Actividad" source="actividad_id" reference="users">
+    <ReferenceInput label="Actividad" source="actividad_id" reference="actividades">
         <SelectInput
         label="Actividad"
         source="actividad_id"
@@ -73,7 +73,7 @@ export const ReconocimientoList = () => {
           <ReferenceField label="Estudiante" source="estudiante_id" reference="users">
             <FunctionField render={record => record && `${record.nombre} ${record.apellidos}`} />
           </ReferenceField>
-          <ReferenceField label="Actividad" source="actividad_id" reference="users">
+          <ReferenceField label="Actividad" source="actividad_id" reference="actividades">
                 <FunctionField render={record => record && `${record.nombre}`} />
             </ReferenceField>
           <TextField source="documento" />
@@ -114,7 +114,7 @@ export const ReconocimientoShow = () => (
             <ReferenceField label="Estudiante" source="estudiante_id" reference="users">
                 <FunctionField render={record => record && `${record.nombre} ${record.apellidos}`} />
             </ReferenceField>
-            <ReferenceField label="Actividad" source="actividad_id" reference="users">
+            <ReferenceField label="Actividad" source="actividad_id" reference="actividades">
                 <FunctionField render={record => record && `${record.nombre}`} />
             </ReferenceField>
             <TextField source="documento" />
