@@ -67,7 +67,7 @@ const FamiliaInput = () => (
 )
 
 const CodFamiliaInput = () => (
-    <ReferenceInput label="Nombre Familia" source="familia_id" reference="familias_profesionales">
+    <ReferenceInput label="Nombre Familia" source="codFamilia" reference="familias_profesionales">
         <SelectInput
             label="Cod Familia"
             source="familia_id"
