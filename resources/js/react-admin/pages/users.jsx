@@ -43,7 +43,7 @@ const NombreUsuario = () => (
 )
 
 const ApellidoUsuario = () => (
-    <TextInput source="name" label="Apellidos" />
+    <TextInput source="apellidos" label="Apellidos" />
 )
 
 const UserFilters = [
