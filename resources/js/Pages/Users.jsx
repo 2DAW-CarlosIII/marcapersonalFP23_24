@@ -28,6 +28,12 @@ const userFilters = [
     <TextInput source="q" label="Search" alwaysOn />,
 
 ];
+function comprobarContraseñas(value,allValues) {
+    if(value != allValues.password){
+        return "Las contraseñas no coinciden";
+    }
+
+}
 export function UserCreate() {
     return(
     <Create>
@@ -37,7 +43,8 @@ export function UserCreate() {
             <TextInput source="apellidos"/>
             <TextInput source="email"/>
             <PasswordInput source="password"/>
-        </SimpleForm>
+            <PasswordInput source="password_confirmation" label="Confirmar contraseña" validate={comprobarContraseñas}/>
+            </SimpleForm>
     </Create>
     )
 }
