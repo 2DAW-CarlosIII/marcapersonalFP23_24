@@ -23,9 +23,9 @@ import {
   } from 'react-admin';
 
 const DocenteInput = () => (
-    <ReferenceInput label="Tutor" source="docente_validador" reference="users">
+    <ReferenceInput label="Docente" source="docente_validador" reference="users">
         <SelectInput
-        label="Tutor"
+        label="Docente"
         source="docente_validador"
         optionText={record => record && `${record.nombre} ${record.apellidos}`} />
     </ReferenceInput>
@@ -74,7 +74,7 @@ export const ReconocimientoList = () => {
             <FunctionField render={record => record && `${record.nombre}`} />
           </ReferenceField>
           <TextField source="documento" />
-          <ReferenceField label="Tutor" source="docente_validador" reference="users">
+          <ReferenceField label="Docente" source="docente_validador" reference="users">
             <FunctionField render={record => record && `${record.nombre} ${record.apellidos}`} />
           </ReferenceField>
           <ShowButton />
