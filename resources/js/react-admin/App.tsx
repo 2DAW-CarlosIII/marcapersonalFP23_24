@@ -10,8 +10,8 @@ export const App = () => (
         dataProvider={dataProvider}
 		authProvider={authProvider}
 	>
-        <Resource icon={UserIcon}
-                  name="users"
+        <Resource name="users"
+                  icon={UserIcon}
                   list={UserList}
                   edit={UserEdit}
                   show={UserShow}

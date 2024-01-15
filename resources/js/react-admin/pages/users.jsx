@@ -35,7 +35,11 @@ const DateCreacion = () => (
 )
 
 const NameUsuario = () => (
-    <TextInput source="name" label="Nombre Usuario" />
+    <TextInput source="name" label="Name" />
+)
+
+const NombreUsuario = () => (
+    <TextInput source="nombre" label="Nombre" />
 )
 
 const ApellidoUsuario = () => (
@@ -46,6 +50,7 @@ const UserFilters = [
     <TextInput source="q" label="Search" alwaysOn />,
     DateCreacion(),
     NameUsuario(),
+    NombreUsuario(),
     ApellidoUsuario(),
 ];
 
@@ -88,8 +93,6 @@ export const UserEdit = () => (
         <TextInput source="nombre" style={{width:' 50%'}}/>
         <TextInput source="apellidos" style={{width:' 50%'}}/>
         <TextInput source="email" style={{width:' 50%'}}/>
-        <PasswordInput source="password" style={{width:' 50%'}} />
-        <PasswordInput source="confirmar_password" style={{width:' 50%'}} />
         <ImageInput source="avatar" label="Avatar" accept="image/*">
             <ImageField source="src" title="title" />
         </ImageInput>
