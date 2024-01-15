@@ -2,7 +2,7 @@
 import { Admin, Resource, ListGuesser, EditGuesser, ShowGuesser } from 'react-admin';
 import { dataProvider } from './dataProvider';
 import { authProvider } from './authProvider';
-import { ReconocimientoList, ReconocimientoEdit, ReconocimientoShow, ReconocimientoCreate } from '../Pages/reconocimientos';
+import { ReconocimientoList, ReconocimientoEdit, ReconocimientoShow, ReconocimientoCreate } from './pages/reconocimientos';
 import ReconocimientoIcon from '@mui/icons-material/AccountTree';
 
 export const App = () => (
@@ -22,7 +22,6 @@ export const App = () => (
         <Resource name="ciclos" list={ListGuesser} edit={EditGuesser} show={ShowGuesser} />
         <Resource name="familias_profesionales" list={ListGuesser} edit={EditGuesser} show={ShowGuesser} />
         <Resource name="actividades" list={ListGuesser} edit={EditGuesser} show={ShowGuesser} />
-        <Resource name="reconocimientos" list={ListGuesser} edit={EditGuesser} show={ShowGuesser} />
     </Admin>
 );
 

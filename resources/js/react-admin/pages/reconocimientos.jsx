@@ -15,7 +15,10 @@ import {
     SelectInput,
     ShowButton,
     Show,
-    SimpleShowLayout
+    SimpleShowLayout,
+    DateField,
+    DateInput,
+    CreateButton
   } from 'react-admin';
 
 import { useRecordContext} from 'react-admin';
@@ -80,7 +83,7 @@ export const ReconocimientoList = () => {
           <ReferenceField label="Docente Validador" source="docente_validador" reference="users">
             <FunctionField render={record => record && `${record.nombre} ${record.apellidos}`} />
           </ReferenceField>
-          <TextField source="fecha" />
+          <DateField source="fecha" />
           <ShowButton />
           <EditButton />
         </Datagrid>
@@ -102,7 +105,7 @@ export const ReconocimientoEdit = () => (
         <ActividadInput />
         <TextInput source="documento" />
         <DocenteInput />
-        <TextInput source="fecha" />
+        <DateInput source="fecha" />
     </SimpleForm>
     </Edit>
 );
@@ -121,7 +124,7 @@ export const ReconocimientoShow = () => (
             <ReferenceField label="Docente" source="docente_validador" reference="users">
                 <FunctionField render={record => record && `${record.nombre} ${record.apellidos}`} />
             </ReferenceField>
-            <TextField source="fecha" />
+            <DateField source="fecha" />
         </SimpleShowLayout>
     </Show>
 );
@@ -134,7 +137,7 @@ export const ReconocimientoCreate = () => (
             <ActividadInput />
             <TextInput source="documento" />
             <DocenteInput />
-            <TextInput source="fecha" />
+            <DateInput source="fecha" />
         </SimpleForm>
     </Create>
 );
