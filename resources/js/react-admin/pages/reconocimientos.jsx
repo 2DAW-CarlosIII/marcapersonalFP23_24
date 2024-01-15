@@ -17,8 +17,7 @@ import {
     Show,
     SimpleShowLayout,
     DateField,
-    DateInput,
-    CreateButton
+    DateInput
   } from 'react-admin';
 
 import { useRecordContext} from 'react-admin';
