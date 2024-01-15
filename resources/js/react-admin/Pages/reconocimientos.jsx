@@ -19,7 +19,8 @@ import {
     Show,
     SimpleShowLayout,
     DateInput,
-    DateField
+    DateField,
+    SearchInput
   } from 'react-admin';
 import { useRecordContext} from 'react-admin';
 import { useMediaQuery } from '@mui/material';
@@ -54,6 +55,25 @@ import { useMediaQuery } from '@mui/material';
     )
 
     /**     FILTROS     */
+
+    const FiltroActividad = () => (
+        <TextInput label="Actividad" source="actividad_id" />
+    )
+
+    const FiltroEstudiante = () => (
+        <TextInput label="Estudiante" source="estudiante_id" />
+    )
+
+    const FiltroDocente = () => (
+        <TextInput label="Docente" source="docente_validador" />
+    )
+
+    const reconocimientosFiltros = [
+        <SearchInput source="q" alwaysOn />,
+        <FiltroActividad label="Actividad" />,
+        <FiltroDocente label="Docente" />,
+        <FiltroEstudiante label="Estudiante" />
+    ]
 
     /**     COMPONENETES GENERALES     */
 
@@ -110,7 +130,7 @@ import { useMediaQuery } from '@mui/material';
     export const ReconocimientoList = () => {
         const isSmall = useMediaQuery((theme) => theme.breakpoints.down('sm'));
         return (
-            <List>
+            <List filters={reconocimientosFiltros}>
                 {isSmall ? (
                     <SimpleList
                         primaryText="%{actividad_id}"
