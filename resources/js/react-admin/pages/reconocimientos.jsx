@@ -22,11 +22,11 @@ import {
     SimpleShowLayout
   } from 'react-admin';
 
-const TutorInput = () => (
-    <ReferenceInput label="Tutor" source="docente_id" reference="users">
+const DocenteInput = () => (
+    <ReferenceInput label="Tutor" source="docente_validador" reference="users">
         <SelectInput
         label="Tutor"
-        source="docente_id"
+        source="docente_validador"
         optionText={record => record && `${record.nombre} ${record.apellidos}`} />
     </ReferenceInput>
 )

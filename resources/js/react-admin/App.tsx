@@ -2,7 +2,7 @@
 import { Admin, Resource, ListGuesser, EditGuesser, ShowGuesser } from 'react-admin';
 import { dataProvider } from './dataProvider';
 import { authProvider } from './authProvider';
-import { ReconocimientoList, ReconocimientoEdit, ReconocimientoShow, ReconocimientoCreate } from '../Pages/reconocimientos';
+import { ReconocimientoList, ReconocimientoEdit, ReconocimientoShow, ReconocimientoCreate } from './pages/reconocimientos';
 import ReconocimientoIcon from '@mui/icons-material/School';
 
 export const App = () => (
