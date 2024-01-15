@@ -3,7 +3,7 @@ import { Admin, Resource, ListGuesser, EditGuesser, ShowGuesser } from 'react-ad
 import { dataProvider } from './dataProvider';
 import { authProvider } from './authProvider';
 import { ReconocimientoList, ReconocimientoEdit, ReconocimientoShow, ReconocimientoCreate } from './pages/reconocimientos';
-import ReconocimientoIcon from '@mui/icons-material/AccountTree';
+import ReconocimientoIcon from '@mui/icons-material/EmojiEvents';
 
 export const App = () => (
     <Admin
