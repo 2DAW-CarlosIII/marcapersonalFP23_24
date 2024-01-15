@@ -2,7 +2,7 @@
 import { Admin, Resource, ListGuesser, EditGuesser, ShowGuesser } from 'react-admin';
 
 /**   COMPONENETES    */
-import { ReconocimientoCreate,ReconocimientoEdit,ReconocimientoList,ReconocimientoShow } from '../Pages/reconocimientos';
+import { ReconocimientoCreate,ReconocimientoEdit,ReconocimientoList,ReconocimientoShow } from './Pages/reconocimientos';
 
 /**   ICONS    */
 import IconVerfied from '@mui/icons-material/Verified';
