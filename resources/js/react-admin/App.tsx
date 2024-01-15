@@ -1,6 +1,12 @@
 import { Admin, Resource, ListGuesser, EditGuesser, ShowGuesser } from 'react-admin';
 import { dataProvider } from './dataProvider';
 import { authProvider } from './authProvider';
+
+import {
+    UserEdit, UserList, UserTitle, UserCreate, UserShow
+} from '../Pages/users';
+
+import UserIcon from '@mui/icons-material/AccountCircle';
 import { ReconocimientoList, ReconocimientoEdit, ReconocimientoShow, ReconocimientoCreate } from './pages/reconocimientos';
 import ReconocimientoIcon from '@mui/icons-material/AccountTree';
 import CicloIcon from '../Pages/iconos/CicloIcons';
@@ -11,9 +17,15 @@ import ProyectoIcon from '@mui/icons-material/AccountTree';
 export const App = () => (
     <Admin
         dataProvider={dataProvider}
-		authProvider={authProvider}
-	>
-        <Resource name="users" list={ListGuesser} edit={EditGuesser} show={ShowGuesser} />
+        authProvider={authProvider}
+    >
+        <Resource
+            name="users"
+            icon={UserIcon}
+            list={UserList}
+            edit={UserEdit}
+            show={UserShow}
+            create={UserCreate} />
         <Resource name="curriculos" list={ListGuesser} edit={EditGuesser} show={ShowGuesser} />
         <Resource name="proyectos"
           icon={ProyectoIcon}
