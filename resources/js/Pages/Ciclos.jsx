@@ -36,7 +36,7 @@ const CodigoFamiliaInput = () => (
     <ReferenceInput label="Cod Familia Profesional" source="familia_id" reference="familias_profesionales">
         <SelectInput
         label="Cod Familia Profesional"
-        source="familia_id"
+        source="codFamilia"
         optionText={record => record && `${record.codigo}`} />
     </ReferenceInput>
 )
