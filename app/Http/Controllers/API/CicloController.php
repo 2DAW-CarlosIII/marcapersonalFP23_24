@@ -13,9 +13,11 @@ class CicloController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return CicloResource::collection(Ciclo::paginate(10));
+        return CicloResource::collection(
+            Ciclo::orderBy($request->_sort, $request->_order)
+            ->paginate($request->perPage));
     }
 
     /**

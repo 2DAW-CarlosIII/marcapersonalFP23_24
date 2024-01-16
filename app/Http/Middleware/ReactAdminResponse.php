@@ -15,9 +15,11 @@ class ReactAdminResponse
      */
     public function handle(Request $request, Closure $next): Response
     {
-        // Necesitamos que el parámetro start de la petición se divida entre 10 y se almacene en el parámetro page de la petición.
-        if($request->has('_start')) {
+        if($request->filled('_start')) {
             $request->merge(['page' => $request->_start / 10 + 1]);
+            if($request->filled('_end')) {
+                $request->merge(['perPage' => $request->_end - $request->_start]);
+            }
         }
         $response = $next($request);
         if($request->routeIs('*.index')) {
