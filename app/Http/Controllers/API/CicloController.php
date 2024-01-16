@@ -27,7 +27,7 @@ class CicloController extends Controller
     {
         $ciclo = json_decode($request->getContent(), true);
 
-        $ciclo = Ciclo::create($ciclo['data']['attributes']);
+        $ciclo = Ciclo::create($ciclo);
 
         return new CicloResource($ciclo);
     }
@@ -46,7 +46,7 @@ class CicloController extends Controller
     public function update(Request $request, Ciclo $ciclo)
     {
         $cicloData = json_decode($request->getContent(), true);
-        $ciclo->update($cicloData['data']['attributes']);
+        $ciclo->update($cicloData);
 
         return new CicloResource($ciclo);
     }

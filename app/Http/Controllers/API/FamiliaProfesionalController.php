@@ -28,7 +28,7 @@ class FamiliaProfesionalController extends Controller
     {
         $familiaProfesional = json_decode($request->getContent(), true);
 
-        $familiaProfesional = FamiliaProfesional::create($familiaProfesional['data']['attributes']);
+        $familiaProfesional = FamiliaProfesional::create($familiaProfesional);
 
         return new FamiliaProfesionalResource($familiaProfesional);
     }
@@ -47,7 +47,7 @@ class FamiliaProfesionalController extends Controller
     public function update(Request $request, FamiliaProfesional $familiaProfesional)
     {
         $familiaProfesionalData = json_decode($request->getContent(), true);
-        $familiaProfesional->update($familiaProfesionalData['data']['attributes']);
+        $familiaProfesional->update($familiaProfesionalData);
 
         return new FamiliaProfesionalResource($familiaProfesional);
     }
