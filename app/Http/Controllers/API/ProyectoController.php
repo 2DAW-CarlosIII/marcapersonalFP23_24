@@ -13,9 +13,12 @@ class ProyectoController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return ProyectoResource::collection(Proyecto::paginate());
+        return ProyectoResource::collection(
+            Proyecto::orderBy($request->_sort, $request->_order)
+            ->paginate($request->perPage)
+            );
     }
 
     /**
