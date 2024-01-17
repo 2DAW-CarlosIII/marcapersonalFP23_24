@@ -14,9 +14,11 @@ class ReconocimientoController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return ReconocimientoResource::collection(Reconocimiento::paginate());
+        return ReconocimientoResource::collection(
+            Reconocimiento::orderBy($request->_sort, $request->_order)
+            ->paginate($request->perPage));
     }
 
     /**
