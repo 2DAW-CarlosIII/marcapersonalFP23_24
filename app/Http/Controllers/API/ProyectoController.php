@@ -18,7 +18,7 @@ class ProyectoController extends Controller
     public function index(Request $request)
     {
         return ProyectoResource::collection(
-            Proyecto::orderBy($request->_sort, $request->_order)
+            Proyecto::orderBy($request->_sort ?? 'id', $request->_order ?? 'asc')
                 ->paginate($request->perPage)
         );
     }

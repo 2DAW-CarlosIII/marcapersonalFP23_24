@@ -32,7 +32,7 @@ import { useMediaQuery } from '@mui/material';
 
 //inputs para luego poder filtrar por docente_validador, por estudiante y por actividad
 const DocenteInput = () => (
-    <ReferenceInput label="Docente" source="docente_validador" reference="docentes">
+    <ReferenceInput label="Docente" source="docente_validador" reference="docentes" alwaysOn >
         <SelectInput
         label="Docente"
         source="docente_validador"
@@ -41,7 +41,7 @@ const DocenteInput = () => (
 )
 
 const EstudianteInput = () => (
-    <ReferenceInput label="Estudiante" source="estudiante_id" reference="users">
+    <ReferenceInput label="Estudiante" source="estudiante_id" reference="users" alwaysOn >
         <SelectInput
         label="Estudiante"
         source="estudiante_id"
