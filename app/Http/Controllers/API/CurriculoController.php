@@ -13,9 +13,12 @@ class CurriculoController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return CurriculoResource::collection(Curriculo::paginate());
+        return CurriculoResource::collection(
+            Curriculo::orderBy($request->_sort ?? 'id', $request->_order ?? 'asc')
+            ->paginate($request->perPage)
+        );
     }
 
     /**

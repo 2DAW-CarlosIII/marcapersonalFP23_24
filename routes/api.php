@@ -33,7 +33,7 @@ Route::prefix('v1')->group(function () {
     Route::apiResource('users', UserController::class);
     Route::apiResource('proyectos', ProyectoController::class);
     Route::apiResource('familias_profesionales', FamiliaProfesionalController::class)->parameters([
-        'familias_profesionales' => 'familiaProfesional'
+        'familias_profesionales' => 'familiaProfesional']);
     Route::apiResource('curriculos', CurriculoController::class);
     Route::apiResource('actividades', ActividadController::class)->parameters([
         'actividades' => 'actividad'
