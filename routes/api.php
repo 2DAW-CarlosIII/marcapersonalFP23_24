@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Route;
 use Psr\Http\Message\ServerRequestInterface;
 use Tqdev\PhpCrudApi\Api;
 use Tqdev\PhpCrudApi\Config\Config;
+use App\Http\Controllers\API\CurriculoController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +26,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::prefix('v1')->group(function () {
     Route::apiResource('ciclos', CicloController::class);
+    Route::apiResource('curriculos', CurriculoController::class);
 });
 
 Route::any('/{any}', function (ServerRequestInterface $request) {
