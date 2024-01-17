@@ -17,6 +17,9 @@ import {
     UserEdit, UserList, UserTitle, UserCreate, UserShow
 } from './Pages/Users';
 import { ProyectoList, ProyectoEdit, ProyectoShow, ProyectoCreate } from './Pages/Proyectos';
+import { CurriculoCreate, CurriculoEdit, CurriculoList, CurriculoShow } from './Pages/Curriculos';
+import { ActividadCreate, ActividadEdit, ActividadList, ActividadShow } from './Pages/Actividad';
+import { FamiliaProfesionalCreate, FamiliaProfesionalEdit, FamiliaProfesionalList, FamiliaProfesionalShow } from './Pages/FamiliaProfesional';
 
 export const App = () => (
     <Admin
@@ -33,9 +36,10 @@ export const App = () => (
             create={UserCreate} />
         <Resource
             name="curriculos"
-            list={ListGuesser}
-            edit={EditGuesser}
-            show={ShowGuesser}
+            list={CurriculoList}
+            edit={CurriculoEdit}
+            show={CurriculoShow}
+            create={CurriculoCreate}
             icon={CurriculoIcon}
         />
         <Resource
@@ -56,16 +60,18 @@ export const App = () => (
         />
         <Resource
             name="familias_profesionales"
-            list={ListGuesser}
-            edit={EditGuesser}
-            show={ShowGuesser}
+            list={FamiliaProfesionalList}
+            edit={FamiliaProfesionalEdit}
+            show={FamiliaProfesionalShow}
+            create={FamiliaProfesionalCreate}
             icon={FamiliaIcon}
         />
         <Resource
             name="actividades"
-            list={ListGuesser}
-            edit={EditGuesser}
-            show={ShowGuesser}
+            list={ActividadList}
+            edit={ActividadEdit}
+            show={ActividadShow}
+            create={ActividadCreate}
             icon={ActivityIcon}
         />
         <Resource

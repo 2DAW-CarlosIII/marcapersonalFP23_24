@@ -10,8 +10,6 @@ import {
     SimpleForm,
     ReferenceInput,
     TextInput,
-    NumberField,
-    NumberInput,
     FunctionField,
     SelectInput,
     ShowButton,
@@ -22,28 +20,27 @@ import {
 import { useRecordContext} from 'react-admin';
 import { useMediaQuery } from '@mui/material';
 
-const TutorInput = () => (
-    <ReferenceInput label="Tutor" source="docente_id" reference="users" alwaysOn >
+const OrganizadorInput = () => (
+    <ReferenceInput label="Organizador" source="docente_id" reference="users" alwaysOn >
         <SelectInput
-        label="Tutor"
+        label="Organizador"
         source="docente_id"
         optionText={record => record && `${record.nombre} ${record.apellidos}`} />
     </ReferenceInput>
 )
-const proyectosFilters = [
+const actividadesFilters = [
     <TextInput source="q" label="Search" alwaysOn />,
-    TutorInput(),
+    OrganizadorInput(),
 ];
 
-export const ProyectoList = () => {
+export const ActividadList = () => {
   const isSmall = useMediaQuery((theme) => theme.breakpoints.down('sm'));
   return (
-    <List filters={proyectosFilters} >
+    <List filters={actividadesFilters} >
       {isSmall ? (
         <SimpleList
           primaryText="%{nombre}"
-          secondaryText="%{dominio}"
-          tertiaryText="%{calificacion}"
+          secondaryText="%{insignia}"
           linkType={(record) => (record.canEdit ? 'edit' : 'show')}
         >
           <EditButton />
@@ -52,11 +49,10 @@ export const ProyectoList = () => {
         <Datagrid bulkActionButtons={false} >
           <TextField source="id" />
           <TextField source="nombre" />
-          <TextField source="dominio" />
-          <ReferenceField label="Tutor" source="docente_id" reference="users">
+          <TextField source="insignia" />
+          <ReferenceField label="Organizador" source="docente_id" reference="users">
             <FunctionField render={record => record && `${record.nombre} ${record.apellidos}`} />
           </ReferenceField>
-          <NumberField source="calificacion" />
           <ShowButton />
           <EditButton />
         </Datagrid>
@@ -65,44 +61,41 @@ export const ProyectoList = () => {
   );
 }
 
-export const ProyectoTitle = () => {
+export const ActividadTitle = () => {
   const record = useRecordContext();
-  return <span>Proyecto {record ? `"${record.nombre}"` : ''}</span>;
+  return <span>Actividad {record ? `"${record.nombre}"` : ''}</span>;
 };
 
-export const ProyectoEdit = () => (
-    <Edit title={<ProyectoTitle />}>
-    <SimpleForm>
-        <TextInput source="id" disabled />
-        <TextInput source="nombre" />
-        <TextInput source="dominio" />
-        <TutorInput />
-        <NumberInput source="calificacion" />
-    </SimpleForm>
+export const ActividadEdit = () => (
+    <Edit title={<ActividadTitle />}>
+        <SimpleForm>
+            <TextInput source="id" disabled />
+            <TextInput source="nombre" />
+            <TextInput source="insignia" />
+            <OrganizadorInput />
+        </SimpleForm>
     </Edit>
 );
 
-export const ProyectoShow = () => (
+export const ActividadShow = () => (
     <Show>
         <SimpleShowLayout>
             <TextField source="id" />
             <TextField source="nombre" />
-            <TextField source="dominio" />
-            <ReferenceField label="Tutor" source="docente_id" reference="users">
+            <TextField source="insignia" />
+            <ReferenceField label="Organizador" source="docente_id" reference="users">
                 <FunctionField render={record => record && `${record.nombre} ${record.apellidos}`} />
             </ReferenceField>
-            <NumberField source="calificacion" />
         </SimpleShowLayout>
     </Show>
 );
 
-export const ProyectoCreate = () => (
+export const ActividadCreate = () => (
     <Create>
         <SimpleForm>
             <TextInput source="nombre" />
-            <TextInput source="dominio" />
-            <TutorInput />
-            <NumberInput source="calificacion" />
+            <TextInput source="insignia" />
+            <OrganizadorInput />
         </SimpleForm>
     </Create>
 );

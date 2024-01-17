@@ -16,7 +16,7 @@ class ActividadController extends Controller
     public function index(Request $request)
     {
         return ActividadResource::collection(
-            Actividad::orderBy($request->_sort, $request->_order)
+            Actividad::orderBy($request->_sort ?? 'id', $request->_order ?? 'asc')
             ->paginate($request->perPage));
     }
 
