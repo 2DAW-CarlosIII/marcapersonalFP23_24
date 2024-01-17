@@ -13,6 +13,6 @@ class Reconocimiento extends Model
         'actividad_id',
         'documento',
         'docente_validador',
-        'reconocimientoIMG'
+        'fecha'
     ];
 }
