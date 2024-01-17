@@ -15,11 +15,13 @@ class ReactAdminResponse
      */
     public function handle(Request $request, Closure $next): Response
     {
+
+        $request->merge(['perPage' => 10]);
         if($request->filled('_start')) {
-            $request->merge(['page' => $request->_start / 10 + 1]);
             if($request->filled('_end')) {
                 $request->merge(['perPage' => $request->_end - $request->_start]);
             }
+            $request->merge(['page' => $request->_start / $request->perPage + 1]);
         }
         $response = $next($request);
         if($request->routeIs('*.index')) {

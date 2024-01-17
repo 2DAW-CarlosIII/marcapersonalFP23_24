@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\ActividadController;
 use App\Http\Controllers\API\CicloController;
 use App\Http\Controllers\API\FamiliaProfesionalController;
 use Illuminate\Http\Request;
@@ -7,6 +8,8 @@ use Illuminate\Support\Facades\Route;
 use Psr\Http\Message\ServerRequestInterface;
 use Tqdev\PhpCrudApi\Api;
 use Tqdev\PhpCrudApi\Config\Config;
+use App\Http\Controllers\API\CurriculoController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -27,8 +30,12 @@ Route::prefix('v1')->group(function () {
     Route::apiResource('ciclos', CicloController::class);
     Route::apiResource('familias_profesionales', FamiliaProfesionalController::class)->parameters([
         'familias_profesionales' => 'familiaProfesional'
+    Route::apiResource('curriculos', CurriculoController::class);
+    Route::apiResource('actividades', ActividadController::class)->parameters([
+        'actividades' => 'actividad'
     ]);
 });
+
 
 Route::any('/{any}', function (ServerRequestInterface $request) {
     $config = new Config([
