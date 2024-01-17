@@ -32,7 +32,7 @@ import { useMediaQuery } from '@mui/material';
 
 //inputs para luego poder filtrar por docente_validador, por estudiante y por actividad
 const DocenteInput = () => (
-    <ReferenceInput label="Docente" source="docente_validador" reference="docentes" alwaysOn >
+    <ReferenceInput label="Docente" source="docente_validador" reference="users" alwaysOn >
         <SelectInput
         label="Docente"
         source="docente_validador"
@@ -106,7 +106,7 @@ export const ReconocimientoList = (props) => {
                     <ReferenceField label="Actividad" source="actividad_id" reference="actividades">
                         <FunctionField render={record => record && `${record.nombre}`} />
                     </ReferenceField>
-                    <ReferenceField label="Docente" source="docente_validador" reference="docentes">
+                    <ReferenceField label="Docente" source="docente_validador" reference="users">
                         <FunctionField render={record => record && `${record.nombre} ${record.apellidos}`} />
                     </ReferenceField>
                     <DateField source="fecha" />
@@ -142,7 +142,7 @@ export const ReconocimientoShow = () => (
                     <ReferenceField label="Actividad" source="actividad_id" reference="actividades">
                         <FunctionField render={record => record && `${record.nombre}`} />
                     </ReferenceField>
-                    <ReferenceField label="Docente" source="docente_validador" reference="docentes">
+                    <ReferenceField label="Docente" source="docente_validador" reference="users">
                         <FunctionField render={record => record && `${record.nombre} ${record.apellidos}`} />
                     </ReferenceField>
                     <DateField source="fecha" />
