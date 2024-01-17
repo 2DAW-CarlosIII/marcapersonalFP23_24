@@ -1,0 +1,59 @@
+<?php
+
+namespace App\Http\Controllers\API;
+
+use App\Http\Controllers\Controller;
+use App\Models\Curriculo;
+use Illuminate\Http\Request;
+use App\Http\Resources\CurriculoResource;
+
+class CurriculoController extends Controller
+{
+    public $modelclass = Curriculo::class;
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
+    {
+        return CurriculoResource::collection(Curriculo::paginate());
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        $Curriculo = json_decode($request->getContent(), true);
+
+        $Curriculo = Curriculo::create($Curriculo['data']['attributes']);
+
+        return new CurriculoResource($Curriculo);
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(Curriculo $Curriculo)
+    {
+        return new CurriculoResource($Curriculo);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, Curriculo $Curriculo)
+    {
+        $CurriculoData = json_decode($request->getContent(), true);
+        $Curriculo->update($CurriculoData['data']['attributes']);
+
+        return new CurriculoResource($Curriculo);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(Curriculo $Curriculo)
+    {
+        $Curriculo->delete();
+    }
+}
