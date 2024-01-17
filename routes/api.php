@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\ActividadController;
 use App\Http\Controllers\API\CicloController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -27,7 +28,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::prefix('v1')->group(function () {
     Route::apiResource('ciclos', CicloController::class);
     Route::apiResource('curriculos', CurriculoController::class);
+    Route::apiResource('actividades', ActividadController::class)->parameters([
+        'actividades' => 'actividad'
+    ]);
 });
+
 
 Route::any('/{any}', function (ServerRequestInterface $request) {
     $config = new Config([
