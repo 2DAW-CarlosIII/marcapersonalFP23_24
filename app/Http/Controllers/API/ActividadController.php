@@ -13,9 +13,11 @@ class ActividadController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return ActividadResource::collection(Actividad::paginate());
+        return ActividadResource::collection(
+            Actividad::orderBy($request->_sort, $request->_order)
+            ->paginate($request->perPage));
     }
 
     /**
