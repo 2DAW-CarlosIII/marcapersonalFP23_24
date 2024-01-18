@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Helpers\FilterHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ActividadResource;
 use App\Models\Actividad;
@@ -15,8 +16,11 @@ class ActividadController extends Controller
      */
     public function index(Request $request)
     {
+        $campos = ['nombre'];
+        $query = FilterHelper::applyFilter($request, $campos);
+
         return ActividadResource::collection(
-            Actividad::orderBy($request->_sort ?? 'id', $request->_order ?? 'asc')
+            $query->orderBy($request->_sort ?? 'id', $request->_order ?? 'asc')
             ->paginate($request->perPage));
     }
 

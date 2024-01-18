@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Helpers\FilterHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
 use App\Models\User;
@@ -16,10 +17,8 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $campos = ['apellidos', 'nombre', 'name', 'email'];
-        $query = User::query();
-        foreach($campos as $campo) {
-            $query->orWhere($campo, 'like', '%' . $request->q . '%');
-        }
+        $query = FilterHelper::applyFilter($request, $campos);
+
         return UserResource::collection(
             $query->orderBy($request->_sort ?? 'id', $request->_order ?? 'asc')
             ->paginate($request->perPage));
