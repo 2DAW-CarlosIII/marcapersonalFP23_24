@@ -15,8 +15,13 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
+        $campos = ['apellidos', 'nombre', 'name', 'email'];
+        $query = User::query();
+        foreach($campos as $campo) {
+            $query->orWhere($campo, 'like', '%' . $request->q . '%');
+        }
         return UserResource::collection(
-            User::orderBy($request->_sort ?? 'id', $request->_order ?? 'asc')
+            $query->orderBy($request->_sort ?? 'id', $request->_order ?? 'asc')
             ->paginate($request->perPage));
     }
 
