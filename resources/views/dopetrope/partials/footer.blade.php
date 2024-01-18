@@ -17,7 +17,7 @@
                     <br>
                     <br>
                     <p style="font-size: 10em;">
-                        {{$userCount}}
+                        {{ \App\Models\User::count() }}
                     </p>
                 </section>
             </div>
