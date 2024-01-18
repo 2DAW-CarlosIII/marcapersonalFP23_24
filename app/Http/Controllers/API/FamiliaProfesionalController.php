@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Helpers\FilterHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\FamiliaProfesionalResource;
 use App\Models\FamiliaProfesional;
@@ -16,8 +17,11 @@ class FamiliaProfesionalController extends Controller
      */
     public function index(Request $request)
     {
+        $campos = ['nombre'];
+        $query = FilterHelper::applyFilter($request, $campos);
+
         return FamiliaProfesionalResource::collection(
-            FamiliaProfesional::orderBy($request->_sort ?? 'id', $request->_order ?? 'asc')
+            $query->orderBy($request->_sort ?? 'id', $request->_order ?? 'asc')
             ->paginate($request->perPage));
     }
 
