@@ -12,6 +12,7 @@ class Actividad extends Model
 
     protected $fillable = [
         'docente_id',
+        'nombre',
         'insignia',
     ];
 }

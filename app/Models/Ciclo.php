@@ -5,14 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Reconocimiento extends Model
+class Ciclo extends Model
 {
     use HasFactory;
+
     protected $fillable = [
-        'estudiante_id',
-        'actividad_id',
-        'documento',
-        'docente_validador',
-        'fecha'
+        'id',
+        'codCiclo',
+        'codFamilia',
+        'familia_id',
+        'grado',
+        'nombre'
     ];
 }
