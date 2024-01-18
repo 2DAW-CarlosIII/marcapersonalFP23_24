@@ -16,7 +16,7 @@ class CicloController extends Controller
     public function index(Request $request)
     {
         return CicloResource::collection(
-            Ciclo::orderBy($request->_sort, $request->_order)
+            Ciclo::orderBy($request->_sort ?? 'id', $request->_order ?? 'asc')
             ->paginate($request->perPage));
     }
 

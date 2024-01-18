@@ -22,10 +22,23 @@ import {
 import { useMediaQuery } from '@mui/material';
 import { useRecordContext } from 'react-admin';
 
+const FamiliaProfesionalInput = () => (
+    <ReferenceInput label="Familia Profesional" source="familia_id" reference="familias_profesionales" alwaysOn >
+        <SelectInput
+        label="Familia Profesional"
+        source="familia_id"
+        optionText={record => record && record.nombre} />
+    </ReferenceInput>
+)
+const ciclosFilters = [
+    <TextInput source="q" label="Search" alwaysOn />,
+    FamiliaProfesionalInput(),
+];
+
 export const CicloList = () => {
     const isSmall = useMediaQuery((theme) => theme.breakpoints.down('sm'));
     return (
-        <List >
+        <List filters={ciclosFilters} >
             {isSmall ? (
                 <SimpleList
                     primaryText="%{nombre}"
