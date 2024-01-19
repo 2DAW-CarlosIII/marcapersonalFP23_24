@@ -20,7 +20,7 @@ class ProyectoController extends Controller
     {
         $campos = ['nombre', 'dominio'];
         $query = FilterHelper::applyFilter($request, $campos);
-        $queryFinal = FilterHelper::applySortOrder($query, $request->_sort ?? 'id', $request->_order ?? 'asc');
+        $queryFinal = FilterHelper::applySortOrder($query, $request);
 
         return ProyectoResource::collection(
             $queryFinal->paginate($request->perPage)
