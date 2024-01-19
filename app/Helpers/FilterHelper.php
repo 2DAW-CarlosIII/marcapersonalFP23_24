@@ -16,4 +16,11 @@ class FilterHelper
         }
         return $query;
     }
+
+    public static function applyPaginateAndOrder($query, $request)
+    {
+        //Le tenemos que pasar también el request para acceder a los valores mandados en la petición
+        return $query->orderBy($request->_sort ?? 'id', $request->_order ?? 'asc')
+        ->paginate($request->perPage);
+    }
 }
