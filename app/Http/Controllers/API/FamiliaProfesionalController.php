@@ -19,10 +19,11 @@ class FamiliaProfesionalController extends Controller
     {
         $campos = ['nombre'];
         $query = FilterHelper::applyFilter($request, $campos);
+        $queryFinal = FilterHelper::applySortOrder($query, $request->_sort ?? 'id', $request->_order ?? 'asc');
 
         return FamiliaProfesionalResource::collection(
-            $query->orderBy($request->_sort ?? 'id', $request->_order ?? 'asc')
-            ->paginate($request->perPage));
+            $queryFinal->paginate($request->perPage)
+        );
     }
 
     /**

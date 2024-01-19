@@ -16,4 +16,9 @@ class FilterHelper
         }
         return $query;
     }
+
+    public static function applySortOrder($query, $sort, $order)
+    {
+        return $query->orderBy($sort, $order);
+    }
 }
