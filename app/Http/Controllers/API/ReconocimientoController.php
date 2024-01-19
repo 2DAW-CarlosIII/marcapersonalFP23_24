@@ -16,6 +16,7 @@ class ReconocimientoController extends Controller
      */
     public function index(Request $request)
     {
+
         return ReconocimientoResource::collection(
             Reconocimiento::orderBy($request->_sort, $request->_order)
             ->paginate($request->perPage));

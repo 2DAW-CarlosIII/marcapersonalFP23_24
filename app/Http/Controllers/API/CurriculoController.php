@@ -17,8 +17,10 @@ class CurriculoController extends Controller
     public function index(Request $request)
     {
         $campos = ['video_curriculum', 'pdf_curriculum'];
-        $query = FilterHelper::applyFilter($request, $campos);
-
+        $filterResult = FilterHelper::applyFilter($request, $campos);
+        $query = $filterResult['query'];
+        $totalCount = $filterResult['total'];
+        $request->attributes->set('total_count', $totalCount);
         return CurriculoResource::collection(
             $query->orderBy($request->_sort ?? 'id', $request->_order ?? 'asc')
             ->paginate($request->perPage)

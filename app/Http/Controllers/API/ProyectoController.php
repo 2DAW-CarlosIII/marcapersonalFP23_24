@@ -19,8 +19,10 @@ class ProyectoController extends Controller
     public function index(Request $request)
     {
         $campos = ['nombre', 'dominio'];
-        $query = FilterHelper::applyFilter($request, $campos);
-
+        $filterResult = FilterHelper::applyFilter($request, $campos);
+        $query = $filterResult['query'];
+        $totalCount = $filterResult['total'];
+        $request->attributes->set('total_count', $totalCount);
         return ProyectoResource::collection(
             $query->orderBy($request->_sort ?? 'id', $request->_order ?? 'asc')
                 ->paginate($request->perPage)

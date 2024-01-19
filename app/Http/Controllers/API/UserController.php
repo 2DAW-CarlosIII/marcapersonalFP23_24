@@ -17,11 +17,15 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $campos = ['apellidos', 'nombre', 'name', 'email'];
-        $query = FilterHelper::applyFilter($request, $campos);
 
+        $filterResult = FilterHelper::applyFilter($request, $campos);
+        $query = $filterResult['query'];
+        $totalCount = $filterResult['total'];
+        $request->attributes->set('total_count', $totalCount);
         return UserResource::collection(
             $query->orderBy($request->_sort ?? 'id', $request->_order ?? 'asc')
-            ->paginate($request->perPage));
+                ->paginate($request->perPage)
+        );
     }
 
     /**

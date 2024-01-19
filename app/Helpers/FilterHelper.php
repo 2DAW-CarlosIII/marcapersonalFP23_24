@@ -14,6 +14,10 @@ class FilterHelper
                     $query->orWhere($column, 'like', '%' . $filterValue . '%');
             }
         }
-        return $query;
+        $totalCount = $query->count();
+        return [
+            'query' => $query,
+            'total' => $totalCount
+        ];
     }
 }
