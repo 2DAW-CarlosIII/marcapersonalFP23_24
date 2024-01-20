@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Helpers\FilterHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ReconocimientoResource;
 use App\Models\Reconocimiento;
@@ -16,8 +17,9 @@ class ReconocimientoController extends Controller
      */
     public function index(Request $request)
     {
+        $query = FilterHelper::applyFilter($request, null, ['estudiante_id', 'actividad_id', 'docente_validador']);
         return ReconocimientoResource::collection(
-            Reconocimiento::orderBy($request->_sort, $request->_order)
+            $query->orderBy($request->_sort, $request->_order)
             ->paginate($request->perPage));
     }
 

@@ -17,7 +17,9 @@ class CicloController extends Controller
     public function index(Request $request)
     {
         $campos = ['nombre'];
-        $query = FilterHelper::applyFilter($request, $campos);
+        $query = FilterHelper::applyFilter($request, $campos, ['familia_id']);
+
+
 
         return CicloResource::collection(
             $query->orderBy($request->_sort ?? 'id', $request->_order ?? 'asc')

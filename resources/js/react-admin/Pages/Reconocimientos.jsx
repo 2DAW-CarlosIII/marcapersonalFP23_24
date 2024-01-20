@@ -87,7 +87,7 @@ const DocentesFilter = (props) => (
 export const ReconocimientoList = (props) => {
     const isSmall = useMediaQuery((theme) => theme.breakpoints.down('sm'));
     return (
-        <List {...props} filters={[<EstudiantesFilter />, <ActividadesFilter />, <DocentesFilter />]}>
+        <List {...props} filters={[<EstudianteInput />, <ActividadInput />, <DocenteInput />]}>
         {isSmall ? (
                 <SimpleList
                     primaryText="%{estudiante_id}"
