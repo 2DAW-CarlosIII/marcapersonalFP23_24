@@ -18,11 +18,10 @@ class CurriculoController extends Controller
     {
         $campos = ['video_curriculum', 'pdf_curriculum'];
         $query = FilterHelper::applyFilter($request, $campos);
-        $sortedAndFilteredQuery = FilterHelper::applyPaginateAndOrder($query,$request);
+        $sortedAndFilteredQuery = FilterHelper::applySorterAndOrder($query,$request);
 
         return CurriculoResource::collection(
-            $sortedAndFilteredQuery
-        );
+            $sortedAndFilteredQuery->paginate($request->perPage));
     }
 
     /**

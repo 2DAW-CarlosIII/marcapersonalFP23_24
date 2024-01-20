@@ -18,10 +18,10 @@ class ActividadController extends Controller
     {
         $campos = ['nombre'];
         $query = FilterHelper::applyFilter($request, $campos);
-        $sortedAndFilteredQuery = FilterHelper::applyPaginateAndOrder($query,$request);
+        $sortedAndFilteredQuery = FilterHelper::applySorterAndOrder($query,$request);
 
         return ActividadResource::collection(
-            $sortedAndFilteredQuery);
+            $sortedAndFilteredQuery->paginate($request->perPage));
     }
 
     /**
