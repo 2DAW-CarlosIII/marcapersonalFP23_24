@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Helpers;
 
 class FilterHelper
@@ -11,13 +12,9 @@ class FilterHelper
         $filterValue = $request->q;
         if ($filterValue) {
             foreach ($filterColumns as $column) {
-                    $query->orWhere($column, 'like', '%' . $filterValue . '%');
+                $query->orWhere($column, 'like', '%' . $filterValue . '%');
             }
         }
-        $totalCount = $query->count();
-        return [
-            'query' => $query,
-            'total' => $totalCount
-        ];
+        return  $query;
     }
 }

@@ -17,10 +17,8 @@ class CicloController extends Controller
     public function index(Request $request)
     {
         $campos = ['nombre'];
-        $filterResult = FilterHelper::applyFilter($request, $campos);
-        $query = $filterResult['query'];
-        $totalCount = $filterResult['total'];
-        $request->attributes->set('total_count', $totalCount);
+        $query = FilterHelper::applyFilter($request, $campos);
+        $request->attributes->set('total_count', $query->count());
         return CicloResource::collection(
             $query->orderBy($request->_sort ?? 'id', $request->_order ?? 'asc')
             ->paginate($request->perPage)
