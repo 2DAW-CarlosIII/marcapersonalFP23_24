@@ -16,8 +16,10 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $campos = ['apellidos', 'nombre', 'name', 'email'];
-        $query = FilterHelper::applyFilter($request, $campos);
+
+        $campos = ['apellidos', 'nombre', 'name', 'email','created_at','updated_at'];
+        $tipoBusqueda =[$request->q,$request->created_at,$request->hasta_at];
+        $query = FilterHelper::applyFilter($request, $campos,$tipoBusqueda);
 
         return UserResource::collection(
             $query->orderBy($request->_sort ?? 'id', $request->_order ?? 'asc')

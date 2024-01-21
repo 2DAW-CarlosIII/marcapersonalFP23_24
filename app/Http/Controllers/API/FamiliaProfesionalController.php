@@ -18,7 +18,8 @@ class FamiliaProfesionalController extends Controller
     public function index(Request $request)
     {
         $campos = ['nombre'];
-        $query = FilterHelper::applyFilter($request, $campos);
+        $tipoBusqueda =[$request->q];
+        $query = FilterHelper::applyFilter($request, $campos,$tipoBusqueda);
 
         return FamiliaProfesionalResource::collection(
             $query->orderBy($request->_sort ?? 'id', $request->_order ?? 'asc')

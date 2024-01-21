@@ -30,9 +30,19 @@ const FamiliaProfesionalInput = () => (
         optionText={record => record && record.nombre} />
     </ReferenceInput>
 )
+
+const CodFamiliaInput = () => (
+    <ReferenceInput label="Nombre Familia" source="codFamilia" reference="familias_profesionales">
+        <SelectInput
+            label="Cod Familia"
+            source="familia_id"
+            optionText={record => record && `${record.codigo}`} />
+    </ReferenceInput>
+)
 const ciclosFilters = [
     <TextInput source="q" label="Search" alwaysOn />,
     FamiliaProfesionalInput(),
+    CodFamiliaInput(),
 ];
 
 export const CicloList = () => {
@@ -79,14 +89,7 @@ const FamiliaInput = () => (
     </ReferenceInput>
 )
 
-const CodFamiliaInput = () => (
-    <ReferenceInput label="Nombre Familia" source="codFamilia" reference="familias_profesionales">
-        <SelectInput
-            label="Cod Familia"
-            source="familia_id"
-            optionText={record => record && `${record.codigo}`} />
-    </ReferenceInput>
-)
+
 
 
 
