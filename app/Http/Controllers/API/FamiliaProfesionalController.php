@@ -20,6 +20,10 @@ class FamiliaProfesionalController extends Controller
         $campos = ['nombre'];
         $query = FilterHelper::applyFilter($request, $campos);
 
+        $countRegister = $query->count();
+
+        $request->merge(['countRegister' => $countRegister]);
+
         return FamiliaProfesionalResource::collection(
             $query->orderBy($request->_sort ?? 'id', $request->_order ?? 'asc')
             ->paginate($request->perPage));

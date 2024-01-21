@@ -19,6 +19,10 @@ class UserController extends Controller
         $campos = ['apellidos', 'nombre', 'name', 'email'];
         $query = FilterHelper::applyFilter($request, $campos);
 
+        $countRegister = $query->count();
+
+        $request->merge(['countRegister' => $countRegister]);
+
         return UserResource::collection(
             $query->orderBy($request->_sort ?? 'id', $request->_order ?? 'asc')
             ->paginate($request->perPage));
