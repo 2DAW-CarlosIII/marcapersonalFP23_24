@@ -16,12 +16,16 @@ class ActividadController extends Controller
      */
     public function index(Request $request)
     {
+
         $campos = ['nombre'];
-        $query = FilterHelper::applyFilter($request, $campos);
+        $camposrelacionados = ['docente_id'];
+        $query = FilterHelper::applyFilter($request, $campos, $camposrelacionados);
 
         return ActividadResource::collection(
             $query->orderBy($request->_sort ?? 'id', $request->_order ?? 'asc')
-            ->paginate($request->perPage));
+            ->paginate($request->perPage)
+        );
+
     }
 
     /**

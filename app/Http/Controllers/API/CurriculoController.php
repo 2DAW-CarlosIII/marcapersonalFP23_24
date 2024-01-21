@@ -16,13 +16,16 @@ class CurriculoController extends Controller
      */
     public function index(Request $request)
     {
+
         $campos = ['video_curriculum', 'pdf_curriculum'];
-        $query = FilterHelper::applyFilter($request, $campos);
+        $camposrelacionados = ['user_id'];
+        $query = FilterHelper::applyFilter($request, $campos, $camposrelacionados);
 
         return CurriculoResource::collection(
             $query->orderBy($request->_sort ?? 'id', $request->_order ?? 'asc')
             ->paginate($request->perPage)
         );
+
     }
 
     /**
