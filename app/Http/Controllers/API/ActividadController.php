@@ -17,7 +17,7 @@ class ActividadController extends Controller
     public function index(Request $request)
     {
         $campos = ['nombre'];
-        $query = FilterHelper::applyFilter($request, $campos);
+        $query = FilterHelper::applyFilter($request, $campos, ['docente_id']);
 
         return ActividadResource::collection(
             $query->orderBy($request->_sort ?? 'id', $request->_order ?? 'asc')
