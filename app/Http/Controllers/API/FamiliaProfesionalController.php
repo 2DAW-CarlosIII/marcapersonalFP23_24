@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 class FamiliaProfesionalController extends Controller
 {
     public $modelclass = FamiliaProfesional::class;
+    public $countFiltro = 0;
 
     /**
      * Display a listing of the resource.
@@ -19,7 +20,7 @@ class FamiliaProfesionalController extends Controller
     {
         $campos = ['nombre'];
         $query = FilterHelper::applyFilter($request, $campos);
-
+        $this->countFiltro = $query->count();
         return FamiliaProfesionalResource::collection(
             $query->orderBy($request->_sort ?? 'id', $request->_order ?? 'asc')
             ->paginate($request->perPage));

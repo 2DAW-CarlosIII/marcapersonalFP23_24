@@ -13,6 +13,7 @@ class ProyectoController extends Controller
 {
 
     public $modelclass = Proyecto::class;
+    public $countFiltro = 0;
     /**
      * Display a listing of the resource.
      */
@@ -20,7 +21,7 @@ class ProyectoController extends Controller
     {
         $campos = ['nombre', 'dominio'];
         $query = FilterHelper::applyFilter($request, $campos);
-
+        $this->countFiltro = $query->count();
         return ProyectoResource::collection(
             $query->orderBy($request->_sort ?? 'id', $request->_order ?? 'asc')
                 ->paginate($request->perPage)

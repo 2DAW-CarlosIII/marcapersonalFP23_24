@@ -11,6 +11,7 @@ use App\Http\Resources\CurriculoResource;
 class CurriculoController extends Controller
 {
     public $modelclass = Curriculo::class;
+    public $countFiltro = 0;
     /**
      * Display a listing of the resource.
      */
@@ -18,7 +19,7 @@ class CurriculoController extends Controller
     {
         $campos = ['video_curriculum', 'pdf_curriculum'];
         $query = FilterHelper::applyFilter($request, $campos);
-
+        $this->countFiltro = $query->count();
         return CurriculoResource::collection(
             $query->orderBy($request->_sort ?? 'id', $request->_order ?? 'asc')
             ->paginate($request->perPage)

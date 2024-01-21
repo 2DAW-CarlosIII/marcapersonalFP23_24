@@ -26,8 +26,8 @@ class ReactAdminResponse
         $response = $next($request);
         if($request->routeIs('*.index')) {
             abort_unless(property_exists($request->route()->controller, 'modelclass'), 500, "It must exists a modelclass property in the controller.");
-            $modelClassName = $request->route()->controller->modelclass;
-            $response->header('X-Total-Count',$modelClassName::count());
+            $modelClassName = $request->route()->controller->countFiltro;
+            $response->header('X-Total-Count',$modelClassName);
         }
         try {
             if(is_callable([$response, 'getData'])) {

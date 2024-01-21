@@ -11,6 +11,7 @@ use App\Helpers\FilterHelper;
 class CicloController extends Controller
 {
     public $modelclass = Ciclo::class;
+    public $countFiltro = 0;
     /**
      * Display a listing of the resource.
      */
@@ -18,7 +19,7 @@ class CicloController extends Controller
     {
         $campos = ['nombre'];
         $query = FilterHelper::applyFilter($request, $campos);
-
+        $this->countFiltro = $query->count();
         return CicloResource::collection(
             $query->orderBy($request->_sort ?? 'id', $request->_order ?? 'asc')
             ->paginate($request->perPage)

@@ -10,12 +10,18 @@ use Illuminate\Http\Request;
 class ReconocimientoController extends Controller
 {
     public $modelclass = Reconocimiento::class;
+    public $countFiltro = 0;
 
     /**
      * Display a listing of the resource.
      */
     public function index(Request $request)
     {
+        //TODO
+        //Cambiar por el filtro
+        $query = $this->modelclass::query();
+        //**************************** */
+        $this->countFiltro = $query->count();
         return ReconocimientoResource::collection(
             Reconocimiento::orderBy($request->_sort, $request->_order)
             ->paginate($request->perPage));
