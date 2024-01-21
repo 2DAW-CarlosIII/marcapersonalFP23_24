@@ -11,7 +11,7 @@ import CurriculoIcon from '@mui/icons-material/Badge';
 import FamiliaIcon from '@mui/icons-material/Work';
 import ActivityIcon from '@mui/icons-material/LocalActivity';
 
-import { ReconocimientoList, ReconocimientoEdit, ReconocimientoShow, ReconocimientoCreate } from './Pages/Reconocimientos';
+import { ReconocimientoList, ReconocimientoEdit, ReconocimientoShow, ReconocimientoCreate,EstudiantesFilter,DocentesFilter,ActividadesFilter } from './Pages/Reconocimientos';
 import { CicloCreate, CicloEdit, CicloList, CicloShow } from './Pages/Ciclos'
 import {
     UserEdit, UserList, UserTitle, UserCreate, UserShow

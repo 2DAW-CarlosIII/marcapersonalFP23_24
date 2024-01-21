@@ -31,14 +31,6 @@ import { useMediaQuery } from '@mui/material';
 //id_actividad como nombre (reference field), docente_validador como texto (reference field) y fecha como fecha
 
 //inputs para luego poder filtrar por docente_validador, por estudiante y por actividad
-const DocenteInput = () => (
-    <ReferenceInput label="Docente" source="docente_validador" reference="users" alwaysOn >
-        <SelectInput
-        label="Docente"
-        source="docente_validador"
-        optionText={record => record && `${record.nombre} ${record.apellidos}`} />
-    </ReferenceInput>
-)
 
 const EstudianteInput = () => (
     <ReferenceInput label="Estudiante" source="estudiante_id" reference="users" alwaysOn >
@@ -49,6 +41,8 @@ const EstudianteInput = () => (
     </ReferenceInput>
 )
 
+
+
 const ActividadInput = () => (
     <ReferenceInput label="Actividad" source="actividad_id" reference="actividades">
         <SelectInput
@@ -58,37 +52,76 @@ const ActividadInput = () => (
     </ReferenceInput>
 )
 
+const DocenteInput = () => (
+    <ReferenceInput label="Docente" source="docente_validador" reference="users" alwaysOn >
+        <SelectInput
+        label="Docente"
+        source="docente_validador"
+        optionText={record => record && `${record.nombre} ${record.apellidos}`} />
+    </ReferenceInput>
+)
+
+
 //filtros por docente_validador, por estudiante y por actividad
 
 const EstudiantesFilter = (props) => (
     <Filter {...props}>
-        <TextInput label="Estudiante" source="estudiante_id" alwaysOn />
-        {/* Add more filter fields here as needed */}
+        <ReferenceInput label="Estudiante" source="estudiante_id" reference="users" alwaysOn>
+            <SelectInput
+                label="Estudiante"
+                source="estudiante_id"
+                optionText={(record) => record && `${record.nombre} ${record.apellidos}`}
+            />
+        </ReferenceInput>
+        {/* Otros campos de filtro para estudiantes */}
     </Filter>
 );
 
 const ActividadesFilter = (props) => (
     <Filter {...props}>
-        <TextInput label="Actividad" source="a" alwaysOn />
-        {/* Add more filter fields here as needed */}
+        <ReferenceInput label="Actividad" source="actividad_id" reference="actividades" alwaysOn>
+            <SelectInput
+                label="Actividad"
+                source="actividad_id"
+                optionText={(record) => record && `${record.nombre}`}
+            />
+        </ReferenceInput>
+        {/* Otros campos de filtro para actividades */}
     </Filter>
 );
 
 const DocentesFilter = (props) => (
     <Filter {...props}>
-        <TextInput label="Docente" source="c" alwaysOn />
-        {/* Add more filter fields here as needed */}
+        <ReferenceInput label="Docente" source="docente_validador" reference="users" alwaysOn>
+            <SelectInput
+                label="Docente"
+                source="docente_validador"
+                optionText={(record) => record && `${record.nombre} ${record.apellidos}`}
+            />
+        </ReferenceInput>
+        {/* Otros campos de filtro para docentes */}
     </Filter>
 );
 
+const FilterPanel = (props) => (
+    <Filter {...props}>
+        <EstudiantesFilter />
+        <ActividadesFilter />
+        <DocentesFilter />
+    </Filter>
+);
 
-
+// Lista
 
 export const ReconocimientoList = (props) => {
     const isSmall = useMediaQuery((theme) => theme.breakpoints.down('sm'));
+
     return (
-        <List {...props} filters={[<EstudiantesFilter />, <ActividadesFilter />, <DocentesFilter />]}>
-        {isSmall ? (
+        <List
+            {...props}
+            filters={<FilterPanel />}
+        >
+            {isSmall ? (
                 <SimpleList
                     primaryText="%{estudiante_id}"
                     secondaryText="%{actividad_id}"
@@ -116,7 +149,7 @@ export const ReconocimientoList = (props) => {
             )}
         </List>
     );
-}
+};
 
 export const ReconocimientoTitle = () => {
   const record = useRecordContext();

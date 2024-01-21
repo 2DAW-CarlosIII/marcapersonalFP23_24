@@ -11,8 +11,9 @@ class Reconocimiento extends Model
     protected $fillable = [
         'estudiante_id',
         'actividad_id',
-        'documento',
+
         'docente_validador',
+        'documento',
         'fecha'
     ];
 }
