@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Helpers\FilterHelper;
+use App\Helpers\PaginacionHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
 use App\Models\User;
@@ -19,9 +20,7 @@ class UserController extends Controller
         $campos = ['apellidos', 'nombre', 'name', 'email'];
         $query = FilterHelper::applyFilter($request, $campos);
 
-        return UserResource::collection(
-            $query->orderBy($request->_sort ?? 'id', $request->_order ?? 'asc')
-            ->paginate($request->perPage));
+        return PaginacionHelper::applyPaginacion($query, $request, 'id', 'ASC');
     }
 
     /**

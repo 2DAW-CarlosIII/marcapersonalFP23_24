@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\ActividadResource;
 use App\Models\Actividad;
 use Illuminate\Http\Request;
+use App\Helpers\PaginacionHelper;
 
 class ActividadController extends Controller
 {
@@ -19,9 +20,7 @@ class ActividadController extends Controller
         $campos = ['nombre'];
         $query = FilterHelper::applyFilter($request, $campos);
 
-        return ActividadResource::collection(
-            $query->orderBy($request->_sort ?? 'id', $request->_order ?? 'asc')
-            ->paginate($request->perPage));
+        return PaginacionHelper::applyPaginacion($query, $request, 'id', 'ASC');
     }
 
     /**

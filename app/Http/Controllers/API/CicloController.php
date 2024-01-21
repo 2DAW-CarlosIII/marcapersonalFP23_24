@@ -7,6 +7,7 @@ use App\Http\Resources\CicloResource;
 use App\Models\Ciclo;
 use Illuminate\Http\Request;
 use App\Helpers\FilterHelper;
+use App\Helpers\PaginacionHelper;
 
 class CicloController extends Controller
 {
@@ -19,10 +20,7 @@ class CicloController extends Controller
         $campos = ['nombre'];
         $query = FilterHelper::applyFilter($request, $campos);
 
-        return CicloResource::collection(
-            $query->orderBy($request->_sort ?? 'id', $request->_order ?? 'asc')
-            ->paginate($request->perPage)
-        );
+        return PaginacionHelper::applyPaginacion($query, $request, 'id', 'ASC');
     }
 
     /**

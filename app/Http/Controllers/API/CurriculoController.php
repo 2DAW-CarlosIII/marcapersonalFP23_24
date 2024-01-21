@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Helpers\FilterHelper;
+use App\Helpers\PaginacionHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Curriculo;
 use Illuminate\Http\Request;
@@ -19,10 +20,7 @@ class CurriculoController extends Controller
         $campos = ['video_curriculum', 'pdf_curriculum'];
         $query = FilterHelper::applyFilter($request, $campos);
 
-        return CurriculoResource::collection(
-            $query->orderBy($request->_sort ?? 'id', $request->_order ?? 'asc')
-            ->paginate($request->perPage)
-        );
+        return PaginacionHelper::applyPaginacion($query, $request, 'id', 'ASC');
     }
 
     /**

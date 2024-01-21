@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Helpers\PaginacionHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ReconocimientoResource;
 use App\Models\Reconocimiento;
@@ -16,9 +17,12 @@ class ReconocimientoController extends Controller
      */
     public function index(Request $request)
     {
-        return ReconocimientoResource::collection(
-            Reconocimiento::orderBy($request->_sort, $request->_order)
-            ->paginate($request->perPage));
+        //TODO
+        //Esto hay que cambiarlo por los filtros
+        $modelClassName = $request->route()->controller->modelclass;
+        $query = $modelClassName::query();
+        //********************************************
+        return PaginacionHelper::applyPaginacion($query, $request, 'id', 'ASC');
     }
 
     /**
