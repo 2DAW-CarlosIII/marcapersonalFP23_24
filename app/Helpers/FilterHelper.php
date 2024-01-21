@@ -16,4 +16,10 @@ class FilterHelper
         }
         return $query;
     }
+
+    public static function applySortAndOrder($request, $query) {
+        $query->orderBy($request->_sort ?? 'id', $request->_order ?? 'asc');
+
+        return $query;
+    }
 }
