@@ -21,10 +21,14 @@ class ProyectoController extends Controller
         $campos = ['nombre', 'dominio'];
         $query = FilterHelper::applyFilter($request, $campos);
 
-        return ProyectoResource::collection(
+        $resultados = CicloResource::collection(
             $query->orderBy($request->_sort ?? 'id', $request->_order ?? 'asc')
-                ->paginate($request->perPage)
+            ->paginate($request->perPage)
         );
+
+        $request->merge(['numeroRegistros' => $resultados->total()]);
+
+        return $resultados;
     }
 
     /**

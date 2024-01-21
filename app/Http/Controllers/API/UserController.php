@@ -19,9 +19,14 @@ class UserController extends Controller
         $campos = ['apellidos', 'nombre', 'name', 'email'];
         $query = FilterHelper::applyFilter($request, $campos);
 
-        return UserResource::collection(
+        $resultados = UserResource::collection(
             $query->orderBy($request->_sort ?? 'id', $request->_order ?? 'asc')
-            ->paginate($request->perPage));
+            ->paginate($request->perPage)
+        );
+
+        $request->merge(['numeroRegistros' => $resultados->total()]);
+
+        return $resultados;
     }
 
     /**

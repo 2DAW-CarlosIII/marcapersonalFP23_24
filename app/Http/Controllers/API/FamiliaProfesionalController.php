@@ -20,9 +20,14 @@ class FamiliaProfesionalController extends Controller
         $campos = ['nombre'];
         $query = FilterHelper::applyFilter($request, $campos);
 
-        return FamiliaProfesionalResource::collection(
+        $resultados = FamiliaProfesionalResource::collection(
             $query->orderBy($request->_sort ?? 'id', $request->_order ?? 'asc')
-            ->paginate($request->perPage));
+            ->paginate($request->perPage)
+        );
+
+        $request->merge(['numeroRegistros' => $resultados->total()]);
+
+        return $resultados;
     }
 
     /**
