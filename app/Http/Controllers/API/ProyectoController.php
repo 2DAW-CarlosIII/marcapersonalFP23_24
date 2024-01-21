@@ -13,6 +13,7 @@ class ProyectoController extends Controller
 {
 
     public $modelclass = Proyecto::class;
+    public $totalResultados = 0;
     /**
      * Display a listing of the resource.
      */
@@ -21,10 +22,13 @@ class ProyectoController extends Controller
         $campos = ['nombre', 'dominio'];
         $query = FilterHelper::applyFilter($request, $campos);
 
-        return ProyectoResource::collection(
+        $data = ProyectoResource::collection(
             $query->orderBy($request->_sort ?? 'id', $request->_order ?? 'asc')
                 ->paginate($request->perPage)
         );
+
+        $this->totalResultados = $data -> total();
+        return $data;
     }
 
     /**

@@ -11,6 +11,7 @@ use App\Helpers\FilterHelper;
 class CicloController extends Controller
 {
     public $modelclass = Ciclo::class;
+    public $totalResultados = 0;
     /**
      * Display a listing of the resource.
      */
@@ -19,10 +20,13 @@ class CicloController extends Controller
         $campos = ['nombre'];
         $query = FilterHelper::applyFilter($request, $campos);
 
-        return CicloResource::collection(
+        $data = CicloResource::collection(
             $query->orderBy($request->_sort ?? 'id', $request->_order ?? 'asc')
             ->paginate($request->perPage)
         );
+
+        $this -> totalResultados = $data->total();
+        return $data;
     }
 
     /**

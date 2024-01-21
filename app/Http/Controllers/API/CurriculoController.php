@@ -11,6 +11,7 @@ use App\Http\Resources\CurriculoResource;
 class CurriculoController extends Controller
 {
     public $modelclass = Curriculo::class;
+    public $totalResultados = 0;
     /**
      * Display a listing of the resource.
      */
@@ -19,10 +20,13 @@ class CurriculoController extends Controller
         $campos = ['video_curriculum', 'pdf_curriculum'];
         $query = FilterHelper::applyFilter($request, $campos);
 
-        return CurriculoResource::collection(
+        $data = CurriculoResource::collection(
             $query->orderBy($request->_sort ?? 'id', $request->_order ?? 'asc')
             ->paginate($request->perPage)
         );
+
+        $this -> totalResultados = $data->total();
+        return $data;
     }
 
     /**

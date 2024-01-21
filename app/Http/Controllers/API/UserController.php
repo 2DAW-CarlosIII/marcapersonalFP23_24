@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 class UserController extends Controller
 {
     public $modelclass = User::class;
+    public $totalResultados = 0;
     /**
      * Display a listing of the resource.
      */
@@ -19,9 +20,11 @@ class UserController extends Controller
         $campos = ['apellidos', 'nombre', 'name', 'email'];
         $query = FilterHelper::applyFilter($request, $campos);
 
-        return UserResource::collection(
+        $data = UserResource::collection(
             $query->orderBy($request->_sort ?? 'id', $request->_order ?? 'asc')
             ->paginate($request->perPage));
+        $this -> totalResultados = $data->total();
+        return $data;
     }
 
     /**
