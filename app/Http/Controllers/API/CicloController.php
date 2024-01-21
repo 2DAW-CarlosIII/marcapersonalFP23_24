@@ -19,6 +19,10 @@ class CicloController extends Controller
         $campos = ['nombre'];
         $query = FilterHelper::applyFilter($request, $campos, ['familia_id']);
 
+        $countRegister = $query->count();
+
+        $request->merge(['countRegister' => $countRegister]);
+
         return CicloResource::collection(
             $query->orderBy($request->_sort ?? 'id', $request->_order ?? 'asc')
             ->paginate($request->perPage)

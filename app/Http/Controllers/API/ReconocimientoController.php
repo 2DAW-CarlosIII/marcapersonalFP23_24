@@ -20,6 +20,10 @@ class ReconocimientoController extends Controller
         $campos = ['estudiante_id', 'actividad_id', 'docente_validador'];
         $query = FilterHelper::applyFilter($request, $campos);
 
+        $countRegister = $query->count();
+
+        $request->merge(['countRegister' => $countRegister]);
+
         return ReconocimientoResource::collection(
             $query->orderBy($request->_sort, $request->_order)
             ->paginate($request->perPage)
