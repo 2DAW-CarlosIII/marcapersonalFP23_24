@@ -11,14 +11,22 @@ class FilterHelper
         $filterValue = $request->q;
         if ($filterValue) {
             foreach ($filterColumns as $column) {
-                $query->orWhere($column, 'like', '%' . $filterValue . '%');
+                if (is_numeric($filterValue)) {
+                    $query->orWhere($column, $filterValue);
+                } else {
+                    $query->orWhere($column, 'like', '%' . $filterValue . '%');
+                }
             }
         }
 
         if ($relatedFilters) {
             foreach ($relatedFilters as $relatedFilter) {
                 if($request[$relatedFilter]) {
-                    $query->orWhere($relatedFilter, 'like', '%' . $request[$relatedFilter] . '%');
+                    if (is_numeric($request[$relatedFilter])) {
+                        $query->orWhere($relatedFilter, $request[$relatedFilter]);
+                    } else {
+                        $query->orWhere($relatedFilter, 'like', '%' . $request[$relatedFilter] . '%');
+                    }
                 }
             }
         }
