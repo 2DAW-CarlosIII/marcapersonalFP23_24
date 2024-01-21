@@ -18,10 +18,10 @@ class CicloController extends Controller
     {
         $campos = ['nombre'];
         $query = FilterHelper::applyFilter($request, $campos);
+        $orderQuery = FilterHelper::applySort($query, $request);
 
         return CicloResource::collection(
-            $query->orderBy($request->_sort ?? 'id', $request->_order ?? 'asc')
-            ->paginate($request->perPage)
+            $orderQuery->paginate($request->perPage)
         );
     }
 

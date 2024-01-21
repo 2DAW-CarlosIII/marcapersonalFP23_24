@@ -14,6 +14,18 @@ class FilterHelper
                     $query->orWhere($column, 'like', '%' . $filterValue . '%');
             }
         }
+
+        return $query;
+    }
+
+    public static function applySort($query, $request)
+    {
+
+        $sortColumns = $request->_sort;
+        $sortOrder = $request->_order;
+
+        $query->orderBy($sortColumns ?? 'id', $sortOrder ?? 'asc');
+
         return $query;
     }
 }
