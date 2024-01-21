@@ -23,13 +23,14 @@ import { useRecordContext} from 'react-admin';
 import { useMediaQuery } from '@mui/material';
 
 const TutorInput = () => (
-    <ReferenceInput label="Tutor" source="docente_id" reference="users" alwaysOn >
+    <ReferenceInput label="Tutor" source="docente_id" reference="users" >
         <SelectInput
         label="Tutor"
         source="docente_id"
         optionText={record => record && `${record.nombre} ${record.apellidos}`} />
     </ReferenceInput>
 )
+
 const proyectosFilters = [
     <TextInput source="q" label="Search" alwaysOn />,
     TutorInput(),

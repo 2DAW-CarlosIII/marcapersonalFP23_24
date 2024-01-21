@@ -18,8 +18,9 @@ class ProyectoController extends Controller
      */
     public function index(Request $request)
     {
-        $campos = ['nombre', 'dominio'];
-        $query = FilterHelper::applyFilter($request, $campos);
+        $campos = ["nombre","dominio"];
+        $parametros = ["docente_id"];
+        $query = FilterHelper::applyFilter($request, $campos,$parametros);
 
         return ProyectoResource::collection(
             $query->orderBy($request->_sort ?? 'id', $request->_order ?? 'asc')

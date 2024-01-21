@@ -16,7 +16,7 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $campos = ['apellidos', 'nombre', 'name', 'email'];
+        $campos = ["apellidos","nombre","name","email"];
         $query = FilterHelper::applyFilter($request, $campos);
 
         return UserResource::collection(

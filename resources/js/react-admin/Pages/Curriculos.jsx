@@ -21,7 +21,7 @@ import { useRecordContext} from 'react-admin';
 import { useMediaQuery } from '@mui/material';
 
 const EstudianteInput = () => (
-    <ReferenceInput label="Estudiante" source="user_id" reference="users" alwaysOn >
+    <ReferenceInput label="Estudiante" source="user_id" reference="users" >
         <SelectInput
         label="Estudiante"
         source="user_id"

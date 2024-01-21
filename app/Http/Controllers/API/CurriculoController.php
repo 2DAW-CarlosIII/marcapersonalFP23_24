@@ -16,8 +16,9 @@ class CurriculoController extends Controller
      */
     public function index(Request $request)
     {
-        $campos = ['video_curriculum', 'pdf_curriculum'];
-        $query = FilterHelper::applyFilter($request, $campos);
+        $campos = ["video_curriculum","pdf_curriculum"];
+        $parametros = ["user_id"];
+        $query = FilterHelper::applyFilter($request, $campos, $parametros);
 
         return CurriculoResource::collection(
             $query->orderBy($request->_sort ?? 'id', $request->_order ?? 'asc')

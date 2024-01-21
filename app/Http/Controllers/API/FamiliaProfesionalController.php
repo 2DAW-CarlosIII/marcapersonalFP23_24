@@ -17,7 +17,7 @@ class FamiliaProfesionalController extends Controller
      */
     public function index(Request $request)
     {
-        $campos = ['nombre'];
+        $campos = ["nombre","codigo"];
         $query = FilterHelper::applyFilter($request, $campos);
 
         return FamiliaProfesionalResource::collection(
