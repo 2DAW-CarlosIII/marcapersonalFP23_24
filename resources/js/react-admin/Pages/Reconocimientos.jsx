@@ -50,7 +50,7 @@ const EstudianteInput = () => (
 )
 
 const ActividadInput = () => (
-    <ReferenceInput label="Actividad" source="actividad_id" reference="actividades">
+    <ReferenceInput label="Actividad" source="actividad_id" reference="actividades" alwaysOn>
         <SelectInput
         label="Actividad"
         source="actividad_id"
@@ -60,34 +60,17 @@ const ActividadInput = () => (
 
 //filtros por docente_validador, por estudiante y por actividad
 
-const EstudiantesFilter = (props) => (
-    <Filter {...props}>
-        <TextInput label="Estudiante" source="estudiante_id" alwaysOn />
-        {/* Add more filter fields here as needed */}
-    </Filter>
-);
 
-const ActividadesFilter = (props) => (
-    <Filter {...props}>
-        <TextInput label="Actividad" source="a" alwaysOn />
-        {/* Add more filter fields here as needed */}
-    </Filter>
-);
-
-const DocentesFilter = (props) => (
-    <Filter {...props}>
-        <TextInput label="Docente" source="c" alwaysOn />
-        {/* Add more filter fields here as needed */}
-    </Filter>
-);
-
-
-
+const ReconocimientosFilters = [
+    DocenteInput(),
+    EstudianteInput(),
+    ActividadInput(),
+];
 
 export const ReconocimientoList = (props) => {
     const isSmall = useMediaQuery((theme) => theme.breakpoints.down('sm'));
     return (
-        <List {...props} filters={[<EstudiantesFilter />, <ActividadesFilter />, <DocentesFilter />]}>
+        <List {...props} filters={ReconocimientosFilters}>
         {isSmall ? (
                 <SimpleList
                     primaryText="%{estudiante_id}"
