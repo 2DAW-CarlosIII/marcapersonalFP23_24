@@ -6,6 +6,7 @@ namespace Database\Seeders;
 
 use App\Models\Estudiante;
 use App\Models\Proyecto;
+use App\Models\UsersCompetencia;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Schema;
@@ -31,6 +32,8 @@ class DatabaseSeeder extends Seeder
         $this->call(ActividadesTableSeeder::class);
         $this->call(FamiliasProfesionalesSeeder::class);
         $this->call(CiclosSeeder::class);
+        $this->call(CompetenciasTableSeeder::class);
+        $this->call(UsersCompetenciasTableSeeder::class);
 
         self::seedProyectos();
         $this->command->info('Tablas inicializadas con datos!');
@@ -41,7 +44,7 @@ class DatabaseSeeder extends Seeder
 
     private static function seedProyectos(): void
     {
-        Proyecto::truncate();
+        UsersCompetencia::truncate();
         foreach( self::$arrayProyectos as $proyecto ) {
             $p = new Proyecto;
             $p->docente_id = $proyecto['docente_id'];
@@ -51,7 +54,17 @@ class DatabaseSeeder extends Seeder
             $p->calificacion = rand(3,10);
             $p->save();
         }
+
+        Proyecto::truncate();
+        foreach( self::$arrayUsersCompetencia as $usersCompetencia) {
+            $p = new UsersCompetencia;
+            $p->docente_id = $usersCompetencia['docente_id'];
+            $p->nombre = $usersCompetencia['nombre'];
+            $p->dominio = $usersCompetencia['dominio'];
+        }
     }
+
+
     private static $arrayProyectos = [
         [
             'docente_id' => 1,
@@ -152,6 +165,33 @@ class DatabaseSeeder extends Seeder
                 'fecha_fin' => '2024-02-28',
                 'calificacion' => 9.4
             ]
+        ],
+    ];
+
+    private static $arrayUsersCompetencia = [
+        [
+            'user_id' => 1,
+            'competencia_id' => 1,
+            'docente_validador' => 'docente1'
+        ],
+        [
+            'user_id' => 2,
+            'competencia_id' => 2,
+            'docente_validador' => 'docente2'
+        ],
+        [
+            'user_id' => 3,
+            'competencia_id' => 3,
+            'docente_validador' => 'docente3'
+        ],[
+            'user_id' => 4,
+            'competencia_id' => 4,
+            'docente_validador' => 'docente4'
+        ],
+        [
+            'user_id' => 5,
+            'competencia_id' => 5,
+            'docente_validador' => 'docente5'
         ],
     ];
 }
