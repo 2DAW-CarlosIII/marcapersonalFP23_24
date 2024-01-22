@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('users_competencias', function (Blueprint $table) {
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('competencia_id');
-            $table->unsignedBigInteger('docente_validador');
             $table->foreign('user_id')->references('id')->on('users');
+            $table->unsignedBigInteger('competencia_id');
             $table->foreign('competencia_id')->references('id')->on('competencias');
+            $table->unsignedBigInteger('docente_validador');
             $table->foreign('docente_validador')->references('id')->on('users');
             $table->timestamps();
         });

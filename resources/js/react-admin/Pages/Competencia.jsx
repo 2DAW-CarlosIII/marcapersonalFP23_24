@@ -24,7 +24,6 @@ import { useMediaQuery } from '@mui/material';
 
 const competenciasFilters = [
     <TextInput source="q" label="Search" alwaysOn />,
-    FamiliaInput(),
 ];
 
 export const CompetenciaList = () => {
@@ -54,7 +53,7 @@ export const CompetenciaList = () => {
 
 export const CompetenciaTitle = () => {
   const record = useRecordContext();
-  return <span>Ciclo {record ? `"${record.nombre}"` : ''}</span>;
+  return <span>Competencia {record ? `"${record.nombre}"` : ''}</span>;
 };
 
 export const CompetenciaEdit = () => (
