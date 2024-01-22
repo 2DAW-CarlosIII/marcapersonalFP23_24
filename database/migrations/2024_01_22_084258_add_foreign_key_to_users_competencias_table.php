@@ -14,8 +14,10 @@ return new class extends Migration
         Schema::table('users_competencias', function (Blueprint $table) {
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->unsignedBigInteger('competencia');
-            $table->foreign('id')->references('id')->on('competencias');
+            $table->unsignedBigInteger('competencia_id');
+            $table->foreign('competencia_id')->references('id')->on('competencias');
+            $table->unsignedBigInteger('docente_validador');
+            $table->foreign('docente_validador')->references('id')->on('users');
         });
     }
 
@@ -27,8 +29,10 @@ return new class extends Migration
         Schema::table('users_competencias', function (Blueprint $table) {
             $table->dropForeign('users_competencias_user_id_foreign');
             $table->dropColumn('user_id');
-            $table->dropForeign('users_competencias_id_foreign');
-            $table->dropColumn('competencia');
+            $table->dropForeign('users_competencias_competencia_id_foreign');
+            $table->dropColumn('competencia_id');
+            $table->dropForeign('users_competencias_docente_validador_foreign');
+            $table->dropColumn('docente_validador');
         });
     }
 };
