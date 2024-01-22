@@ -82,5 +82,12 @@ export const App = () => (
             show={ReconocimientoShow}
             create={ReconocimientoCreate}
         />
+        <Resource name="competencias"
+         icon={CicloIcon}
+         list={CompetenciaList}
+         edit={CompetenciaEdit}
+         show={CompetenciaShow}
+         create={CompetenciaCreate}
+         />
     </Admin>
 );

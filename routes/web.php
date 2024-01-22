@@ -10,6 +10,7 @@ use App\Http\Controllers\CurriculoController;
 use App\Http\Controllers\EstudianteController;
 use App\Http\Controllers\DocenteController;
 use App\Http\Controllers\TallerController;
+use App\Http\Controllers\CompetenciaController;
 
 use Illuminate\Foundation\Application;
 use Inertia\Inertia;
@@ -152,6 +153,20 @@ Route::prefix('docentes')->group(function () {
     Route::get('/edit/{id}', [DocenteController::class, 'getEdit'])->where('id', '[0-9]+')->middleware('auth');
 
     Route::put('/edit/{id}', [DocenteController::class, 'putEdit'])->where('id', '[0-9]+');
+});
+
+Route::prefix('competencias')->group(function () {
+
+    Route::get('/', [CompetenciaController::class, 'getIndex'])->name('docentes');
+
+    Route::get('/show/{id}', [CompetenciaController::class, 'getShow'])->where('id', '[0-9]+');
+
+    Route::get('/create', [CompetenciaController::class, 'getCreate'])->middleware('auth');
+
+    Route::get('/edit/{id}', [CompetenciaController::class, 'getEdit'])->where('id', '[0-9]+')->middleware('auth');
+
+    Route::put('/edit/{id}', [CompetenciaController::class, 'putEdit'])->where('id', '[0-9]+');
+
 });
 
 Route::get('/talleres', [TallerController::class, 'getIndex']);
