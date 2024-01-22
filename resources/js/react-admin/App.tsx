@@ -10,6 +10,7 @@ import ProyectoIcon from '@mui/icons-material/AccountTree';
 import CurriculoIcon from '@mui/icons-material/Badge';
 import FamiliaIcon from '@mui/icons-material/Work';
 import ActivityIcon from '@mui/icons-material/LocalActivity';
+import IdiomaIcon from '@mui/icons-material/Language';
 
 import { ReconocimientoList, ReconocimientoEdit, ReconocimientoShow, ReconocimientoCreate } from './Pages/Reconocimientos';
 import { CicloCreate, CicloEdit, CicloList, CicloShow } from './Pages/Ciclos'
@@ -20,6 +21,7 @@ import { ProyectoList, ProyectoEdit, ProyectoShow, ProyectoCreate } from './Page
 import { CurriculoCreate, CurriculoEdit, CurriculoList, CurriculoShow } from './Pages/Curriculos';
 import { ActividadCreate, ActividadEdit, ActividadList, ActividadShow } from './Pages/Actividad';
 import { FamiliaProfesionalCreate, FamiliaProfesionalEdit, FamiliaProfesionalList, FamiliaProfesionalShow } from './Pages/FamiliaProfesional';
+import { IdiomaCreate, IdiomaEdit, IdiomaList, IdiomaShow } from './Pages/Idiomas';
 
 export const App = () => (
     <Admin
@@ -81,6 +83,15 @@ export const App = () => (
             edit={ReconocimientoEdit}
             show={ReconocimientoShow}
             create={ReconocimientoCreate}
+        />
+
+        <Resource
+            name="idiomas"
+            icon={IdiomaIcon}
+            list={IdiomaList}
+            edit={IdiomaEdit}
+            show={IdiomaShow}
+            create={IdiomaCreate}
         />
     </Admin>
 );
