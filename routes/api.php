@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\API\ActividadController;
 use App\Http\Controllers\API\CicloController;
+use App\Http\Controllers\API\CompetenciaController;
+use App\Http\Controllers\API\UserCompetenciaController;
 use App\Http\Controllers\API\ReconocimientoController;
 use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\API\ProyectoController;
@@ -12,7 +14,7 @@ use Psr\Http\Message\ServerRequestInterface;
 use Tqdev\PhpCrudApi\Api;
 use Tqdev\PhpCrudApi\Config\Config;
 use App\Http\Controllers\API\CurriculoController;
-
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,6 +42,10 @@ Route::prefix('v1')->group(function () {
     Route::apiResource('curriculos', CurriculoController::class);
     Route::apiResource('actividades', ActividadController::class)->parameters([
         'actividades' => 'actividad'
+    ]);
+    Route::apiResource('competencias', CompetenciaController::class);
+    Route::apiResource('users_competencias', UserCompetenciaController::class)->parameters([
+        'users_competencias' => 'userCompetencia'
     ]);
 });
 
