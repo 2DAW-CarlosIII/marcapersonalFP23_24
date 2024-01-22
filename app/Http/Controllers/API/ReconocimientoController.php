@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\ReconocimientoResource;
 use App\Models\Reconocimiento;
 use Illuminate\Http\Request;
+use App\Helpers\FilterHelper;
 
 class ReconocimientoController extends Controller
 {
@@ -16,8 +17,11 @@ class ReconocimientoController extends Controller
      */
     public function index(Request $request)
     {
+        $campos = [];
+        $recursosrelacionados = ['actividad_id', 'estudiante_id', 'docente_validador'];
+        $query = FilterHelper::applyFilter($request, $campos, $recursosrelacionados);
         return ReconocimientoResource::collection(
-            Reconocimiento::orderBy($request->_sort, $request->_order)
+            $query->orderBy($request->_sort ?? 'id', $request->_order ?? 'asc')
             ->paginate($request->perPage));
     }
 
