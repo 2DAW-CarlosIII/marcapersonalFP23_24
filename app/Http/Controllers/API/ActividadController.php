@@ -18,7 +18,8 @@ class ActividadController extends Controller
     {
         $campos = ['nombre'];
         $query = FilterHelper::applyFilter($request, $campos);
-
+        $numeroCampos=$query->count();
+        $request->merge(['numeroCampos'=>$numeroCampos]);
         return ActividadResource::collection(
             $query->orderBy($request->_sort ?? 'id', $request->_order ?? 'asc')
             ->paginate($request->perPage));

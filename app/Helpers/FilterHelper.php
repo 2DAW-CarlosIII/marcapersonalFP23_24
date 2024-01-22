@@ -16,4 +16,5 @@ class FilterHelper
         }
         return $query;
     }
+
 }

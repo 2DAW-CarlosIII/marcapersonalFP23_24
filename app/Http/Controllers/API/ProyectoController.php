@@ -20,7 +20,8 @@ class ProyectoController extends Controller
     {
         $campos = ['nombre', 'dominio'];
         $query = FilterHelper::applyFilter($request, $campos);
-
+        $numeroCampos=$query->count();
+        $request->merge(['numeroCampos'=>$numeroCampos]);
         return ProyectoResource::collection(
             $query->orderBy($request->_sort ?? 'id', $request->_order ?? 'asc')
                 ->paginate($request->perPage)
