@@ -15,8 +15,13 @@ class CicloController extends Controller
      */
     public function index(Request $request)
     {
+        $campos = ['nombre'];
+        $query = Ciclo::query();
+        foreach($campos as $campo){
+            $query->orWhere($campo,'like','%' . $request->q . '%');
+        }
         return CicloResource::collection(
-            Ciclo::orderBy($request->_sort ?? 'id', $request->_order ?? 'asc')
+            $query->orderBy($request->_sort ?? 'id', $request->_order ?? 'asc')
             ->paginate($request->perPage));
     }
 
