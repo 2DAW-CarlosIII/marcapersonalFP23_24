@@ -6,6 +6,7 @@ namespace Database\Seeders;
 
 use App\Models\Estudiante;
 use App\Models\Proyecto;
+use App\Models\Competencia;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Schema;
@@ -31,6 +32,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ActividadesTableSeeder::class);
         $this->call(FamiliasProfesionalesSeeder::class);
         $this->call(CiclosSeeder::class);
+        $this->call(CompetenciasTableSeeder::class);
 
         self::seedProyectos();
         $this->command->info('Tablas inicializadas con datos!');
