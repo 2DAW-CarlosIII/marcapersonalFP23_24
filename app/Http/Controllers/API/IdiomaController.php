@@ -4,12 +4,9 @@ namespace App\Http\Controllers\API;
 
 use App\Helpers\FilterHelper;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\CicloResource;
 use App\Http\Resources\IdiomaResource;
-use App\Models\Ciclo;
 use App\Models\Idioma;
 use Illuminate\Http\Request;
-use PHPUnit\Util\Filter;
 
 class IdiomaController extends Controller
 {
@@ -32,11 +29,11 @@ class IdiomaController extends Controller
      */
     public function store(Request $request)
     {
-        $ciclo = json_decode($request->getContent(), true);
+        $idioma = json_decode($request->getContent(), true);
 
-        $ciclo = Ciclo::create($ciclo);
+        $idioma = Idioma::create($idioma);
 
-        return new CicloResource($ciclo);
+        return new IdiomaResource($idioma);
     }
 
     /**
@@ -44,7 +41,7 @@ class IdiomaController extends Controller
      */
     public function show(Idioma $idioma)
     {
-        return new CicloResource($idioma);
+        return new IdiomaResource($idioma);
     }
 
     /**

@@ -32,7 +32,7 @@ class DatabaseSeeder extends Seeder
         $this->call(FamiliasProfesionalesSeeder::class);
         $this->call(CiclosSeeder::class);
         $this->call(IdiomasTableSeeder::class);
-        $this->call(Users_IdiomasTableSeeder::class);
+        $this->call(UsersIdiomasTableSeeder::class);
 
         self::seedProyectos();
         $this->command->info('Tablas inicializadas con datos!');

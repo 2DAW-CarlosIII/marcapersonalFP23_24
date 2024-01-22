@@ -13,7 +13,7 @@ use Psr\Http\Message\ServerRequestInterface;
 use Tqdev\PhpCrudApi\Api;
 use Tqdev\PhpCrudApi\Config\Config;
 use App\Http\Controllers\API\CurriculoController;
-
+use App\Http\Controllers\API\UsersIdiomaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,6 +43,8 @@ Route::prefix('v1')->group(function () {
         'actividades' => 'actividad'
     ]);
     Route::apiResource('idiomas', IdiomaController::class);
+
+    Route::apiResource('users_idiomas', UsersIdiomaController::class);
 });
 
 
