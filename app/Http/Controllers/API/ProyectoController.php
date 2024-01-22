@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Helpers\FilterHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\CicloResource;
 use App\Http\Resources\ProyectoResource;
@@ -17,8 +18,11 @@ class ProyectoController extends Controller
      */
     public function index(Request $request)
     {
+        $campos = ['nombre', 'dominio'];
+        $query = FilterHelper::applyFilter($request, $campos);
+
         return ProyectoResource::collection(
-            Proyecto::orderBy($request->_sort ?? 'id', $request->_order ?? 'asc')
+            $query->orderBy($request->_sort ?? 'id', $request->_order ?? 'asc')
                 ->paginate($request->perPage)
         );
     }
