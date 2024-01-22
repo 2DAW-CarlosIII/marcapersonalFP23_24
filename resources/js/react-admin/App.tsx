@@ -1,31 +1,80 @@
-import { Admin, Resource, ListGuesser, EditGuesser, ShowGuesser } from 'react-admin';
-import { dataProvider } from './dataProvider';
-import { authProvider } from './authProvider';
+import {
+    ListGuesser,
+    EditGuesser,
+    ShowGuesser,
+    Admin,
+    Resource,
+} from "react-admin";
+import { dataProvider } from "./dataProvider";
+import { authProvider } from "./authProvider";
+import React from "react";
 
 // Icons
-import UserIcon from '@mui/icons-material/AccountCircle';
-import ReconocimientoIcon from '@mui/icons-material/AccountTree';
-import CicloIcon from '@mui/icons-material/School';
-import ProyectoIcon from '@mui/icons-material/AccountTree';
-import CurriculoIcon from '@mui/icons-material/Badge';
-import FamiliaIcon from '@mui/icons-material/Work';
-import ActivityIcon from '@mui/icons-material/LocalActivity';
-
-import { ReconocimientoList, ReconocimientoEdit, ReconocimientoShow, ReconocimientoCreate } from './Pages/Reconocimientos';
-import { CicloCreate, CicloEdit, CicloList, CicloShow } from './Pages/Ciclos'
+import UserIcon from "@mui/icons-material/AccountCircle";
+import ReconocimientoIcon from "@mui/icons-material/AccountTree";
+import CicloIcon from "@mui/icons-material/School";
+import ProyectoIcon from "@mui/icons-material/AccountTree";
+import CurriculoIcon from "@mui/icons-material/Badge";
+import FamiliaIcon from "@mui/icons-material/Work";
+import ActivityIcon from "@mui/icons-material/LocalActivity";
+import IdiomaIcon from "@mui/icons-material/Translate";
+import IdiomaUserIcon from "@mui/icons-material/InterpreterMode";
 import {
-    UserEdit, UserList, UserTitle, UserCreate, UserShow
-} from './Pages/Users';
-import { ProyectoList, ProyectoEdit, ProyectoShow, ProyectoCreate } from './Pages/Proyectos';
-import { CurriculoCreate, CurriculoEdit, CurriculoList, CurriculoShow } from './Pages/Curriculos';
-import { ActividadCreate, ActividadEdit, ActividadList, ActividadShow } from './Pages/Actividad';
-import { FamiliaProfesionalCreate, FamiliaProfesionalEdit, FamiliaProfesionalList, FamiliaProfesionalShow } from './Pages/FamiliaProfesional';
+    ReconocimientoList,
+    ReconocimientoEdit,
+    ReconocimientoShow,
+    ReconocimientoCreate,
+} from "./Pages/Reconocimientos";
+import { CicloCreate, CicloEdit, CicloList, CicloShow } from "./Pages/Ciclos";
+import {
+    UserEdit,
+    UserList,
+    UserTitle,
+    UserCreate,
+    UserShow,
+} from "./Pages/Users";
+import {
+    ProyectoList,
+    ProyectoEdit,
+    ProyectoShow,
+    ProyectoCreate,
+} from "./Pages/Proyectos";
+import {
+    CurriculoCreate,
+    CurriculoEdit,
+    CurriculoList,
+    CurriculoShow,
+} from "./Pages/Curriculos";
+import {
+    ActividadCreate,
+    ActividadEdit,
+    ActividadList,
+    ActividadShow,
+} from "./Pages/Actividad";
+import {
+    FamiliaProfesionalCreate,
+    FamiliaProfesionalEdit,
+    FamiliaProfesionalList,
+    FamiliaProfesionalShow,
+} from "./Pages/FamiliaProfesional";
+import {
+    IdiomaCreate,
+    IdiomaEdit,
+    IdiomaList,
+    IdiomaShow,
+} from "./Pages/Idioma";
+import {
+    IdiomauserList,
+    IdiomauserCreate,
+    IdiomauserEdit,
+    IdiomauserShow,
+} from "./Pages/Idiomauser";
 
 export const App = () => (
     <Admin
         dataProvider={dataProvider}
         authProvider={authProvider}
-        basename='/dashboard'
+        basename="/dashboard"
     >
         <Resource
             name="users"
@@ -33,7 +82,8 @@ export const App = () => (
             list={UserList}
             edit={UserEdit}
             show={UserShow}
-            create={UserCreate} />
+            create={UserCreate}
+        />
         <Resource
             name="curriculos"
             list={CurriculoList}
@@ -81,6 +131,24 @@ export const App = () => (
             edit={ReconocimientoEdit}
             show={ReconocimientoShow}
             create={ReconocimientoCreate}
+        />
+
+        <Resource
+            name="idiomas"
+            icon={IdiomaIcon}
+            list={IdiomaList}
+            edit={IdiomaEdit}
+            show={IdiomaShow}
+            create={IdiomaCreate}
+        />
+
+        <Resource
+            name="idiomasusers"
+            icon={IdiomaUserIcon}
+            list={IdiomauserList}
+            /* edit={IdiomauserEdit} */
+            show={IdiomauserShow}
+            create={IdiomauserCreate}
         />
     </Admin>
 );
