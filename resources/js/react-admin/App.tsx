@@ -10,6 +10,8 @@ import ProyectoIcon from '@mui/icons-material/AccountTree';
 import CurriculoIcon from '@mui/icons-material/Badge';
 import FamiliaIcon from '@mui/icons-material/Work';
 import ActivityIcon from '@mui/icons-material/LocalActivity';
+import CompetenciaIcon from '@mui/icons-material/Extension';
+import UserCompetenciaIcon from '@mui/icons-material/School';
 
 import { ReconocimientoList, ReconocimientoEdit, ReconocimientoShow, ReconocimientoCreate } from './Pages/Reconocimientos';
 import { CicloCreate, CicloEdit, CicloList, CicloShow } from './Pages/Ciclos'
@@ -21,7 +23,7 @@ import { CurriculoCreate, CurriculoEdit, CurriculoList, CurriculoShow } from './
 import { ActividadCreate, ActividadEdit, ActividadList, ActividadShow } from './Pages/Actividad';
 import { FamiliaProfesionalCreate, FamiliaProfesionalEdit, FamiliaProfesionalList, FamiliaProfesionalShow } from './Pages/FamiliaProfesional';
 import { CompetenciaCreate, CompetenciaEdit, CompetenciaList, CompetenciaShow } from './Pages/Competencias';
-
+import { User_CompetenciaCreate, User_CompetenciaEdit, User_CompetenciaList, User_CompetenciaShow } from './Pages/Users_Competencia';
 
 export const App = () => (
     <Admin
@@ -86,11 +88,19 @@ export const App = () => (
         />
         <Resource
             name="competencias"
-            icon={ReconocimientoIcon}
+            icon={CompetenciaIcon}
             list={CompetenciaList}
             edit={CompetenciaEdit}
             show={CompetenciaShow}
             create={CompetenciaCreate}
+        />
+        <Resource
+            name="UserCompetencias"
+            icon={UserCompetenciaIcon}
+            list={User_CompetenciaList}
+            edit={User_CompetenciaEdit}
+            show={User_CompetenciaShow}
+            create={User_CompetenciaCreate}
         />
     </Admin>
 );

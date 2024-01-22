@@ -42,6 +42,7 @@ Route::prefix('v1')->group(function () {
         'actividades' => 'actividad'
     ]);
     Route::apiResource('competencias', CompetenciaController::class);
+    Route::apiResource('UserCompetencias', CompetenciaController::class);
 });
 
 
