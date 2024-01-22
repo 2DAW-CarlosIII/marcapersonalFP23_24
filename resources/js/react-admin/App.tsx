@@ -20,7 +20,7 @@ import { ProyectoList, ProyectoEdit, ProyectoShow, ProyectoCreate } from './Page
 import { CurriculoCreate, CurriculoEdit, CurriculoList, CurriculoShow } from './Pages/Curriculos';
 import { ActividadCreate, ActividadEdit, ActividadList, ActividadShow } from './Pages/Actividad';
 import { FamiliaProfesionalCreate, FamiliaProfesionalEdit, FamiliaProfesionalList, FamiliaProfesionalShow } from './Pages/FamiliaProfesional';
-
+import { CompetenciaList } from './Pages/Competencia';
 export const App = () => (
     <Admin
         dataProvider={dataProvider}
@@ -81,6 +81,11 @@ export const App = () => (
             edit={ReconocimientoEdit}
             show={ReconocimientoShow}
             create={ReconocimientoCreate}
+        />
+ <Resource
+            name="competencias"
+            icon={ReconocimientoIcon}
+            list={CompetenciaList}
         />
     </Admin>
 );

@@ -34,6 +34,8 @@ Route::prefix('v1')->group(function () {
     Route::apiResource('reconocimientos', ReconocimientoController::class);
     Route::apiResource('users', UserController::class);
     Route::apiResource('proyectos', ProyectoController::class);
+    Route::apiResource('competencias', ProyectoController::class);
+    Route::apiResource('users_competencias', ProyectoController::class);
     Route::apiResource('familias_profesionales', FamiliaProfesionalController::class)->parameters([
         'familias_profesionales' => 'familiaProfesional'
     ]);
