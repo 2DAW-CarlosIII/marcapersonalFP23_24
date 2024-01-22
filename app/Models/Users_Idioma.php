@@ -10,6 +10,7 @@ class Users_Idioma extends Model
     use HasFactory;
 
     protected $fillable = [
+        'idioma_id',
         'certificado',
     ];
 }
