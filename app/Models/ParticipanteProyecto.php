@@ -15,4 +15,11 @@ class ParticipanteProyecto extends Model
     ];
 
     protected $table = 'participantes_proyectos';
+
+    protected $primaryKey =  [
+        'estudiante_id',
+        'proyecto_id',
+    ];
+
+    public $incrementing = false;
 }

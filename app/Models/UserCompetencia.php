@@ -16,4 +16,11 @@ class UserCompetencia extends Model
     ];
 
     protected $table = "users_competencias";
+
+    protected $primaryKey = [
+        'user_id',
+        'competencia_id',
+    ];
+
+    public $incrementing = false;
 }

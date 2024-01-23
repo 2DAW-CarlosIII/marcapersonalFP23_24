@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Proyecto;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,8 +19,8 @@ class ParticipanteProyectoFactory extends Factory
     public function definition(): array
     {
         return [
-            'estudiante_id' => random_int(1, 20),
-            'proyecto_id' => random_int(1, 20),
+            'estudiante_id' => User::all()->random()->id,
+            'proyecto_id' => Proyecto::all()->random()->id,
         ];
     }
 }
