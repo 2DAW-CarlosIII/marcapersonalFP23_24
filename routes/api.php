@@ -6,7 +6,6 @@ use App\Http\Controllers\API\ReconocimientoController;
 use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\API\ProyectoController;
 use App\Http\Controllers\API\FamiliaProfesionalController;
-use App\Http\Controllers\API\EmpresaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Psr\Http\Message\ServerRequestInterface;
@@ -42,7 +41,6 @@ Route::prefix('v1')->group(function () {
     Route::apiResource('actividades', ActividadController::class)->parameters([
         'actividades' => 'actividad'
     ]);
-    Route::apiResource('empresas', EmpresaController::class);
 });
 
 

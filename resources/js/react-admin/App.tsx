@@ -13,7 +13,6 @@ import ActivityIcon from '@mui/icons-material/LocalActivity';
 
 import { ReconocimientoList, ReconocimientoEdit, ReconocimientoShow, ReconocimientoCreate } from './Pages/Reconocimientos';
 import { CicloCreate, CicloEdit, CicloList, CicloShow } from './Pages/Ciclos';
-import { EmpresaList, EmpresaEdit, EmpresaShow, EmpresaCreate } from './Pages/Empresas';
 import {
     UserEdit, UserList, UserTitle, UserCreate, UserShow
 } from './Pages/Users';
@@ -78,14 +77,6 @@ export const App = () => (
         <Resource
             name="reconocimientos"
             icon={ReconocimientoIcon}
-            list={ReconocimientoList}
-            edit={ReconocimientoEdit}
-            show={ReconocimientoShow}
-            create={ReconocimientoCreate}
-        />
-        <Resource
-            name="empresas"
-            icon={FamiliaIcon}
             list={ReconocimientoList}
             edit={ReconocimientoEdit}
             show={ReconocimientoShow}
