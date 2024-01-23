@@ -11,7 +11,6 @@ import CurriculoIcon from '@mui/icons-material/Badge';
 import FamiliaIcon from '@mui/icons-material/Work';
 import ActivityIcon from '@mui/icons-material/LocalActivity';
 import IdiomaIcon from '@mui/icons-material/Language';
-import UsersIdiomaIcon from '@mui/icons-material/Translate';
 
 import { ReconocimientoList, ReconocimientoEdit, ReconocimientoShow, ReconocimientoCreate } from './Pages/Reconocimientos';
 import { CicloCreate, CicloEdit, CicloList, CicloShow } from './Pages/Ciclos'
@@ -23,7 +22,6 @@ import { CurriculoCreate, CurriculoEdit, CurriculoList, CurriculoShow } from './
 import { ActividadCreate, ActividadEdit, ActividadList, ActividadShow } from './Pages/Actividad';
 import { FamiliaProfesionalCreate, FamiliaProfesionalEdit, FamiliaProfesionalList, FamiliaProfesionalShow } from './Pages/FamiliaProfesional';
 import { IdiomaCreate, IdiomaEdit, IdiomaList, IdiomaShow } from './Pages/Idiomas';
-import { UsersIdiomaCreate, UsersIdiomaEdit, UsersIdiomaList, UsersIdiomaShow } from './Pages/UsersIdiomas';
 
 export const App = () => (
     <Admin
@@ -96,13 +94,5 @@ export const App = () => (
             create={IdiomaCreate}
         />
 
-        <Resource
-            name="users_idiomas"
-            icon={UsersIdiomaIcon}
-            list={UsersIdiomaList}
-            edit={UsersIdiomaEdit}
-            show={UsersIdiomaShow}
-            create={UsersIdiomaCreate}
-        />
     </Admin>
 );
