@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Proyecto_Ciclo extends Model
 {
     use HasFactory;
-    protected $fillable = [
+    protected $primaykey = [
         'proyecto_id',
         'ciclo_id',
     ];
