@@ -13,4 +13,10 @@ class User_ciclo extends Model
         'user_id',
         'ciclo_id',
     ];
+
+    protected $primaryKey =  [
+        'user_id',
+        'ciclo_id',
+    ];
+    public $incrementing = false;
 }

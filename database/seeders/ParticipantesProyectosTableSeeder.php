@@ -13,6 +13,6 @@ class ParticipantesProyectosTableSeeder extends Seeder
     public function run(): void
     {
         ParticipanteProyecto::truncate();
-        ParticipanteProyecto::factory(20)->create();
+        ParticipanteProyecto::factory(10)->create();
     }
 }

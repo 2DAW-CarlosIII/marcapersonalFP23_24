@@ -14,4 +14,5 @@ class ProyectoCiclo extends Model
         'proyecto_id',
         'ciclo_id',
     ];
+    public $incrementing = false;
 }

@@ -14,8 +14,7 @@ class EmpresaController extends Controller
     public function index(Request $request)
     {
         $campos = ['nif', 'email'];
-        $otrosFiltros=[];
-        $query = FilterHelper::applyFilter($request, $campos, $otrosFiltros);
+        $query = FilterHelper::applyFilter($request, $campos);
         $request->attributes->set('total_count', $query->count());
         $queryOrdered = FilterHelper::applyOrder($query, $request);
         return EmpresaResource::collection($queryOrdered->paginate($request->perPage));
