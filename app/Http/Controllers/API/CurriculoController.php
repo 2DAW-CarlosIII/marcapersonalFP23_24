@@ -17,12 +17,11 @@ class CurriculoController extends Controller
     public function index(Request $request)
     {
         $campos = ['video_curriculum', 'pdf_curriculum'];
-        $query = FilterHelper::applyFilter($request, $campos);
-
-        return CurriculoResource::collection(
-            $query->orderBy($request->_sort ?? 'id', $request->_order ?? 'asc')
-            ->paginate($request->perPage)
-        );
+        $otrosFiltros = ['user_id'];
+        $query = FilterHelper::applyFilter($request, $campos, $otrosFiltros);
+        $request->attributes->set('total_count', $query->count());
+        $queryOrdered = FilterHelper::applyOrder($query, $request);
+        return CurriculoResource::collection($queryOrdered->paginate($request->perPage));
     }
 
     /**
