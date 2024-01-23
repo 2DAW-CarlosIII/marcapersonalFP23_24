@@ -12,7 +12,7 @@ use Psr\Http\Message\ServerRequestInterface;
 use Tqdev\PhpCrudApi\Api;
 use Tqdev\PhpCrudApi\Config\Config;
 use App\Http\Controllers\API\CurriculoController;
-
+use App\Http\Controllers\API\EmpresaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,6 +40,9 @@ Route::prefix('v1')->group(function () {
     Route::apiResource('curriculos', CurriculoController::class);
     Route::apiResource('actividades', ActividadController::class)->parameters([
         'actividades' => 'actividad'
+    ]);
+    Route::apiResource('empresas', EmpresaController::class)->parameters([
+        'empresas' => 'empresa'
     ]);
 });
 

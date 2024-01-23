@@ -19,7 +19,6 @@ class EmpresaFactory extends Factory
         return [
             'nif' => $this->faker->unique()->regexify('[0-9]{8}[A-Z]{1}'),
             'email' => $this->faker->safeEmail(),
-            'password' => $this->faker->password(),
 
         ];
     }

@@ -13,7 +13,6 @@ class Empresa extends Model
 
         'nif',
         'email',
-        'password',
 
     ];
 }

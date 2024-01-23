@@ -6,7 +6,7 @@ use App\Models\Empresa;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class EmpresaTablaSeeder extends Seeder
+class EmpresaTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
