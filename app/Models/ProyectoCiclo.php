@@ -10,4 +10,8 @@ class ProyectoCiclo extends Model
     use HasFactory;
     protected $table = 'proyectos_ciclos';
     protected $fillable = ['proyecto_id', 'ciclo_id'];
+    protected $primaryKey =  [
+        'proyecto_id',
+        'ciclo_id',
+    ];
 }
