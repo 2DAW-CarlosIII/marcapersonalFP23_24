@@ -38,7 +38,9 @@ export const CompetenciaList = () => {
                 </SimpleList>
             ) : (
                 <Datagrid bulkActionButtons={false} >
-
+                    <TextField source="id" />
+                    <TextField source="nombre" />
+                    <TextField source="color" />
                     <ShowButton />
                     <EditButton />
                 </Datagrid>

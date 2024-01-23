@@ -39,6 +39,10 @@ export const UserCompetenciaList = () => {
             ) : (
                 <Datagrid bulkActionButtons={false} >
 
+                    <TextField source="id" />
+                    <TextField source="user_id" />
+                    <TextField source="competencia_id" />
+                    <TextField source="docente_validador" />
                     <ShowButton />
                     <EditButton />
                 </Datagrid>
