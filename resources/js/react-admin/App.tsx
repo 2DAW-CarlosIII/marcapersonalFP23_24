@@ -11,6 +11,7 @@ import CurriculoIcon from '@mui/icons-material/Badge';
 import FamiliaIcon from '@mui/icons-material/Work';
 import ActivityIcon from '@mui/icons-material/LocalActivity';
 import EmpresaIcon from '@mui/icons-material/LocalActivity';
+import IdiomaIcon from '@mui/icons-material/Language';
 
 import { ReconocimientoList, ReconocimientoEdit, ReconocimientoShow, ReconocimientoCreate } from './Pages/Reconocimientos';
 import { EmpresaList, EmpresaEdit, EmpresaShow, EmpresaCreate } from './Pages/Empresa';
@@ -22,6 +23,8 @@ import { ProyectoList, ProyectoEdit, ProyectoShow, ProyectoCreate } from './Page
 import { CurriculoCreate, CurriculoEdit, CurriculoList, CurriculoShow } from './Pages/Curriculos';
 import { ActividadCreate, ActividadEdit, ActividadList, ActividadShow } from './Pages/Actividad';
 import { FamiliaProfesionalCreate, FamiliaProfesionalEdit, FamiliaProfesionalList, FamiliaProfesionalShow } from './Pages/FamiliaProfesional';
+import { CompetenciaCreate, CompetenciaEdit, CompetenciaList, CompetenciaShow } from './Pages/Competencias'
+import { IdiomaCreate, IdiomaEdit, IdiomaList, IdiomaShow } from './Pages/Idiomas';
 
 export const App = () => (
     <Admin
@@ -84,7 +87,8 @@ export const App = () => (
             show={ReconocimientoShow}
             create={ReconocimientoCreate}
         />
-        <Resource
+
+    <Resource
             name="empresas"
             icon={EmpresaIcon}
             list={EmpresaList}
@@ -92,5 +96,23 @@ export const App = () => (
             show={EmpresaShow}
             create={EmpresaCreate}
         />
+
+            <Resource
+            name="competencias"
+            list={CompetenciaList}
+            edit={CompetenciaEdit}
+            show={CompetenciaShow}
+            create={CompetenciaCreate}
+        />
+
+        <Resource
+            name="idiomas"
+            icon={IdiomaIcon}
+            list={IdiomaList}
+            edit={IdiomaEdit}
+            show={IdiomaShow}
+            create={IdiomaCreate}
+        />
+
     </Admin>
 );

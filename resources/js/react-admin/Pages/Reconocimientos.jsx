@@ -60,34 +60,43 @@ const ActividadInput = () => (
 
 //filtros por docente_validador, por estudiante y por actividad
 
-const EstudiantesFilter = (props) => (
-    <Filter {...props}>
-        <TextInput label="Estudiante" source="estudiante_id" alwaysOn />
-        {/* Add more filter fields here as needed */}
-    </Filter>
+const EstudiantesFilter = () => (
+    <ReferenceInput label="Estudiante" source="estudiante_id" reference="users" alwaysOn >
+        <SelectInput
+        label="Estudiante"
+        source="estudiante_id"
+        optionText={record => record && `${record.nombre} ${record.apellidos}`} />
+    </ReferenceInput>
 );
 
-const ActividadesFilter = (props) => (
-    <Filter {...props}>
-        <TextInput label="Actividad" source="a" alwaysOn />
-        {/* Add more filter fields here as needed */}
-    </Filter>
+const ActividadesFilter = () => (
+    <ReferenceInput label="Actividad" source="actividad_id" reference="actividades" alwaysOn >
+        <SelectInput
+        label="Actividad"
+        source="actividad_id"
+        optionText={record => record && `${record.nombre}`} />
+    </ReferenceInput>
 );
 
-const DocentesFilter = (props) => (
-    <Filter {...props}>
-        <TextInput label="Docente" source="c" alwaysOn />
-        {/* Add more filter fields here as needed */}
-    </Filter>
+const DocentesFilter = () => (
+    <ReferenceInput label="Docente" source="docente_validador" reference="users" alwaysOn >
+        <SelectInput
+        label="Docente"
+        source="docente_validador"
+        optionText={record => record && `${record.nombre} ${record.apellidos}`} />
+    </ReferenceInput>
 );
 
-
-
+const reconocimientosFilters = [
+    EstudiantesFilter(),
+    ActividadesFilter(),
+    DocentesFilter(),
+];
 
 export const ReconocimientoList = (props) => {
     const isSmall = useMediaQuery((theme) => theme.breakpoints.down('sm'));
     return (
-        <List {...props} filters={[<EstudiantesFilter />, <ActividadesFilter />, <DocentesFilter />]}>
+        <List {...props} filters={reconocimientosFilters}>
         {isSmall ? (
                 <SimpleList
                     primaryText="%{estudiante_id}"

@@ -6,6 +6,7 @@ use App\Http\Controllers\API\ReconocimientoController;
 use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\API\ProyectoController;
 use App\Http\Controllers\API\FamiliaProfesionalController;
+use App\Http\Controllers\API\IdiomaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Psr\Http\Message\ServerRequestInterface;
@@ -13,6 +14,7 @@ use Tqdev\PhpCrudApi\Api;
 use Tqdev\PhpCrudApi\Config\Config;
 use App\Http\Controllers\API\CurriculoController;
 use App\Http\Controllers\API\EmpresaController;
+use App\Http\Controllers\API\CompetenciasController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,6 +44,8 @@ Route::prefix('v1')->group(function () {
     Route::apiResource('actividades', ActividadController::class)->parameters([
         'actividades' => 'actividad'
     ]);
+    Route::apiResource('competencias', CompetenciasController::class);
+    Route::apiResource('idiomas', IdiomaController::class);
 });
 
 
