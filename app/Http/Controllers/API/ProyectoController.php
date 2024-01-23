@@ -19,12 +19,11 @@ class ProyectoController extends Controller
     public function index(Request $request)
     {
         $campos = ['nombre', 'dominio'];
-        $query = FilterHelper::applyFilter($request, $campos);
-
-        return ProyectoResource::collection(
-            $query->orderBy($request->_sort ?? 'id', $request->_order ?? 'asc')
-                ->paginate($request->perPage)
-        );
+        $otrosFiltros = ['docente_id'];
+        $query = FilterHelper::applyFilter($request, $campos, $otrosFiltros);
+        $request->attributes->set('total_count', $query->count());
+        $queryOrdered = FilterHelper::applyOrder($query, $request);
+        return ProyectoResource::collection($queryOrdered->paginate($request->perPage));
     }
 
     /**
