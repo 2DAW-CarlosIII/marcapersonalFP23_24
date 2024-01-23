@@ -18,7 +18,7 @@ class IdiomasFactory extends Factory
     {
         return [
 
-                'nombre' => fake()->Name(),
-        ];
+                'nombre' => fake()->randomElement(['Español', 'Inglés', 'Francés', 'Húngaro', 'Alemán', 'Italiano', 'Ruso', 'Japonés']),
+            ];
     }
 }

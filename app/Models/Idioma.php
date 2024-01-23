@@ -10,7 +10,6 @@ class Idioma extends Model
     use HasFactory;
 
     protected $fillable = [
-        'id',
         'nombre',
     ];
 }

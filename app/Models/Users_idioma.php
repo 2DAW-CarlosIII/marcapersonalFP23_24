@@ -9,9 +9,5 @@ class Users_idioma extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'user_id',
-        'idioma_id',
-        'certificado'
-    ];
+    protected $table = 'users_idiomas';
 }

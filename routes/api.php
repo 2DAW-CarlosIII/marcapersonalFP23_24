@@ -7,6 +7,7 @@ use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\API\ProyectoController;
 use App\Http\Controllers\API\FamiliaProfesionalController;
 use App\Http\Controllers\API\IdiomaController;
+use App\Http\Controllers\API\Users_idiomaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Psr\Http\Message\ServerRequestInterface;
@@ -43,6 +44,7 @@ Route::prefix('v1')->group(function () {
         'actividades' => 'actividad'
     ]);
     Route::apiResource('idiomas', IdiomaController::class);
+    Route::apiResource('Users_idioma', Users_idiomaController::class);
 });
 
 

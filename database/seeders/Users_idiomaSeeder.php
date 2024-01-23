@@ -4,16 +4,16 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\Idioma;
+use App\Models\Users_idioma;
 
-class IdiomasSeeder extends Seeder
+class Users_idiomauserSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        Idioma::truncate();
-        Idioma::factory(10)->create();
+        Users_idioma::truncate();
+        Users_idioma::factory(20)->create();
     }
 }
