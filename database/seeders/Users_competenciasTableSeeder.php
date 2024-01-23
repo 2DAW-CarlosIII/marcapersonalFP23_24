@@ -32,13 +32,9 @@ class Users_competenciasTableSeeder extends Seeder
                 DB::table('users_competencias')->insert([
                     'user_id' => $user->id,
                     'competencia_id' => $competencia->id,
-                    'docente_validador' => $docentes->random()->id,
+                    //Como docente_validador es nulleable, aleatoriamente se le puede asignarlo o no
+                    'docente_validador' => rand(0, 1) ? $docentes->random()->id : null
                 ]);
-                /*UserCompetencia::create([
-                    'user_id' => $user->id,
-                    'competencia_id' => $competencia->id,
-                    'docente_validador' => $docentes->random()->id,
-                ]);*/
             }
         }
 

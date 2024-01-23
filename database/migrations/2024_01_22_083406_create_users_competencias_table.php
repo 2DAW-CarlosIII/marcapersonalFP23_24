@@ -12,7 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('users_competencias', function (Blueprint $table) {
-            $table->id();
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->unsignedBigInteger('competencia_id');
+            $table->foreign('competencia_id')->references('id')->on('competencias');
+            $table->unsignedBigInteger('docente_validador')->nullable();
+            $table->foreign('docente_validador')->references('id')->on('users');
+            $table->primary(['user_id', 'competencia_id']);
             $table->timestamps();
         });
     }
@@ -22,6 +28,14 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::table('users_competencias', function (Blueprint $table) {
+            $table->dropForeign('users_competencias_user_id_foreign');
+            $table->dropColumn('user_id');
+            $table->dropForeign('users_competencias_competencia_id_foreign');
+            $table->dropColumn('competencia_id');
+            $table->dropForeign('users_competencias_docente_validador_foreign');
+            $table->dropColumn('docente_validador');
+        });
         Schema::dropIfExists('users_competencias');
     }
 };
