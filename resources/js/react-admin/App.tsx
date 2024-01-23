@@ -10,9 +10,11 @@ import ProyectoIcon from '@mui/icons-material/AccountTree';
 import CurriculoIcon from '@mui/icons-material/Badge';
 import FamiliaIcon from '@mui/icons-material/Work';
 import ActivityIcon from '@mui/icons-material/LocalActivity';
+import EmpresaIcon from '@mui/icons-material/LocalActivity';
 import IdiomaIcon from '@mui/icons-material/Language';
 
 import { ReconocimientoList, ReconocimientoEdit, ReconocimientoShow, ReconocimientoCreate } from './Pages/Reconocimientos';
+import { EmpresaList, EmpresaEdit, EmpresaShow, EmpresaCreate } from './Pages/Empresa';
 import { CicloCreate, CicloEdit, CicloList, CicloShow } from './Pages/Ciclos'
 import {
     UserEdit, UserList, UserTitle, UserCreate, UserShow
@@ -84,6 +86,15 @@ export const App = () => (
             edit={ReconocimientoEdit}
             show={ReconocimientoShow}
             create={ReconocimientoCreate}
+        />
+
+    <Resource
+            name="empresas"
+            icon={EmpresaIcon}
+            list={EmpresaList}
+            edit={EmpresaEdit}
+            show={EmpresaShow}
+            create={EmpresaCreate}
         />
 
             <Resource

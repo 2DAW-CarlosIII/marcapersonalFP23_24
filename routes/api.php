@@ -13,6 +13,7 @@ use Psr\Http\Message\ServerRequestInterface;
 use Tqdev\PhpCrudApi\Api;
 use Tqdev\PhpCrudApi\Config\Config;
 use App\Http\Controllers\API\CurriculoController;
+use App\Http\Controllers\API\EmpresaController;
 use App\Http\Controllers\API\CompetenciasController;
 
 /*
@@ -35,6 +36,7 @@ Route::prefix('v1')->group(function () {
     Route::apiResource('reconocimientos', ReconocimientoController::class);
     Route::apiResource('users', UserController::class);
     Route::apiResource('proyectos', ProyectoController::class);
+    Route::apiResource('empresas', EmpresaController::class);
     Route::apiResource('familias_profesionales', FamiliaProfesionalController::class)->parameters([
         'familias_profesionales' => 'familiaProfesional'
     ]);
