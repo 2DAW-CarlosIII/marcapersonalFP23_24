@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Ciclo;
+use App\Models\Proyecto;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -18,8 +20,8 @@ class Proyecto_CicloFactory extends Factory
     {
 
         return [
-            'proyecto_id' => fake()->numberBetween(1, 20),
-            'ciclo_id' => fake()->numberBetween(1, 20),
+            'proyecto_id' => Proyecto::all()->random()->id,
+            'ciclo_id' => Ciclo::all()->random()->id,
         ];
     }
 }

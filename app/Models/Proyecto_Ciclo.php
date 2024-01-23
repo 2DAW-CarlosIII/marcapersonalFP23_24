@@ -12,5 +12,9 @@ class Proyecto_Ciclo extends Model
         'proyecto_id',
         'ciclo_id',
     ];
+    protected $primaryKey =  [
+        'proyecto_id',
+        'ciclo_id',
+    ];
     protected $table = 'proyectos_ciclos';
 }
