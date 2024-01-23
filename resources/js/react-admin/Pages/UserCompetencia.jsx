@@ -32,14 +32,15 @@ export const UserCompetenciaList = () => {
         <List >
         {isSmall ? (
                 <SimpleList
-
-                >
-                    <EditButton />
-                </SimpleList>
+                    primaryText="%{user_id}"
+                    secondaryText="%{competencia_id}"
+                    tertiaryText="%{docente_validador}"
+                linkType={(record) => (record.canEdit ? 'edit' : 'show')}
+              >
+                <EditButton />
+              </SimpleList>
             ) : (
                 <Datagrid bulkActionButtons={false} >
-
-                    <TextField source="id" />
                     <TextField source="user_id" />
                     <TextField source="competencia_id" />
                     <TextField source="docente_validador" />

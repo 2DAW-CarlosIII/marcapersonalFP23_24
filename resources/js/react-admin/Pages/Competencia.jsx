@@ -31,11 +31,13 @@ export const CompetenciaList = () => {
     return (
         <List>
         {isSmall ? (
-                <SimpleList
-
-                >
-                    <EditButton />
-                </SimpleList>
+            <SimpleList
+                primaryText="%{nombre}"
+                secondaryText="%{color}"
+                linkType={(record) => (record.canEdit ? 'edit' : 'show')}
+            >
+                <EditButton />
+            </SimpleList>
             ) : (
                 <Datagrid bulkActionButtons={false} >
                     <TextField source="id" />

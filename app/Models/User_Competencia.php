@@ -15,4 +15,5 @@ class User_Competencia extends Model
         'competencia_id',
         'docente_validador',
     ];
+    protected $primaryKey = ['user_id', 'competencia_id'];
 }

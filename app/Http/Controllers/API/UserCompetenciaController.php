@@ -10,12 +10,13 @@ use Illuminate\Http\Request;
 
 class UserCompetenciaController extends Controller
 {
+    public $modelclass = User_Competencia::class;
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        UserCompetenciaResource::collection(User_Competencia::all());
+        return UserCompetenciaResource::collection(User_Competencia::all());
     }
 
     /**
