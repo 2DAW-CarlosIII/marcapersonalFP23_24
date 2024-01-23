@@ -23,17 +23,8 @@ import {
 import { useRecordContext} from 'react-admin';
 import { useMediaQuery } from '@mui/material';
 
-const NombreInput = () => (
-    <ReferenceInput label="Nombre" source="competencias_id" reference="competencias">
-        <SelectInput
-        label="Nombre"
-        source="competencias_id"
-        optionText={record => record && `${record.nombre} ${record.apellidos}`} />
-    </ReferenceInput>
-)
 const proyectosFilters = [
-    <TextInput source="q" label="Search" alwaysOn />,
-    NombreInput(),
+    <TextInput source="q" label="Search" alwaysOn />
 ];
 
 export const CompetenciasList = () => {
@@ -53,9 +44,6 @@ export const CompetenciasList = () => {
           <TextField source="id" />
           <TextField source="nombre" />
           <TextField source="color" />
-          <ReferenceField label="nombre" source="competencias_id" reference="competencias">
-            <FunctionField render={record => record && `${record.nombre} ${record.apellidos}`} />
-          </ReferenceField>
           <ShowButton />
           <EditButton />
         </Datagrid>
@@ -70,12 +58,11 @@ export const CompetenciasTitle = () => {
 };
 
 export const CompetenciasEdit = () => (
-    <Edit title={<ProyectoTitle />}>
+    <Edit title={<CompetenciasTitle />}>
     <SimpleForm>
         <TextInput source="id" disabled />
         <TextInput source="nombre" />
         <TextInput source="color" />
-        <NombreInput />
     </SimpleForm>
     </Edit>
 );
@@ -86,9 +73,6 @@ export const CompetenciasShow = () => (
             <TextField source="id" />
             <TextField source="nombre" />
             <TextField source="color" />
-            <ReferenceField label="Nombre" source="competencias_id" reference="competencias">
-                <FunctionField render={record => record && `${record.nombre} ${record.apellidos}`} />
-            </ReferenceField>
         </SimpleShowLayout>
     </Show>
 );
@@ -98,7 +82,6 @@ export const CompetenciasCreate = () => (
         <SimpleForm>
             <TextInput source="nombre" />
             <TextInput source="color" />
-            <NombreInput />
         </SimpleForm>
     </Create>
 );

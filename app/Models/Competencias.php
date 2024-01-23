@@ -10,6 +10,5 @@ class Competencias extends Model
     use HasFactory;
 
     protected $table = 'competencias';
-    protected $primaryKey = 'my_id';
-    public $timestamps = false;
+    protected $primaryKey = 'id';
 }

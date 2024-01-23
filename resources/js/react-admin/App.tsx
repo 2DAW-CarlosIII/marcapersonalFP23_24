@@ -10,6 +10,7 @@ import ProyectoIcon from '@mui/icons-material/AccountTree';
 import CurriculoIcon from '@mui/icons-material/Badge';
 import FamiliaIcon from '@mui/icons-material/Work';
 import ActivityIcon from '@mui/icons-material/LocalActivity';
+import CompetenciasIcon from '@mui/icons-material/CoPresent';
 
 import { ReconocimientoList, ReconocimientoEdit, ReconocimientoShow, ReconocimientoCreate } from './Pages/Reconocimientos';
 import { CicloCreate, CicloEdit, CicloList, CicloShow } from './Pages/Ciclos'
@@ -85,7 +86,7 @@ export const App = () => (
         />
         <Resource
             name="competencias"
-            icon={ReconocimientoIcon}
+            icon={CompetenciasIcon}
             list={CompetenciasList}
             edit={CompetenciasEdit}
             show={CompetenciasShow}
