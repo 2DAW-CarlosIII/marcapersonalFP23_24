@@ -18,7 +18,7 @@ class UserController extends Controller
     {
         $campos = ['apellidos', 'nombre', 'name', 'email'];
         $query = FilterHelper::applyFilter($request, $campos);
-        $queryOrdered = FilterHelper::applyOrder($query,$request->_sort,$request->_order);
+        $queryOrdered = FilterHelper::applyOrder($query,$request);
         return UserResource::collection($queryOrdered->paginate($request->perPage));
     }
 
