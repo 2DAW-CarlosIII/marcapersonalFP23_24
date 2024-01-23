@@ -27,6 +27,6 @@ class Users_CompetenciasSeeder extends Seeder
     private static $arrayUsers_Competencias = array(
         array('user_id' => '1','competencia_id' => '2','docente_validador' => '10'),
         array('user_id' => '2','competencia_id' => '1','docente_validador' => '11'),
-        array('user_id' => '3','competencia_id' => '3','docente_validador' => '9'),
+        array('user_id' => '3','competencia_id' => '3','docente_validador' => null),
     );
 }

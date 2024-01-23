@@ -16,8 +16,9 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->unsignedBigInteger('competencia_id');
             $table->foreign('competencia_id')->references('id')->on('competencias');
-            $table->unsignedBigInteger('docente_validador');
+            $table->unsignedBigInteger('docente_validador')->nullable();
             $table->foreign('docente_validador')->references('id')->on('users');
+            $table->primary(['user_id', 'competencia_id']);
             $table->timestamps();
         });
     }
