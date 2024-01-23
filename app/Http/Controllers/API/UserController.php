@@ -20,7 +20,7 @@ class UserController extends Controller
     {
         $campos = ['apellidos', 'nombre', 'name', 'email'];
         $date_filters = ['created_at', 'hasta_at'];
-        $query = FilterHelper::applyFilter($request, $campos, $otrosFiltros);
+        $query = FilterHelper::applyFilter($request, $campos);
         $request->attributes->set('total_count', $query->count());
         $queryOrdered = FilterHelper::applyOrder($query, $request);
         return UserResource::collection($queryOrdered->paginate($request->perPage));
