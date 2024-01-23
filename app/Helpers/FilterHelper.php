@@ -27,4 +27,8 @@ class FilterHelper
 
         return $query;
     }
+
+    public static function applyOrder($query, $request){
+        return $query->orderBy($request->_sort ?? 'id', $request->_order ?? 'asc');
+    }
 }

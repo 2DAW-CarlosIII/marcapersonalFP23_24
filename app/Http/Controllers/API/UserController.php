@@ -20,14 +20,9 @@ class UserController extends Controller
     {
         $campos = ['apellidos', 'nombre', 'name', 'email'];
         $date_filters = ['created_at', 'hasta_at'];
-        $query = FilterHelper::applyFilter($request, $campos, []);
-        $query = DateFilterHelper::applyFilter($query, $request, 'created_at', $date_filters);
-        //TO-DO: Añadir las clausulas where de la clase 'DateFilterHelper' en la clase 'FilterHelper'
-        //       de forma que se puedan aplicar todos los filtros en una sola consulta
-
-        return UserResource::collection(
-            $query->orderBy($request->_sort ?? 'id', $request->_order ?? 'asc')
-            ->paginate($request->perPage));
+        $query = FilterHelper::applyFilter($request, $campos, $otrosFiltros);
+        $queryOrdered = FilterHelper::applyOrder($query, $request);
+        return UserResource::collection($queryOrdered->paginate($request->perPage));
     }
 
     /**
