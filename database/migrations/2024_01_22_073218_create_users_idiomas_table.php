@@ -15,6 +15,7 @@ return new class extends Migration
             $table->foreignId('user_id');
             $table->foreignId('idioma_id');
             $table->boolean('certificado')->default(false);
+            $table->char('nivel', 2);
             $table->timestamps();
         });
     }
