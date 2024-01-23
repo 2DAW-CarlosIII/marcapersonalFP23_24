@@ -17,11 +17,11 @@ class IdiomaController extends Controller
     public function index(Request $request)
     {
         $campo = 'nombre';
-        $query = FilterHelper::applyFilter($request, $campo);
-
-        return IdiomaResource::collection(
-            $query->orderBy($request->_sort ?? 'id', $request->_order ?? 'asc')
-                ->paginate($request->perPage));
+        $otrosFiltros = [];
+        $query = FilterHelper::applyFilter($request, $campo, $otrosFiltros);
+        $request->attributes->set('total_count', $query->count());
+        $queryOrdered = FilterHelper::applyOrder($query, $request);
+        return IdiomaResource::collection($queryOrdered->paginate($request->perPage));
     }
 
     /**
