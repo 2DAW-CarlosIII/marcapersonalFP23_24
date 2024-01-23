@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('idioma_id');
             $table->boolean('certificado')->default(false);
             $table->string('nivel', 2)->nullable();
-            $table->unique(['user_id', 'idioma_id']);
+            $table->primary(['user_id', 'idioma_id']);
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('idioma_id')->references('id')->on('idiomas')->onDelete('cascade');
             $table->timestamps();
