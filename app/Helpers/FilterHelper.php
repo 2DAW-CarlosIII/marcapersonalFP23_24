@@ -19,7 +19,7 @@ class FilterHelper
             foreach ($otrosFiltros as $column) {
                 if($request->$column){
 
-                    $query->orWhere($column, 'like', '%' . $request->$column . '%');
+                    $query->orWhere($column, 'like', '=' . $request->$column . '%');
 
                 }
             }
