@@ -19,6 +19,7 @@ class IdiomasTableSeeder extends Seeder
             $recon = new Idiomas();
             $recon->estudiante_id = $idioma['estudiante_id'];
             $recon->nombre = $idioma['idiomas_id'];
+            $recon->nivel_id = $idioma['nivel_id'];
             $recon->save();
         }
     }
@@ -26,53 +27,61 @@ class IdiomasTableSeeder extends Seeder
         [
             'estudiante_id' => 1,
             'nombre' => 'Ingles',
+            'nivel_id' => 'a1',
         ],
 
         [
             'estudiante_id' => 2,
             'nombre' => 'Frances',
+            'nivel_id' => 'a2',
         ],
 
         [
             'estudiante_id' => 3,
-                'nombre' => 'Aleman',
+            'nombre' => 'Aleman',
+            'nivel_id' => 'a1',
          ],
 
         [
             'estudiante_id' => 4,
             'nombre' => 'Italiano',
+            'nivel_id' => 'a1',
         ],
 
         [
             'estudiante_id' => 5,
             'nombre' => 'Portugues',
-
+            'nivel_id' => 'a1',
         ],
 
         [
             'estudiante_id' => 6,
-                'nombre' => 'Chino',
+            'nombre' => 'Chino',
+            'nivel_id' => 'a1',
         ],
 
         [
             'estudiante_id' => 7,
-                'nombre' => 'Japones',
+            'nombre' => 'Japones',
+            'nivel_id' => 'a1',
         ],
 
         [
             'estudiante_id' => 8,
-                'nombre' => 'Ruso',
+            'nombre' => 'Ruso',
+            'nivel_id' => 'a1',
         ],
 
         [
             'estudiante_id' => 9,
-                'nombre' => 'Arabe',
+            'nombre' => 'Arabe',
+            'nivel_id' => 'a1',
         ],
 
         [
             'estudiante_id' => 10,
-                'nombre' => 'Coreano',
-
+            'nombre' => 'Coreano',
+            'nivel_id' => 'a1',
         ],
     ];
 }

@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users')->notNullable();
             $table->foreignId('idioma_id')->constrained('idiomas')->notNullable();
+            $table->foreignId('nivel_id')->constrained('niveles')->notNullable();
             $table->boolean('certificado');
             $table->timestamps();
         });
