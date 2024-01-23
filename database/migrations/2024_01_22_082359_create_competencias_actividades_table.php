@@ -12,11 +12,16 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('competencias_actividades', function (Blueprint $table) {
-            $table->id();
+            $table->unsignedBigInteger('competencia_id');
+            $table->unsignedBigInteger('actividades_id');
+            $table->foreign('competencia_id')->references('id')->on('competencias');
+            $table->foreign('actividades_id')->references('id')->on('actividades');
+
             $table->timestamps();
         });
     }
 
+//$table->foreing(dovente_validador)->references(id)
     /**
      * Reverse the migrations.
      */

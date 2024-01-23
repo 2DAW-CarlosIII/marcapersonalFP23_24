@@ -20,6 +20,7 @@ import { ProyectoList, ProyectoEdit, ProyectoShow, ProyectoCreate } from './Page
 import { CurriculoCreate, CurriculoEdit, CurriculoList, CurriculoShow } from './Pages/Curriculos';
 import { ActividadCreate, ActividadEdit, ActividadList, ActividadShow } from './Pages/Actividad';
 import { FamiliaProfesionalCreate, FamiliaProfesionalEdit, FamiliaProfesionalList, FamiliaProfesionalShow } from './Pages/FamiliaProfesional';
+import { CompetenciaCreate, CompetenciaEdit, CompetenciaList, CompetenciaShow } from './Pages/Competencias'
 
 export const App = () => (
     <Admin
@@ -83,7 +84,14 @@ export const App = () => (
             create={ReconocimientoCreate}
         />
 
+            <Resource
+            name="competencias"
+            list={CompetenciaList}
+            edit={CompetenciaEdit}
+            show={CompetenciaShow}
+            create={CompetenciaCreate}
+        />
 
-        <Resource name="competencias" list={ListGuesser} edit={EditGuesser} show={ShowGuesser} />
+        {/* <Resource name="competencias" list={ListGuesser} edit={EditGuesser} show={ShowGuesser} /> */}
     </Admin>
 );
