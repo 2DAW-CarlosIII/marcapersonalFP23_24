@@ -10,6 +10,7 @@ import ProyectoIcon from '@mui/icons-material/AccountTree';
 import CurriculoIcon from '@mui/icons-material/Badge';
 import FamiliaIcon from '@mui/icons-material/Work';
 import ActivityIcon from '@mui/icons-material/LocalActivity';
+import CompetenciaIcon from '@mui/icons-material/School';
 import EmpresaIcon from '@mui/icons-material/LocalActivity';
 import IdiomaIcon from '@mui/icons-material/Language';
 
@@ -87,7 +88,7 @@ export const App = () => (
             show={ReconocimientoShow}
             create={ReconocimientoCreate}
         />
-
+    
     <Resource
             name="empresas"
             icon={EmpresaIcon}
@@ -103,6 +104,7 @@ export const App = () => (
             edit={CompetenciaEdit}
             show={CompetenciaShow}
             create={CompetenciaCreate}
+            icon={CompetenciaIcon}
         />
 
         <Resource

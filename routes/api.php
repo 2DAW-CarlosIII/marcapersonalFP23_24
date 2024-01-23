@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\API\ActividadController;
 use App\Http\Controllers\API\CicloController;
+use App\Http\Controllers\API\CompetenciaController;
 use App\Http\Controllers\API\ReconocimientoController;
 use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\API\ProyectoController;
@@ -44,7 +45,7 @@ Route::prefix('v1')->group(function () {
     Route::apiResource('actividades', ActividadController::class)->parameters([
         'actividades' => 'actividad'
     ]);
-    Route::apiResource('competencias', CompetenciasController::class);
+    Route::apiResource('competencias', CompetenciaController::class);
     Route::apiResource('idiomas', IdiomaController::class);
 });
 

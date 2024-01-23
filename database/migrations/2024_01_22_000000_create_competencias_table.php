@@ -27,13 +27,3 @@ return new class extends Migration
         Schema::dropIfExists('competencias');
     }
 };
-
-// Schema::create('estudiantes', function (Blueprint $table) {
-//             $table->id();
-//             $table->string('nombre', 32);
-//             $table->string('apellidos', 32);
-//             $table->string('direccion');
-//             $table->integer('votos')->nullable();
-//             $table->boolean('confirmado')->default(false);
-//             $table->timestamps();
-//         });
