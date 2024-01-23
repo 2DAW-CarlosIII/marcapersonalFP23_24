@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Helpers;
 
 class FilterHelper
@@ -12,9 +13,10 @@ class FilterHelper
         /* Barra de búsqueda*/
         if ($filterValue) {
             foreach ($filterColumns as $column) {
-                    $query->orWhere($column, 'like', '%' . $filterValue . '%');
+                $query->orWhere($column, 'like', '%' . $filterValue . '%');
             }
         }
+
         /* Resto de filtros (desplegables)*/
         if ($others_filters != null) {
             foreach ($others_filters as $filter) {

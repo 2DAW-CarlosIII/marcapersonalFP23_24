@@ -21,6 +21,7 @@ class ProyectoController extends Controller
         $campos = ['nombre', 'dominio'];
         $otrosFiltros = ['docente_id'];
         $query = FilterHelper::applyFilter($request, $campos, $otrosFiltros);
+        $request->attributes->set('total_count', $query->count());
         $queryOrdered = FilterHelper::applyOrder($query, $request);
         return ProyectoResource::collection($queryOrdered->paginate($request->perPage));
     }

@@ -20,7 +20,8 @@ class ReconocimientoController extends Controller
         $campos = [];
         $otrosFiltros = ['estudiante_id', 'actividad_id', 'docente_validador'];
         $query = FilterHelper::applyFilter($request, $campos, $otrosFiltros);
-
+        $request->attributes->set('total_count', $query->count());
+        $queryOrdered = FilterHelper::applyOrder($query, $request);
         return ReconocimientoResource::collection(
             $query->orderBy($request->_sort ?? 'id', $request->_order ?? 'asc')
                 ->paginate($request->perPage)

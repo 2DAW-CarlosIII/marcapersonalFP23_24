@@ -18,8 +18,9 @@ class FamiliaProfesionalController extends Controller
     public function index(Request $request)
     {
         $campos = ['nombre'];
-        $query = FilterHelper::applyFilter($request, $campos);
-        $queryOrdered = FilterHelper::applyOrder($query,$request);
+        $query = FilterHelper::applyFilter($request, $campos, $otrosFiltros);
+        $request->attributes->set('total_count', $query->count());
+        $queryOrdered = FilterHelper::applyOrder($query, $request);
         return FamiliaProfesionalResource::collection($queryOrdered->paginate($request->perPage));
     }
 
