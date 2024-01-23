@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Helpers\DateFilterHelper;
 use App\Helpers\FilterHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Date;
 
 class UserController extends Controller
 {
@@ -17,7 +19,11 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $campos = ['apellidos', 'nombre', 'name', 'email'];
-        $query = FilterHelper::applyFilter($request, $campos);
+        $date_filters = ['created_at', 'hasta_at'];
+        $query = FilterHelper::applyFilter($request, $campos, []);
+        $query = DateFilterHelper::applyFilter($query, $request, 'created_at', $date_filters);
+        //TO-DO: Añadir las clausulas where de la clase 'DateFilterHelper' en la clase 'FilterHelper'
+        //       de forma que se puedan aplicar todos los filtros en una sola consulta
 
         return UserResource::collection(
             $query->orderBy($request->_sort ?? 'id', $request->_order ?? 'asc')
