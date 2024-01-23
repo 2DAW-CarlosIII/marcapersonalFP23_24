@@ -17,11 +17,11 @@ class ActividadController extends Controller
     public function index(Request $request)
     {
         $campos = ['nombre'];
-        $query = FilterHelper::applyFilter($request, $campos);
+        $otrosFiltros = ['docente_id'];
+        $query = FilterHelper::applyFilter($request, $campos, $otrosFiltros);
         $request->attributes->set('total_count', $query->count());
-        return ActividadResource::collection(
-            $query->orderBy($request->_sort ?? 'id', $request->_order ?? 'asc')
-            ->paginate($request->perPage));
+        $queryOrdered = FilterHelper::applyOrder($query, $request);
+        return ActividadResource::collection($queryOrdered->paginate($request->perPage));
     }
 
     /**

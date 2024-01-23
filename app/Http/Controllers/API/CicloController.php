@@ -17,12 +17,11 @@ class CicloController extends Controller
     public function index(Request $request)
     {
         $campos = ['nombre'];
-        $query = FilterHelper::applyFilter($request, $campos);
+        $otrosFiltros = ['familia_id'];
+        $query = FilterHelper::applyFilter($request, $campos, $otrosFiltros);
         $request->attributes->set('total_count', $query->count());
-        return CicloResource::collection(
-            $query->orderBy($request->_sort ?? 'id', $request->_order ?? 'asc')
-            ->paginate($request->perPage)
-        );
+        $queryOrdered = FilterHelper::applyOrder($query, $request);
+        return CicloResource::collection($queryOrdered->paginate($request->perPage));
     }
 
     /**
