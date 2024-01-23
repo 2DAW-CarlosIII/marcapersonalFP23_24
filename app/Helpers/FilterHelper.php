@@ -17,7 +17,7 @@ class FilterHelper
         return $query;
     }
 
-    public static function order($query, $sort, $order){
-        return $query->orderBy($sort,$order);
+    public static function applyOrder($query, $_sort, $_order){
+        return $query->orderBy($_sort ?? 'id', $_order ?? 'asc');
     }
 }

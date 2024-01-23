@@ -18,7 +18,7 @@ class ActividadController extends Controller
     {
         $campos = ['nombre'];
         $query = FilterHelper::applyFilter($request, $campos);
-        $queryOrdered = FilterHelper::order($query,$request->_sort ?? 'id', $request->_order ?? 'asc');
+        $queryOrdered = FilterHelper::applyOrder($query,$request->_sort,$request->_order);
         return ActividadResource::collection($queryOrdered->paginate($request->perPage));
     }
 
