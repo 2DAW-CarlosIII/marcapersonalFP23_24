@@ -4,7 +4,7 @@ namespace App\Helpers;
 
 class FilterHelper
 {
-    public static function applyFilter($request, $filterColumns, $others_filters = null)
+    public static function applyFilter($request, $filterColumns, $others_filters = array())
     {
         $modelClassName = $request->route()->controller->modelclass;
         $query = $modelClassName::query();

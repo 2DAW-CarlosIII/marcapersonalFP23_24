@@ -5,21 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class UserCompetencia extends Model
+class ParticipanteProyecto extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'user_id',
-        'competencia_id',
-        'docente_validador',
+        'estudiante_id',
+        'proyecto_id',
     ];
 
-    protected $table = "users_competencias";
+    protected $table = 'participantes_proyectos';
 
-    protected $primaryKey = [
-        'user_id',
-        'competencia_id',
+    protected $primaryKey =  [
+        'estudiante_id',
+        'proyecto_id',
     ];
 
     public $incrementing = false;

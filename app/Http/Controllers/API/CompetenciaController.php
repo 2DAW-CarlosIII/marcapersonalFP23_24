@@ -18,9 +18,6 @@ class CompetenciaController extends Controller
     {
         $campos = ['nombre'];
         $query = FilterHelper::applyFilter($request, $campos);
-
-        $otrosFiltros = [''];
-        $query = FilterHelper::applyFilter($request, $campos, $otrosFiltros);
         $request->attributes->set('total_count', $query->count());
         $queryOrdered = FilterHelper::applyOrder($query, $request);
         return CompetenciaResource::collection($queryOrdered->paginate($request->perPage));

@@ -5,22 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class UserCompetencia extends Model
+class User_ciclo extends Model
 {
     use HasFactory;
-
+    protected $table = 'users_ciclos';
     protected $fillable = [
         'user_id',
-        'competencia_id',
-        'docente_validador',
+        'ciclo_id',
     ];
 
-    protected $table = "users_competencias";
-
-    protected $primaryKey = [
+    protected $primaryKey =  [
         'user_id',
-        'competencia_id',
+        'ciclo_id',
     ];
-
     public $incrementing = false;
 }

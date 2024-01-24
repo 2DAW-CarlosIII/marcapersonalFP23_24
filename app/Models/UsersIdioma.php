@@ -16,4 +16,13 @@ class UsersIdioma extends Model
         'certificado',
     ];
 
+    protected $table = "users_idiomas";
+
+    protected $primaryKey = [
+        'user_id',
+        'idioma_id',
+    ];
+
+    public $incrementing = false;
+
 }
