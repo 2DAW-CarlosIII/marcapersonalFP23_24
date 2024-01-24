@@ -31,8 +31,15 @@ class DatabaseSeeder extends Seeder
         $this->call(ActividadesTableSeeder::class);
         $this->call(FamiliasProfesionalesSeeder::class);
         $this->call(CiclosSeeder::class);
+        $this->call(CompetenciasTableSeeder::class);
+        $this->call(UsersCompetenciasTableSeeder::class);
+        $this->call(EmpresasTableSeeder::class);
+        $this->call(IdiomasTableSeeder::class);
+        $this->call(UsersIdiomasTableSeeder::class);
 
         self::seedProyectos();
+        $this->call(ProyectoCicloTableSeeder::class);
+
         $this->command->info('Tablas inicializadas con datos!');
 
         Model::reguard();
@@ -42,13 +49,13 @@ class DatabaseSeeder extends Seeder
     private static function seedProyectos(): void
     {
         Proyecto::truncate();
-        foreach( self::$arrayProyectos as $proyecto ) {
+        foreach (self::$arrayProyectos as $proyecto) {
             $p = new Proyecto;
             $p->docente_id = $proyecto['docente_id'];
             $p->nombre = $proyecto['nombre'];
             $p->dominio = $proyecto['dominio'];
             $p->metadatos = serialize($proyecto['metadatos']);
-            $p->calificacion = rand(3,10);
+            $p->calificacion = rand(3, 10);
             $p->save();
         }
     }
@@ -155,4 +162,3 @@ class DatabaseSeeder extends Seeder
         ],
     ];
 }
-
