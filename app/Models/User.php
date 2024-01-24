@@ -63,4 +63,9 @@ class User extends Authenticatable
         return $this->belongsToMany(Idioma::class, 'users_idiomas', 'user_id', 'idioma_id')
         ->withPivot(['nivel', 'certificado']);
     }
+    public function competencias(): BelongsToMany
+    {
+        return $this->belongsToMany(Competencia::class, 'users_competencias')
+        ->withPivot('docente_validador');
+    }
 }
