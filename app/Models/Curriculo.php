@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Curriculo extends Model
 {
@@ -13,4 +14,13 @@ class Curriculo extends Model
         'user_id',
         'video_curriculum',
     ];
+
+        /**
+     * Get the user that owns the curriculo.
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
 }
