@@ -15,8 +15,7 @@ class CicloResource extends JsonResource
     public function toArray(Request $request): array
     {
         return array_merge(parent::toArray($request), [
-            'familia_profesional' => new FamiliaProfesionalResource($this->familiaProfesional),
-            'proyectos'           => new ProyectoResource($this->proyectos),
+            'familia_profesional' => FamiliaProfesionalResource::collection($this->familiaProfesional),
         ]);
     }
 }

@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Proyecto extends Model
 {
@@ -28,8 +28,8 @@ class Proyecto extends Model
         return $proyectos;
     }
 
-    public function ciclo(): BelongsTo
+    public function ciclos(): BelongsToMany
     {
-        return $this->belongsTo(Ciclo::class, 'id');
+        return $this->belongsToMany(Ciclo::class, 'proyectos_ciclos');
     }
 }

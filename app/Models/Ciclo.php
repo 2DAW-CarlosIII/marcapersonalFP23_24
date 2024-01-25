@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Ciclo extends Model
 {
@@ -28,8 +28,8 @@ class Ciclo extends Model
         return $this->belongsTo(FamiliaProfesional::class, 'familia_id');
     }
 
-    public function proyectos(): HasMany
+    public function proyectos(): BelongsToMany
     {
-        return $this->hasMany(Proyecto::class, 'id');
+        return $this->belongsToMany(Proyecto::class, 'proyectos_ciclos');
     }
 }
