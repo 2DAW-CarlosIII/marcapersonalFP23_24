@@ -17,10 +17,13 @@ class UserResource extends JsonResource
         $array_idiomas = IdiomaResource::collection($this->idiomas)->resolve();
 
         $idiomasTransformados = array_map(function ($idioma) {
+            unset($idioma['pivot']['idioma_id']);
+            unset($idioma['pivot']['user_id']);
             $pivot = $idioma['pivot'];
             unset($idioma['pivot']);
             return array_merge($idioma, $pivot);
         }, $array_idiomas);
+
 
         return array_merge(parent::toArray($request), [
             'curriculo' => new CurriculoResource($this->curriculo),
