@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class ProyectoCiclo extends Model
 {
@@ -15,4 +16,8 @@ class ProyectoCiclo extends Model
         'ciclo_id',
     ];
     public $incrementing = false;
+
+    public function users() : BelongsToMany {
+        return $this->belongsToMany(User::class,"participantes_proyectos","proyecto_id","estudiante_id");
+    }
 }
