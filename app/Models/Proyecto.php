@@ -30,6 +30,12 @@ class Proyecto extends Model
         return $proyectos;
     }
 
+    public function ciclos(): BelongsToMany
+    {
+        return $this->belongsToMany(Ciclo::class, 'proyectos_ciclos')
+        ->withPivot(['proyecto_id', 'ciclo_id']);
+    }
+
     public function users(): BelongsToMany
     {
         return $this->belongsToMany(User::class);

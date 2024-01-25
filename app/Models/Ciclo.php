@@ -28,6 +28,12 @@ class Ciclo extends Model
         return $this->belongsTo(FamiliaProfesional::class, 'familia_id');
     }
 
+    public function proyectos(): BelongsToMany
+    {
+        return $this->belongsToMany(Proyecto::class, 'proyectos_ciclos')
+        ->withPivot(['proyecto_id', 'ciclo_id']);
+    }
+
     public function users(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'users_ciclos');
