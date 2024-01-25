@@ -5,6 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -62,5 +63,10 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Idioma::class, 'users_idiomas', 'user_id', 'idioma_id')
         ->withPivot(['nivel', 'certificado']);
+    }
+
+    public function competencias(): BelongsToMany
+    {
+        return $this->belongsToMany(Competencia::class, 'users_competencias', 'user_id', 'competencia_id')->withPivot('docente_validador');
     }
 }
