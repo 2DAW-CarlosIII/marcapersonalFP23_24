@@ -66,6 +66,6 @@ class User extends Authenticatable
 
     public function Ciclos(): BelongsToMany
     {
-        return $this->belongsToMany(Idioma::class, 'users_ciclos', 'user_id', 'ciclo_id');
+        return $this->belongsToMany(Ciclo::class, 'users_ciclos', 'user_id', 'ciclo_id');
     }
 }
