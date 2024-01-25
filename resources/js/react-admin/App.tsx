@@ -10,6 +10,7 @@ import ProyectoIcon from '@mui/icons-material/AccountTree';
 import CurriculoIcon from '@mui/icons-material/Badge';
 import FamiliaIcon from '@mui/icons-material/Work';
 import ActivityIcon from '@mui/icons-material/LocalActivity';
+import CompetenciaIcon from '@mui/icons-material/Badge';
 
 import { ReconocimientoList, ReconocimientoEdit, ReconocimientoShow, ReconocimientoCreate } from './Pages/Reconocimientos';
 import { CicloCreate, CicloEdit, CicloList, CicloShow } from './Pages/Ciclos'
@@ -20,7 +21,7 @@ import { ProyectoList, ProyectoEdit, ProyectoShow, ProyectoCreate } from './Page
 import { CurriculoCreate, CurriculoEdit, CurriculoList, CurriculoShow } from './Pages/Curriculos';
 import { ActividadCreate, ActividadEdit, ActividadList, ActividadShow } from './Pages/Actividad';
 import { FamiliaProfesionalCreate, FamiliaProfesionalEdit, FamiliaProfesionalList, FamiliaProfesionalShow } from './Pages/FamiliaProfesional';
-
+import { CompetenciaCreate, CompetenciaEdit, CompetenciasList, CompetenciaShow } from './Pages/Competencias';
 export const App = () => (
     <Admin
         dataProvider={dataProvider}
@@ -82,5 +83,14 @@ export const App = () => (
             show={ReconocimientoShow}
             create={ReconocimientoCreate}
         />
+        <Resource
+            name="competencias"
+            icon={CompetenciaIcon}
+            list={CompetenciasList}
+            edit={CompetenciaEdit}
+            show={CompetenciaShow}
+            create={CompetenciaCreate}
+        />
+
     </Admin>
 );
