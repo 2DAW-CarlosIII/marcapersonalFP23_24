@@ -17,7 +17,7 @@ class Actividad extends Model
         'insignia',
     ];
 
-    public function user(): BelongsTo
+    public function creador(): BelongsTo
     {
         return $this->belongsTo(User::class, 'docente_id');
     }
