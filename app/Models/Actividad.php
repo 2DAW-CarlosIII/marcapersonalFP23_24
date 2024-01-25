@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Actividad extends Model
 {
@@ -15,4 +16,10 @@ class Actividad extends Model
         'nombre',
         'insignia',
     ];
+
+    public function users(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'docente_id');
+    }
+
 }
