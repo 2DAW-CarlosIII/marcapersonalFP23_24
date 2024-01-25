@@ -15,4 +15,12 @@ class Reconocimiento extends Model
         'docente_validador',
         'fecha'
     ];
+
+    /**
+     * Get the Actividad that owns the Reconocimiento.
+     */
+
+     public function actividad(){
+        return $this->belongsTo(Actividad::class, 'actividad_id');
+    }
 }

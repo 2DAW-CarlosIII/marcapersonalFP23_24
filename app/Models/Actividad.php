@@ -15,4 +15,8 @@ class Actividad extends Model
         'nombre',
         'insignia',
     ];
+
+    public function reconocimiento(){
+        return $this->hasMany(Reconocimiento::class, 'actividad_id');
+    }
 }
