@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Actividad extends Model
 {
@@ -15,4 +16,9 @@ class Actividad extends Model
         'nombre',
         'insignia',
     ];
+
+    public function competencias(): BelongsToMany
+    {
+       return $this->belongsToMany(Competencias::class, 'competencias_actividades', 'actividades_id', 'competencia_id');
+    }
 }
