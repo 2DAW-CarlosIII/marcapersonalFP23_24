@@ -17,6 +17,7 @@ class UserResource extends JsonResource
         return array_merge(parent::toArray($request), [
             'curriculo' => new CurriculoResource($this->curriculo),
             'idiomas' => IdiomaResource::collection($this->idiomas),
+            'competencias' => CompetenciasResource::collection($this->competencias),
         ]);
     }
 }
