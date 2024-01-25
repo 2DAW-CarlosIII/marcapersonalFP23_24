@@ -19,7 +19,11 @@ class Reconocimiento extends Model
 
     public function actividad(): BelongsTo
     {
-        return $this->belongsTo(Actividad::class, 'actividad_id');
+        return $this->belongsTo(Actividad::class);
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
