@@ -16,6 +16,7 @@ class ProyectoResource extends JsonResource
     {
         return array_merge(parent::toArray($request), [
             'ciclos' => CicloResource::collection($this->ciclos),
+            'estudiantes' => $this->users()->get(),
         ]);
     }
 }
