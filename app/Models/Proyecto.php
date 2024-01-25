@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Proyecto extends Model
 {
@@ -25,5 +26,13 @@ class Proyecto extends Model
     public static function contarProyectos(){
         $proyectos = self::all()->count();
         return $proyectos;
+    }
+    /**
+     * The users that belong to the idioma.
+     */
+    public function users(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'participantes_proyectos' );
+
     }
 }
