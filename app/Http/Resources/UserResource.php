@@ -14,9 +14,17 @@ class UserResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        $array_idiomas = IdiomaResource::collection($this->idiomas)->resolve();
+
+        $idiomasTransformados = array_map(function ($idioma) {
+            $pivot = $idioma['pivot'];
+            unset($idioma['pivot']);
+            return array_merge($idioma, $pivot);
+        }, $array_idiomas);
+
         return array_merge(parent::toArray($request), [
             'curriculo' => new CurriculoResource($this->curriculo),
-            'idiomas' => IdiomaResource::collection($this->idiomas),
+            'idiomas' => $idiomasTransformados,
         ]);
     }
 }
