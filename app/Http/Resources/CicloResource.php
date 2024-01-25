@@ -14,13 +14,10 @@ class CicloResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        if(property_exists($this, 'familiaProfesional')){
+
             return array_merge(parent::toArray($request), [
                 'familia_profesional' => new FamiliaProfesionalResource($this->familiaProfesional),
             ]);
-        }else{
-            return parent::toArray($request);
 
-        }
     }
 }
