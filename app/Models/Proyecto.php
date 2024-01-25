@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Proyecto extends Model
 {
@@ -22,8 +24,13 @@ class Proyecto extends Model
         $nProyectos = self::orderByDesc('calificacion')->take(5)->get();
         return $nProyectos;
     }
+
     public static function contarProyectos(){
         $proyectos = self::all()->count();
         return $proyectos;
+    }
+
+    public function users() : BelongsToMany {
+        return $this->belongsToMany(User::class,"participantes_proyectos","proyecto_id","estudiante_id");
     }
 }
