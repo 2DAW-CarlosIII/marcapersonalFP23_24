@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+
 
 class Proyecto extends Model
 {
@@ -25,5 +27,10 @@ class Proyecto extends Model
     public static function contarProyectos(){
         $proyectos = self::all()->count();
         return $proyectos;
+    }
+
+    public function ciclo(): BelongsTo
+    {
+        return $this->BelongsTo(Ciclo::class, 'id');
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Proyecto;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -16,6 +17,7 @@ class CicloResource extends JsonResource
     {
         return array_merge(parent::toArray($request), [
             'familia_profesional' => new FamiliaProfesionalResource($this->familiaProfesional),
+            'proyectos' => new Proyecto($this->proyecto),
         ]);
     }
 }
