@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -76,6 +77,23 @@ class User extends Authenticatable
         return $this->belongsToMany(Competencia::class, 'users_competencias', 'user_id', 'competencia_id')->withPivot('docente_validador');
     }
 
+    /**
+     * Get the actividades for the user.
+    */
+
+    public function actividades(): HasManyThrough
+    {
+        return $this->hasManyThrough(Actividad::class, Reconocimiento::class, 'estudiante_id', 'id', 'id', 'actividad_id');
+    }
+
+    /**
+     * Get the reconocimientos for the user.
+    */
+
+    public function reconocimientos(): HasMany
+    {
+        return $this->hasMany(Reconocimiento::class, 'id');
+    }
 
     public function ciclos(): BelongsToMany
     {
