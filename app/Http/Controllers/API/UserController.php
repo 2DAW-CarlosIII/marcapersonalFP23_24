@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Helpers\DateFilterHelper;
+use App\Helpers\FilterHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Date;
 
 class UserController extends Controller
 {
@@ -15,14 +18,12 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $campos = ['apellidos','nombre','name','email'];
-        $query = User::query();
-        foreach($campos as $campo){
-            $query->orWhere($campo,'like','%' . $request->q . '%');
-        }
-        return UserResource::collection(
-            $query->orderBy($request->_sort ?? 'id', $request->_order ?? 'asc')
-            ->paginate($request->perPage));
+        $campos = ['apellidos', 'nombre', 'name', 'email'];
+        $date_filters = ['created_at', 'hasta_at'];
+        $query = FilterHelper::applyFilter($request, $campos);
+        $request->attributes->set('total_count', $query->count());
+        $queryOrdered = FilterHelper::applyOrder($query, $request);
+        return UserResource::collection($queryOrdered->paginate($request->perPage));
     }
 
     /**

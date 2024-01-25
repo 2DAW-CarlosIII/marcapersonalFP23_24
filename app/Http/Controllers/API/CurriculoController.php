@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Helpers\FilterHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Curriculo;
 use Illuminate\Http\Request;
@@ -13,9 +14,14 @@ class CurriculoController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request) {
-        return CurriculoResource::collection( Curriculo::orderBy($request->_sort, $request->_order)
-        ->paginate($request->perPage));
+    public function index(Request $request)
+    {
+        $campos = ['video_curriculum', 'pdf_curriculum'];
+        $otrosFiltros = ['user_id'];
+        $query = FilterHelper::applyFilter($request, $campos, $otrosFiltros);
+        $request->attributes->set('total_count', $query->count());
+        $queryOrdered = FilterHelper::applyOrder($query, $request);
+        return CurriculoResource::collection($queryOrdered->paginate($request->perPage));
     }
 
     /**

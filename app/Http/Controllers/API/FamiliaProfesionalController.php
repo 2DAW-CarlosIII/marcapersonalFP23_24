@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Helpers\FilterHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\FamiliaProfesionalResource;
 use App\Models\FamiliaProfesional;
@@ -16,9 +17,11 @@ class FamiliaProfesionalController extends Controller
      */
     public function index(Request $request)
     {
-        return FamiliaProfesionalResource::collection(
-            FamiliaProfesional::orderBy($request->_sort ?? 'id', $request->_order ?? 'asc')
-            ->paginate($request->perPage));
+        $campos = ['nombre'];
+        $query = FilterHelper::applyFilter($request, $campos);
+        $request->attributes->set('total_count', $query->count());
+        $queryOrdered = FilterHelper::applyOrder($query, $request);
+        return FamiliaProfesionalResource::collection($queryOrdered->paginate($request->perPage));
     }
 
     /**

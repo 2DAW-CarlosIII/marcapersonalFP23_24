@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class UserResource extends JsonResource
+class CompetenciaResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -14,9 +14,6 @@ class UserResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return array_merge(parent::toArray($request), [
-            'curriculo' => new CurriculoResource($this->curriculo),
-            'idiomas' => IdiomaResource::collection($this->idiomas),
-        ]);
+        return parent::toArray($request);
     }
 }
