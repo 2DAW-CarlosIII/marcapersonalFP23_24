@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -100,7 +99,7 @@ class User extends Authenticatable
         return $this->belongsToMany(Ciclo::class, 'users_ciclos', 'user_id', 'ciclo_id');
     }
 
-    public function actividades(): HasMany
+    public function actividadesPropuestas(): HasMany
     {
         return $this->hasMany(Actividad::class, 'docente_id', 'id');
     }
