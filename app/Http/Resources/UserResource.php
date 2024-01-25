@@ -19,6 +19,7 @@ class UserResource extends JsonResource
             'curriculo' => new CurriculoResource($this->curriculo),
             'idiomas' => IdiomaResource::collection($this->idiomas),
             'competencias' => CompetenciaResource::collection($this->competencias),
+            'ciclos' => CicloResource::collection($this->ciclos),
         ]);
     }
 }

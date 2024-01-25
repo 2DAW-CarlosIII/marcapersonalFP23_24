@@ -69,4 +69,10 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Competencia::class, 'users_competencias', 'user_id', 'competencia_id')->withPivot('docente_validador');
     }
+
+
+    public function ciclos(): BelongsToMany
+    {
+        return $this->belongsToMany(Ciclo::class, 'users_ciclos', 'user_id', 'ciclo_id');
+    }
 }
