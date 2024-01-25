@@ -18,6 +18,7 @@ class Actividad extends Model
     ];
     public function reconocimientos(): HasMany
     {
+        
     return $this->hasMany(Reconocimiento::class, 'actividad_id');
     }
 
