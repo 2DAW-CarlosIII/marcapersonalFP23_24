@@ -2,18 +2,19 @@
 
 namespace Database\Seeders;
 
-use App\Models\Competencia;
+use App\Models\Proyecto;
+use App\Models\ProyectoCiclo;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class CompetenciasTableSeeder extends Seeder
+class ProyectoCicloTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        Competencia::truncate();
-        Competencia::factory(20)->create();
+        ProyectoCiclo::truncate();
+        ProyectoCiclo::factory(20)->create();
     }
 }

@@ -1,19 +1,18 @@
 <?php
 
 namespace Database\Seeders;
-
-use App\Models\Competencia;
+use App\Models\ParticipanteProyecto;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class CompetenciasTableSeeder extends Seeder
+class ParticipantesProyectosTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        Competencia::truncate();
-        Competencia::factory(20)->create();
+        ParticipanteProyecto::truncate();
+        ParticipanteProyecto::factory(5)->create();
     }
 }

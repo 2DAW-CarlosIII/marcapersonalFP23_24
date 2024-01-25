@@ -10,9 +10,16 @@ import ProyectoIcon from '@mui/icons-material/AccountTree';
 import CurriculoIcon from '@mui/icons-material/Badge';
 import FamiliaIcon from '@mui/icons-material/Work';
 import ActivityIcon from '@mui/icons-material/LocalActivity';
+<<<<<<< HEAD
 import CompetenciaIcon from '@mui/icons-material/Badge';
+=======
+import CompetenciaIcon from '@mui/icons-material/School';
+import EmpresaIcon from '@mui/icons-material/LocalActivity';
+import IdiomaIcon from '@mui/icons-material/Language';
+>>>>>>> cd7cb02fc207628ae21c4d12e4e1508dbd4e3e8d
 
 import { ReconocimientoList, ReconocimientoEdit, ReconocimientoShow, ReconocimientoCreate } from './Pages/Reconocimientos';
+import { EmpresaList, EmpresaEdit, EmpresaShow, EmpresaCreate } from './Pages/Empresa';
 import { CicloCreate, CicloEdit, CicloList, CicloShow } from './Pages/Ciclos'
 import {
     UserEdit, UserList, UserTitle, UserCreate, UserShow
@@ -21,7 +28,13 @@ import { ProyectoList, ProyectoEdit, ProyectoShow, ProyectoCreate } from './Page
 import { CurriculoCreate, CurriculoEdit, CurriculoList, CurriculoShow } from './Pages/Curriculos';
 import { ActividadCreate, ActividadEdit, ActividadList, ActividadShow } from './Pages/Actividad';
 import { FamiliaProfesionalCreate, FamiliaProfesionalEdit, FamiliaProfesionalList, FamiliaProfesionalShow } from './Pages/FamiliaProfesional';
+<<<<<<< HEAD
 import { CompetenciaCreate, CompetenciaEdit, CompetenciasList, CompetenciaShow } from './Pages/Competencias';
+=======
+import { CompetenciaCreate, CompetenciaEdit, CompetenciaList, CompetenciaShow } from './Pages/Competencias'
+import { IdiomaCreate, IdiomaEdit, IdiomaList, IdiomaShow } from './Pages/Idiomas';
+
+>>>>>>> cd7cb02fc207628ae21c4d12e4e1508dbd4e3e8d
 export const App = () => (
     <Admin
         dataProvider={dataProvider}
@@ -83,6 +96,7 @@ export const App = () => (
             show={ReconocimientoShow}
             create={ReconocimientoCreate}
         />
+<<<<<<< HEAD
         <Resource
             name="competencias"
             icon={CompetenciaIcon}
@@ -90,6 +104,34 @@ export const App = () => (
             edit={CompetenciaEdit}
             show={CompetenciaShow}
             create={CompetenciaCreate}
+=======
+    
+    <Resource
+            name="empresas"
+            icon={EmpresaIcon}
+            list={EmpresaList}
+            edit={EmpresaEdit}
+            show={EmpresaShow}
+            create={EmpresaCreate}
+        />
+
+            <Resource
+            name="competencias"
+            list={CompetenciaList}
+            edit={CompetenciaEdit}
+            show={CompetenciaShow}
+            create={CompetenciaCreate}
+            icon={CompetenciaIcon}
+        />
+
+        <Resource
+            name="idiomas"
+            icon={IdiomaIcon}
+            list={IdiomaList}
+            edit={IdiomaEdit}
+            show={IdiomaShow}
+            create={IdiomaCreate}
+>>>>>>> cd7cb02fc207628ae21c4d12e4e1508dbd4e3e8d
         />
 
     </Admin>

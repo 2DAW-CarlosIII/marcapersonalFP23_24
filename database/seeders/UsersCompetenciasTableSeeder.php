@@ -2,18 +2,18 @@
 
 namespace Database\Seeders;
 
-use App\Models\Competencia;
+use App\Models\UserCompetencia;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class CompetenciasTableSeeder extends Seeder
+class UsersCompetenciasTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        Competencia::truncate();
-        Competencia::factory(20)->create();
+        UserCompetencia::truncate();
+        UserCompetencia::factory(5)->create();
     }
 }

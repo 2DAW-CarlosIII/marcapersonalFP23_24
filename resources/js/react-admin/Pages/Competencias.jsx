@@ -10,86 +10,86 @@ import {
     SimpleForm,
     ReferenceInput,
     TextInput,
+    NumberField,
+    NumberInput,
     FunctionField,
     SelectInput,
     ShowButton,
     Show,
     SimpleShowLayout
-  } from 'react-admin';
+} from 'react-admin';
 
-import { useRecordContext} from 'react-admin';
 import { useMediaQuery } from '@mui/material';
+import { useRecordContext } from 'react-admin';
 
-const CompetenciaInput = () => (
-    <ReferenceInput label="Nombre" source="nombre" reference="competencias" alwaysOn >
-        <SelectInput
-        label="Nombre"
-        source="competencias"
-        optionText={record => record && record.nombre} />
-    </ReferenceInput>
-)
 const competenciasFilters = [
     <TextInput source="q" label="Search" alwaysOn />,
-    CompetenciaInput(),
 ];
 
-export const CompetenciasList = () => {
-  const isSmall = useMediaQuery((theme) => theme.breakpoints.down('sm'));
-  return (
-    <List filters={competenciasFilters} >
-      {isSmall ? (
-        <SimpleList
-          primaryText="%{nombre}"
-          secondaryText="%{color}"
-          linkType={(record) => (record.canEdit ? 'edit' : 'show')}
-        >
-          <EditButton />
-        </SimpleList>
-      ) : (
-        <Datagrid bulkActionButtons={false} >
-            <TextField source="id" />
-            <TextField source="nombre" />
-            <TextField source="color" />
-            <ShowButton />
-            <EditButton />
-        </Datagrid>
-      )}
-    </List>
-  );
-}
+export const CompetenciaList = () => {
+    const isSmall = useMediaQuery((theme) => theme.breakpoints.down('sm'));
+    return (
+        <List filters={competenciasFilters} >
+            {isSmall ? (
+                <SimpleList
+                    primaryText="%{nombre}"
+                    secondaryText="%{color}"
+                    linkType={(record) => (record.canEdit ? 'edit' : 'show')}
+                >
+                    <EditButton />
+                </SimpleList>
+            ) : (
+                <Datagrid bulkActionButtons={false} >
+                    <NumberField label="ID" source="id" />
+                    <TextField label="nombre" source="nombre" />
+                    <TextField label="color" source="color" />
+                    <ShowButton />
+                    <EditButton />
+                </Datagrid>
+            )}
+        </List>
+    );
+
+
+};
+
+
 
 export const CompetenciaTitle = () => {
-  const record = useRecordContext();
-  return <span>Competencia {record ? `"${record.nombre}"` : ''}</span>;
+    const record = useRecordContext();
+    return <span>Competencia {record ? `"${record.nombre}"` : ''}</span>;
 };
 
 export const CompetenciaEdit = () => (
     <Edit title={<CompetenciaTitle />}>
-    <SimpleForm>
-        <CompetenciaInput />
-        <TextInput source="id" disabled />
-        <TextInput source="color" />
-    </SimpleForm>
+        <SimpleForm>
+            <NumberInput label="ID" source="id" />
+            <TextInput label="nombre" source="nombre" />
+            <TextInput label="color" source="color" />
+        </SimpleForm>
     </Edit>
+
+
 );
 
 export const CompetenciaShow = () => (
     <Show>
         <SimpleShowLayout>
-            <ReferenceField label="Competencia" source="nombre" reference="competencias">
-                <FunctionField render={record => record && `${record.nombre}`} />
-            </ReferenceField>
-            <TextField source="id" />
-            <TextField source="nombre" />
+            <NumberField label="ID" source="id" />
+            <TextField label="nombre" source="nombre" />
+            <TextField source="color" />
+            <ShowButton />
+            <EditButton />
         </SimpleShowLayout>
     </Show>
 );
 
 export const CompetenciaCreate = () => (
-    <Create title={<CompetenciaTitle />}>
+    <Create>
         <SimpleForm>
-            <CompetenciaInput />
-            <TextInput source="color" />
+            <NumberInput label="ID" source="id" />
+            <TextInput label="nombre" source="nombre" />
+            <TextInput label="color" source="color" />
         </SimpleForm>
     </Create>
 );
