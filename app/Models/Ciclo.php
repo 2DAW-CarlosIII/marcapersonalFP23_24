@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Ciclo extends Model
 {
@@ -25,5 +26,11 @@ class Ciclo extends Model
     public function familiaProfesional(): BelongsTo
     {
         return $this->belongsTo(FamiliaProfesional::class, 'familia_id');
+    }
+
+    public function proyectos(): BelongsToMany
+    {
+        return $this->belongsTo(Proyecto::class, 'proyectos_ciclos')
+        ->withPivot(['proyecto_id', 'ciclo_id']);
     }
 }
