@@ -22,4 +22,5 @@ class ParticipanteProyecto extends Model
     ];
 
     public $incrementing = false;
+
 }

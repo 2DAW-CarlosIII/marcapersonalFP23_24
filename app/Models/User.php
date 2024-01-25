@@ -4,7 +4,9 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -61,5 +63,18 @@ class User extends Authenticatable
     public function idiomas(): BelongsToMany
     {
         return $this->belongsToMany(Idioma::class, 'users_idiomas', 'user_id', 'idioma_id');
+    }
+
+    /**
+     * Get the proyectos that owns the user.
+     */
+    // public function proyectos(): BelongsTo
+    // {
+    //     return $this->belongsTo(Proyecto::class, 'proyecto_id');
+    // }
+
+    public function proyecto(): BelongsToMany
+    {
+        return $this->belongsToMany(Proyecto::class, 'participantes_proyectos', 'estudiante_id', 'proyecto_id');
     }
 }
