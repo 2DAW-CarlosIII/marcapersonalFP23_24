@@ -50,7 +50,7 @@ class User extends Authenticatable
 
     /**
      * Get the curriculo associated with the user.
-    */
+     */
     public function curriculo(): HasOne
     {
         return $this->hasOne(Curriculo::class);
@@ -58,11 +58,16 @@ class User extends Authenticatable
 
     /**
      * The idiomas that belong to the user.
-    */
+     */
     public function idiomas(): BelongsToMany
     {
         return $this->belongsToMany(Idioma::class, 'users_idiomas', 'user_id', 'idioma_id')
-        ->withPivot(['nivel', 'certificado']);
+            ->withPivot(['nivel', 'certificado']);
+    }
+
+    public function proyectos(): BelongsToMany
+    {
+        return $this->belongsToMany(Proyecto::class, 'participantes_proyectos', 'estudiante_id', 'proyecto_id');
     }
 
     public function competencias(): BelongsToMany
