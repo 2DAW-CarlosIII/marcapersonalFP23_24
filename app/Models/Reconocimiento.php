@@ -18,6 +18,7 @@ class Reconocimiento extends Model
     ];
     public function actividad(): BelongsTo
 {
+
     return $this->belongsTo(Actividad::class, 'actividad_id');
 }
 
