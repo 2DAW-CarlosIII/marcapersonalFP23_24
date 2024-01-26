@@ -13,6 +13,7 @@ class Curriculo extends Model
     protected $fillable = [
         'user_id',
         'video_curriculum',
+        'sobre_mi',
     ];
 
     /**

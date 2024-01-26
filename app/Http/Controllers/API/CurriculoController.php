@@ -49,8 +49,9 @@ class CurriculoController extends Controller
      */
     public function update(Request $request, Curriculo $Curriculo)
     {
-        $CurriculoData = json_decode($request->getContent(), true);
-        $Curriculo->update($CurriculoData['data']['attributes']);
+        $curriculoData = json_decode($request->getContent(), true);
+
+        $Curriculo->update($curriculoData);
 
         return new CurriculoResource($Curriculo);
     }

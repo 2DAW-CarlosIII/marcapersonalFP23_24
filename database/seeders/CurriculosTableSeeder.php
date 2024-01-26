@@ -51,6 +51,25 @@ class CurriculosTableSeeder extends Seeder
         ],
     ];
 
+    private static $frases = [
+        "Publicación de tesis sobre innovaciones en FinTech en la Revista Internacional de Finanzas.",
+        "Proyecto de tesis centrado en el desarrollo de algoritmos éticos para IA.",
+        "Ganador del premio nacional de marketing digital por campaña innovadora en redes sociales.",
+        "Colaborador en proyecto de investigación sobre optimización de redes 5G.",
+        "Desarrolló un programa de enseñanza en línea para estudiantes con necesidades especiales.",
+        "Investigación sobre nuevas técnicas de secuenciación de ADN presentada en congreso internacional.",
+        "Diseño de un proyecto de vivienda ecológica premiado en concurso de arquitectura sostenible.",
+        "Participación en conferencias internacionales sobre resolución de conflictos y diplomacia.",
+        "Realización de un estudio comparativo sobre terapias de ansiedad para publicación en revista científica.",
+        "Organizador de un simposio sobre tecnologías emergentes en la comunicación digital.",
+        "Voluntariado en proyectos de educación ambiental y conservación de la biodiversidad.",
+        "Desarrollo de un software educativo interactivo para el aprendizaje de lenguas extranjeras.",
+        "Coordinación de un taller interdisciplinario sobre urbanismo y desarrollo sostenible.",
+        "Investigación sobre el impacto de las redes sociales en la salud mental de adolescentes.",
+        "Colaborador en proyecto de ley sobre derechos digitales y privacidad en la era de la información."
+    ];
+
+
     /**
      * Run the database seeds.
      */
@@ -58,10 +77,11 @@ class CurriculosTableSeeder extends Seeder
     {
         Curriculo::truncate();
 
-        foreach( self::$arrayCurriculos as $curriculo ) {
+        foreach (self::$arrayCurriculos as $curriculo) {
             $curri = new Curriculo;
             $curri->user_id = $curriculo['user_id'];
             $curri->video_curriculum = $curriculo['video_curriculum'];
+            $curri->sobre_mi = self::$frases[array_rand(self::$frases)];
             $curri->save();
         }
     }
