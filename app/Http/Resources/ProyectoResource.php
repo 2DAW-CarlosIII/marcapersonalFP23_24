@@ -15,7 +15,7 @@ class ProyectoResource extends JsonResource
     public function toArray(Request $request): array
     {
         return array_merge(parent::toArray($request), [
-            'nombreDocente' => $this->docente ? $this->docente->name : null,
+            'tutor' => $this->docente ? $this->docente->nombre . " " . $this->docente->apellidos : null,
             'ciclos' => CicloResource::collection($this->ciclos),
             'estudiantes' => $this->users()->get(),
         ]);
