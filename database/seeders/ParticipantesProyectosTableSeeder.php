@@ -17,9 +17,10 @@ class ParticipantesProyectosTableSeeder extends Seeder
         ParticipanteProyecto::truncate();
 
         $users = User::all();
+        $proyectos = Proyecto::all();
         foreach($users as $user){
 
-            $proyectosSeleccionados = Proyecto::all()->random(random_int(0,2));
+            $proyectosSeleccionados = $proyectos->random(random_int(0,2));
 
             $sonProyectosDiferentes = false;
 
@@ -28,6 +29,8 @@ class ParticipantesProyectosTableSeeder extends Seeder
 
                     if($proyectosSeleccionados->get(0)->id !== $proyectosSeleccionados->get(1)->id){
                         $sonProyectosDiferentes = true;
+                    }else{
+                        $proyectosSeleccionados->set(0)->id = $proyectos->random()->id;
                     }
 
                 }while(!$sonProyectosDiferentes);
