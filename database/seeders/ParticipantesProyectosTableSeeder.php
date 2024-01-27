@@ -15,17 +15,18 @@ class ParticipantesProyectosTableSeeder extends Seeder
     public function run(): void
     {
         ParticipanteProyecto::truncate();
+        array_map(function($value){
+            $userProyects = random_int(0,2);
+            for($i = 0; $i < $userProyects; $i++){
+                $participante = new ParticipanteProyecto(
+                    [
+                        "estudiante_id"=>$value->id,
+                        "proyecto_id"=>Proyecto::inRandomOrder()->get()->id,
+                    ]
+                );
+                $participante->save();
+            }
 
-        $amountElementsToInsert = random_int(0,2);
-
-        for($i = 0; $i < $amountElementsToInsert; $i++){
-            $participanteProyecto = new ParticipanteProyecto(
-                [
-                    "estudiante_id"=>User::inRandomOrder()->first()->id,
-                    "proyecto_id"=> Proyecto::inRandomOrder()->first()->id,
-                ]
-            );
-            $participanteProyecto->save();
-        }
+        },User::all()->toArray());
     }
 }
