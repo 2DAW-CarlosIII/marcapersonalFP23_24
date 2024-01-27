@@ -11,9 +11,7 @@ class CountController extends Controller
 {
     public function count($tabla)
     {
-        if (!Schema::hasTable($tabla)) {
-            return response()->json(['error' => 'Tabla no encontrada'], 404);
-        }
+        abort_unless(Schema::hasTable($tabla), 404, "Table not found");
 
         $count = DB::table($tabla)->count();
         return response()->json(['count' => $count]);
