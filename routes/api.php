@@ -16,6 +16,7 @@ use Tqdev\PhpCrudApi\Config\Config;
 use App\Http\Controllers\API\CurriculoController;
 use App\Http\Controllers\API\EmpresaController;
 use App\Http\Controllers\API\CompetenciasController;
+use App\Http\Controllers\API\ContadorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,6 +34,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::prefix('v1')->group(function () {
+    Route::get('{tabla}/count', [ContadorController::class,'count']);
     Route::apiResource('ciclos', CicloController::class);
     Route::apiResource('reconocimientos', ReconocimientoController::class);
     Route::apiResource('users', UserController::class);
