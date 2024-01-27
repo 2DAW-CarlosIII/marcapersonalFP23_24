@@ -62,6 +62,7 @@ class CurriculosTableSeeder extends Seeder
             $curri = new Curriculo;
             $curri->user_id = $curriculo['user_id'];
             $curri->video_curriculum = $curriculo['video_curriculum'];
+            $curri->sobre_mi = fake()->sentence();
             $curri->save();
         }
     }
