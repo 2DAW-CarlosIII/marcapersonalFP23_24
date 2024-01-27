@@ -39,8 +39,9 @@ export const CurriculoList = () => {
     <List filters={curriculosFilters} >
       {isSmall ? (
         <SimpleList
-          primaryText="%{video_curriculo}"
-          secondaryText="%{pdf_curriculo}"
+          primaryText="%{video_curriculum}"
+          secondaryText="%{pdf_curriculum}"
+          tertiaryText="%{sobre_mi}"
           linkType={(record) => (record.canEdit ? 'edit' : 'show')}
         >
           <EditButton />
@@ -53,6 +54,7 @@ export const CurriculoList = () => {
             </ReferenceField>
             <TextField source="video_curriculum" />
             <TextField source="pdf_curriculum" />
+            <TextField source="sobre_mi" />
             <ShowButton />
             <EditButton />
         </Datagrid>
@@ -73,6 +75,7 @@ export const CurriculoEdit = () => (
         <TextInput source="id" disabled />
         <TextInput source="video_curriculum" />
         <TextInput source="pdf_curriculum" />
+        <TextInput source="sobre_mi" />
     </SimpleForm>
     </Edit>
 );
@@ -86,6 +89,7 @@ export const CurriculoShow = () => (
             <TextField source="id" />
             <TextField source="video_curriculum" />
             <TextField source="pdf_curriculum" />
+            <TextField source="sobre_mi" />
         </SimpleShowLayout>
     </Show>
 );
@@ -96,6 +100,7 @@ export const CurriculoCreate = () => (
             <EstudianteInput />
             <TextInput source="video_curriculum" />
             <TextInput source="pdf_curriculum" />
+            <TextInput source="sobre_mi" />
         </SimpleForm>
     </Create>
 );

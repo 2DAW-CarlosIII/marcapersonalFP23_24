@@ -29,11 +29,11 @@ class CurriculoController extends Controller
      */
     public function store(Request $request)
     {
-        $Curriculo = json_decode($request->getContent(), true);
+        $curriculoData = $request->all();
 
-        $Curriculo = Curriculo::create($Curriculo['data']['attributes']);
+        $curriculo = Curriculo::create($curriculoData);
 
-        return new CurriculoResource($Curriculo);
+        return new CurriculoResource($curriculo);
     }
 
     /**
@@ -49,8 +49,9 @@ class CurriculoController extends Controller
      */
     public function update(Request $request, Curriculo $Curriculo)
     {
-        $CurriculoData = json_decode($request->getContent(), true);
-        $Curriculo->update($CurriculoData['data']['attributes']);
+        $curriculoData = json_decode($request->getContent(), true);
+
+        $Curriculo->update($curriculoData);
 
         return new CurriculoResource($Curriculo);
     }
