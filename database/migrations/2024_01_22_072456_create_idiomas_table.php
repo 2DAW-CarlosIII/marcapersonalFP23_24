@@ -13,7 +13,11 @@ return new class extends Migration
     {
         Schema::create('idiomas', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre', 100);
+            $table->string('alpha2', 3);
+            $table->string('alpha3t', 5);
+            $table->string('alpha3b', 5);
+            $table->string('english_name', 60);
+            $table->string('native_name', 60);
             $table->timestamps();
         });
     }
