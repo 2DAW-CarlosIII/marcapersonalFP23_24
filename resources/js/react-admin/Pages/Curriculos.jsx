@@ -73,6 +73,7 @@ export const CurriculoEdit = () => (
         <TextInput source="id" disabled />
         <TextInput source="video_curriculum" />
         <TextInput source="pdf_curriculum" />
+        <TextInput source="sobre_mi" />
     </SimpleForm>
     </Edit>
 );
@@ -86,6 +87,7 @@ export const CurriculoShow = () => (
             <TextField source="id" />
             <TextField source="video_curriculum" />
             <TextField source="pdf_curriculum" />
+            <TextField source="sobre_mi" />
         </SimpleShowLayout>
     </Show>
 );
