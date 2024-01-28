@@ -21,7 +21,7 @@ import { useRecordContext} from 'react-admin';
 import { useMediaQuery } from '@mui/material';
 
 const NombreInput = () => (
-    <TextInput source="nombre" label="Nombre"/>
+    <TextInput source="english_name" label="Nombre Ingles"/>
 )
 const IdiomasFilters = [
     <TextInput source="q" label="Search" alwaysOn />,
@@ -34,8 +34,9 @@ export const IdiomaList = () => {
     <List filters={IdiomasFilters} >
       {isSmall ? (
         <SimpleList
-          primaryText="%{id}"
-          secondaryText="%{nombre}"
+            primaryText="%{alpha3t}"
+            secondaryText="%{native_name}"
+            tertiaryText="%{english_name}"
           linkType={(record) => (record.canEdit ? 'edit' : 'show')}
         >
           <EditButton />
@@ -43,7 +44,10 @@ export const IdiomaList = () => {
       ) : (
         <Datagrid bulkActionButtons={false} >
           <TextField source="id" />
-          <TextField source="nombre" />
+          <TextField source="alpha2" label="Codigo Idioma 2"/>
+          <TextField source="alpha3t" label="Codigo Idioma 3"/>
+          <TextField source="english_name" label="Nombre Ingles"/>
+          <TextField source="native_name" label="Nombre Nativo"/>
           <ShowButton />
           <EditButton />
         </Datagrid>
@@ -61,7 +65,10 @@ export const IdiomaEdit = () => (
     <Edit title={<IdiomaTitle />}>
         <SimpleForm>
             <TextInput source="id" disabled />
-            <NombreInput />
+            <TextInput source="alpha2" label="Codigo Idioma 2"/>
+            <TextInput source="alpha3t" label="Codigo Idioma 3"/>
+            <TextInput source="english_name" label="Nombre Ingles"/>
+            <TextInput source="native_name" label="Nombre Nativo"/>
         </SimpleForm>
     </Edit>
 );
@@ -70,7 +77,10 @@ export const IdiomaShow = () => (
     <Show>
         <SimpleShowLayout>
             <TextField source="id" />
-            <TextField source="nombre" />
+            <TextField source="alpha2" label="Codigo Idioma 2"/>
+            <TextField source="alpha3t" label="Codigo Idioma 3"/>
+            <TextField source="english_name" label="Nombre Ingles"/>
+            <TextField source="native_name" label="Nombre Nativo"/>
         </SimpleShowLayout>
     </Show>
 );
@@ -78,7 +88,10 @@ export const IdiomaShow = () => (
 export const IdiomaCreate = () => (
     <Create>
         <SimpleForm>
-            <NombreInput />
+            <TextInput source="alpha2" label="Codigo Idioma 2"/>
+            <TextInput source="alpha3t" label="Codigo Idioma 3"/>
+            <TextInput source="english_name" label="Nombre Ingles"/>
+            <TextInput source="native_name" label="Nombre Nativo"/>
         </SimpleForm>
     </Create>
 );
