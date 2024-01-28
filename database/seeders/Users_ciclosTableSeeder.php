@@ -1,6 +1,9 @@
 <?php
 
 namespace Database\Seeders;
+
+use App\Models\Ciclo;
+use App\Models\User;
 use App\Models\User_ciclo;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -14,11 +17,16 @@ class Users_ciclosTableSeeder extends Seeder
     {
         //seed de la tabla pivote users_ciclos
         User_ciclo::truncate();
-        for ($i=1; $i <= 20; $i++) {
-            User_ciclo::create([
-                'user_id' => $i,
-                'ciclo_id' => $i,
-            ]);
+
+        $users = User::all();
+        $ciclos = Ciclo::all();
+
+        foreach ($users as $user) {
+            $numCiclos = random_int(0, 2);
+            for ($i = 0; $i < $numCiclos; $i++) {
+                $ciclo = $ciclos->random()->id;
+                $user->ciclos()->attach($ciclo);
+            }
         }
     }
 }
