@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 use App\Models\UserCompetencia;
+use App\Models\User;
+use App\Models\Competencia;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -14,6 +16,28 @@ class UsersCompetenciasTableSeeder extends Seeder
     public function run(): void
     {
         UserCompetencia::truncate();
-        UserCompetencia::factory(5)->create();
-    }
-}
+
+        $users = User::all();
+        $competencias = Competencia::all();
+
+
+        foreach ($users as $user) {
+            $cantidadCompetencias = random_int(0, 2);
+
+            $competenciasAsignadas = [];
+
+            for ($i = 0; $i < $cantidadCompetencias; $i++) {
+
+                $competenciaAsignada = $competencias->random();
+
+                    do {
+                        $competenciaAsignada = $competencias->random();
+
+                        // Control de duplicados
+                        if (!in_array($competenciaAsignada->id, $competenciasAsignadas)) {
+                            $user->competencias()->attach($competenciaAsignada->id);
+                            $competenciasAsignadas[] = $competenciaAsignada->id;
+                        }
+                    } while (count($competenciasAsignadas) < $cantidadCompetencias);
+                }
+            }}}
