@@ -24,9 +24,9 @@ class Users_ciclosTableSeeder extends Seeder
         foreach ($user as $user) {
             $numVeces= rand(0, 2);
             for ($i=1; $i <= $numVeces; $i++) {
-                while($randomId_old==$randomId){
-                $randomId = $ciclo->random()->id;
-                }
+                do{
+                    $randomId = $ciclo->random()->id;
+                }while($randomId_old==$randomId);
                 $randomId_old=$randomId;
                 $user->ciclos()->attach($randomId);
             }
