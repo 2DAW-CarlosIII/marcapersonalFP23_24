@@ -41,7 +41,6 @@ export const IdiomaList = () => {
         <Datagrid bulkActionButtons={false} >
           <TextField source="id" />
           <TextField source="alpha2" label="Codigo Idioma 2"/>
-          <TextField source="alpha3t" label="Codigo Idioma 3"/>
           <TextField source="english_name" label="Nombre Ingles"/>
           <TextField source="native_name" label="Nombre Nativo"/>
           <ShowButton />
@@ -62,7 +61,8 @@ export const IdiomaEdit = () => (
         <SimpleForm>
             <TextInput source="id" disabled />
             <TextInput source="alpha2" label="Codigo Idioma 2"/>
-            <TextInput source="alpha3t" label="Codigo Idioma 3"/>
+            <TextInput source="alpha3t" label="Codigo Idioma 3t"/>
+            <TextInput source="alpha3b" label="Codigo Idioma 3b"/>
             <TextInput source="english_name" label="Nombre Ingles"/>
             <TextInput source="native_name" label="Nombre Nativo"/>
         </SimpleForm>
@@ -74,7 +74,8 @@ export const IdiomaShow = () => (
         <SimpleShowLayout>
             <TextField source="id" />
             <TextField source="alpha2" label="Codigo Idioma 2"/>
-            <TextField source="alpha3t" label="Codigo Idioma 3"/>
+            <TextField source="alpha3t" label="Codigo Idioma 3t"/>
+            <TextField source="alpha3b" label="Codigo Idioma 3b"/>
             <TextField source="english_name" label="Nombre Ingles"/>
             <TextField source="native_name" label="Nombre Nativo"/>
         </SimpleShowLayout>
@@ -85,7 +86,8 @@ export const IdiomaCreate = () => (
     <Create>
         <SimpleForm>
             <TextInput source="alpha2" label="Codigo Idioma 2"/>
-            <TextInput source="alpha3t" label="Codigo Idioma 3"/>
+            <TextInput source="alpha3t" label="Codigo Idioma 3t"/>
+            <TextInput source="alpha3b" label="Codigo Idioma 3b"/>
             <TextInput source="english_name" label="Nombre Ingles"/>
             <TextInput source="native_name" label="Nombre Nativo"/>
         </SimpleForm>
