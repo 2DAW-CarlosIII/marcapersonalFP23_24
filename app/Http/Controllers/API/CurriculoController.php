@@ -47,12 +47,12 @@ class CurriculoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Curriculo $Curriculo)
+    public function update(Request $request, Curriculo $curriculo)
     {
-        $CurriculoData = json_decode($request->getContent(), true);
-        $Curriculo->update($CurriculoData['data']['attributes']);
+        $curriculoData = json_decode($request->getContent(), true);
+        $curriculo->update($curriculoData);
 
-        return new CurriculoResource($Curriculo);
+        return new CurriculoResource($curriculo);
     }
 
     /**
