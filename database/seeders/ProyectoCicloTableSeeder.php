@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Ciclo;
 use App\Models\Proyecto;
 use App\Models\ProyectoCiclo;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -15,6 +16,17 @@ class ProyectoCicloTableSeeder extends Seeder
     public function run(): void
     {
         ProyectoCiclo::truncate();
-        ProyectoCiclo::factory(20)->create();
+
+        $proyectos = Proyecto::all();
+
+        foreach ($proyectos as $proyecto) {
+            $proyectoCiclo = rand(0, 2);
+
+            $ciclosAleatorios = Ciclo::inRandomOrder()->take($proyectoCiclo)->get();
+
+            foreach ($ciclosAleatorios as $ciclo) {
+                $proyecto->ciclos()->attach($ciclo->id);
+            }
+        }
     }
 }
