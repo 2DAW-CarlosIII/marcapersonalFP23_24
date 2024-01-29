@@ -15,7 +15,7 @@ class UsersCompetenciasTableSeeder extends Seeder
      */
     public function run(): void
     {
-        UserCompetencia::truncate();
+       
         UserCompetencia::factory(5)->create();
 
         $usuarios = User::all();
