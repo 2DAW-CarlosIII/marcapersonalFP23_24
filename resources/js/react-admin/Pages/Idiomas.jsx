@@ -20,12 +20,9 @@ import {
 import { useRecordContext} from 'react-admin';
 import { useMediaQuery } from '@mui/material';
 
-const NombreInput = () => (
-    <TextInput source="english_name" label="Nombre"/>
-)
+
 const IdiomasFilters = [
     <TextInput source="q" label="Search" alwaysOn />,
-    NombreInput(),
 ];
 
 export const IdiomaList = () => {
@@ -43,9 +40,6 @@ export const IdiomaList = () => {
       ) : (
         <Datagrid bulkActionButtons={false} >
           <TextField source="id" />
-          <TextField source="alpha2" />
-          <TextField source="alpha3t" />
-          <TextField source="alpha3b" />
           <TextField source="english_name" />
           <TextField source="native_name" />
           <ShowButton />
@@ -68,7 +62,7 @@ export const IdiomaEdit = () => (
             <TextInput source="alpha2" />
             <TextInput source="alpha3t" />
             <TextInput source="alpha3b" />
-            <NombreInput />
+            <TextInput source="english_name" label="Nombre"/>
             <TextInput source="native_name"/>
         </SimpleForm>
     </Edit>
@@ -93,7 +87,7 @@ export const IdiomaCreate = () => (
         <TextInput source="alpha2" />
             <TextInput source="alpha3t" />
             <TextInput source="alpha3b" />
-            <NombreInput />
+            <TextInput source="english_name" label="Nombre"/>
             <TextInput source="native_name"/>
         </SimpleForm>
     </Create>
