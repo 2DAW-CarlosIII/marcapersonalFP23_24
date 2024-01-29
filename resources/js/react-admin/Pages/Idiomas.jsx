@@ -20,12 +20,8 @@ import {
 import { useRecordContext} from 'react-admin';
 import { useMediaQuery } from '@mui/material';
 
-const NombreInput = () => (
-    <TextInput source="english_name" label="Nombre Ingles"/>
-)
 const IdiomasFilters = [
     <TextInput source="q" label="Search" alwaysOn />,
-    NombreInput(),
 ];
 
 export const IdiomaList = () => {
