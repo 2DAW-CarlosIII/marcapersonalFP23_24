@@ -16,7 +16,8 @@ class UsersCompetenciasTableSeeder extends Seeder
     public function run(): void
     {
        
-        UserCompetencia::factory(5)->create();
+       
+        UserCompetencia::truncate();
 
         $usuarios = User::all();
         $competencias = Competencia::all();
@@ -26,6 +27,9 @@ class UsersCompetenciasTableSeeder extends Seeder
 
             for ($i = 0; $i < $numCompetenciasUsuario; $i++){
                 $competencia = $competencias->random();
+                while ($usuario->competencias->contains($competencia)) {
+                    $competencia = $competencias->random();
+                }
                 $usuario->competencias()->attach($competencia->id);
             }
         }
