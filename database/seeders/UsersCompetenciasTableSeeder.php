@@ -17,14 +17,24 @@ class UsersCompetenciasTableSeeder extends Seeder
     {
         UserCompetencia::truncate();
 
-        $usuarios = User::all();
+        $users = User::all();
         $competencias = Competencia::all();
 
-        foreach ($usuarios as $usuario) {
-            $valorAleatorio = random_int(0,2);
-            for ($i = 0; $i < $valorAleatorio; $i++){
-                $usuario->competencias()->attach($competencias->random()->id);
+
+        foreach ($users as $user) {
+            $cantidadCompetencias = random_int(0, 2);
+
+            $competenciasAsignadas = [];
+
+            for ($i = 0; $i < $cantidadCompetencias; $i++) {
+                $competenciaAsignada = $competencias->random();
+
+                while (!in_array($competenciaAsignada->id, $competenciasAsignadas)) {
+                    $user->competencias()->attach($competenciaAsignada->id);
+                    $competenciasAsignadas[] = $competenciaAsignada->id;
+                }
             }
         }
-    }
-}
+
+
+    }}
