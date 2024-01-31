@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('competencias_actividades', function (Blueprint $table) {
             $table->unsignedBigInteger('competencia_id');
-            $table->unsignedBigInteger('actividades_id');
+            $table->unsignedBigInteger('actividad_id');
             $table->foreign('competencia_id')->references('id')->on('competencias');
-            $table->foreign('actividades_id')->references('id')->on('actividades');
+            $table->foreign('actividad_id')->references('id')->on('actividades');
 
             $table->timestamps();
         });

@@ -16,6 +16,7 @@ use Tqdev\PhpCrudApi\Config\Config;
 use App\Http\Controllers\API\CurriculoController;
 use App\Http\Controllers\API\EmpresaController;
 use App\Http\Controllers\API\TokenController;
+use App\Http\Controllers\API\CountController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,7 +36,7 @@ Route::prefix('v1')->group(function () {
             $user->fullName = $user->nombre . ' ' . $user->apellidos;
             return $user;
         });
-
+      
         Route::apiResource('ciclos', CicloController::class);
         Route::apiResource('reconocimientos', ReconocimientoController::class);
         Route::apiResource('users', UserController::class);
@@ -51,6 +52,8 @@ Route::prefix('v1')->group(function () {
         Route::apiResource('competencias', CompetenciaController::class);
         Route::apiResource('idiomas', IdiomaController::class);
     });
+
+    Route::get('{tabla}/count', [CountController::class, 'count']);
 
     // emite un nuevo token
     Route::post('tokens', [TokenController::class, 'store']);

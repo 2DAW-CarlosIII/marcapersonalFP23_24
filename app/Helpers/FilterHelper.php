@@ -9,23 +9,27 @@ class FilterHelper
         $modelClassName = $request->route()->controller->modelclass;
         $query = $modelClassName::query();
 
-        $filterValue = $request->q;
-        /* Barra de búsqueda*/
-        if ($filterValue) {
-            foreach ($filterColumns as $column) {
-                $query->orWhere($column, 'like', '%' . $filterValue . '%');
+        if ($request->has('id')) {
+            $ids = $request->id;
+            $query->whereIn('id', is_array($ids) ? $ids : array($ids));
+        } else {
+            $filterValue = $request->q;
+            /* Barra de búsqueda*/
+            if ($filterValue) {
+                foreach ($filterColumns as $column) {
+                    $query->orWhere($column, 'like', '%' . $filterValue . '%');
+                }
             }
-        }
 
-        /* Resto de filtros (desplegables)*/
-        if ($others_filters != null) {
-            foreach ($others_filters as $filter) {
-                if ($request[$filter]) {
-                    $query->where($filter, $request[$filter]);
+            /* Resto de filtros (desplegables)*/
+            if ($others_filters != null) {
+                foreach ($others_filters as $filter) {
+                    if ($request[$filter]) {
+                        $query->where($filter, $request[$filter]);
+                    }
                 }
             }
         }
-
 
         return $query;
     }

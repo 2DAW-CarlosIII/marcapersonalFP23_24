@@ -20,12 +20,9 @@ import {
 import { useRecordContext} from 'react-admin';
 import { useMediaQuery } from '@mui/material';
 
-const NombreInput = () => (
-    <TextInput source="nombre" label="Nombre"/>
-)
+
 const IdiomasFilters = [
     <TextInput source="q" label="Search" alwaysOn />,
-    NombreInput(),
 ];
 
 export const IdiomaList = () => {
@@ -35,7 +32,7 @@ export const IdiomaList = () => {
       {isSmall ? (
         <SimpleList
           primaryText="%{id}"
-          secondaryText="%{nombre}"
+          secondaryText="%{english_name}"
           linkType={(record) => (record.canEdit ? 'edit' : 'show')}
         >
           <EditButton />
@@ -43,7 +40,8 @@ export const IdiomaList = () => {
       ) : (
         <Datagrid bulkActionButtons={false} >
           <TextField source="id" />
-          <TextField source="nombre" />
+          <TextField source="english_name" />
+          <TextField source="native_name" />
           <ShowButton />
           <EditButton />
         </Datagrid>
@@ -60,8 +58,12 @@ export const IdiomaTitle = () => {
 export const IdiomaEdit = () => (
     <Edit title={<IdiomaTitle />}>
         <SimpleForm>
-            <TextInput source="id" disabled />
-            <NombreInput />
+        <TextInput source="id" disabled />
+            <TextInput source="alpha2" />
+            <TextInput source="alpha3t" />
+            <TextInput source="alpha3b" />
+            <TextInput source="english_name" label="Nombre"/>
+            <TextInput source="native_name"/>
         </SimpleForm>
     </Edit>
 );
@@ -69,8 +71,12 @@ export const IdiomaEdit = () => (
 export const IdiomaShow = () => (
     <Show>
         <SimpleShowLayout>
-            <TextField source="id" />
-            <TextField source="nombre" />
+        <TextField source="id" />
+          <TextField source="alpha2" />
+          <TextField source="alpha3t" />
+          <TextField source="alpha3b" />
+          <TextField source="english_name" />
+          <TextField source="native_name" />
         </SimpleShowLayout>
     </Show>
 );
@@ -78,7 +84,11 @@ export const IdiomaShow = () => (
 export const IdiomaCreate = () => (
     <Create>
         <SimpleForm>
-            <NombreInput />
+        <TextInput source="alpha2" />
+            <TextInput source="alpha3t" />
+            <TextInput source="alpha3b" />
+            <TextInput source="english_name" label="Nombre"/>
+            <TextInput source="native_name"/>
         </SimpleForm>
     </Create>
 );
