@@ -42,7 +42,7 @@ class ReconocimientoPolicy
      */
     public function update(User $user, Reconocimiento $reconocimiento): bool
     {
-        return $user->esPropietario($reconocimiento);
+        return $user->esPropietario($reconocimiento,$reconocimiento->docente_validador);
     }
 
     /**
@@ -50,7 +50,7 @@ class ReconocimientoPolicy
      */
     public function delete(User $user, Reconocimiento $reconocimiento): bool
     {
-        return $user->esPropietario($reconocimiento);
+        return $user->esPropietario($reconocimiento,$reconocimiento->docente_validador);
 
     }
 
