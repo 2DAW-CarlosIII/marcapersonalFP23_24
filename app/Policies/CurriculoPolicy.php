@@ -17,23 +17,23 @@ class CurriculoPolicy
      */
     public function before(User $user, $ability)
     {
-        if($user->email === env('ADMIN_EMAIL')) return true;
+        if($user->esAdmin()) return true;
     }
 
     /**
      * Determine whether the user can view any models.
      */
-    public function viewAny(User $user): bool
+    public function viewAny(?User $user): bool
     {
-        //
+        return true;
     }
 
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Curriculo $curriculo): bool
+    public function view(?User $user, Curriculo $curriculo): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -41,7 +41,7 @@ class CurriculoPolicy
      */
     public function create(User $user): bool
     {
-        return $user->email === env('ADMIN_EMAIL');
+        return $user->esEstudiante();
     }
 
     /**
@@ -49,7 +49,7 @@ class CurriculoPolicy
      */
     public function update(User $user, Curriculo $curriculo): bool
     {
-        return $user->id === $curriculo->user_id;
+        return $user->esPropietario($curriculo);
     }
 
     /**
@@ -57,7 +57,7 @@ class CurriculoPolicy
      */
     public function delete(User $user, Curriculo $curriculo): bool
     {
-        //
+        return $user->esPropietario($curriculo);
     }
 
     /**
