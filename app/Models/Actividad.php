@@ -21,7 +21,7 @@ class Actividad extends Model
 
     public function competencias(): BelongsToMany
     {
-       return $this->belongsToMany(Competencias::class, 'competencias_actividades', 'actividad_id', 'competencia_id');
+       return $this->belongsToMany(Competencia::class, 'competencias_actividades', 'actividad_id', 'competencia_id');
     }
 
     public function reconocimientos(): HasMany

@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\Competencias;
+use App\Models\Competencia;
 use App\Models\Actividad;
 use App\Models\Competencias_Actividades;
 
@@ -18,7 +18,7 @@ class ActividadesCompetenciasTableSeeder extends Seeder
         Competencias_Actividades::truncate();
 
         $actividades = Actividad::all();
-        $competencias = Competencias::all();
+        $competencias = Competencia::all();
 
         foreach ($actividades as $actividad) {
             $nCompetencias = rand(0, 2);

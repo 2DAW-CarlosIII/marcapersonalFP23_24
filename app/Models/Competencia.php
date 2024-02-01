@@ -20,4 +20,9 @@ class Competencia extends Model
     {
         return $this->belongsToMany(User::class, 'users_competencias')->withPivot('docente_validador');
     }
+
+    public function actividades(): BelongsToMany
+    {
+       return $this->belongsToMany(Actividad::class, 'competencias_actividades');
+    }
 }
