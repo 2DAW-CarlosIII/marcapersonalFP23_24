@@ -16,6 +16,7 @@ use Tqdev\PhpCrudApi\Config\Config;
 use App\Http\Controllers\API\CurriculoController;
 use App\Http\Controllers\API\EmpresaController;
 use App\Http\Controllers\API\TokenController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\API\CountController;
 
 /*
@@ -59,6 +60,10 @@ Route::prefix('v1')->group(function () {
     Route::post('tokens', [TokenController::class, 'store']);
     // elimina el token del usuario autenticado
     Route::delete('tokens', [TokenController::class, 'destroy'])->middleware('auth:sanctum');
+
+    Route::post('login', [AuthenticatedSessionController::class, 'apiLogin']);
+    Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
+        ->middleware('auth:sanctum')->name('logout');
 
 });
 

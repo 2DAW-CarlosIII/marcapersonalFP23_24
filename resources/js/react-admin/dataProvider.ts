@@ -60,7 +60,7 @@ dataProvider.postLogin = (email, password) => {
 };
 
 dataProvider.postLogout = () => {
-    return httpClient(`${apiUrl}../../../logout`, {
+    return httpClient(`${apiUrl}/logout`, {
         method: 'POST',
         headers: new Headers({ 'Content-Type': 'application/json' }),
     });
