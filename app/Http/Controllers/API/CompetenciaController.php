@@ -6,6 +6,7 @@ use App\Helpers\FilterHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\CompetenciaResource;
 use App\Models\Competencia;
+use App\Models\UserCompetencia;
 use Illuminate\Http\Request;
 
 class CompetenciaController extends Controller
@@ -29,10 +30,19 @@ class CompetenciaController extends Controller
     public function store(Request $request)
     {
         $competencia = json_decode($request->getContent(), true);
-
         $competencia = Competencia::create($competencia);
-
         return new CompetenciaResource($competencia);
+
+
+        $competenciaData = $request->all();
+        $competenciaData['user_id'] = auth()->id();
+        $competencia = Competencia::create($competenciaData);
+        return response()->json($competencia, 201);
+
+        $userCompetenciaData = $request->all();
+        $userCompetenciaData['user_id'] = auth()->id();
+        $userCompetencia = UserCompetencia::create($userCompetenciaData);
+        return response()->json($userCompetencia, 201);
     }
 
     /**

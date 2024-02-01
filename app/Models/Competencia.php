@@ -25,4 +25,29 @@ class Competencia extends Model
     {
        return $this->belongsToMany(Actividad::class, 'competencias_actividades');
     }
+
+    public function esAdmin(): bool
+    {
+        return $this->email === env('ADMIN_EMAIL');
+    }
+
+    public function esEstudiante(): bool
+    {
+        return $this->getEmailDomain() === env('STUDENT_EMAIL_DOMAIN');
+    }
+
+    public function esPropietario($recurso, $propiedad = 'user_id'): bool
+    {
+        return $recurso && $recurso->$propiedad === $this->id;
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'usuario_id');
+    }
+
+    public function competencia()
+    {
+        return $this->belongsTo(Competencia::class);
+    }
 }
