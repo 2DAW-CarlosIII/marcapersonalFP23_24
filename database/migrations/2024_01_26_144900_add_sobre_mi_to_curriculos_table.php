@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('estudiantes', function (Blueprint $table) {
-            $table->string('avatar')->nullable();
+        Schema::table('curriculos', function (Blueprint $table) {
+            $table->char('sobre_mi', 255)->nullable();
         });
     }
 
@@ -21,8 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('estudiantes', function (Blueprint $table) {
-            $table->dropColumn('avatar');
+        Schema::table('curriculos', function (Blueprint $table) {
+            $table->dropColumn('sobre_mi');
         });
     }
 };

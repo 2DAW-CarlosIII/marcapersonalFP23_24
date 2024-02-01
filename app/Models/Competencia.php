@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Competencia extends Model
 {
@@ -14,4 +15,14 @@ class Competencia extends Model
         'nombre',
         'color',
     ];
+
+    public function users(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'users_competencias')->withPivot('docente_validador');
+    }
+
+    public function actividades(): BelongsToMany
+    {
+       return $this->belongsToMany(Actividad::class, 'competencias_actividades');
+    }
 }

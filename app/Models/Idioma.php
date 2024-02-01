@@ -11,7 +11,11 @@ class Idioma extends Model
     use HasFactory;
 
     protected $fillable = [
-        'nombre',
+        'alpha2',
+        'alpha3t',
+        'alpha3b',
+        'english_name',
+        'native_name',
     ];
 
     /**

@@ -7,10 +7,21 @@ use App\Http\Controllers\Controller;
 use App\Models\Curriculo;
 use Illuminate\Http\Request;
 use App\Http\Resources\CurriculoResource;
+use Illuminate\Support\Facades\Gate;
 
 class CurriculoController extends Controller
 {
     public $modelclass = Curriculo::class;
+
+    /**
+     * Create the controller instance.
+     *
+     * @return void
+    */
+    public function __construct()
+    {
+        $this->authorizeResource(Curriculo::class, 'curriculo');
+    }
     /**
      * Display a listing of the resource.
      */
@@ -47,12 +58,13 @@ class CurriculoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Curriculo $Curriculo)
+    public function update(Request $request, Curriculo $curriculo)
     {
-        $CurriculoData = json_decode($request->getContent(), true);
-        $Curriculo->update($CurriculoData['data']['attributes']);
 
-        return new CurriculoResource($Curriculo);
+        $curriculoData = json_decode($request->getContent(), true);
+        $curriculo->update($curriculoData);
+
+        return new CurriculoResource($curriculo);
     }
 
     /**

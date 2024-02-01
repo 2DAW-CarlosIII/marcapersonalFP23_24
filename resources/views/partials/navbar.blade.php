@@ -31,7 +31,7 @@
                   </ul>
               @else
                   <ul style="user-select: none; display: none; position: absolute;" class="">
-                      <li style="white-space: nowrap;"><a href="{{ route('login') }}" style="display: block;">Login</a>
+                      <li style="white-space: nowrap;"><a href="{{ route('dashboard') }}" style="display: block;">Login</a>
                       </li>
                       <li style="white-space: nowrap;"><a href="{{ route('register') }}"
                               style="display: block;">Register</a></li>
