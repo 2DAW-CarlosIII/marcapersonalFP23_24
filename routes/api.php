@@ -30,31 +30,28 @@ use App\Http\Controllers\API\CountController;
 */
 
 Route::prefix('v1')->group(function () {
-    Route::get('curriculos', [CurriculoController::class, 'index']);
-    Route::get('curriculos/{curriculo}', [CurriculoController::class, 'show']);
     Route::middleware('auth:sanctum')->group(function () {
         Route::get('/user', function (Request $request) {
             $user = $request->user();
             $user->fullName = $user->nombre . ' ' . $user->apellidos;
             return $user;
         });
-
-        Route::apiResource('ciclos', CicloController::class);
-        Route::apiResource('reconocimientos', ReconocimientoController::class);
-        Route::apiResource('users', UserController::class);
-        Route::apiResource('proyectos', ProyectoController::class);
-        Route::apiResource('empresas', EmpresaController::class);
-        Route::apiResource('familias_profesionales', FamiliaProfesionalController::class)->parameters([
-            'familias_profesionales' => 'familiaProfesional'
-        ]);
-        Route::apiResource('curriculos', CurriculoController::class)
-            ->except(['index', 'show']);
-        Route::apiResource('actividades', ActividadController::class)->parameters([
-            'actividades' => 'actividad'
-        ]);
-        Route::apiResource('competencias', CompetenciaController::class);
-        Route::apiResource('idiomas', IdiomaController::class);
     });
+
+    Route::apiResource('ciclos', CicloController::class);
+    Route::apiResource('reconocimientos', ReconocimientoController::class);
+    Route::apiResource('users', UserController::class);
+    Route::apiResource('proyectos', ProyectoController::class);
+    Route::apiResource('empresas', EmpresaController::class);
+    Route::apiResource('familias_profesionales', FamiliaProfesionalController::class)->parameters([
+        'familias_profesionales' => 'familiaProfesional'
+    ]);
+    Route::apiResource('curriculos', CurriculoController::class);
+    Route::apiResource('actividades', ActividadController::class)->parameters([
+        'actividades' => 'actividad'
+    ]);
+    Route::apiResource('competencias', CompetenciaController::class);
+    Route::apiResource('idiomas', IdiomaController::class);
 
     Route::get('{tabla}/count', [CountController::class, 'count']);
 
