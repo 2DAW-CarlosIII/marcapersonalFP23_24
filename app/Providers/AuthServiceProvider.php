@@ -3,7 +3,10 @@
 namespace App\Providers;
 
 // use Illuminate\Support\Facades\Gate;
+
+use App\Models\Competencia;
 use App\Models\Curriculo;
+use App\Policies\CompetenciaPolicy;
 use App\Policies\CurriculoPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
@@ -16,6 +19,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         Curriculo::class => CurriculoPolicy::class,
+        Competencia::class => CompetenciaPolicy::class,
     ];
 
     /**
