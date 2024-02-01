@@ -30,6 +30,8 @@ use App\Http\Controllers\API\CountController;
 */
 
 Route::prefix('v1')->group(function () {
+    Route::get('curriculos', [CurriculoController::class, 'index']);
+    Route::get('curriculos/{curriculo}', [CurriculoController::class, 'show']);
     Route::middleware('auth:sanctum')->group(function () {
         Route::get('/user', function (Request $request) {
             $user = $request->user();
@@ -45,7 +47,8 @@ Route::prefix('v1')->group(function () {
         Route::apiResource('familias_profesionales', FamiliaProfesionalController::class)->parameters([
             'familias_profesionales' => 'familiaProfesional'
         ]);
-        Route::apiResource('curriculos', CurriculoController::class);
+        Route::apiResource('curriculos', CurriculoController::class)
+            ->except(['index', 'show']);
         Route::apiResource('actividades', ActividadController::class)->parameters([
             'actividades' => 'actividad'
         ]);
