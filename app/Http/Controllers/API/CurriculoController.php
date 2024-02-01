@@ -12,6 +12,16 @@ use Illuminate\Support\Facades\Gate;
 class CurriculoController extends Controller
 {
     public $modelclass = Curriculo::class;
+
+    /**
+     * Create the controller instance.
+     *
+     * @return void
+    */
+    public function __construct()
+    {
+        $this->authorizeResource(Curriculo::class, 'curriculo');
+    }
     /**
      * Display a listing of the resource.
      */
@@ -50,7 +60,6 @@ class CurriculoController extends Controller
      */
     public function update(Request $request, Curriculo $curriculo)
     {
-        $this->authorize('update', $curriculo);
 
         $curriculoData = json_decode($request->getContent(), true);
         $curriculo->update($curriculoData);

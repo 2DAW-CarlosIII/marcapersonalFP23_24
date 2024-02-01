@@ -21,7 +21,10 @@ class UsersTableSeeder extends Seeder
             'password' => env('ADMIN_PASSWORD', 'password'),
         ]);
 
-        User::factory(10)->create();
+        // Crear 10 usuarios con el estado docente
+        User::factory(10)->docente()->create();
+        // Crear 30 usuarios con el estado estudiante
+        User::factory(30)->estudiante()->create();
 
 
     }

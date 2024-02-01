@@ -104,4 +104,31 @@ class User extends Authenticatable
         return $this->hasMany(Actividad::class, 'docente_id', 'id');
     }
 
+    // Gestión de roles
+    public function esAdmin(): bool
+    {
+        return $this->email === env('ADMIN_EMAIL');
+    }
+
+    public function esDocente(): bool
+    {
+        return $this->getEmailDomain() === env('TEACHER_EMAIL_DOMAIN');
+    }
+
+    public function esEstudiante(): bool
+    {
+        return $this->getEmailDomain() === env('STUDENT_EMAIL_DOMAIN');
+    }
+
+    public function esPropietario($recurso, $propiedad = 'user_id'): bool
+    {
+        return $recurso && $recurso->$propiedad === $this->id;
+    }
+
+    private function getEmailDomain(): string
+    {
+        $dominio = explode('@', $this->email)[1];
+        return $dominio;
+    }
+
 }
