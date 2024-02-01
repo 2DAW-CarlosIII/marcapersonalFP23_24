@@ -13,6 +13,13 @@ use Illuminate\Support\Facades\Date;
 class UserController extends Controller
 {
     public $modelclass = User::class;
+
+    public function __construct()
+    {
+        $this->middleware('auth:sanctum')->except(['index', 'show', 'store']);
+        $this->authorizeResource(User::class, 'user');
+    }
+
     /**
      * Display a listing of the resource.
      */
