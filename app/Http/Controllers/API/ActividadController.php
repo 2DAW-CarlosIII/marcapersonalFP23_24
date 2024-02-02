@@ -14,6 +14,13 @@ class ActividadController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+     public function __construct()
+     {
+         $this->middleware('auth:sanctum')->except(['index', 'show']);
+         $this->authorizeResource(Actividad::class, 'actividad');
+     }
+
     public function index(Request $request)
     {
         $campos = ['nombre'];
@@ -30,7 +37,7 @@ class ActividadController extends Controller
     public function store(Request $request)
     {
         $actividad = json_decode($request->getContent(), true);
-
+        $actividad['docente_id'] = $request->user()->id;
         $actividad = Actividad::create($actividad);
 
         return new ActividadResource($actividad);
