@@ -11,6 +11,18 @@ use Illuminate\Http\Request;
 class EmpresaController extends Controller
 {
     public $modelclass = Empresa::class;
+
+    /**
+     * Create the controller instance.
+     *
+     * @return void
+    */
+    public function __construct()
+    {
+        $this->middleware('auth:sanctum')->except(['index', 'show']);
+        $this->authorizeResource(Empresa::class, 'empresa');
+    }
+
     public function index(Request $request)
     {
         $campos = ['nif', 'email'];
