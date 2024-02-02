@@ -3,8 +3,12 @@
 namespace App\Providers;
 
 // use Illuminate\Support\Facades\Gate;
+use App\Models\Idioma;
 use App\Models\Curriculo;
+use App\Models\FamiliaProfesional;
 use App\Policies\CurriculoPolicy;
+use App\Policies\FamiliaProfesionalPolicy;
+use App\Policies\IdiomaPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
@@ -16,6 +20,8 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         Curriculo::class => CurriculoPolicy::class,
+        FamiliaProfesional::class => FamiliaProfesionalPolicy::class,
+        Idioma::class => IdiomaPolicy::class,
     ];
 
     /**

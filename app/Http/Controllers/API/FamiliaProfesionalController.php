@@ -13,6 +13,17 @@ class FamiliaProfesionalController extends Controller
     public $modelclass = FamiliaProfesional::class;
 
     /**
+     * Create the controller instance.
+     *
+     * @return void
+    */
+    public function __construct()
+    {
+        $this->middleware('auth:sanctum')->except(['index', 'show']);
+        $this->authorizeResource(FamiliaProfesional::class, 'familiaProfesional');
+    }
+
+    /**
      * Display a listing of the resource.
      */
     public function index(Request $request)
