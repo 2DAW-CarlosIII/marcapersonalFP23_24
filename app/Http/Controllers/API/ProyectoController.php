@@ -11,6 +11,16 @@ use Illuminate\Http\Request;
 
 class ProyectoController extends Controller
 {
+    /**
+     * Create the controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth:sanctum')->except(['index', 'show']);
+        $this->authorizeResource(Proyecto::class, 'proyecto');
+    }
 
     public $modelclass = Proyecto::class;
     /**
@@ -31,7 +41,11 @@ class ProyectoController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('create', Proyecto::class);
+
         $proyecto = json_decode($request->getContent(), true);
+
+        $proyecto['docente_id'] = $request->user()->id;
 
         $proyecto = Proyecto::create($proyecto);
 
@@ -51,6 +65,8 @@ class ProyectoController extends Controller
      */
     public function update(Request $request, Proyecto $proyecto)
     {
+        $this->authorize('update', $proyecto);
+
         $proyectoData = json_decode($request->getContent(), true);
         $proyecto->update($proyectoData);
 
@@ -62,6 +78,8 @@ class ProyectoController extends Controller
      */
     public function destroy(Proyecto $proyecto)
     {
+        $this->authorize('delete', $proyecto);
+
         $proyecto->delete();
     }
 }
