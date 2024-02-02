@@ -21,7 +21,7 @@ class Actividad extends Model
 
     public function competencias(): BelongsToMany
     {
-       return $this->belongsToMany(Competencia::class, 'competencias_actividades', 'actividad_id', 'competencia_id');
+        return $this->belongsToMany(Competencia::class, 'competencias_actividades', 'actividad_id', 'competencia_id');
     }
 
     public function reconocimientos(): HasMany
@@ -31,7 +31,6 @@ class Actividad extends Model
 
     public function creador(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'docente_id');
+        return $this->belongsTo(User::class, 'docente_id', 'id'); // Especifica la clave foránea y la clave primaria
     }
-
 }

@@ -78,20 +78,21 @@ class User extends Authenticatable
 
     /**
      * Get the actividades for the user.
-    */
+     */
 
     public function actividades(): HasManyThrough
     {
         return $this->hasManyThrough(Actividad::class, Reconocimiento::class, 'estudiante_id', 'id', 'id', 'actividad_id');
     }
 
+
     /**
      * Get the reconocimientos for the user.
-    */
+     */
 
     public function reconocimientos(): HasMany
     {
-        return $this->hasMany(Reconocimiento::class, 'id');
+        return $this->hasMany(Reconocimiento::class, 'estudiante_id');
     }
 
     public function ciclos(): BelongsToMany
@@ -130,5 +131,4 @@ class User extends Authenticatable
         $dominio = explode('@', $this->email)[1];
         return $dominio;
     }
-
 }

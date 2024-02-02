@@ -16,10 +16,11 @@ return new class extends Migration
             $table->unsignedBigInteger('estudiante_id');
             $table->unsignedBigInteger('actividad_id');
             $table->string('documento')->nullable();
-            $table->unsignedBigInteger('docente_validador')->nullable();
+            $table->unsignedBigInteger('docente_validador_id')->nullable();
             $table->timestamps();
         });
     }
+
 
     /**
      * Reverse the migrations.

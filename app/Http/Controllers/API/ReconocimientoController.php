@@ -12,6 +12,18 @@ class ReconocimientoController extends Controller
 {
     public $modelclass = Reconocimiento::class;
 
+
+    /**
+     * Create the controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth:sanctum')->except(['index', 'show']);
+        $this->authorizeResource(Reconocimiento::class, 'reconocimiento');
+    }
+
     /**
      * Display a listing of the resource.
      */
