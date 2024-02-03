@@ -69,8 +69,4 @@ class ProyectoPolicy
         //
     }
 
-    public function store(User $user)
-    {
-        return $user->esDocente();
-    }
 }

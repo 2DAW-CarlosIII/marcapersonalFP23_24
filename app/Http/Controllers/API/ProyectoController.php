@@ -77,7 +77,7 @@ class ProyectoController extends Controller
      */
     public function destroy(Proyecto $proyecto)
     {
-        $this->authorize('update', $proyecto);
+        $this->authorize('delete', $proyecto);
         $proyecto->delete();
     }
 }
