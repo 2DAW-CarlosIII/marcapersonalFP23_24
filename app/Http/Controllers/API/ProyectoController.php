@@ -11,6 +11,12 @@ use Illuminate\Http\Request;
 
 class ProyectoController extends Controller
 {
+    //Middleware de autenticación
+    public function __construct()
+    {
+        $this->middleware('auth:sanctum')->except(['index', 'show']);
+        $this->authorizeResource(Proyecto::class, 'proyecto');
+    }
 
     public $modelclass = Proyecto::class;
     /**
@@ -18,6 +24,7 @@ class ProyectoController extends Controller
      */
     public function index(Request $request)
     {
+
         $campos = ['nombre', 'dominio'];
         $otrosFiltros = ['docente_id'];
         $query = FilterHelper::applyFilter($request, $campos, $otrosFiltros);
@@ -31,11 +38,22 @@ class ProyectoController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('create', Proyecto::class);
+
         $proyecto = json_decode($request->getContent(), true);
+
+        $proyecto['docente_id'] = $request->user()->id;
 
         $proyecto = Proyecto::create($proyecto);
 
         return new CicloResource($proyecto);
+
+        /**!SECTIONEn el caso de los modelos que tienen alguna referencia al propietario,
+         *  debemos asignar automáticamente, como propietario, al usuario autenticado,
+         * en el momento de crear el recurso. Para ello, debemos modificar el método store de cada controlador,
+         * de forma que se asigne el propietario al crear el recurso. */
+
+
     }
 
     /**
@@ -51,6 +69,7 @@ class ProyectoController extends Controller
      */
     public function update(Request $request, Proyecto $proyecto)
     {
+        $this->authorize('update', $proyecto);
         $proyectoData = json_decode($request->getContent(), true);
         $proyecto->update($proyectoData);
 
@@ -62,6 +81,9 @@ class ProyectoController extends Controller
      */
     public function destroy(Proyecto $proyecto)
     {
+        $this->authorize('delete', $proyecto);
         $proyecto->delete();
     }
+
+
 }
