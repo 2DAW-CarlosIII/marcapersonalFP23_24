@@ -19,7 +19,7 @@ class ActividadPolicy
     {
         if($user->esAdmin()) return true;
     }
-    
+
     /**
      * Determine whether the user can view any models.
      */
@@ -49,7 +49,7 @@ class ActividadPolicy
      */
     public function update(User $user, Actividad $actividad): bool
     {
-        return $user->esPropietario($actividad);
+        return $user->esPropietario($actividad, 'docente_id');
     }
 
     /**
@@ -57,7 +57,7 @@ class ActividadPolicy
      */
     public function delete(User $user, Actividad $actividad): bool
     {
-        return $user->esPropietario($actividad);
+        return $user->esPropietario($actividad, 'docente_id');
     }
 
     /**
