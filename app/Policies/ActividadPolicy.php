@@ -14,7 +14,7 @@ class ActividadPolicy
 
      public function before(User $user, $ability)
 {
-    if($user->email === env('ADMIN_EMAIL')) return true;
+    if($user->esAdmin()) return true;
 }
 
     public function viewAny(User $user): bool
@@ -35,7 +35,7 @@ class ActividadPolicy
      */
     public function create(User $user): bool
     {
-        return explode("@",$user->email)[1] === env('TEACHER_EMAIL_DOMAIN');
+        return $user->esDocente();
     }
 
     /**
@@ -43,7 +43,7 @@ class ActividadPolicy
      */
     public function update(User $user, Actividad $actividad): bool
     {
-        return $user->id === $actividad->docente_id;
+        return $user->esPropietario($actividad, 'docente_id');
     }
 
     /**
@@ -51,7 +51,7 @@ class ActividadPolicy
      */
     public function delete(User $user, Actividad $actividad): bool
     {
-        return $user->id === $actividad->docente_id;
+        return $user->esPropietario($actividad, 'docente_id');
     }
 
     /**
