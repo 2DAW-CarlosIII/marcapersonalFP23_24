@@ -12,6 +12,8 @@ use App\Models\Ciclo;
 use App\Policies\CicloPolicy;
 use App\Models\Curriculo;
 use App\Policies\CurriculoPolicy;
+use App\Models\Empresa;
+use App\Policies\EmpresaPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
@@ -22,10 +24,11 @@ class AuthServiceProvider extends ServiceProvider
      * @var array<class-string, class-string>
      */
     protected $policies = [
-        Curriculo::class => CurriculoPolicy::class,
-        Competencia::class => CompetenciaPolicy::class,
-        Ciclo::class => CicloPolicy::class,
         Actividad::class => ActividadPolicy::class,
+        Ciclo::class => CicloPolicy::class,
+        Competencia::class => CompetenciaPolicy::class,
+        Curriculo::class => CurriculoPolicy::class,
+        Empresa::class => EmpresaPolicy::class,
     ];
 
     /**
