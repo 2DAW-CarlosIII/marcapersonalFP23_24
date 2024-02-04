@@ -4,15 +4,21 @@ namespace App\Http\Controllers\API;
 
 use App\Helpers\FilterHelper;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\CicloResource;
 use App\Http\Resources\ProyectoResource;
 use App\Models\Proyecto;
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class ProyectoController extends Controller
 {
 
     public $modelclass = Proyecto::class;
+
+    public function __construct()
+    {
+        $this->middleware('auth:sanctum')->except(['index', 'show']);
+        $this->authorizeResource(Proyecto::class, 'proyecto');
+    }
     /**
      * Display a listing of the resource.
      */
@@ -29,14 +35,21 @@ class ProyectoController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
-        $proyecto = json_decode($request->getContent(), true);
 
-        $proyecto = Proyecto::create($proyecto);
+     public function store(Request $request)
+     {
 
-        return new CicloResource($proyecto);
-    }
+        $this->authorize('create', Proyecto::class);
+
+         $proyecto = json_decode($request->getContent(), true);
+
+         $proyecto['docente_id']= auth()->id();
+
+         $proyecto = Proyecto::create($proyecto);
+
+         return new ProyectoResource($proyecto);
+     }
+
 
     /**
      * Display the specified resource.
@@ -51,6 +64,8 @@ class ProyectoController extends Controller
      */
     public function update(Request $request, Proyecto $proyecto)
     {
+        $this->authorize('update', $proyecto);
+
         $proyectoData = json_decode($request->getContent(), true);
         $proyecto->update($proyectoData);
 
@@ -62,6 +77,7 @@ class ProyectoController extends Controller
      */
     public function destroy(Proyecto $proyecto)
     {
+        $this->authorize('delete', $proyecto);
         $proyecto->delete();
     }
 }
