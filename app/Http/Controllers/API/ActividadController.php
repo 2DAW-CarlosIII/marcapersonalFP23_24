@@ -11,6 +11,16 @@ use Illuminate\Http\Request;
 class ActividadController extends Controller
 {
     public $modelclass = Actividad::class;
+
+    /**
+     * Create the controller instance.
+     */
+    public function __construct()
+    {
+        $this->middleware('auth:sanctum')->except(['index', 'show']);
+        $this->authorizeResource(Actividad::class, 'actividad');
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -30,6 +40,8 @@ class ActividadController extends Controller
     public function store(Request $request)
     {
         $actividad = json_decode($request->getContent(), true);
+        
+        $actividad['docente_id'] = auth()->user()->id;
 
         $actividad = Actividad::create($actividad);
 
