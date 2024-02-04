@@ -17,14 +17,14 @@ class ProyectoPolicy
 }
 
 
-    public function viewAny(User $user): bool
+    public function viewAny(?User $user): bool
     {
         //Anónimo puede acceder al método index
         return true;
     }
 
 
-    public function view(User $user, Proyecto $proyecto): bool
+    public function view(?User $user, Proyecto $proyecto): bool
     {
         //Anónimo puede acceder al método show
         return true;
