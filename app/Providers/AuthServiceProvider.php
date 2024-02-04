@@ -11,6 +11,7 @@ use App\Policies\CompetenciaPolicy;
 use App\Models\Ciclo;
 use App\Policies\CicloPolicy;
 use App\Models\Curriculo;
+use App\Models\User;
 use App\Policies\CurriculoPolicy;
 use App\Models\Empresa;
 use App\Policies\EmpresaPolicy;
@@ -20,6 +21,7 @@ use App\Models\Idioma;
 use App\Policies\IdiomaPolicy;
 use App\Models\Proyecto;
 use App\Policies\ProyectoPolicy;
+use App\Policies\UsersPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
@@ -38,6 +40,7 @@ class AuthServiceProvider extends ServiceProvider
         FamiliaProfesional::class => FamiliaProfesionalPolicy::class,
         Idioma::class => IdiomaPolicy::class,
         Proyecto::class => ProyectoPolicy::class,
+        User::class => UsersPolicy::class,
     ];
 
     /**

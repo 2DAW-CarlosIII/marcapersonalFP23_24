@@ -14,6 +14,16 @@ class UserController extends Controller
 {
     public $modelclass = User::class;
     /**
+     * Create the controller instance.
+     *
+     * @return void
+    */
+    public function __construct()
+    {
+        $this->middleware('auth:sanctum')->except(['index', 'show', 'store']);
+        $this->authorizeResource(User::class, 'user');
+    }
+    /**
      * Display a listing of the resource.
      */
     public function index(Request $request)
