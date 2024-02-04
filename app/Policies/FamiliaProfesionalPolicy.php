@@ -17,7 +17,7 @@ class FamiliaProfesionalPolicy
     /**
      * Determine whether the user can view any models.
      */
-    public function viewAny(User $user): bool
+    public function viewAny(?User $user): bool
     {
         return true;
     }
@@ -25,7 +25,7 @@ class FamiliaProfesionalPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, FamiliaProfesional $familiaProfesional): bool
+    public function view(?User $user, FamiliaProfesional $familiaProfesional): bool
     {
         return true;
     }
