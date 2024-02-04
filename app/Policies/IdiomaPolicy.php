@@ -17,7 +17,7 @@ class IdiomaPolicy
     /**
      * Determine whether the user can view any models.
      */
-    public function viewAny(User $user): bool
+    public function viewAny(?User $user): bool
     {
         return true;
     }
@@ -25,7 +25,7 @@ class IdiomaPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Idioma $idioma): bool
+    public function view(?User $user, Idioma $idioma): bool
     {
         return true;
     }
@@ -35,7 +35,7 @@ class IdiomaPolicy
      */
     public function create(User $user): bool
     {
-        return $user->esAdmin();
+        return false;
     }
 
     /**
@@ -43,7 +43,7 @@ class IdiomaPolicy
      */
     public function update(User $user, Idioma $idioma): bool
     {
-        return $user->esAdmin();
+        return false;
     }
 
     /**
@@ -51,7 +51,7 @@ class IdiomaPolicy
      */
     public function delete(User $user, Idioma $idioma): bool
     {
-        return $user->esAdmin();
+        return false;
     }
 
     /**
@@ -59,7 +59,7 @@ class IdiomaPolicy
      */
     public function restore(User $user, Idioma $idioma): bool
     {
-        return $user->esAdmin();
+        return false;
     }
 
     /**
@@ -67,6 +67,6 @@ class IdiomaPolicy
      */
     public function forceDelete(User $user, Idioma $idioma): bool
     {
-        return $user->esAdmin();
+        return false;
     }
 }
