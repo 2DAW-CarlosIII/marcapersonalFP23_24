@@ -22,6 +22,8 @@ use App\Models\Proyecto;
 use App\Policies\ProyectoPolicy;
 use App\Models\Reconocimiento;
 use App\Policies\ReconocimientoPolicy;
+use App\Models\User;
+use App\Policies\UsersPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
@@ -41,6 +43,7 @@ class AuthServiceProvider extends ServiceProvider
         Idioma::class => IdiomaPolicy::class,
         Proyecto::class => ProyectoPolicy::class,
         Reconocimiento::class => ReconocimientoPolicy::class,
+        User::class => UsersPolicy::class,
     ];
 
     /**
