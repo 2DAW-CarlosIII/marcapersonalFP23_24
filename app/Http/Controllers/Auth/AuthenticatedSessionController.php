@@ -38,6 +38,18 @@ class AuthenticatedSessionController extends Controller
     }
 
     /**
+     * Handle an incoming authentication request.
+     */
+    public function apiLogin(LoginRequest $request)
+    {
+        $request->authenticate();
+
+        $request->session()->regenerate();
+
+        return response()->json(['message' => 'Sesión iniciada correctamente']);
+    }
+
+    /**
      * Destroy an authenticated session.
      */
     public function destroy(Request $request)
