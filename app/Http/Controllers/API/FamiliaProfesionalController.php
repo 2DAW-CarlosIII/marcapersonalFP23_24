@@ -13,8 +13,8 @@ class FamiliaProfesionalController extends Controller
 
     public function __construct()
     {
-        $this->authorizeResource(FamiliaProfesional::class, 'familiaProfesional');
         $this->middleware('auth:sanctum')->except(['index', 'show']);
+        $this->authorizeResource(FamiliaProfesional::class, 'familiaProfesional');
     }
 
     public $modelclass = FamiliaProfesional::class;
@@ -36,8 +36,6 @@ class FamiliaProfesionalController extends Controller
      */
     public function store(Request $request)
     {
-        $this->authorize('create', FamiliaProfesional::class);
-
         $familiaProfesional = json_decode($request->getContent(), true);
 
         $familiaProfesional = FamiliaProfesional::create($familiaProfesional);
@@ -58,8 +56,6 @@ class FamiliaProfesionalController extends Controller
      */
     public function update(Request $request, FamiliaProfesional $familiaProfesional)
     {
-        $this->authorize('update', $familiaProfesional);
-
         $familiaProfesionalData = json_decode($request->getContent(), true);
         $familiaProfesional->update($familiaProfesionalData);
 
@@ -71,7 +67,6 @@ class FamiliaProfesionalController extends Controller
      */
     public function destroy(FamiliaProfesional $familiaProfesional)
     {
-        $this->authorize('delete', $familiaProfesional);
         $familiaProfesional->delete();
     }
 }

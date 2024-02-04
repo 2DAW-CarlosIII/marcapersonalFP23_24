@@ -39,8 +39,6 @@ class ProyectoController extends Controller
      public function store(Request $request)
      {
 
-        $this->authorize('create', Proyecto::class);
-
          $proyecto = json_decode($request->getContent(), true);
 
          $proyecto['docente_id']= auth()->id();
@@ -64,7 +62,6 @@ class ProyectoController extends Controller
      */
     public function update(Request $request, Proyecto $proyecto)
     {
-        $this->authorize('update', $proyecto);
 
         $proyectoData = json_decode($request->getContent(), true);
         $proyecto->update($proyectoData);
@@ -77,7 +74,6 @@ class ProyectoController extends Controller
      */
     public function destroy(Proyecto $proyecto)
     {
-        $this->authorize('delete', $proyecto);
         $proyecto->delete();
     }
 }

@@ -34,8 +34,6 @@ class CompetenciaController extends Controller
      */
     public function store(Request $request)
     {
-        $this->authorize('create', Competencia::class);
-
         $competencia = json_decode($request->getContent(), true);
 
         $competencia = Competencia::create($competencia);
@@ -56,8 +54,6 @@ class CompetenciaController extends Controller
      */
     public function update(Request $request, Competencia $competencia)
     {
-        $this->authorize('update', $competencia);
-
         $competenciaData = json_decode($request->getContent(), true);
         $competencia->update($competenciaData);
 

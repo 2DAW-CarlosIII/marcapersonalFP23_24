@@ -35,7 +35,7 @@ class CicloPolicy
      */
     public function create(User $user): bool
     {
-        return $user->esAdmin();
+        return false;
     }
 
     /**
@@ -43,7 +43,7 @@ class CicloPolicy
      */
     public function update(User $user, Ciclo $ciclo): bool
     {
-        return $user->esAdmin($ciclo);
+        return false;
     }
 
     /**
@@ -51,7 +51,7 @@ class CicloPolicy
      */
     public function delete(User $user, Ciclo $ciclo): bool
     {
-        return $user->esAdmin($ciclo);
+        return false;
     }
 
     /**
