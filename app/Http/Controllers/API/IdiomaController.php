@@ -10,6 +10,13 @@ use Illuminate\Http\Request;
 
 class IdiomaController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->authorizeResource(Idioma::class, 'idioma');
+        $this->middleware('auth:sanctum')->except(['index', 'show']);
+    }
+
     public $modelclass = Idioma::class;
     /**
      * Display a listing of the resource.
@@ -28,6 +35,8 @@ class IdiomaController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('create', Idioma::class);
+
         $idioma = json_decode($request->getContent(), true);
 
         $idioma = Idioma::create($idioma);
@@ -48,6 +57,8 @@ class IdiomaController extends Controller
      */
     public function update(Request $request, Idioma $idioma)
     {
+        $this->authorize('update', $idioma);
+
         $idiomaData = json_decode($request->getContent(), true);
 
         $idioma->update($idiomaData);
@@ -60,6 +71,7 @@ class IdiomaController extends Controller
      */
     public function destroy(Idioma $idioma)
     {
+        $this->authorize('delete', $idioma);
         $idioma->delete();
     }
 }

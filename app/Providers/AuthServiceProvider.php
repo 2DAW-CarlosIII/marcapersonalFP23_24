@@ -14,6 +14,10 @@ use App\Models\Curriculo;
 use App\Policies\CurriculoPolicy;
 use App\Models\Empresa;
 use App\Policies\EmpresaPolicy;
+use App\Models\FamiliaProfesional;
+use App\Policies\FamiliaProfesionalPolicy;
+use App\Models\Idioma;
+use App\Policies\IdiomaPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
@@ -29,6 +33,8 @@ class AuthServiceProvider extends ServiceProvider
         Competencia::class => CompetenciaPolicy::class,
         Curriculo::class => CurriculoPolicy::class,
         Empresa::class => EmpresaPolicy::class,
+        FamiliaProfesional::class => FamiliaProfesionalPolicy::class,
+        Idioma::class => IdiomaPolicy::class,
     ];
 
     /**
