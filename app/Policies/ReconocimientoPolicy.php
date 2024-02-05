@@ -69,4 +69,9 @@ class ReconocimientoPolicy
     {
         //
     }
+
+    public function validar(User $user, Reconocimiento $reconocimiento): bool
+    {
+        return $user->esDocente();
+    }
 }

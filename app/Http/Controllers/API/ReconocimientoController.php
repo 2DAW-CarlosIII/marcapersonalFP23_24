@@ -6,6 +6,7 @@ use App\Helpers\FilterHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ReconocimientoResource;
 use App\Models\Reconocimiento;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ReconocimientoController extends Controller
@@ -73,5 +74,10 @@ class ReconocimientoController extends Controller
     public function destroy(Reconocimiento $reconocimiento)
     {
         $reconocimiento->delete();
+    }
+
+    public function validar(Reconocimiento $reconocimiento)
+    {
+        $reconocimiento->docente_validador = $reconocimiento->id;
     }
 }
