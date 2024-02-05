@@ -34,7 +34,7 @@ class ReconocimientoPolicy
      */
     public function create(User $user): bool
     {
-        return $user->esDocente();
+        return $user->esEstudiante();
     }
 
     /**
@@ -52,6 +52,11 @@ class ReconocimientoPolicy
     {
         return $user->esPropietario($reconocimiento,$reconocimiento->estudiante_id);
 
+    }
+
+    public function validate(User $user, Reconocimiento $reconocimiento): bool
+    {
+        return $user->esDocente();
     }
 
     /**
