@@ -41,7 +41,7 @@ class CurriculoPolicy
      */
     public function create(User $user): bool
     {
-        return $user->email === env('ADMIN_EMAIL');
+        return $user->esEstudiante();
     }
 
     /**
@@ -49,7 +49,7 @@ class CurriculoPolicy
      */
     public function update(User $user, Curriculo $curriculo): bool
     {
-        return $user->id === $curriculo->user_id;
+        return $user->esPropietario($curriculo);
     }
 
     /**
