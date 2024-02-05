@@ -42,6 +42,10 @@ class ReconocimientoController extends Controller
      */
     public function store(Request $request)
     {
+        if($request->docente_validador != null){
+            abort(403);
+        }
+
         $reconocimiento = json_decode($request->getContent(), true);
         $reconocimiento = Reconocimiento::create($reconocimiento);
 
@@ -62,6 +66,24 @@ class ReconocimientoController extends Controller
     public function update(Request $request, Reconocimiento $reconocimiento)
     {
         $reconocimientoData = json_decode($request->getContent(), true);
+        if($reconocimientoData['docente_validador'] != null){
+            $this->validar($request, $reconocimiento);
+        } else {
+            $reconocimiento->update($reconocimientoData);
+
+            return new ReconocimientoResource($reconocimiento);
+        }
+    }
+
+    /**
+     * Validate the specified resource in storage.
+     */
+    public function validar(Request $request, Reconocimiento $reconocimiento)
+    {
+        $this->authorize('validar', $reconocimiento);
+        
+        $reconocimientoData = json_decode($request->getContent(), true);
+        $reconocimientoData['docente_validador'] = $request->user()->id;
         $reconocimiento->update($reconocimientoData);
 
         return new ReconocimientoResource($reconocimiento);

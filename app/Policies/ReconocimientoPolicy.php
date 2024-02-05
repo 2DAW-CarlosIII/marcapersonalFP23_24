@@ -11,6 +11,7 @@ class ReconocimientoPolicy
 
     public function before(User $user, $ability)
     {
+        if($ability == 'update' && $user->esDocente()) return true;
         if($user->esAdmin()) return true;
     }
     /**
@@ -34,7 +35,7 @@ class ReconocimientoPolicy
      */
     public function create(User $user): bool
     {
-        return $user->esDocente();
+        return $user->esEstudiante();
     }
 
     /**
@@ -42,7 +43,12 @@ class ReconocimientoPolicy
      */
     public function update(User $user, Reconocimiento $reconocimiento): bool
     {
-        return $user->esPropietario($reconocimiento,$reconocimiento->estudiante_id);
+        return $user->esPropietario($reconocimiento,'estudiante_id');
+    }
+
+    public function validar(User $user, Reconocimiento $reconocimiento): bool
+    {
+        return $user->esDocente();
     }
 
     /**
