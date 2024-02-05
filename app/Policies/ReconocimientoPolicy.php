@@ -11,7 +11,22 @@ class ReconocimientoPolicy
 
     public function before(User $user, $ability)
     {
-        if($user->esAdmin()) return true;
+        if ($user->esAdmin()) return true;
+    }
+
+
+    public function validar(User $user, Reconocimiento $reconocimiento)
+    {
+        if ($user->esDocente()) {
+            return [
+                'id' => $reconocimiento->id,
+                'estudiante_id' => $reconocimiento->estudiante_id,
+                'actividad_id' => $reconocimiento->actividad_id,
+                'docente_validador' => $reconocimiento->docente_validador,
+            ];
+        } else {
+            return Response::deny('No tienes permisos para validar reconocimientos');
+        }
     }
     /**
      * Determine whether the user can view any models.
@@ -34,7 +49,7 @@ class ReconocimientoPolicy
      */
     public function create(User $user): bool
     {
-        return $user->esDocente();
+        return $user->esEstudiante();
     }
 
     /**
@@ -42,7 +57,7 @@ class ReconocimientoPolicy
      */
     public function update(User $user, Reconocimiento $reconocimiento): bool
     {
-        return $user->esPropietario($reconocimiento,$reconocimiento->estudiante_id);
+        return $user->esPropietario($reconocimiento, $reconocimiento->estudiante_id) || $user->esDocente();
     }
 
     /**
@@ -50,8 +65,7 @@ class ReconocimientoPolicy
      */
     public function delete(User $user, Reconocimiento $reconocimiento): bool
     {
-        return $user->esPropietario($reconocimiento,$reconocimiento->estudiante_id);
-
+        return $user->esPropietario($reconocimiento, $reconocimiento->estudiante_id);
     }
 
     /**

@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\ReconocimientoResource;
 use App\Models\Reconocimiento;
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class ReconocimientoController extends Controller
 {
@@ -42,11 +43,13 @@ class ReconocimientoController extends Controller
      */
     public function store(Request $request)
     {
+
         $reconocimiento = json_decode($request->getContent(), true);
         $reconocimiento = Reconocimiento::create($reconocimiento);
 
         return new ReconocimientoResource($reconocimiento);
     }
+
 
     /**
      * Display the specified resource.
