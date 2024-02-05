@@ -1,170 +1,87 @@
-// in resources/js/react-admin/pages/proyectos.jsx
-import {
-    List,
-    Filter,
-    SimpleList,
-    Datagrid,
-    TextField,
-    DateField,
-    ReferenceField,
-    EditButton,
-    Edit,
-    Create,
-    SimpleForm,
-    ReferenceInput,
-    TextInput,
-    NumberField,
-    NumberInput,
-    FunctionField,
-    SelectInput,
-    ShowButton,
-    Show,
-    SimpleShowLayout,
-    FileInput,
-  } from 'react-admin';
+<?php
 
-import { useRecordContext} from 'react-admin';
-import { useMediaQuery } from '@mui/material';
+namespace App\Http\Controllers\API;
 
+use App\Helpers\FilterHelper;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\ReconocimientoResource;
+use App\Models\Reconocimiento;
+use Illuminate\Http\Request;
 
-//TODO mostraremos id_estudiante como nombre (referenceFIeld + input para validad),
-//id_actividad como nombre (reference field), docente_validador como texto (reference field) y fecha como fecha
+class ReconocimientoController extends Controller
+{
+    public $modelclass = Reconocimiento::class;
 
-//inputs para luego poder filtrar por docente_validador, por estudiante y por actividad
-const DocenteInput = () => (
-    <ReferenceInput label="Docente" source="docente_validador" reference="users" alwaysOn >
-        <SelectInput
-        label="Docente"
-        source="docente_validador"
-        optionText={record => record && `${record.nombre} ${record.apellidos}`} />
-    </ReferenceInput>
-)
+    /**
+     * Create the controller instance.
+     *
+     * @return void
+     */
 
-const EstudianteInput = () => (
-    <ReferenceInput label="Estudiante" source="estudiante_id" reference="users" alwaysOn >
-        <SelectInput
-        label="Estudiante"
-        source="estudiante_id"
-        optionText={record => record && `${record.nombre} ${record.apellidos}`} />
-    </ReferenceInput>
-)
+    public function __construct()
+    {
+        $this->middleware('auth:sanctum')->except(['index', 'show']);
+        $this->authorizeResource(Reconocimiento::class, 'reconocimiento');
+    }
 
-const ActividadInput = () => (
-    <ReferenceInput label="Actividad" source="actividad_id" reference="actividades">
-        <SelectInput
-        label="Actividad"
-        source="actividad_id"
-        optionText={record => record && `${record.nombre}`} />
-    </ReferenceInput>
-)
+    public function index(Request $request)
+    {
+        $campos = [];
+        $otrosFiltros = ['estudiante_id', 'actividad_id', 'docente_validador'];
+        $query = FilterHelper::applyFilter($request, $campos, $otrosFiltros);
+        $request->attributes->set('total_count', $query->count());
+        $queryOrdered = FilterHelper::applyOrder($query, $request);
+        return ReconocimientoResource::collection(
+            $query->orderBy($request->_sort ?? 'id', $request->_order ?? 'asc')
+                ->paginate($request->perPage)
+        );
+    }
 
-//filtros por docente_validador, por estudiante y por actividad
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        $reconocimiento = json_decode($request->getContent(), true);
+        $reconocimiento = Reconocimiento::create($reconocimiento);
 
-const EstudiantesFilter = () => (
-    <ReferenceInput label="Estudiante" source="estudiante_id" reference="users" alwaysOn >
-        <SelectInput
-        label="Estudiante"
-        source="estudiante_id"
-        optionText={record => record && `${record.nombre} ${record.apellidos}`} />
-    </ReferenceInput>
-);
+        return new ReconocimientoResource($reconocimiento);
+    }
 
-const ActividadesFilter = () => (
-    <ReferenceInput label="Actividad" source="actividad_id" reference="actividades" alwaysOn >
-        <SelectInput
-        label="Actividad"
-        source="actividad_id"
-        optionText={record => record && `${record.nombre}`} />
-    </ReferenceInput>
-);
+    /**
+     * Display the specified resource.
+     */
+    public function show(Reconocimiento $reconocimiento)
+    {
+        return new ReconocimientoResource($reconocimiento);
+    }
 
-const DocentesFilter = () => (
-    <ReferenceInput label="Docente" source="docente_validador" reference="users" alwaysOn >
-        <SelectInput
-        label="Docente"
-        source="docente_validador"
-        optionText={record => record && `${record.nombre} ${record.apellidos}`} />
-    </ReferenceInput>
-);
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, Reconocimiento $reconocimiento)
+    {
+        $reconocimientoData = json_decode($request->getContent(), true);
+        $reconocimiento->update($reconocimientoData);
 
-const reconocimientosFilters = [
-    EstudiantesFilter(),
-    ActividadesFilter(),
-    DocentesFilter(),
-];
+        return new ReconocimientoResource($reconocimiento);
+    }
 
-export const ReconocimientoList = (props) => {
-    const isSmall = useMediaQuery((theme) => theme.breakpoints.down('sm'));
-    return (
-        <List {...props} filters={reconocimientosFilters}>
-        {isSmall ? (
-                <SimpleList
-                    primaryText="%{estudiante_id}"
-                    secondaryText="%{actividad_id}"
-                    tertiaryText="%{docente_validador}"
-                    linkType={(record) => (record.canEdit ? 'edit' : 'show')}
-                >
-                    <EditButton />
-                </SimpleList>
-            ) : (
-                <Datagrid bulkActionButtons={false} >
-                    <TextField source="id" />
-                    <ReferenceField label="Estudiante" source="estudiante_id" reference="users">
-                        <FunctionField render={record => record && `${record.nombre} ${record.apellidos}`} />
-                    </ReferenceField>
-                    <ReferenceField label="Actividad" source="actividad_id" reference="actividades">
-                        <FunctionField render={record => record && `${record.nombre}`} />
-                    </ReferenceField>
-                    <ReferenceField label="Docente" source="docente_validador" reference="users">
-                        <FunctionField render={record => record && `${record.nombre} ${record.apellidos}`} />
-                    </ReferenceField>
-                    <DateField source="fecha" />
-                    <ShowButton />
-                    <EditButton />
-                </Datagrid>
-            )}
-        </List>
-    );
+    public function validar(Request $request, Reconocimiento $reconocimiento){
+
+        $this->authorize('validar', $reconocimiento);
+        $reconocimientoData = json_decode($request->getContent('docente_id'), true);
+        $reconocimientoData['docente_id']= auth()->id();
+        $reconocimiento->update($reconocimientoData);
+
+        return new ReconocimientoResource($reconocimiento);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(Reconocimiento $reconocimiento)
+    {
+        $reconocimiento->delete();
+    }
 }
-
-export const ReconocimientoTitle = () => {
-  const record = useRecordContext();
-  return <span>Reconocimiento {record ? `"${record.id}"` : ''}</span>;
-};
-
-export const ReconocimientoEdit = () => (
-    <Edit title={<ReconocimientoTitle />}>
-    <SimpleForm>
-        <EstudianteInput />
-        <DocenteInput />
-        <ActividadInput />
-    </SimpleForm>
-    </Edit>
-);
-
-export const ReconocimientoShow = () => (
-    <Show>
-        <SimpleShowLayout>
-                    <ReferenceField label="Estudiante" source="estudiante_id" reference="users">
-                        <FunctionField render={record => record && `${record.nombre} ${record.apellidos}`} />
-                    </ReferenceField>
-                    <ReferenceField label="Actividad" source="actividad_id" reference="actividades">
-                        <FunctionField render={record => record && `${record.nombre}`} />
-                    </ReferenceField>
-                    <ReferenceField label="Docente" source="docente_validador" reference="users">
-                        <FunctionField render={record => record && `${record.nombre} ${record.apellidos}`} />
-                    </ReferenceField>
-                    <DateField source="fecha" />
-        </SimpleShowLayout>
-    </Show>
-);
-
-export const ReconocimientoCreate = () => (
-    <Create>
-        <SimpleForm>
-            <EstudianteInput />
-            <DocenteInput />
-            <ActividadInput />
-        </SimpleForm>
-    </Create>
-);
