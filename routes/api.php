@@ -55,7 +55,8 @@ Route::prefix('v1')->group(function () {
     Route::apiResource('idiomas', IdiomaController::class);
 
     Route::get('{tabla}/count', [CountController::class, 'count']);
-
+    //Creo que el patch cambiaba solo el campo docente_validador, no todo el registro
+    Route::patch('reconocimiento/validar', [ReconocimientoController::class, 'validar']);
     // emite un nuevo token
     Route::post('tokens', [TokenController::class, 'store']);
     // elimina el token del usuario autenticado

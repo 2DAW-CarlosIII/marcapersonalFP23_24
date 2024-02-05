@@ -7,6 +7,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\ReconocimientoResource;
 use App\Models\Reconocimiento;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 
 class ReconocimientoController extends Controller
 {
@@ -43,6 +46,7 @@ class ReconocimientoController extends Controller
     public function store(Request $request)
     {
         $reconocimiento = json_decode($request->getContent(), true);
+        $reconocimiento['docente_validador'] = null;
         $reconocimiento = Reconocimiento::create($reconocimiento);
 
         return new ReconocimientoResource($reconocimiento);
@@ -61,7 +65,11 @@ class ReconocimientoController extends Controller
      */
     public function update(Request $request, Reconocimiento $reconocimiento)
     {
+        /* Si un docente o un administrador quiere validar un reconocimiento, que lo haga a través del endpoint validar*/
         $reconocimientoData = json_decode($request->getContent(), true);
+
+        abort_if($reconocimiento->docente_validador != $reconocimientoData->docente_validador, 403, 'No tienes permiso para modificar validaciones');
+
         $reconocimiento->update($reconocimientoData);
 
         return new ReconocimientoResource($reconocimiento);
@@ -73,5 +81,12 @@ class ReconocimientoController extends Controller
     public function destroy(Reconocimiento $reconocimiento)
     {
         $reconocimiento->delete();
+    }
+
+    public function validar(Reconocimiento $reconocimiento)
+    {
+        $reconocimiento->docente_validador = Auth::user()->id;
+        $reconocimiento->save();
+        return new ReconocimientoResource($reconocimiento);
     }
 }
