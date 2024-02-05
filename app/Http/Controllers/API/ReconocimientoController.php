@@ -33,6 +33,8 @@ class ReconocimientoController extends Controller
      */
     public function store(Request $request)
     {
+        //offsetUnset('docente_validador');
+
         $reconocimiento = json_decode($request->getContent(), true);
 
         $reconocimiento = Reconocimiento::create($reconocimiento);
@@ -65,5 +67,17 @@ class ReconocimientoController extends Controller
     public function destroy(Reconocimiento $reconocimiento)
     {
         $reconocimiento->delete();
+    }
+
+    public function validar(Reconocimiento $reconocimiento)
+    {
+
+    }
+
+    protected function resourceAbilityMap()
+    {
+        return array_merge(parent::resourceAbilityMap(), [
+            'validar' => 'validar'
+        ]);
     }
 }
