@@ -43,6 +43,8 @@ class ReconocimientoController extends Controller
     public function store(Request $request)
     {
         $reconocimiento = json_decode($request->getContent(), true);
+        $reconocimiento['estudiante_id'] = auth()->user()->id;
+        $reconocimiento['docente_validador'] = null;
         $reconocimiento = Reconocimiento::create($reconocimiento);
 
         return new ReconocimientoResource($reconocimiento);
@@ -62,6 +64,7 @@ class ReconocimientoController extends Controller
     public function update(Request $request, Reconocimiento $reconocimiento)
     {
         $reconocimientoData = json_decode($request->getContent(), true);
+        $reconocimientoData['docente_validador'] = $reconocimiento->docente_validador;
         $reconocimiento->update($reconocimientoData);
 
         return new ReconocimientoResource($reconocimiento);
@@ -73,5 +76,13 @@ class ReconocimientoController extends Controller
     public function destroy(Reconocimiento $reconocimiento)
     {
         $reconocimiento->delete();
+    }
+
+    public function validar(Request $request, Reconocimiento $reconocimiento)
+    {
+        $reconocimiento->docente_validador = auth()->user()->id;
+        $reconocimiento->save();
+
+        return new ReconocimientoResource($reconocimiento);
     }
 }

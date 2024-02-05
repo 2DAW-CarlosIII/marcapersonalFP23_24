@@ -34,7 +34,7 @@ class ReconocimientoPolicy
      */
     public function create(User $user): bool
     {
-        return $user->esDocente();
+        return $user->esEstudiante();
     }
 
     /**
@@ -42,7 +42,7 @@ class ReconocimientoPolicy
      */
     public function update(User $user, Reconocimiento $reconocimiento): bool
     {
-        return $user->esPropietario($reconocimiento,$reconocimiento->estudiante_id);
+        return $user->esPropietario($reconocimiento,'estudiante_id');
     }
 
     /**
@@ -50,7 +50,7 @@ class ReconocimientoPolicy
      */
     public function delete(User $user, Reconocimiento $reconocimiento): bool
     {
-        return $user->esPropietario($reconocimiento,$reconocimiento->estudiante_id);
+        return $user->esPropietario($reconocimiento,'estudiante_id');
 
     }
 
@@ -68,5 +68,11 @@ class ReconocimientoPolicy
     public function forceDelete(User $user, Reconocimiento $reconocimiento): bool
     {
         //
+    }
+
+    public function validar(User $user, Reconocimiento $reconocimiento): bool
+    {
+        return $user->esDocente();
+        
     }
 }
