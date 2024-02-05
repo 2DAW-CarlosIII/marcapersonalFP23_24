@@ -42,7 +42,8 @@ class ReconocimientoPolicy
      */
     public function update(User $user, Reconocimiento $reconocimiento): bool
     {
-        return $user->esPropietario($reconocimiento,$reconocimiento->estudiante_id);
+        return $user->esPropietario($reconocimiento,$reconocimiento->estudiante_id) ||
+        $user->esDocente();
     }
 
     /**

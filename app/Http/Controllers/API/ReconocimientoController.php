@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\ReconocimientoResource;
 use App\Models\Reconocimiento;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ReconocimientoController extends Controller
 {
@@ -61,7 +62,13 @@ class ReconocimientoController extends Controller
      */
     public function update(Request $request, Reconocimiento $reconocimiento)
     {
+        $usuario = Auth::user();
+
         $reconocimientoData = json_decode($request->getContent(), true);
+        if($reconocimientoData['docente_validador'] !== null) {
+            abort_if (!$usuario->esAdmin(), 403);
+            $reconocimientoData['docente_validador'] = $usuario->id;
+        }
         $reconocimiento->update($reconocimientoData);
 
         return new ReconocimientoResource($reconocimiento);
