@@ -34,7 +34,11 @@ class ReconocimientoPolicy
      */
     public function create(User $user): bool
     {
-        return $user->esDocente();
+        if($user->esEstudiante()){
+            return true;
+        }else if($user->esDocente()){
+            return true;
+        }else{return false;}
     }
 
     /**
@@ -68,5 +72,10 @@ class ReconocimientoPolicy
     public function forceDelete(User $user, Reconocimiento $reconocimiento): bool
     {
         //
+    }
+
+    public function validar(User $user): bool
+    {
+        return $user->esDocente();
     }
 }

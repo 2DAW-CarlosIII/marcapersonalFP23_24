@@ -136,7 +136,6 @@ export const ReconocimientoEdit = () => (
     <Edit title={<ReconocimientoTitle />}>
     <SimpleForm>
         <EstudianteInput />
-        <DocenteInput />
         <ActividadInput />
     </SimpleForm>
     </Edit>
@@ -163,7 +162,6 @@ export const ReconocimientoCreate = () => (
     <Create>
         <SimpleForm>
             <EstudianteInput />
-            <DocenteInput />
             <ActividadInput />
         </SimpleForm>
     </Create>

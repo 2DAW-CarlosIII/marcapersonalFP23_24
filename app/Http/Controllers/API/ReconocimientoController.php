@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\ReconocimientoResource;
 use App\Models\Reconocimiento;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ReconocimientoController extends Controller
 {
@@ -73,5 +74,17 @@ class ReconocimientoController extends Controller
     public function destroy(Reconocimiento $reconocimiento)
     {
         $reconocimiento->delete();
+    }
+
+    public function validar(Request $request, Reconocimiento $reconocimiento){
+        $this->authorize('validar', $reconocimiento);
+        $reconocimientoData = json_decode($request->getContent(), true);
+
+        if($reconocimiento->docente_validador === null){
+        $reconocimiento->docente_validador = Auth::user()->id;
+        $reconocimiento->validar($reconocimientoData);
+        }
+
+        return new ReconocimientoResource($reconocimiento);
     }
 }
