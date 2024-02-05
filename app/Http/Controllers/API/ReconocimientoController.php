@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\ReconocimientoResource;
 use App\Models\Reconocimiento;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class ReconocimientoController extends Controller
 {
@@ -42,6 +44,16 @@ class ReconocimientoController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('create', Reconocimiento::class);
+
+        Validator::make($request->all(), [
+            'docente_validador' => Rule::prohibitedIf($request->user()->esEstudiante()),
+        ]);
+
+        Validator::make($request->all(), [
+            'docente_validador' => Rule::prohibitedIf(($request->user()->esDocente()) || $request->user()->esAdmin()),
+        ]);
+
         $reconocimiento = json_decode($request->getContent(), true);
         $reconocimiento = Reconocimiento::create($reconocimiento);
 
@@ -61,6 +73,16 @@ class ReconocimientoController extends Controller
      */
     public function update(Request $request, Reconocimiento $reconocimiento)
     {
+        $this->authorize('update', $reconocimiento);
+
+        Validator::make($request->all(), [
+            'docente_validador' => Rule::prohibitedIf($request->user()->esEstudiante()),
+        ]);
+
+        Validator::make($request->all(), [
+            'docente_validador' => Rule::prohibitedIf(($request->user()->esDocente()) || $request->user()->esAdmin()),
+        ]);
+
         $reconocimientoData = json_decode($request->getContent(), true);
         $reconocimiento->update($reconocimientoData);
 

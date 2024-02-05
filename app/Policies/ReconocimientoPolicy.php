@@ -34,7 +34,7 @@ class ReconocimientoPolicy
      */
     public function create(User $user): bool
     {
-        return $user->esDocente();
+        return ($user->esDocente() || $user->esEstudiante());
     }
 
     /**
@@ -42,7 +42,7 @@ class ReconocimientoPolicy
      */
     public function update(User $user, Reconocimiento $reconocimiento): bool
     {
-        return $user->esPropietario($reconocimiento,$reconocimiento->estudiante_id);
+        return ($user->esPropietario($reconocimiento,$reconocimiento->estudiante_id) || $user->esDocente() || $user->esEstudiante());
     }
 
     /**
