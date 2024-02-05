@@ -43,6 +43,7 @@ class ReconocimientoController extends Controller
     public function store(Request $request)
     {
         $reconocimiento = json_decode($request->getContent(), true);
+        $reconocimiento->docente_validador = null;
         $reconocimiento = Reconocimiento::create($reconocimiento);
 
         return new ReconocimientoResource($reconocimiento);
@@ -62,6 +63,7 @@ class ReconocimientoController extends Controller
     public function update(Request $request, Reconocimiento $reconocimiento)
     {
         $reconocimientoData = json_decode($request->getContent(), true);
+        $reconocimiento->docente_validador = null;
         $reconocimiento->update($reconocimientoData);
 
         return new ReconocimientoResource($reconocimiento);

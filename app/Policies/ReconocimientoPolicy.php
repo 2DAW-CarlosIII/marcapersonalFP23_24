@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use App\Http\Resources\ReconocimientoResource;
 use App\Models\Reconocimiento;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
@@ -34,7 +35,7 @@ class ReconocimientoPolicy
      */
     public function create(User $user): bool
     {
-        return $user->esDocente();
+        return $user->esEstudiante();
     }
 
     /**
@@ -52,6 +53,14 @@ class ReconocimientoPolicy
     {
         return $user->esPropietario($reconocimiento,$reconocimiento->estudiante_id);
 
+    }
+
+    public function validar(User $user, Reconocimiento $reconocimiento){
+        if($user->esDocente()){
+            $reconocimiento->docente_validador = $user->id;
+            $reconocimiento->save();
+        }
+        return new ReconocimientoResource($reconocimiento);
     }
 
     /**
