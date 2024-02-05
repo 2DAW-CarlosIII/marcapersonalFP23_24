@@ -44,6 +44,8 @@ class ReconocimientoController extends Controller
     {
         $reconocimiento = json_decode($request->getContent(), true);
         $reconocimiento = Reconocimiento::create($reconocimiento);
+        $reconocimiento->docente_validador = null;
+        $reconocimiento->save();
 
         return new ReconocimientoResource($reconocimiento);
     }
@@ -73,5 +75,16 @@ class ReconocimientoController extends Controller
     public function destroy(Reconocimiento $reconocimiento)
     {
         $reconocimiento->delete();
+    }
+
+    public function validar(Request $request, Reconocimiento $reconocimiento)
+    {
+
+        abort_if($request->user()->esDocente()->can('validar',$reconocimiento) ||
+         $request->user()->esAdmin()->can('validar',$reconocimiento),403);
+
+        $reconocimiento->docente_validador = $request->user()->id;
+        $reconocimiento->save();
+
     }
 }
