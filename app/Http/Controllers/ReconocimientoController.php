@@ -120,4 +120,6 @@ class ReconocimientoController extends Controller
         ]);
         return redirect(action([self::class, 'getShow'], ['id' => $reconocimiento->id]));
     }
+
+
 }

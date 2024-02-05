@@ -74,4 +74,22 @@ class ReconocimientoController extends Controller
     {
         $reconocimiento->delete();
     }
+
+    public function crearReconocimiento(Request $request){
+
+        $reconocimiento = new Reconocimiento($request->all());
+        if (!auth()->user()->esDocente() && !auth()->user()->esAdmin()){
+            $reconocimiento->docente_validador = null;
+        }
+        $reconocimiento->save();
+    }
+
+    public function validarReconocimiento(Request $request, Reconocimiento $reconocimiento){
+
+        if($reconocimiento->validarReconocimiento(auth()->id())){
+
+        }else{
+            return response()->json(['error' => 'Not authorized.'],403);
+        }
+    }
 }
