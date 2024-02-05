@@ -42,11 +42,19 @@ class ReconocimientoController extends Controller
      */
     public function store(Request $request)
     {
-        $reconocimiento = json_decode($request->getContent(), true);
-        $reconocimiento = Reconocimiento::create($reconocimiento);
+        $this->authorize('create', Reconocimiento::class);
+        //Forzar NULL docente_validador en creación de reconocimiento
+        if (! $request->has('docente_validador')) {
+            $request->except(['docente_validador']);
+        }
+
+        $reconocimientoData = json_decode($request->getContent(), true);
+        $reconocimiento = Reconocimiento::create($reconocimientoData);
 
         return new ReconocimientoResource($reconocimiento);
     }
+
+
 
     /**
      * Display the specified resource.
@@ -61,17 +69,8 @@ class ReconocimientoController extends Controller
      */
     public function update(Request $request, Reconocimiento $reconocimiento)
     {
+        $this->authorize('update', $reconocimiento);
         $reconocimientoData = json_decode($request->getContent(), true);
-        $reconocimiento->update($reconocimientoData);
-
-        return new ReconocimientoResource($reconocimiento);
-    }
-
-    public function validar(Request $request, Reconocimiento $reconocimiento){
-
-        $this->authorize('validar', $reconocimiento);
-        $reconocimientoData = json_decode($request->getContent('docente_id'), true);
-        $reconocimientoData['docente_id']= auth()->id();
         $reconocimiento->update($reconocimientoData);
 
         return new ReconocimientoResource($reconocimiento);
@@ -84,4 +83,17 @@ class ReconocimientoController extends Controller
     {
         $reconocimiento->delete();
     }
+
+    public function validar(Request $request, Reconocimiento $reconocimiento)
+    {
+        //Esta policy nos sirve para validar si el usuario es docente o admin
+        $this->authorize('create', Reconocimiento::class);
+        $reconocimiento = Reconocimiento::find($request->id);
+        $reconocimiento->docente_validador = $request->user()->id;
+        $reconocimiento->save();
+        return new ReconocimientoResource($reconocimiento);
+
+    }
+
+
 }

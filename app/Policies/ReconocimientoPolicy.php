@@ -34,15 +34,24 @@ class ReconocimientoPolicy
      */
     public function create(User $user): bool
     {
-        return $user->esEstudiante();
+        return $user->esDocente();
     }
 
     /**
      * Determine whether the user can update the model.
      */
+
+     //Verificar rol de usuario para actualizar reconocimiento, si no es docente ni admin, se excluye el campo docente_validador
     public function update(User $user, Reconocimiento $reconocimiento): bool
     {
-        return $user->esPropietario($reconocimiento,$reconocimiento->estudiante_id);
+        if ($user->esDocente() || $user->esAdmin()) {
+            return $user->esPropietario($reconocimiento,$reconocimiento->estudiante_id);
+        }
+
+        else{
+            $reconocimiento = $reconocimiento->except(['docente_validador']);
+            return $user->esPropietario($reconocimiento,$reconocimiento->estudiante_id);
+        }
     }
 
     /**
@@ -52,11 +61,6 @@ class ReconocimientoPolicy
     {
         return $user->esPropietario($reconocimiento,$reconocimiento->estudiante_id);
 
-    }
-
-    public function validar(User $user, Reconocimiento $reconocimiento)
-    {
-        return $user->esDocente();
     }
 
     /**
@@ -74,4 +78,6 @@ class ReconocimientoPolicy
     {
         //
     }
+
+
 }
