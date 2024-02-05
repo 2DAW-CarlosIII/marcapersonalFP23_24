@@ -21,9 +21,9 @@ import {
     Show,
     SimpleShowLayout,
     FileInput,
-  } from 'react-admin';
+} from 'react-admin';
 
-import { useRecordContext} from 'react-admin';
+import { useRecordContext } from 'react-admin';
 import { useMediaQuery } from '@mui/material';
 
 
@@ -34,27 +34,27 @@ import { useMediaQuery } from '@mui/material';
 const DocenteInput = () => (
     <ReferenceInput label="Docente" source="docente_validador" reference="users" alwaysOn >
         <SelectInput
-        label="Docente"
-        source="docente_validador"
-        optionText={record => record && `${record.nombre} ${record.apellidos}`} />
+            label="Docente"
+            source="docente_validador"
+            optionText={record => record && `${record.nombre} ${record.apellidos}`} />
     </ReferenceInput>
 )
 
 const EstudianteInput = () => (
     <ReferenceInput label="Estudiante" source="estudiante_id" reference="users" alwaysOn >
         <SelectInput
-        label="Estudiante"
-        source="estudiante_id"
-        optionText={record => record && `${record.nombre} ${record.apellidos}`} />
+            label="Estudiante"
+            source="estudiante_id"
+            optionText={record => record && `${record.nombre} ${record.apellidos}`} />
     </ReferenceInput>
 )
 
 const ActividadInput = () => (
     <ReferenceInput label="Actividad" source="actividad_id" reference="actividades">
         <SelectInput
-        label="Actividad"
-        source="actividad_id"
-        optionText={record => record && `${record.nombre}`} />
+            label="Actividad"
+            source="actividad_id"
+            optionText={record => record && `${record.nombre}`} />
     </ReferenceInput>
 )
 
@@ -63,27 +63,27 @@ const ActividadInput = () => (
 const EstudiantesFilter = () => (
     <ReferenceInput label="Estudiante" source="estudiante_id" reference="users" alwaysOn >
         <SelectInput
-        label="Estudiante"
-        source="estudiante_id"
-        optionText={record => record && `${record.nombre} ${record.apellidos}`} />
+            label="Estudiante"
+            source="estudiante_id"
+            optionText={record => record && `${record.nombre} ${record.apellidos}`} />
     </ReferenceInput>
 );
 
 const ActividadesFilter = () => (
     <ReferenceInput label="Actividad" source="actividad_id" reference="actividades" alwaysOn >
         <SelectInput
-        label="Actividad"
-        source="actividad_id"
-        optionText={record => record && `${record.nombre}`} />
+            label="Actividad"
+            source="actividad_id"
+            optionText={record => record && `${record.nombre}`} />
     </ReferenceInput>
 );
 
 const DocentesFilter = () => (
     <ReferenceInput label="Docente" source="docente_validador" reference="users" alwaysOn >
         <SelectInput
-        label="Docente"
-        source="docente_validador"
-        optionText={record => record && `${record.nombre} ${record.apellidos}`} />
+            label="Docente"
+            source="docente_validador"
+            optionText={record => record && `${record.nombre} ${record.apellidos}`} />
     </ReferenceInput>
 );
 
@@ -97,7 +97,7 @@ export const ReconocimientoList = (props) => {
     const isSmall = useMediaQuery((theme) => theme.breakpoints.down('sm'));
     return (
         <List {...props} filters={reconocimientosFilters}>
-        {isSmall ? (
+            {isSmall ? (
                 <SimpleList
                     primaryText="%{estudiante_id}"
                     secondaryText="%{actividad_id}"
@@ -128,33 +128,34 @@ export const ReconocimientoList = (props) => {
 }
 
 export const ReconocimientoTitle = () => {
-  const record = useRecordContext();
-  return <span>Reconocimiento {record ? `"${record.id}"` : ''}</span>;
+    const record = useRecordContext();
+    return <span>Reconocimiento {record ? `"${record.id}"` : ''}</span>;
 };
 
 export const ReconocimientoEdit = () => (
     <Edit title={<ReconocimientoTitle />}>
-    <SimpleForm>
-        <EstudianteInput />
-        <DocenteInput />
-        <ActividadInput />
-    </SimpleForm>
+        <SimpleForm>
+            <EstudianteInput />
+            <DocenteInput />
+            <ActividadInput />
+
+        </SimpleForm>
     </Edit>
 );
 
 export const ReconocimientoShow = () => (
     <Show>
         <SimpleShowLayout>
-                    <ReferenceField label="Estudiante" source="estudiante_id" reference="users">
-                        <FunctionField render={record => record && `${record.nombre} ${record.apellidos}`} />
-                    </ReferenceField>
-                    <ReferenceField label="Actividad" source="actividad_id" reference="actividades">
-                        <FunctionField render={record => record && `${record.nombre}`} />
-                    </ReferenceField>
-                    <ReferenceField label="Docente" source="docente_validador" reference="users">
-                        <FunctionField render={record => record && `${record.nombre} ${record.apellidos}`} />
-                    </ReferenceField>
-                    <DateField source="fecha" />
+            <ReferenceField label="Estudiante" source="estudiante_id" reference="users">
+                <FunctionField render={record => record && `${record.nombre} ${record.apellidos}`} />
+            </ReferenceField>
+            <ReferenceField label="Actividad" source="actividad_id" reference="actividades">
+                <FunctionField render={record => record && `${record.nombre}`} />
+            </ReferenceField>
+            <ReferenceField label="Docente" source="docente_validador" reference="users">
+                <FunctionField render={record => record && `${record.nombre} ${record.apellidos}`} />
+            </ReferenceField>
+            <DateField source="fecha" />
         </SimpleShowLayout>
     </Show>
 );

@@ -6,6 +6,7 @@ use App\Helpers\FilterHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ReconocimientoResource;
 use App\Models\Reconocimiento;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ReconocimientoController extends Controller
@@ -61,6 +62,8 @@ class ReconocimientoController extends Controller
      */
     public function update(Request $request, Reconocimiento $reconocimiento)
     {
+        abort_if ($request->user()->cannot('update', $reconocimiento), 403);
+
         $reconocimientoData = json_decode($request->getContent(), true);
         $reconocimiento->update($reconocimientoData);
 
@@ -73,5 +76,12 @@ class ReconocimientoController extends Controller
     public function destroy(Reconocimiento $reconocimiento)
     {
         $reconocimiento->delete();
+    }
+
+    public function validar(Reconocimiento $reconocimiento, User $user){
+        if($user->esDocente() || $user->esAdmin()){
+            $reconocimiento->docente_validador = $user->id;
+            return $reconocimiento;
+        }
     }
 }

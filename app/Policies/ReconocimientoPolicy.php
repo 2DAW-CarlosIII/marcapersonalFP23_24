@@ -42,6 +42,11 @@ class ReconocimientoPolicy
      */
     public function update(User $user, Reconocimiento $reconocimiento): bool
     {
+
+        if(!($user->esDocente()) || !($user->esAdmin())){
+            // return $reconocimiento->docente_validador = null;
+            return $user->esPropietario($reconocimiento,$reconocimiento->docente_validador);
+        }
         return $user->esPropietario($reconocimiento,$reconocimiento->estudiante_id);
     }
 
