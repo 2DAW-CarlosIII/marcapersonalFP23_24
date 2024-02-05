@@ -61,8 +61,34 @@ class ReconocimientoController extends Controller
      */
     public function update(Request $request, Reconocimiento $reconocimiento)
     {
+        $usuario = auth()->user();
+
+        // Probaria a comprobar si $usuario es docente, entonces asi
+
         $reconocimientoData = json_decode($request->getContent(), true);
         $reconocimiento->update($reconocimientoData);
+
+        // Si es alumno, entonces asi (sin meter docente validador)
+
+        /*
+        $reconocimiento->update([
+            'estudiante_id'=>$request->estudiante_id,
+            'actividad_id'=>$request->actividad_id,
+            'documento'=>$path ?? $reconocimiento->documento,
+        ]);
+        */
+
+        return new ReconocimientoResource($reconocimiento);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function validar(Request $request, Reconocimiento $reconocimiento)
+    {
+        $reconocimiento->update([
+            'docente_validador'=>$request->docente_validador,
+        ]);
 
         return new ReconocimientoResource($reconocimiento);
     }

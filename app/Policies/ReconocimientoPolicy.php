@@ -34,7 +34,7 @@ class ReconocimientoPolicy
      */
     public function create(User $user): bool
     {
-        return $user->esDocente();
+        return $user->esEstudiante();
     }
 
     /**
@@ -42,7 +42,17 @@ class ReconocimientoPolicy
      */
     public function update(User $user, Reconocimiento $reconocimiento): bool
     {
-        return $user->esPropietario($reconocimiento,$reconocimiento->estudiante_id);
+        if ($user->esPropietario($reconocimiento,$reconocimiento->estudiante_id || $user->esDocente())){
+            return true;
+        }
+    }
+
+    /**
+     * Determine whether the user can validate the model.
+     */
+    public function validar(User $user): bool
+    {
+        return $user->esDocente();
     }
 
     /**
