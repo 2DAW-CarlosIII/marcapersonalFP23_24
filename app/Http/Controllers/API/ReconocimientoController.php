@@ -67,6 +67,16 @@ class ReconocimientoController extends Controller
         return new ReconocimientoResource($reconocimiento);
     }
 
+    public function validar(Request $request, Reconocimiento $reconocimiento){
+
+        $this->authorize('validar', $reconocimiento);
+        $reconocimientoData = json_decode($request->getContent('docente_id'), true);
+        $reconocimientoData['docente_id']= auth()->id();
+        $reconocimiento->update($reconocimientoData);
+
+        return new ReconocimientoResource($reconocimiento);
+    }
+
     /**
      * Remove the specified resource from storage.
      */
