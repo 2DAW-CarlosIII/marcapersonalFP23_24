@@ -26,4 +26,18 @@ class Reconocimiento extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function validar($user,$reconocimiento){
+        if($user->esDocente()||$user->esAdmin()){
+            $reconocimiento->docente_validador = $user->id;
+            $reconocimiento->save();
+            return true;
+        }else{
+            $reconocimientoOriginal=Reconocimiento::findOrFail($this->id);
+            if($reconocimiento->docente_validador != $reconocimientoOriginal->docente_validador){
+                return false;
+            }else{
+                return true;
+            }
+        }
+    }
 }

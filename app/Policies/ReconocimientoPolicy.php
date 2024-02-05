@@ -34,7 +34,8 @@ class ReconocimientoPolicy
      */
     public function create(User $user): bool
     {
-        return $user->esDocente();
+
+        return $user->esEstudiante()||$user->esDocente()||$user->esAdmin();
     }
 
     /**
@@ -42,8 +43,14 @@ class ReconocimientoPolicy
      */
     public function update(User $user, Reconocimiento $reconocimiento): bool
     {
-        return $user->esPropietario($reconocimiento,$reconocimiento->estudiante_id);
-    }
+        if($reconocimiento->validar($user,$reconocimiento)){
+            return $user->esPropietarioReconocimiento($reconocimiento,$reconocimiento->estudiante_id)||$user->esDocente();
+
+        }else{
+            return false;
+        }
+
+}
 
     /**
      * Determine whether the user can delete the model.

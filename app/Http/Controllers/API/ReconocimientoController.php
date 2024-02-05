@@ -23,6 +23,22 @@ class ReconocimientoController extends Controller
         $this->middleware('auth:sanctum')->except(['index', 'show']);
         $this->authorizeResource(Reconocimiento::class, 'reconocimiento');
     }
+    public function comprobarDocente(Request $request,$reconocimiento,$reconocimientoOriginal=null){
+        if($request->user()->esDocente()||$request->user()->esAdmin()){
+            $reconocimiento->docente_validador = $request->user()->id;
+            $reconocimiento->save();
+            return $reconocimiento;
+        }else{
+            if($reconocimientoOriginal){
+                $reconocimiento->docente_validador = $reconocimientoOriginal->docente_validador;
+            }else{
+                $reconocimiento->docente_validador = null;
+            }
+            $reconocimiento->save();
+            return $reconocimiento;
+        }
+    }
+
 
     public function index(Request $request)
     {
@@ -44,8 +60,7 @@ class ReconocimientoController extends Controller
     {
         $reconocimiento = json_decode($request->getContent(), true);
         $reconocimiento = Reconocimiento::create($reconocimiento);
-
-        return new ReconocimientoResource($reconocimiento);
+        return new ReconocimientoResource($this->comprobarDocente($request,$reconocimiento));
     }
 
     /**
@@ -62,9 +77,9 @@ class ReconocimientoController extends Controller
     public function update(Request $request, Reconocimiento $reconocimiento)
     {
         $reconocimientoData = json_decode($request->getContent(), true);
+        $reconocimientoOriginal=Reconocimiento::findOrFail($reconocimientoData["id"]);
         $reconocimiento->update($reconocimientoData);
-
-        return new ReconocimientoResource($reconocimiento);
+        return new ReconocimientoResource($this->comprobarDocente($request,$reconocimiento,$reconocimientoOriginal));
     }
 
     /**

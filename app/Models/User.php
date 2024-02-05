@@ -124,7 +124,10 @@ class User extends Authenticatable
     {
         return $recurso && $recurso->$propiedad === $this->id;
     }
-
+    public function esPropietarioReconocimiento($recurso, $propiedad = 'user_id'): bool
+    {
+        return $recurso && $recurso->estudiante_id === $this->id;
+    }
     private function getEmailDomain(): string
     {
         $dominio = explode('@', $this->email)[1];
