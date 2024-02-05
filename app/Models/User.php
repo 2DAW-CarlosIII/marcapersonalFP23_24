@@ -131,4 +131,10 @@ class User extends Authenticatable
         return $dominio;
     }
 
+    private function esValidador($recurso, $propiedad = 'docente_validador'): bool
+    {
+        if($this->esAdmin() || $this->esDocente())
+        return $recurso && $recurso->$propiedad === $this->id;
+    }
+
 }
