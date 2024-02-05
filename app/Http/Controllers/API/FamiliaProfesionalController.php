@@ -10,6 +10,13 @@ use Illuminate\Http\Request;
 
 class FamiliaProfesionalController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth:sanctum')->except(['index', 'show']);
+        $this->authorizeResource(FamiliaProfesional::class, 'familiaProfesional');
+    }
+
     public $modelclass = FamiliaProfesional::class;
 
     /**

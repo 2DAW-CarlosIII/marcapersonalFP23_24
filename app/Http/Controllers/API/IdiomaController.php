@@ -10,6 +10,13 @@ use Illuminate\Http\Request;
 
 class IdiomaController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth:sanctum')->except(['index', 'show']);
+        $this->authorizeResource(Idioma::class, 'idioma');
+    }
+
     public $modelclass = Idioma::class;
     /**
      * Display a listing of the resource.

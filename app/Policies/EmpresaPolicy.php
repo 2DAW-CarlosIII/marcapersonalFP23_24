@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\Curriculo;
+use App\Models\Empresa;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
 
-class CurriculoPolicy
+class EmpresaPolicy
 {
     /**
      * Perform pre-authorization checks.
@@ -31,7 +31,7 @@ class CurriculoPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(?User $user, Curriculo $curriculo): bool
+    public function view(?User $user, Empresa $empresa): bool
     {
         return true;
     }
@@ -41,29 +41,30 @@ class CurriculoPolicy
      */
     public function create(User $user): bool
     {
-        return $user->esEstudiante();
+        return $user->esDocente();
     }
 
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Curriculo $curriculo): bool
+    public function update(User $user, Empresa $empresa): bool
     {
-        return $user->esPropietario($curriculo);
+        return $user->esDocente();
     }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Curriculo $curriculo): bool
+    public function delete(User $user, Empresa $empresa): bool
     {
-        return $user->esPropietario($curriculo);
+
+        return false;
     }
 
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, Curriculo $curriculo): bool
+    public function restore(User $user, Empresa $empresa): bool
     {
         //
     }
@@ -71,7 +72,7 @@ class CurriculoPolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, Curriculo $curriculo): bool
+    public function forceDelete(User $user, Empresa $empresa): bool
     {
         //
     }

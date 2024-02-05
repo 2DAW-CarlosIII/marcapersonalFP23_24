@@ -16,6 +16,7 @@ use Tqdev\PhpCrudApi\Config\Config;
 use App\Http\Controllers\API\CurriculoController;
 use App\Http\Controllers\API\EmpresaController;
 use App\Http\Controllers\API\TokenController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\API\CountController;
 
 /*
@@ -36,22 +37,22 @@ Route::prefix('v1')->group(function () {
             $user->fullName = $user->nombre . ' ' . $user->apellidos;
             return $user;
         });
-
-        Route::apiResource('ciclos', CicloController::class);
-        Route::apiResource('reconocimientos', ReconocimientoController::class);
-        Route::apiResource('users', UserController::class);
-        Route::apiResource('proyectos', ProyectoController::class);
-        Route::apiResource('empresas', EmpresaController::class);
-        Route::apiResource('familias_profesionales', FamiliaProfesionalController::class)->parameters([
-            'familias_profesionales' => 'familiaProfesional'
-        ]);
-        Route::apiResource('curriculos', CurriculoController::class);
-        Route::apiResource('actividades', ActividadController::class)->parameters([
-            'actividades' => 'actividad'
-        ]);
-        Route::apiResource('competencias', CompetenciaController::class);
-        Route::apiResource('idiomas', IdiomaController::class);
     });
+
+    Route::apiResource('ciclos', CicloController::class);
+    Route::apiResource('reconocimientos', ReconocimientoController::class);
+    Route::apiResource('users', UserController::class);
+    Route::apiResource('proyectos', ProyectoController::class);
+    Route::apiResource('empresas', EmpresaController::class);
+    Route::apiResource('familias_profesionales', FamiliaProfesionalController::class)->parameters([
+        'familias_profesionales' => 'familiaProfesional'
+    ]);
+    Route::apiResource('curriculos', CurriculoController::class);
+    Route::apiResource('actividades', ActividadController::class)->parameters([
+        'actividades' => 'actividad'
+    ]);
+    Route::apiResource('competencias', CompetenciaController::class);
+    Route::apiResource('idiomas', IdiomaController::class);
 
     Route::get('{tabla}/count', [CountController::class, 'count']);
 
@@ -59,6 +60,10 @@ Route::prefix('v1')->group(function () {
     Route::post('tokens', [TokenController::class, 'store']);
     // elimina el token del usuario autenticado
     Route::delete('tokens', [TokenController::class, 'destroy'])->middleware('auth:sanctum');
+
+    Route::post('login', [AuthenticatedSessionController::class, 'apiLogin']);
+    Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
+        ->middleware('auth:sanctum')->name('logout');
 
 });
 

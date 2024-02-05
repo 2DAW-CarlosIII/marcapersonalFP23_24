@@ -13,8 +13,17 @@ class ReconocimientoController extends Controller
     public $modelclass = Reconocimiento::class;
 
     /**
-     * Display a listing of the resource.
+     * Create the controller instance.
+     *
+     * @return void
      */
+
+    public function __construct()
+    {
+        $this->middleware('auth:sanctum')->except(['index', 'show']);
+        $this->authorizeResource(Reconocimiento::class, 'reconocimiento');
+    }
+
     public function index(Request $request)
     {
         $campos = [];
@@ -34,7 +43,6 @@ class ReconocimientoController extends Controller
     public function store(Request $request)
     {
         $reconocimiento = json_decode($request->getContent(), true);
-
         $reconocimiento = Reconocimiento::create($reconocimiento);
 
         return new ReconocimientoResource($reconocimiento);

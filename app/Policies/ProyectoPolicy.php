@@ -2,24 +2,17 @@
 
 namespace App\Policies;
 
-use App\Models\Curriculo;
+use App\Models\Proyecto;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
 
-class CurriculoPolicy
+class ProyectoPolicy
 {
-    /**
-     * Perform pre-authorization checks.
-     *
-     * @param  \App\Models\User  $user
-     * @param  string  $ability
-     * @return void|bool
-     */
+
     public function before(User $user, $ability)
     {
         if($user->esAdmin()) return true;
     }
-
     /**
      * Determine whether the user can view any models.
      */
@@ -31,7 +24,7 @@ class CurriculoPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(?User $user, Curriculo $curriculo): bool
+    public function view(?User $user, Proyecto $proyecto): bool
     {
         return true;
     }
@@ -41,29 +34,29 @@ class CurriculoPolicy
      */
     public function create(User $user): bool
     {
-        return $user->esEstudiante();
+        return $user->esDocente();
     }
 
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Curriculo $curriculo): bool
+    public function update(User $user, Proyecto $proyecto): bool
     {
-        return $user->esPropietario($curriculo);
+        return $user->esPropietario($proyecto, 'docente_id');
     }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Curriculo $curriculo): bool
+    public function delete(User $user, Proyecto $proyecto): bool
     {
-        return $user->esPropietario($curriculo);
+        return $user->esPropietario($proyecto, 'docente_id');
     }
 
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, Curriculo $curriculo): bool
+    public function restore(User $user, Proyecto $proyecto): bool
     {
         //
     }
@@ -71,8 +64,9 @@ class CurriculoPolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, Curriculo $curriculo): bool
+    public function forceDelete(User $user, Proyecto $proyecto): bool
     {
         //
     }
+
 }
