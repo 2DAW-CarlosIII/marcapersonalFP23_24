@@ -32,9 +32,14 @@ class ReconocimientoPolicy
     /**
      * Determine whether the user can create models.
      */
-    public function create(User $user): bool
+    public function create(User $user, Reconocimiento $reconocimiento): bool
     {
-        return $user->esDocente();
+        if($user->esPropietario($reconocimiento,$reconocimiento->estudiante_id)){
+            'docente_validador' == null;
+            return Response::allow();
+        }else{
+            return Response::denyWithStatus(403);
+        }
     }
 
     /**
@@ -42,7 +47,15 @@ class ReconocimientoPolicy
      */
     public function update(User $user, Reconocimiento $reconocimiento): bool
     {
-        return $user->esPropietario($reconocimiento,$reconocimiento->estudiante_id);
+        if($user->esPropietario($reconocimiento,$reconocimiento->estudiante_id)){
+            'docente_validador' == $user->id;
+            return Response::allow();
+        }else if($user->esDocente() || $user->esAdmin()){
+            return Response::allow();
+        }else{
+            return Response::denyWithStatus(403);
+        }
+
     }
 
     /**
