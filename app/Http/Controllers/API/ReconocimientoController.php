@@ -28,6 +28,15 @@ class ReconocimientoController extends Controller
         );
     }
 
+    public function create(Request $request)
+    {
+        $reconocimiento = json_decode($request->getContent(), true);
+
+        $reconocimiento = Reconocimiento::create($reconocimiento);
+
+        return new ReconocimientoResource($reconocimiento);
+
+    }
     /**
      * Store a newly created resource in storage.
      */

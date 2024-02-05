@@ -26,4 +26,5 @@ class Reconocimiento extends Model
     {
         return $this->belongsTo(User::class);
     }
+
 }
