@@ -41,9 +41,10 @@ class AutorizacionReconocimientoTest extends TestCase
 
     public function reconocimientoUpdate($propio = false) : TestResponse
     {
+        $user = Auth::user();
         $data = [
             'actividad_id' => 1,
-            'estudiante_id' => $propio ? Auth::user()->id : 100,
+            'estudiante_id' => $propio ? $user->id : 100,
             'documento' => '123456',
             'fecha' => '2021-10-10',
             'docente_validador' => 35,
@@ -51,7 +52,7 @@ class AutorizacionReconocimientoTest extends TestCase
 
         $reconocimiento = $propio
             ? Reconocimiento::create($data)
-            : Reconocimiento::inRandomOrder()->first();
+            : Reconocimiento::whereNot('estudiante_id', ($user ? $user->id : 100))->first();
         return $this->putJson(self::$apiurl_reconocimiento . "/{$reconocimiento->id}", $data);
     }
 
@@ -63,16 +64,17 @@ class AutorizacionReconocimientoTest extends TestCase
 
     public function reconocimientoDelete($propio = false) : TestResponse
     {
+        $user = Auth::user();
         $data = [
             'actividad_id' => 1,
-            'estudiante_id' => $propio ? Auth::user()->id : 100,
+            'estudiante_id' => $propio ? $user->id : 100,
             'documento' => '123456',
             'fecha' => '2021-10-10',
             'docente_validador' => 35,
         ];
         $reconocimiento = $propio
             ? Reconocimiento::create($data)
-            : Reconocimiento::inRandomOrder()->first();
+            : Reconocimiento::whereNot('estudiante_id', ($user ? $user->id : 100))->first();
         return $this->delete(self::$apiurl_reconocimiento . "/{$reconocimiento->id}");
     }
 
