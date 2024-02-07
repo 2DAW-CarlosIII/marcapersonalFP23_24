@@ -39,9 +39,12 @@ export const authProvider = {
         return Promise.resolve();
     },
     getIdentity: () => {
+
         return dataProvider.getIdentity()
             .then(( data ) => {
-                return data.json
+
+                data.json.avatar = 'http://acreditacion.educadgo.gob.mx/static/img/user.png'
+                 return data.json
             })
             .catch(() => {
                 throw new Error('Network error')

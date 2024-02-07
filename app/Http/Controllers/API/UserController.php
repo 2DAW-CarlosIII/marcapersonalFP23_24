@@ -59,7 +59,22 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        $userData = json_decode($request->getContent(), true);
+        $userData = $request->all();
+        if($userAvatar = $request->file('avatar')) {
+            $request->validate([
+                'avatar' => 'required|mimes:jpeg,png,gif,svg|max:5120', // Specify image MIME types and maximum size
+            ], [
+                'avatar.required' => 'Por favor, selecciona un avatar.',
+                'avatar.mimes' => 'El avatar debe ser una imagen.',
+                'avatar.max' => 'El tamaño del avatar no debe ser mayor a 5 MB.',
+            ]);
+
+            $path = $userAvatar->store('avatars', ['disk' => 'public']);
+            $userData['avatar'] = $path;
+        } else {
+            $userdataData['avatar'] = $user->avatar;
+        }
+
         $user->update($userData);
         return new UserResource($user);
     }
