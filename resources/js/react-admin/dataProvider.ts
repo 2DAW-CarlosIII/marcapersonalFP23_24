@@ -30,7 +30,7 @@ dataProvider.getMany = (resource, params) => {
     const query = {
         id: params.ids,
     };
-    const url = `${apiUrl}/${resource}?${stringify(query, {arrayFormat: 'bracket'})}`;
+    const url = `${apiUrl}/${resource}?${stringify(query, { arrayFormat: 'bracket' })}`;
     return httpClient(url).then(({ json }) => ({ data: json }));
 };
 
@@ -72,9 +72,10 @@ dataProvider.postLogout = () => {
 };
 
 dataProvider.update = (resource, params) => {
-    if (resource !== 'proyectos' || !params.data.attachments) {
+    if ((resource !== 'proyectos' || resource !== 'users') && !params.data.attachments) {
         return originalDataProvider.update(resource, params);
     }
+
 
     let formData = new FormData();
     for (const property in params.data) {
@@ -83,18 +84,19 @@ dataProvider.update = (resource, params) => {
 
     formData.append('fichero', params.data.attachments.rawFile)
     formData.append('_method', 'PUT')
+    formData.append('avatar', params.data.attachments.rawFile)
 
     const url = `${apiUrl}/${resource}/${params.id}`
     return httpClient(url, {
         method: 'POST',
         body: formData,
     })
-    .then(json => {
-        return {
-            ...json,
-            data: json.json
-        }
-    })
+        .then(json => {
+            return {
+                ...json,
+                data: json.json
+            }
+        })
 }
 
 export { dataProvider };
