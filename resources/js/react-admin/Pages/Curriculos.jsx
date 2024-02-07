@@ -12,6 +12,7 @@ import {
     TextInput,
     FunctionField,
     SelectInput,
+    FileInput, FileField,
     ShowButton,
     Show,
     SimpleShowLayout
@@ -72,8 +73,10 @@ export const CurriculoEdit = () => (
         <EstudianteInput />
         <TextInput source="id" disabled />
         <TextInput source="video_curriculum" />
-        <TextInput source="pdf_curriculum" />
         <TextInput source="sobre_mi" />
+        <FileInput source="fichero" label="PDF del Currículum">
+            <FileField source="src" title="title" />
+        </FileInput>
     </SimpleForm>
     </Edit>
 );
