@@ -41,6 +41,15 @@ export const authProvider = {
     getIdentity: () => {
         return dataProvider.getIdentity()
             .then(( data ) => {
+
+                if (data.json.avatar) {
+                    data.json.avatar = data.json.attachments.src;
+
+                } else {
+                    data.json.avatar = 'http://acreditacion.educadgo.gob.mx/static/img/user.png';
+
+                }
+
                 return data.json
             })
             .catch(() => {
