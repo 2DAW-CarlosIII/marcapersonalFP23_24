@@ -93,7 +93,7 @@ dataProvider.update = (resource, params) => {
             };
         });
     } else if (resource === 'proyectos' && params.data.attachments) {
-        let formData = new FormData();
+    let formData = new FormData();
     for (const property in params.data) {
         formData.append(`${property}`, `${params.data[property]}`);
     }
@@ -112,10 +112,9 @@ dataProvider.update = (resource, params) => {
             data: json.json
         }
     })
-    } else {
+} else {
         // If conditions are not met, fall back to the original behavior
         return originalDataProvider.update(resource, params);
-    }
-};
+}
 
 export { dataProvider };
