@@ -7,6 +7,7 @@ import {
     EditButton,
     Edit,
     Create,
+    FileInput, FileField,
     SimpleForm,
     ReferenceInput,
     TextInput,
@@ -72,7 +73,9 @@ export const CurriculoEdit = () => (
         <EstudianteInput />
         <TextInput source="id" disabled />
         <TextInput source="video_curriculum" />
-        <TextInput source="pdf_curriculum" />
+        <FileInput source="attachments" label="Archivo pdf">
+            <FileField source="src" title="title" />
+        </FileInput>
         <TextInput source="sobre_mi" />
     </SimpleForm>
     </Edit>
