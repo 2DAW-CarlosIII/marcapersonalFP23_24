@@ -14,6 +14,7 @@ import {
     NumberInput,
     FunctionField,
     SelectInput,
+    FileInput, FileField,
     ShowButton,
     Show,
     SimpleShowLayout
@@ -78,6 +79,9 @@ export const ProyectoEdit = () => (
         <TextInput source="dominio" />
         <TutorInput />
         <NumberInput source="calificacion" />
+        <FileInput source="fichero" label="Archivo comprimido con el proyecto">
+            <FileField source="src" title="title" />
+        </FileInput>
     </SimpleForm>
     </Edit>
 );
