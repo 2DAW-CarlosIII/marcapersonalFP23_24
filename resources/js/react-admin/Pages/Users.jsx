@@ -18,6 +18,8 @@ import {
     SimpleShowLayout,
     DateInput,
     PasswordInput,
+    FileInput,
+    FileField,
 } from 'react-admin';
 
 import { useMediaQuery } from '@mui/material';
@@ -87,7 +89,9 @@ export const UserEdit = () => (
             <TextInput source="nombre" label="Nombre" />
             <TextInput source="apellidos" label="Apellidos" />
             <TextInput source="email" label="Email" />
-            <ImageInput source="avatar" style={{ border: '2px dashed #ccc', padding: '10px', maxWidth: '180px' }}></ImageInput>
+            <FileInput source="attachments" label="Archivo de Avatar" >
+                <FileField source="src" title="title" />
+            </FileInput>
         </SimpleForm>
     </Edit>
 );
