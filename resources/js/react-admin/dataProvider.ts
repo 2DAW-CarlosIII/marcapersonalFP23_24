@@ -72,7 +72,7 @@ dataProvider.postLogout = () => {
 };
 
 dataProvider.update = (resource, params) => {
-    if (resource !== 'proyectos' || !params.data.attachments) {
+    if (!params.data.attachments) {
         return originalDataProvider.update(resource, params);
     }
 
@@ -80,8 +80,13 @@ dataProvider.update = (resource, params) => {
     for (const property in params.data) {
         formData.append(`${property}`, `${params.data[property]}`);
     }
+    if(resource === 'curriculos'){
+        formData.append('pdf_curriculum', params.data.attachments.rawFile)
+    }
+    else if(resource === 'proyectos'){
+        formData.append('fichero', params.data.attachments.rawFile)
+    }
 
-    formData.append('fichero', params.data.attachments.rawFile)
     formData.append('_method', 'PUT')
 
     const url = `${apiUrl}/${resource}/${params.id}`

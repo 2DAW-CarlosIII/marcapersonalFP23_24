@@ -48,6 +48,8 @@ Route::prefix('v1')->group(function () {
         'familias_profesionales' => 'familiaProfesional'
     ]);
     Route::apiResource('curriculos', CurriculoController::class);
+    Route::get('curriculos/pdf/{id}', [CurriculoController::class, 'getAccessCurriculoPDF']);
+
     Route::apiResource('actividades', ActividadController::class)->parameters([
         'actividades' => 'actividad'
     ]);

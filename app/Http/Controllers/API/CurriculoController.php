@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Curriculo;
 use Illuminate\Http\Request;
 use App\Http\Resources\CurriculoResource;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Gate;
 
 class CurriculoController extends Controller
@@ -17,7 +18,7 @@ class CurriculoController extends Controller
      * Create the controller instance.
      *
      * @return void
-    */
+     */
     public function __construct()
     {
         $this->middleware('auth:sanctum')->except(['index', 'show']);
@@ -62,10 +63,41 @@ class CurriculoController extends Controller
     public function update(Request $request, Curriculo $curriculo)
     {
 
-        $curriculoData = json_decode($request->getContent(), true);
+        $curriculoData = $request->all();
+
+        if ($curriculoRepoPdf = $request->file('pdf_curriculum')) {
+            $request->validate([
+                'pdf_curriculum' => 'required|mimes:pdf|max:5120',
+            ], [
+                'pdf_curriculum.required' => 'Por favor, selecciona un fichero.',
+                'pdf_curriculum.mimes' => 'El fichero debe ser un fichero pdf.',
+                'pdf_curriculum.max' => 'El tamaño del fichero no debe ser mayor a 5 MB.',
+            ]);
+
+            $path = $curriculoRepoPdf->store('repoPDFCurriculos', ['disk' => 'local']);
+            $curriculoData['pdf_curriculum'] = $path;
+        } else {
+            $curriculoData['pdf_curriculum'] = $curriculo->fichero;
+        }
+
         $curriculo->update($curriculoData);
 
         return new CurriculoResource($curriculo);
+    }
+
+    public function getAccessCurriculoPDF($id)
+    {
+        $curriculo = Curriculo::findOrFail($id);
+
+        //La ruta de la descripcion no funciona.
+
+        $path = storage_path() . '/app/' . $curriculo->pdf_curriculum;
+
+        if (file_exists($path)) {
+            return Response::download($path);
+        } else {
+            abort(403, 'Archivo no encontrado');
+        }
     }
 
     /**
