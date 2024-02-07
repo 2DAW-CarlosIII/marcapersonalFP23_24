@@ -30,7 +30,7 @@ dataProvider.getMany = (resource, params) => {
     const query = {
         id: params.ids,
     };
-    const url = `${apiUrl}/${resource}?${stringify(query, {arrayFormat: 'bracket'})}`;
+    const url = `${apiUrl}/${resource}?${stringify(query, { arrayFormat: 'bracket' })}`;
     return httpClient(url).then(({ json }) => ({ data: json }));
 };
 
@@ -72,7 +72,7 @@ dataProvider.postLogout = () => {
 };
 
 dataProvider.update = (resource, params) => {
-    if (resource !== 'proyectos' || !params.data.attachments) {
+    if (resource !== 'proyectos' && resource !== 'curriculos' || !params.data.attachments) {
         return originalDataProvider.update(resource, params);
     }
 
@@ -80,8 +80,11 @@ dataProvider.update = (resource, params) => {
     for (const property in params.data) {
         formData.append(`${property}`, `${params.data[property]}`);
     }
-
-    formData.append('fichero', params.data.attachments.rawFile)
+    if(resource == 'curriculos'){
+        formData.append('pdf_curriculum', params.data.attachments.rawFile)
+    }else if(resource == 'proyectos'){
+        formData.append('fichero', params.data.attachments.rawFile)
+    }
     formData.append('_method', 'PUT')
 
     const url = `${apiUrl}/${resource}/${params.id}`
@@ -89,12 +92,12 @@ dataProvider.update = (resource, params) => {
         method: 'POST',
         body: formData,
     })
-    .then(json => {
-        return {
-            ...json,
-            data: json.json
-        }
-    })
+        .then(json => {
+            return {
+                ...json,
+                data: json.json
+            }
+        })
 }
 
 export { dataProvider };
