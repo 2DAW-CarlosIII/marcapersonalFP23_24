@@ -72,7 +72,7 @@ dataProvider.postLogout = () => {
 };
 
 dataProvider.update = (resource, params) => {
-    if (resource !== 'proyectos' || !params.data.fichero) {
+    if (resource !== 'proyectos' || !params.data.attachments) {
         return originalDataProvider.update(resource, params);
     }
 
@@ -81,7 +81,7 @@ dataProvider.update = (resource, params) => {
         formData.append(`${property}`, `${params.data[property]}`);
     }
 
-    formData.append('fichero', params.data.fichero.rawFile)
+    formData.append('fichero', params.data.attachments.rawFile)
     formData.append('_method', 'PUT')
 
     const url = `${apiUrl}/${resource}/${params.id}`
