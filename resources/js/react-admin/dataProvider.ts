@@ -116,5 +116,5 @@ dataProvider.update = (resource, params) => {
         // If conditions are not met, fall back to the original behavior
         return originalDataProvider.update(resource, params);
 }
-
+}
 export { dataProvider };
