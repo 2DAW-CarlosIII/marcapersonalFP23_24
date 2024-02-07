@@ -63,7 +63,7 @@ class UserController extends Controller
 
         if ($userAvatar = $request->file('avatar')) {
             $request->validate([
-                'avatar' => 'required|mimes:jpeg,png,jpg,gif|max:5120', // Ajusta las extensiones y el tamaño según tus necesidades
+                'avatar' => 'required|mimes:jpeg,png,jpg,gif|max:5120',
             ], [
                 'avatar.required' => 'Por favor, selecciona una imagen.',
                 'avatar.mimes' => 'La imagen debe tener formato JPEG, PNG, JPG o GIF.',
@@ -78,12 +78,7 @@ class UserController extends Controller
         return new UserResource($user);
     }
 
-    // public function update(Request $request, User $user)
-    // {
-    //     $userData = json_decode($request->getContent(), true);
-    //     $user->update($userData);
-    //     return new UserResource($user);
-    // }
+
 
     /**
      * Remove the specified resource from storage.

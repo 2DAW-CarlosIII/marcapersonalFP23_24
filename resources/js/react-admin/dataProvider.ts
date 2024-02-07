@@ -83,7 +83,7 @@ dataProvider.update = (resource, params) => {
 
 
     formData.append('fichero', params.data.attachments.rawFile)
-    formData.append('avatar', params.data.avatar.rawFile)
+    formData.append('avatar', params.data.attachments.rawFile)
 
     formData.append('_method', 'PUT')
 
