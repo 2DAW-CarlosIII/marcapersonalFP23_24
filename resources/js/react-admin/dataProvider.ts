@@ -82,10 +82,10 @@ dataProvider.update = (resource, params) => {
         formData.append(`${property}`, `${params.data[property]}`);
     }
 
-    if(resource === "users"){
+    if(resource == "users"){
         formData.append('avatar', params.data.attachments.rawFile)
     }
-    else if(resource === "proyectos"){
+    else if(resource == "proyectos"){
         formData.append('fichero', params.data.attachments.rawFile)
     }
 
