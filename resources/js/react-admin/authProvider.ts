@@ -38,14 +38,17 @@ export const authProvider = {
     checkError: (error) => {
         return Promise.resolve();
     },
+
     getIdentity: () => {
         return dataProvider.getIdentity()
             .then(( data ) => {
+                data.json.avatar = data.json.avatar == null ? 'http://acreditacion.educadgo.gob.mx/static/img/user.png' : "/storage/" + data.json.avatar;
                 return data.json
             })
             .catch(() => {
-                throw new Error('Network error')
+                throw new Error('Error de red')
             });
     },
+
     getPermissions: () => Promise.resolve('')
 };

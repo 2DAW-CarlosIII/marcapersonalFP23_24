@@ -27,6 +27,7 @@ class User extends Authenticatable
         'password',
         'nombre',
         'apellidos',
+        'avatar',
     ];
 
     /**
@@ -50,7 +51,7 @@ class User extends Authenticatable
     ];
 
     /**
-     * Get the curriculo associated with the user.
+     * the curriculo associated with the user.
      */
     public function curriculo(): HasOne
     {

@@ -9,20 +9,23 @@ use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Date;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
     public $modelclass = User::class;
+
     /**
      * Create the controller instance.
      *
      * @return void
-    */
+     */
     public function __construct()
     {
         $this->middleware('auth:sanctum')->except(['index', 'show', 'store']);
         $this->authorizeResource(User::class, 'user');
     }
+
     /**
      * Display a listing of the resource.
      */
@@ -57,12 +60,28 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, User $user)
-    {
-        $userData = json_decode($request->getContent(), true);
-        $user->update($userData);
-        return new UserResource($user);
-    }
+
+        public function update(Request $request, User $user)
+        {
+
+            $userData = $request->all();
+            if($userAvatar = $request->file('avatar')){
+                $request->validate([
+                    'avatar' => 'required|mimes: jpeg, jpg, png, tiff|max:5120',
+                ], [
+                    'avatar.required' => 'Por favor, selecciona una imagen.',
+                    'avatar.mimes' => 'El fichero debe ser una imagen jpeg, jpg o png.',
+                    'avatar.max' => 'El tamaño del fichero no debe ser mayor a 5 MB.',
+                ]);
+
+                $path = $userAvatar->store('userData', ['disk' => 'public']);
+                $userData['avatar'] = $path;
+            } else {
+                $userData['avatar'] = $user->avatar;
+            }
+            $user->update($userData);
+            return new UserResource($user);
+        }
 
     /**
      * Remove the specified resource from storage.
