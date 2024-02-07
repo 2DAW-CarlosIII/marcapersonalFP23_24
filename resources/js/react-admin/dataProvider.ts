@@ -72,29 +72,38 @@ dataProvider.postLogout = () => {
 };
 
 dataProvider.update = (resource, params) => {
-    if (resource !== 'proyectos' || !params.data.attachments) {
+    if ((resource !== 'proyectos' && resource !== 'curriculos') || !params.data.attachments) {
         return originalDataProvider.update(resource, params);
     }
 
     let formData = new FormData();
-    for (const property in params.data) {
-        formData.append(`${property}`, `${params.data[property]}`);
+        for (const property in params.data) {
+            formData.append(`${property}`, `${params.data[property]}`);
+        }
+
+    if(resource === 'proyectos'){
+
+        formData.append('fichero', params.data.attachments.rawFile);
+
+    }else if(resource === 'curriculos'){
+
+        formData.append('pdf_curriculum', params.data.attachments.rawFile);
+
     }
 
-    formData.append('fichero', params.data.attachments.rawFile)
     formData.append('_method', 'PUT')
 
-    const url = `${apiUrl}/${resource}/${params.id}`
-    return httpClient(url, {
-        method: 'POST',
-        body: formData,
-    })
-    .then(json => {
-        return {
-            ...json,
-            data: json.json
-        }
-    })
+        const url = `${apiUrl}/${resource}/${params.id}`
+        return httpClient(url, {
+            method: 'POST',
+            body: formData,
+        })
+        .then(json => {
+            return {
+                ...json,
+                data: json.json
+            }
+        })
 }
 
 export { dataProvider };

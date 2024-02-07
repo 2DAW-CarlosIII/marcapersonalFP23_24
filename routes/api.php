@@ -58,6 +58,9 @@ Route::prefix('v1')->group(function () {
     Route::put('reconocimientos/validar/{id}', [ReconocimientoController::class, 'validar'])
         ->where('id', '[0-9]+');
 
+    Route::get('curriculos/pdf/{id}', [CurriculoController::class, 'descargarCurriculum'])
+        ->where('id', '[0-9]+');
+
     // emite un nuevo token
     Route::post('tokens', [TokenController::class, 'store']);
     // elimina el token del usuario autenticado
