@@ -14,6 +14,7 @@ import {
     SelectInput,
     ShowButton,
     Show,
+    FileInput, FileField,
     SimpleShowLayout
   } from 'react-admin';
 
@@ -72,7 +73,9 @@ export const CurriculoEdit = () => (
         <EstudianteInput />
         <TextInput source="id" disabled />
         <TextInput source="video_curriculum" />
-        <TextInput source="pdf_curriculum" />
+        <FileInput source="attachments" label="Archivo pdf del currículo">
+            <FileField source="src" title="title" />
+        </FileInput>
         <TextInput source="sobre_mi" />
     </SimpleForm>
     </Edit>

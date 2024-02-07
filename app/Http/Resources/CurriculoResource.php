@@ -14,6 +14,14 @@ class CurriculoResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return array_merge(parent::toArray($request), [
+            'attachments' => $this->pdf_curriculum
+            ? [
+                'src' => ('/storage/' . $this->pdf_curriculum),
+                'title' => $this->id
+              ]
+            : null,
+        ]);
+
     }
 }

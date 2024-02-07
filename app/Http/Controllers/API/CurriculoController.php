@@ -61,8 +61,21 @@ class CurriculoController extends Controller
      */
     public function update(Request $request, Curriculo $curriculo)
     {
+               $curriculoData = $request->all();
+               if($curriculoRepoPdf = $request->file('pdf_curriculum')) {
+                    $request->validate([
+                        'pdf_curriculum' => 'required|mimes:pdf|max:5120', // Se permiten ficheros comprimidos de hasta 5 MB
+                    ], [
+                        'pdf_curriculum.required' => 'Por favor, selecciona un fichero pdf.',
+                        'pdf_curriculum.mimes' => 'El fichero debe ser un fichero PDF.',
+                        'pdf_curriculum.max' => 'El tamaño del fichero no debe ser mayor a 5 MB.',
+                    ]);
 
-        $curriculoData = json_decode($request->getContent(), true);
+                    $path = $curriculoRepoPdf->store('repoPdfs', ['disk' => 'public']);
+                    $curriculoData['pdf_curriculum'] = $path;
+                } else {
+                    $curriculoData['pdf_curriculum'] = $curriculo->fichero;
+                }
         $curriculo->update($curriculoData);
 
         return new CurriculoResource($curriculo);
