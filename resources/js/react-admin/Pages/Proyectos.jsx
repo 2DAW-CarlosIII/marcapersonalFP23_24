@@ -79,7 +79,7 @@ export const ProyectoEdit = () => (
         <TextInput source="dominio" />
         <TutorInput />
         <NumberInput source="calificacion" />
-        <FileInput source="fichero" label="Archivo comprimido con el proyecto">
+        <FileInput source="attachments" label="Archivo comprimido con el proyecto">
             <FileField source="src" title="title" />
         </FileInput>
     </SimpleForm>
