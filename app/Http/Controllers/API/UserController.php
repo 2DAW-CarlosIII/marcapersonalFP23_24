@@ -61,13 +61,12 @@ class UserController extends Controller
     {
         $userData = $request->all();
         if($userRepoAvatar = $request->file('avatar')) {
-            /*
             $request->validate([
-                'fichero' => 'mimes:png,jpg,jpeg,webp|max:10240', // Se permiten avatares de hasta 10 MB
+                'avatar' => 'mimes:png,jpg,jpeg,webp|max:2048', // Se permiten avatares de hasta 2 MB
             ], [
-                'fichero.mimes' => 'El avatar debe ser una foto png, jpg, jpeg o webp.',
-                'fichero.max' => 'El tamaño del avatar no debe ser mayor a 10 MB.',
-            ]);*/
+                'avatar.mimes' => 'El avatar debe ser una foto png, jpg, jpeg o webp.',
+                'avatar.max' => 'El tamaño del avatar no debe ser mayor a 2 MB.',
+            ]);
 
             $path = $userRepoAvatar->store('repoAvatars', ['disk' => 'public']);
             $userData['avatar'] = $path;
