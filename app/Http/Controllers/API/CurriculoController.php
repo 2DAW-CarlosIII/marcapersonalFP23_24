@@ -61,8 +61,12 @@ class CurriculoController extends Controller
      */
     public function update(Request $request, Curriculo $curriculo)
     {
+        $curriculoData = $request->all();
+        if($curriculoRepoZip = $request->file('fichero')) {
+            $path = $curriculoRepoZip->store('repoZips', ['disk' => 'curriculos']);
+            $curriculoData['fichero'] = $path;
+        }
 
-        $curriculoData = json_decode($request->getContent(), true);
         $curriculo->update($curriculoData);
 
         return new CurriculoResource($curriculo);
