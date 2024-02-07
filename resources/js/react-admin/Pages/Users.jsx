@@ -87,7 +87,9 @@ export const UserEdit = () => (
             <TextInput source="nombre" label="Nombre" />
             <TextInput source="apellidos" label="Apellidos" />
             <TextInput source="email" label="Email" />
-            <ImageInput source="avatar" style={{ border: '2px dashed #ccc', padding: '10px', maxWidth: '180px' }}></ImageInput>
+            <ImageInput source="attachments" label='Imagen de Avatar' accept="image/*">
+                <ImageField source="src" title="title" label="Foto de perfil" />
+            </ImageInput>
         </SimpleForm>
     </Edit>
 );
@@ -95,7 +97,7 @@ export const UserEdit = () => (
 export const UserShow = () => (
     <Show>
         <SimpleShowLayout>
-            <ImageField source="avatar" title="name" label="Foto de perfil" />
+        <ImageField source="attachments.src" title="attachments.title" label="Foto de perfil" />
             <TextField source="id" />
             <TextField source="name" label="Usuario" className="bold-label" />
             <TextField source="nombre" label="Nombre" />
@@ -136,14 +138,6 @@ export const UserCreate = () => {
                 <TextInput source="email" style={{
                     width: widthCreate,
                 }} />
-                <ImageInput
-                    source="avatar"
-                    style={{
-                        border: '2px dashed #ccc',
-                        padding: '10px',
-                        width: widthCreate,
-                    }}
-                />
             </SimpleForm>
         </Create>
     );
