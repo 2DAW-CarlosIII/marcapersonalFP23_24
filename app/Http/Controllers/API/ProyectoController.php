@@ -72,7 +72,7 @@ class ProyectoController extends Controller
                 'fichero.max' => 'El tamaño del fichero no debe ser mayor a 5 MB.',
             ]);
 
-            $path = $proyectoRepoZip->store('repoZips', ['disk' => 'public']);
+            $path = $proyectoRepoZip->store('repoPdf', ['disk' => 'public']);
             $proyectoData['fichero'] = $path;
         } else {
             $proyectoData['fichero'] = $proyecto->fichero;

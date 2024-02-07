@@ -74,7 +74,7 @@ export const CurriculoEdit = () => (
         <TextInput source="id" disabled />
         <TextInput source="video_curriculum" />
         <TextInput source="sobre_mi" />
-        <FileInput source="fichero" label="PDF del Currículum">
+        <FileInput source="attachments" label="PDF del Currículum">
             <FileField source="src" title="title" />
         </FileInput>
     </SimpleForm>
