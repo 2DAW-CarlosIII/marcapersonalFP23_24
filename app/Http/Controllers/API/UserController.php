@@ -62,7 +62,7 @@ class UserController extends Controller
         $userAvatar = $request->all();
         if($userRepoAvatar = $request->file('avatar')) {
             $request->validate([
-                'avatar' => 'mimes:npg,jpg,jpeg|max:5120', // Se permiten imagenes de hasta 5 MB
+                'avatar' => 'mimes:png,jpg,jpeg|max:5120', // Se permiten imagenes de hasta 5 MB
             ], [
                 'avatar.mimes' => 'El avatar debe ser una imagen.',
                 'avatar.max' => 'El tamaño del avatar no debe ser mayor a 5 MB.',

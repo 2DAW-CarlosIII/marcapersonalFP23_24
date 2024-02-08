@@ -72,7 +72,7 @@ dataProvider.postLogout = () => {
 };
 
 dataProvider.update = (resource, params) => {
-    if (!params.data.attachments) {
+    if (comprobarResource(resource, params)) {
         return originalDataProvider.update(resource, params);
     }
 
@@ -81,8 +81,7 @@ dataProvider.update = (resource, params) => {
         formData.append(`${property}`, `${params.data[property]}`);
     }
 
-    if (resource === 'proyectos') formData.append('fichero', params.data.attachments.rawFile)
-    if (resource === 'users') formData.append('avatar', params.data.attachments.rawFile)
+    asignarFichero(resource, formData, params)
     formData.append('_method', 'PUT')
 
     const url = `${apiUrl}/${resource}/${params.id}`
@@ -97,5 +96,17 @@ dataProvider.update = (resource, params) => {
         }
     })
 }
+
+function comprobarResource (resource, params) {
+    if (resource !== 'proyectos' || !params.data.attachments) return false
+    if (resource !== 'users' || !params.data.attachments) return false
+    return true
+}
+
+function asignarFichero (resource, formData, params) {
+    if (resource === 'proyectos') formData.append('fichero', params.data.attachments.rawFile)
+    if (resource === 'users') formData.append('avatar', params.data.attachments.rawFile)
+}
+
 
 export { dataProvider };
