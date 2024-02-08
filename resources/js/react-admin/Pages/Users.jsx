@@ -94,7 +94,11 @@ export const UserEdit = () => (
 export const UserShow = () => (
     <Show>
         <SimpleShowLayout>
-            <ImageField source="avatar" title="name" label="Foto de perfil" />
+            <ImageField
+                source="attachments.src"
+                title="name"
+                label="Foto de perfil"
+            />
             <TextField source="id" />
             <TextField source="name" label="Usuario" className="bold-label" />
             <TextField source="nombre" label="Nombre" />
