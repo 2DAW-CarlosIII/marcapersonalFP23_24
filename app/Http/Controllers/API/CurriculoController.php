@@ -6,7 +6,7 @@ use App\Helpers\FilterHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Curriculo;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Response;
 use App\Http\Resources\CurriculoResource;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Gate;
@@ -97,7 +97,7 @@ class CurriculoController extends Controller
 
     public function descargarCurriculum($id){
         $curriculum = Curriculo::findOrFail($id);
-        $path = storage_path().'/'.'app'.'/curriculos/'.$curriculum->pdf_curriculo;
+        $path = storage_path('app/' . $curriculum->pdf_curriculum);
         if (file_exists($path)) {
             return Response::download($path);
         }
