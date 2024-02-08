@@ -57,6 +57,7 @@ Route::prefix('v1')->group(function () {
     Route::get('{tabla}/count', [CountController::class, 'count']);
     Route::put('reconocimientos/validar/{id}', [ReconocimientoController::class, 'validar'])
         ->where('id', '[0-9]+');
+    Route::get('curriculos/pdf/{id}', [CurriculoController::class, 'descargarCurriculo']);
 
     // emite un nuevo token
     Route::post('tokens', [TokenController::class, 'store']);

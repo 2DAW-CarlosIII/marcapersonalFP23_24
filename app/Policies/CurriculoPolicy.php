@@ -75,4 +75,12 @@ class CurriculoPolicy
     {
         //
     }
+
+    /**
+     * Quien puede descargar el currículo, de momento solo el propietario
+     */
+    public function descargarCurriculo(User $user, Curriculo $curriculo): bool
+    {
+        return $user->esPropietario($curriculo);
+    }
 }
