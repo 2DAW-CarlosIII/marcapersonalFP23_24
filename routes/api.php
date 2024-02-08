@@ -47,7 +47,11 @@ Route::prefix('v1')->group(function () {
     Route::apiResource('familias_profesionales', FamiliaProfesionalController::class)->parameters([
         'familias_profesionales' => 'familiaProfesional'
     ]);
+
     Route::apiResource('curriculos', CurriculoController::class);
+    Route::get("curriculos/pdf/{id}", [CurriculoController::class, "downloadCurriculo"])
+    ->where('id', '[0-9]+');
+
     Route::apiResource('actividades', ActividadController::class)->parameters([
         'actividades' => 'actividad'
     ]);

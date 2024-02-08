@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Curriculo;
 use Illuminate\Http\Request;
 use App\Http\Resources\CurriculoResource;
-use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Response;
 
 class CurriculoController extends Controller
 {
@@ -61,8 +61,21 @@ class CurriculoController extends Controller
      */
     public function update(Request $request, Curriculo $curriculo)
     {
+        $curriculoData = $request->all();
+        if($curriculoPDF = $request->file('pdf_curriculum')) {
+            $request->validate([
+                'pdf_curriculum' => 'required|mimes:pdf|max:5120', // Se permiten ficheros comprimidos de hasta 5 MB
+            ], [
+                'pdf_curriculum.required' => 'Por favor, selecciona un fichero.',
+                'pdf_curriculum.mimes' => 'El fichero debe ser un fichero PDF.',
+                'pdf_curriculum.max' => 'El tamaño del fichero no debe ser mayor a 5 MB.',
+            ]);
 
-        $curriculoData = json_decode($request->getContent(), true);
+            $curriculoData['pdf_curriculum'] = $curriculoPDF->store('curriculos');
+        } else {
+            $curriculoData['pdf_curriculum'] = $curriculo->pdf_curriculum;
+        }
+
         $curriculo->update($curriculoData);
 
         return new CurriculoResource($curriculo);
@@ -74,5 +87,16 @@ class CurriculoController extends Controller
     public function destroy(Curriculo $curriculo)
     {
         $curriculo->delete();
+    }
+
+    /**
+     * Download the specified curriculo from data base
+     */
+    public function downloadCurriculo($id) {
+        $path = storage_path().'/'.'app'.'/'.Curriculo::findOrFail(intval($id))->pdf_curriculum;
+        var_dump($path);
+        if (file_exists($path)) {
+            return Response::download($path);
+        }
     }
 }

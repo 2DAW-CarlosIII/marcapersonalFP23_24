@@ -14,7 +14,8 @@ import {
     SelectInput,
     ShowButton,
     Show,
-    SimpleShowLayout
+    SimpleShowLayout,
+    FileInput, FileField,
   } from 'react-admin';
 
 import { useRecordContext} from 'react-admin';
@@ -52,7 +53,6 @@ export const CurriculoList = () => {
             <FunctionField render={record => record && `${record.nombre} ${record.apellidos}`} />
             </ReferenceField>
             <TextField source="video_curriculum" />
-            <TextField source="pdf_curriculum" />
             <ShowButton />
             <EditButton />
         </Datagrid>
@@ -72,8 +72,10 @@ export const CurriculoEdit = () => (
         <EstudianteInput />
         <TextInput source="id" disabled />
         <TextInput source="video_curriculum" />
-        <TextInput source="pdf_curriculum" />
         <TextInput source="sobre_mi" />
+        <FileInput source="attachments" label="Archivo pdf curriculo">
+            <FileField source="src" title="title" />
+        </FileInput>
     </SimpleForm>
     </Edit>
 );
@@ -86,7 +88,6 @@ export const CurriculoShow = () => (
             </ReferenceField>
             <TextField source="id" />
             <TextField source="video_curriculum" />
-            <TextField source="pdf_curriculum" />
             <TextField source="sobre_mi" />
         </SimpleShowLayout>
     </Show>
@@ -97,7 +98,6 @@ export const CurriculoCreate = () => (
         <SimpleForm>
             <EstudianteInput />
             <TextInput source="video_curriculum" />
-            <TextInput source="pdf_curriculum" />
         </SimpleForm>
     </Create>
 );
