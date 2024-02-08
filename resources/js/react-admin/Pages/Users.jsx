@@ -18,9 +18,10 @@ import {
     SimpleShowLayout,
     DateInput,
     PasswordInput,
-} from 'react-admin';
+    FileInput,
+} from "react-admin";
 
-import { useMediaQuery } from '@mui/material';
+import { useMediaQuery } from "@mui/material";
 
 const DesdeInput = () => (
     <DateInput source="created_at" label="Fecha de alta desde" />
@@ -43,10 +44,8 @@ const UserFilters = [
     HastaInput(),
 ];
 
-
-
 export const UserList = () => {
-    const isSmall = useMediaQuery((theme) => theme.breakpoints.down('sm'));
+    const isSmall = useMediaQuery((theme) => theme.breakpoints.down("sm"));
 
     return (
         <List filters={UserFilters}>
@@ -55,7 +54,7 @@ export const UserList = () => {
                     primaryText={(record) => record.nombre}
                     secondaryText={(record) => record.email}
                     tertiaryText={(record) => record.created_at}
-                    linkType={(record) => (record.canEdit ? 'edit' : 'show')}
+                    linkType={(record) => (record.canEdit ? "edit" : "show")}
                 />
             ) : (
                 <Datagrid bulkActionButtons={false}>
@@ -73,10 +72,8 @@ export const UserList = () => {
     );
 };
 
-
-
 export const UserTitle = ({ record }) => {
-    return <span>User {record ? `"${record.nombre}"` : ''}</span>;
+    return <span>User {record ? `"${record.nombre}"` : ""}</span>;
 };
 
 export const UserEdit = () => (
@@ -87,7 +84,9 @@ export const UserEdit = () => (
             <TextInput source="nombre" label="Nombre" />
             <TextInput source="apellidos" label="Apellidos" />
             <TextInput source="email" label="Email" />
-            <ImageInput source="avatar" style={{ border: '2px dashed #ccc', padding: '10px', maxWidth: '180px' }}></ImageInput>
+            <ImageInput source="attachments" label="Foto de perfil">
+                <ImageField source="src" title="title" />
+            </ImageInput>
         </SimpleForm>
     </Edit>
 );
@@ -107,24 +106,37 @@ export const UserShow = () => (
     </Show>
 );
 export const UserCreate = () => {
-    const isSmall = useMediaQuery((theme) => theme.breakpoints.down('sm'));
-    const widthCreate = isSmall ? '100%' : '200px';
+    const isSmall = useMediaQuery((theme) => theme.breakpoints.down("sm"));
+    const widthCreate = isSmall ? "100%" : "200px";
 
     return (
         <Create>
             <SimpleForm>
-                <TextInput source="name" label="Usuario" style={{
-                    width: widthCreate,
-                }} />
-                <TextInput source="nombre" style={{
-                    width: widthCreate,
-                }} />
-                <TextInput source="apellidos" style={{
-                    width: widthCreate,
-                }} />
-                <PasswordInput source="password" style={{
-                    width:widthCreate,
-                }} />
+                <TextInput
+                    source="name"
+                    label="Usuario"
+                    style={{
+                        width: widthCreate,
+                    }}
+                />
+                <TextInput
+                    source="nombre"
+                    style={{
+                        width: widthCreate,
+                    }}
+                />
+                <TextInput
+                    source="apellidos"
+                    style={{
+                        width: widthCreate,
+                    }}
+                />
+                <PasswordInput
+                    source="password"
+                    style={{
+                        width: widthCreate,
+                    }}
+                />
                 <PasswordInput
                     source="confirmPassword"
                     label="Confirm Password"
@@ -133,14 +145,17 @@ export const UserCreate = () => {
                         width: widthCreate,
                     }}
                 />
-                <TextInput source="email" style={{
-                    width: widthCreate,
-                }} />
+                <TextInput
+                    source="email"
+                    style={{
+                        width: widthCreate,
+                    }}
+                />
                 <ImageInput
                     source="avatar"
                     style={{
-                        border: '2px dashed #ccc',
-                        padding: '10px',
+                        border: "2px dashed #ccc",
+                        padding: "10px",
                         width: widthCreate,
                     }}
                 />

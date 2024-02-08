@@ -23,19 +23,26 @@ class UserResource extends JsonResource
             'proyectos' => ProyectoResource::collection($this->proyectos),
             'competencias' => CompetenciaResource::collection($this->competencias),
             'ciclos' => CicloResource::collection($this->ciclos),
+            'attachments' => $this->avatar
+                ? [
+                    'src' => ('/storage/' . $this->avatar),
+                    'title' => $this->nombre
+                ]
+                : null,
         ]);
     }
 
-    public function getIdiomasFromUser() {
-      $array_idiomas = IdiomaResource::collection($this->idiomas)->resolve();
+    public function getIdiomasFromUser()
+    {
+        $array_idiomas = IdiomaResource::collection($this->idiomas)->resolve();
 
         $idiomasTransformados = array_map(function ($idioma) {
-          if(array_key_exists('pivot', $idioma)) {
-            $idioma['nivel'] = $idioma['pivot']['nivel'];
-            $idioma['certificado'] = $idioma['pivot']['certificado'];
-            unset($idioma['pivot']);
-          }
-          return $idioma;
+            if (array_key_exists('pivot', $idioma)) {
+                $idioma['nivel'] = $idioma['pivot']['nivel'];
+                $idioma['certificado'] = $idioma['pivot']['certificado'];
+                unset($idioma['pivot']);
+            }
+            return $idioma;
         }, $array_idiomas);
 
         return $idiomasTransformados;

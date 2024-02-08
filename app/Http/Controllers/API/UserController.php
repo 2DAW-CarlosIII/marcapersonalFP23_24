@@ -17,7 +17,7 @@ class UserController extends Controller
      * Create the controller instance.
      *
      * @return void
-    */
+     */
     public function __construct()
     {
         $this->middleware('auth:sanctum')->except(['index', 'show', 'store']);
@@ -59,7 +59,22 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        $userData = json_decode($request->getContent(), true);
+        $userData = $request->all();
+        if ($userAvatar = $request->file('avatar')) {
+            $request->validate(
+                [
+                    'avatar' => 'mimes:jpeg,png,jpg,gif,svg|max:4096'
+                ],
+                [
+                    'avatar.mimes' => 'El archivo debe ser una imagen',
+                    'avatar.max' => 'El tamaño máximo de la imagen es 2MB',
+                ]
+            );
+            $path = $userAvatar->store('repoAvatars', ['disk' => 'public']);
+            $userData['avatar'] = $path;
+        } else {
+            $userData['avatar'] = $user->avatar;
+        }
         $user->update($userData);
         return new UserResource($user);
     }

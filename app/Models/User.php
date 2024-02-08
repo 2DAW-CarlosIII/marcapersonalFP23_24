@@ -27,6 +27,7 @@ class User extends Authenticatable
         'password',
         'nombre',
         'apellidos',
+        'avatar',
     ];
 
     /**
@@ -78,7 +79,7 @@ class User extends Authenticatable
 
     /**
      * Get the actividades for the user.
-    */
+     */
 
     public function actividades(): HasManyThrough
     {
@@ -87,7 +88,7 @@ class User extends Authenticatable
 
     /**
      * Get the reconocimientos for the user.
-    */
+     */
 
     public function reconocimientos(): HasMany
     {
@@ -130,5 +131,4 @@ class User extends Authenticatable
         $dominio = explode('@', $this->email)[1];
         return $dominio;
     }
-
 }

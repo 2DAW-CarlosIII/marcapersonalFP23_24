@@ -1,15 +1,20 @@
 // in resources/js/react-admin/dataProvider.ts
-import { fetchUtils } from 'react-admin';
+import { fetchUtils } from "react-admin";
 import jsonServerProvider from "ra-data-json-server";
-import { stringify } from 'query-string';
+import { stringify } from "query-string";
 
 const httpClient = (url, options = {}) => {
     if (!options.headers) {
-        options.headers = new Headers({ Accept: 'application/json' });
+        options.headers = new Headers({ Accept: "application/json" });
     }
-    const token = localStorage.getItem('auth') ? JSON.parse(localStorage.getItem('auth')) : undefined
+    const token = localStorage.getItem("auth")
+        ? JSON.parse(localStorage.getItem("auth"))
+        : undefined;
     if (token) {
-        options.headers.set('Authorization', `${token.token_type} ${token.access_token}`);
+        options.headers.set(
+            "Authorization",
+            `${token.token_type} ${token.access_token}`
+        );
     }
     return fetchUtils.fetchJson(url, options);
 };
@@ -30,71 +35,103 @@ dataProvider.getMany = (resource, params) => {
     const query = {
         id: params.ids,
     };
-    const url = `${apiUrl}/${resource}?${stringify(query, {arrayFormat: 'bracket'})}`;
+    const url = `${apiUrl}/${resource}?${stringify(query, {
+        arrayFormat: "bracket",
+    })}`;
     return httpClient(url).then(({ json }) => ({ data: json }));
 };
 
 dataProvider.createToken = (email, password) => {
     return httpClient(`${apiUrl}/tokens`, {
-        method: 'POST',
+        method: "POST",
         body: JSON.stringify({ email, password }),
-        headers: new Headers({ 'Content-Type': 'application/json' }),
+        headers: new Headers({ "Content-Type": "application/json" }),
     });
 };
 
 dataProvider.deleteToken = () => {
     return httpClient(`${apiUrl}/tokens`, {
-        method: 'DELETE',
-        headers: new Headers({ 'Content-Type': 'application/json' }),
+        method: "DELETE",
+        headers: new Headers({ "Content-Type": "application/json" }),
     });
 };
 
 dataProvider.getIdentity = () => {
     return httpClient(`${apiUrl}/user`, {
-        method: 'GET',
-        headers: new Headers({ 'Content-Type': 'application/json' }),
+        method: "GET",
+        headers: new Headers({ "Content-Type": "application/json" }),
     });
 };
 
 dataProvider.postLogin = (email, password) => {
     return httpClient(`${apiUrl}/login`, {
-        method: 'POST',
+        method: "POST",
         body: JSON.stringify({ email, password }),
-        headers: new Headers({ 'Content-Type': 'application/json' }),
+        headers: new Headers({ "Content-Type": "application/json" }),
     });
 };
 
 dataProvider.postLogout = () => {
     return httpClient(`${apiUrl}/logout`, {
-        method: 'POST',
-        headers: new Headers({ 'Content-Type': 'application/json' }),
+        method: "POST",
+        headers: new Headers({ "Content-Type": "application/json" }),
     });
 };
 
 dataProvider.update = (resource, params) => {
-    if (resource !== 'proyectos' || !params.data.attachments) {
-        return originalDataProvider.update(resource, params);
-    }
-
-    let formData = new FormData();
-    for (const property in params.data) {
-        formData.append(`${property}`, `${params.data[property]}`);
-    }
-
-    formData.append('fichero', params.data.attachments.rawFile)
-    formData.append('_method', 'PUT')
-
-    const url = `${apiUrl}/${resource}/${params.id}`
-    return httpClient(url, {
-        method: 'POST',
-        body: formData,
-    })
-    .then(json => {
-        return {
-            ...json,
-            data: json.json
+    return new Promise((resolve, reject) => {
+        let formData = new FormData();
+        switch (resource) {
+            case "users":
+                for (const property in params.data) {
+                    formData.append(`${property}`, `${params.data[property]}`);
+                }
+                formData.append("avatar", params.data.attachments.rawFile);
+                formData.append("_method", "PUT");
+                const url = `${apiUrl}/${resource}/${params.id}`;
+                httpClient(url, {
+                    method: "POST",
+                    body: formData,
+                })
+                    .then((json) => {
+                        resolve({
+                            ...json,
+                            data: json.json,
+                        });
+                    })
+                    .catch((error) => {
+                        reject(error);
+                    });
+                break;
+            case "proyectos":
+                for (const property in params.data) {
+                    formData.append(`${property}`, `${params.data[property]}`);
+                }
+                formData.append("fichero", params.data.attachments.rawFile);
+                formData.append("_method", "PUT");
+                const url2 = `${apiUrl}/${resource}/${params.id}`;
+                httpClient(url2, {
+                    method: "POST",
+                    body: formData,
+                })
+                    .then((json) => {
+                        resolve({
+                            ...json,
+                            data: json.json,
+                        });
+                    })
+                    .catch((error) => {
+                        reject(error);
+                    });
+                break;
+            default:
+                originalDataProvider
+                    .update(resource, params)
+                    .then(resolve)
+                    .catch(reject);
+                break;
         }
-    })
-}
+    });
+};
 
 export { dataProvider };
