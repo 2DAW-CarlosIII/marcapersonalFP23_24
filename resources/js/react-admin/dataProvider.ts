@@ -30,7 +30,7 @@ dataProvider.getMany = (resource, params) => {
     const query = {
         id: params.ids,
     };
-    const url = `${apiUrl}/${resource}?${stringify(query, {arrayFormat: 'bracket'})}`;
+    const url = `${apiUrl}/${resource}?${stringify(query, { arrayFormat: 'bracket' })}`;
     return httpClient(url).then(({ json }) => ({ data: json }));
 };
 
@@ -71,37 +71,59 @@ dataProvider.postLogout = () => {
     });
 };
 
-dataProvider.update = (resource, params) => {
-    // Me da problemas si pongo (resource !== 'proyectos' )
-    if (!params.data.attachments) {
-        return originalDataProvider.update(resource, params);
-    }
+function checkResource(resource, params) {
+    //proyectos, users
+    const resources = ['proyectos', 'users'];
 
-    let formData = new FormData();
+    resources.map((value) => {
+        if (resource !== value || !params.data.attachments) {
+            return originalDataProvider.update(resource, params);
+        }
+    })
+
+}
+
+function appendData(resource, params, formData){
     for (const property in params.data) {
         formData.append(`${property}`, `${params.data[property]}`);
     }
 
-    if(resource == "users"){
-        formData.append('avatar', params.data.attachments.rawFile)
-    }
-    else if(resource == "proyectos"){
-        formData.append('fichero', params.data.attachments.rawFile)
+    switch(resource){
+        case 'users':
+            formData.append('avatar', params.data.attachments.rawFile)
+            break;
+        case 'proyectos':
+            formData.append('fichero', params.data.attachments.rawFile)
+            break;
     }
 
     formData.append('_method', 'PUT')
+}
+
+dataProvider.update = (resource, params) => {
+    // Me da problemas si pongo (resource !== 'proyectos' )
+
+
+    checkResource(resource, params);
+    // if (!params.data.attachments) {
+    //     return originalDataProvider.update(resource, params);
+    // }
+
+    let formData = new FormData();
+
+    appendData(resource, params, formData)
 
     const url = `${apiUrl}/${resource}/${params.id}`
     return httpClient(url, {
         method: 'POST',
         body: formData,
     })
-    .then(json => {
-        return {
-            ...json,
-            data: json.json
-        }
-    })
+        .then(json => {
+            return {
+                ...json,
+                data: json.json
+            }
+        })
 }
 
 export { dataProvider };
