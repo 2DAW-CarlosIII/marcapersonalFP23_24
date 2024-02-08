@@ -54,7 +54,6 @@ Route::prefix('v1')->group(function () {
     Route::apiResource('competencias', CompetenciaController::class);
     Route::apiResource('idiomas', IdiomaController::class);
 
-    Route::get('curriculos/pdf/{id}', [CurriculoController::class, 'descargaCurriculo']);
     Route::get('{tabla}/count', [CountController::class, 'count']);
     Route::put('reconocimientos/validar/{id}', [ReconocimientoController::class, 'validar'])
         ->where('id', '[0-9]+');

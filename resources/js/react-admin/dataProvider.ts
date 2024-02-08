@@ -70,9 +70,8 @@ dataProvider.postLogout = () => {
         headers: new Headers({ 'Content-Type': 'application/json' }),
     });
 };
-
-dataProvider.update = (resource, params) => {
-    if ((resource!=='curriculos' && 'proyectos')|| !params.data.attachments) {
+function updateCurriculo(resource, params){
+    if (!params.data.attachments) {
         return originalDataProvider.update(resource, params);
     }
 
@@ -82,6 +81,30 @@ dataProvider.update = (resource, params) => {
     }
 
     formData.append('pdf_curriculum', params.data.attachments.rawFile)
+
+    formData.append('_method', 'PUT')
+
+    const url = `${apiUrl}/${resource}/${params.id}`
+    return httpClient(url, {
+        method: 'POST',
+        body: formData,
+    })
+    .then(json => {
+        return {
+            ...json,
+            data: json.json
+        }
+    })
+}
+function updateProyecto(resource, params){
+    if (!params.data.attachments) {
+        return originalDataProvider.update(resource, params);
+    }
+
+    let formData = new FormData();
+    for (const property in params.data) {
+        formData.append(`${property}`, `${params.data[property]}`);
+    }
 
     formData.append('fichero', params.data.attachments.rawFile)
 
@@ -98,6 +121,17 @@ dataProvider.update = (resource, params) => {
             data: json.json
         }
     })
+}
+dataProvider.update = (resource, params) => {
+    if(!params.data.attachments) return originalDataProvider.update(resource, params);
+    switch (resource) {
+        case 'curriculos':
+            return updateCurriculo(resource, params);
+        case 'proyectos':
+            return updateProyecto(resource, params);
+        default:
+            return originalDataProvider.update(resource, params);
+    }
 }
 
 export { dataProvider };
