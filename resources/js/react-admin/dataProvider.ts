@@ -72,26 +72,34 @@ dataProvider.postLogout = () => {
 };
 
 dataProvider.update = (resource, params) => {
-    if ((resource !== 'proyectos' && resource !== 'curriculos') || !params.data.attachments) {
-        return originalDataProvider.update(resource, params);
+
+    let result;
+    switch (resource){
+        case 'proyectos':
+            result = updateInsideLogic('fichero', resource, params);
+            break;
+        case 'curriculos':
+            result = updateInsideLogic('pdf_curriculum',resource,params);
+            break;
+        default :
+            result = updateInsideLogic('none',resource,params);
+            break;
     }
 
-    let formData = new FormData();
+    return result;
+}
+
+function updateInsideLogic($_strAppend, resource, params){
+    if (params.data.attachments && $_strAppend !== 'none'){
+
+        let formData = new FormData();
         for (const property in params.data) {
             formData.append(`${property}`, `${params.data[property]}`);
         }
 
-    if(resource === 'proyectos'){
+        formData.append($_strAppend, params.data.attachments.rawFile);
 
-        formData.append('fichero', params.data.attachments.rawFile);
-
-    }else if(resource === 'curriculos'){
-
-        formData.append('pdf_curriculum', params.data.attachments.rawFile);
-
-    }
-
-    formData.append('_method', 'PUT')
+        formData.append('_method', 'PUT')
 
         const url = `${apiUrl}/${resource}/${params.id}`
         return httpClient(url, {
@@ -104,6 +112,10 @@ dataProvider.update = (resource, params) => {
                 data: json.json
             }
         })
+
+    }else{
+        return originalDataProvider.update(resource, params);
+    }
 }
 
 export { dataProvider };
