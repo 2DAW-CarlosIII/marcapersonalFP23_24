@@ -43,7 +43,7 @@ export const authProvider = {
             .then(( data ) => {
 
                 if (data.json.avatar) {
-                    data.json.avatar = data.json.attachments.src;
+                    data.json.avatar = '/storage/' + data.json.avatar;
 
                 } else {
                     data.json.avatar = 'http://acreditacion.educadgo.gob.mx/static/img/user.png';
