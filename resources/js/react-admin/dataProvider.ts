@@ -73,20 +73,20 @@ dataProvider.postLogout = () => {
 
 dataProvider.update = (resource, params) => {
 
-    let result;
+    let returnDeUpdate;
     switch (resource){
         case 'proyectos':
-            result = updateInsideLogic('fichero', resource, params);
+            returnDeUpdate = updateInsideLogic('fichero', resource, params);
             break;
         case 'curriculos':
-            result = updateInsideLogic('pdf_curriculum',resource,params);
+            returnDeUpdate = updateInsideLogic('pdf_curriculum',resource,params);
             break;
         default :
-            result = updateInsideLogic('none',resource,params);
+            returnDeUpdate = updateInsideLogic('none',resource,params);
             break;
     }
 
-    return result;
+    return returnDeUpdate;
 }
 
 function updateInsideLogic($_strAppend, resource, params){
