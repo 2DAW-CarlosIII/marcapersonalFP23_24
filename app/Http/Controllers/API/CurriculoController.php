@@ -79,7 +79,7 @@ class CurriculoController extends Controller
                 Storage::delete($curriculo['pdf_curriculum']);
             }
 
-            $path = $curriculoPDF->store('PDFs');
+            $path = $curriculoPDF->store('PDFs', ['disk' => 'local']);
             $curriculoData['pdf_curriculum'] = $path;
         } else {
             $curriculoData['pdf_curriculum'] = $curriculo->curriculum;
