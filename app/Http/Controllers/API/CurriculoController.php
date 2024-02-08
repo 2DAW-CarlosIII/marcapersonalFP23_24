@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Curriculo;
 use Illuminate\Http\Request;
 use App\Http\Resources\CurriculoResource;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Response;
 
@@ -97,8 +98,10 @@ class CurriculoController extends Controller
     public function descargarCurriculo($id)
     {
         $curriculo = Curriculo::findOrFail($id);
+        $this->authorize('descargarCurriculo', $curriculo);
+
         $path = storage_path().'/'.'app'.'/'.$curriculo->pdf_curriculum;
-        if (file_exists($path)) {
+        if ($curriculo->pdf_curriculum && file_exists($path)) {
             return Response::download($path);
         } else {
             return response()->json(['message' => 'El curriculum no existe'], 404);
