@@ -49,7 +49,7 @@ Route::prefix('v1')->group(function () {
     ]);
 
     Route::apiResource('curriculos', CurriculoController::class);
-    Route::get("curriculos/pdf/{id}", [CurriculoController::class, "downloadCurriculo"])
+    Route::get("curriculos/pdf/{id}", [CurriculoController::class, "downloadCurriculoPDF"])
     ->where('id', '[0-9]+');
 
     Route::apiResource('actividades', ActividadController::class)->parameters([

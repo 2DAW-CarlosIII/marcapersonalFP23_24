@@ -7,7 +7,10 @@ use App\Http\Controllers\Controller;
 use App\Models\Curriculo;
 use Illuminate\Http\Request;
 use App\Http\Resources\CurriculoResource;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
+
+use function PHPUnit\Framework\isNull;
 
 class CurriculoController extends Controller
 {
@@ -92,11 +95,14 @@ class CurriculoController extends Controller
     /**
      * Download the specified curriculo from data base
      */
-    public function downloadCurriculo($id) {
-        $path = storage_path().'/'.'app'.'/'.Curriculo::findOrFail($id)->pdf_curriculum;
-        var_dump($path);
-        if (file_exists($path)) {
-            return Response::download($path);
+    public function downloadCurriculoPDF($id) {
+        $curriculo = Curriculo::findOrFail($id);
+        if(isset($curriculo->pdf_curriculum)){
+            $this->authorize("downloadCurriculoPDF",$curriculo);
+            $path = storage_path().'/'.'app'.'/'.$curriculo->pdf_curriculum;
+            if (file_exists($path)) {
+                return Response::download($path);
+            }
         }
     }
 }

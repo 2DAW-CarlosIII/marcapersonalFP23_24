@@ -75,4 +75,11 @@ class CurriculoPolicy
     {
         //
     }
+
+    /**
+     * Determine whether the user can permanently download the model.
+     */
+    public function downloadCurriculoPDF(User $user, Curriculo $curriculo){
+        return $user->esPropietario($curriculo);
+    }
 }
