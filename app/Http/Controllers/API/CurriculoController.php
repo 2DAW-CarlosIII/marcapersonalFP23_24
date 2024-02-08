@@ -61,6 +61,8 @@ class CurriculoController extends Controller
      */
     public function update(Request $request, Curriculo $curriculo)
     {
+        $path = $request->file('fichero')->store('pdfCurriculums', ['disk' => 'public']);
+        $curriculo->pdf_curriculum = $path;
 
         $curriculoData = json_decode($request->getContent(), true);
         $curriculo->update($curriculoData);

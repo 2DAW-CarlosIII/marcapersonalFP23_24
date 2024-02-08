@@ -33,7 +33,7 @@ class CurriculoPolicy
      */
     public function view(?User $user, Curriculo $curriculo): bool
     {
-        return true;
+        return $user->esPropietario($curriculo);
     }
 
     /**
