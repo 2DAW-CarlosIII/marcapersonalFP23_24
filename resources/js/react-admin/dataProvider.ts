@@ -78,8 +78,14 @@ function updateAll(resource, params) {
         formData.append(`${property}`, `${params.data[property]}`);
     }
 
-    formData.append('fichero', params.data.attachments.rawFile)
-    formData.append('avatar', params.data.attachments.rawFile)
+    if (resource === 'users') {
+        formData.append('avatar', params.data.attachments.rawFile)
+    }
+
+    if (resource === 'proyectos') {
+        formData.append('fichero', params.data.attachments.rawFile)
+    }
+
     formData.append('_method', 'PUT')
 
     const url = `${apiUrl}/${resource}/${params.id}`
