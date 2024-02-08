@@ -2,6 +2,7 @@
 import { fetchUtils } from 'react-admin';
 import jsonServerProvider from "ra-data-json-server";
 import { stringify } from 'query-string';
+import { error } from 'console';
 
 const httpClient = (url, options = {}) => {
     if (!options.headers) {
@@ -71,21 +72,16 @@ dataProvider.postLogout = () => {
     });
 };
 
-dataProvider.update = (resource, params) => {
-    if (!params.data.attachments) {
-        return originalDataProvider.update(resource, params);
-    }
-
+dataProvider.createFormData = (params) => {
     let formData = new FormData();
     for (const property in params.data) {
         formData.append(`${property}`, `${params.data[property]}`);
     }
+    return formData;
+}
 
-    if (resource == "users"){
-        formData.append('avatar', params.data.attachments.rawFile)
-    } else if (resource == "proyectos"){
-        formData.append('fichero', params.data.attachments.rawFile)
-    }
+dataProvider.sendFormData = (resource, params, formData) => {
+
     formData.append('_method', 'PUT')
 
     const url = `${apiUrl}/${resource}/${params.id}`
@@ -99,6 +95,43 @@ dataProvider.update = (resource, params) => {
             data: json.json
         }
     })
+}
+
+dataProvider.update = (resource, params) => {
+    if (!params.data.attachments) {
+        return originalDataProvider.update(resource, params);
+    }
+
+    switch (resource) {
+        case 'users':
+            return dataProvider.updateUser(resource, params);
+        case 'proyectos':
+            return dataProvider.updateProyecto(resource, params);
+        default:
+            return originalDataProvider.update(resource, params);
+    }
+}
+
+dataProvider.updateUser = (resource, params) => {
+    if (!params.data.attachments) {
+        return originalDataProvider.update(resource, params);
+    } else {
+        let formData = dataProvider.createFormData(params);
+        formData.append('avatar', params.data.attachments.rawFile)
+        return dataProvider.sendFormData(resource, params, formData);
+        // Error: The dataProvider threw an error. It should return a rejected Promise instead.
+
+    }
+}
+
+dataProvider.updateProyecto = (resource, params) => {
+    if (!params.data.attachments) {
+        return originalDataProvider.update(resource, params);
+    } else {
+        let formData = dataProvider.createFormData(params);
+        formData.append('fichero', params.data.attachments.rawFile)
+        return dataProvider.sendFormData(resource, params, formData);
+    }
 }
 
 export { dataProvider };
