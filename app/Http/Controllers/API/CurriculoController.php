@@ -93,7 +93,7 @@ class CurriculoController extends Controller
      * Download the specified curriculo from data base
      */
     public function downloadCurriculo($id) {
-        $path = storage_path().'/'.'app'.'/'.Curriculo::findOrFail(intval($id))->pdf_curriculum;
+        $path = storage_path().'/'.'app'.'/'.Curriculo::findOrFail($id)->pdf_curriculum;
         var_dump($path);
         if (file_exists($path)) {
             return Response::download($path);
