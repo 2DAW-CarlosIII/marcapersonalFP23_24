@@ -25,7 +25,7 @@ class UserResource extends JsonResource
             'ciclos' => CicloResource::collection($this->ciclos),
             'attachments' => $this->avatar
                 ? [
-                    'src' => ('/storage/app/public/' . $this->avatar),
+                    'src' => ('/storage/' . $this->avatar),
                     'title' => 'Foto de perfil'
                   ]
                 : null,

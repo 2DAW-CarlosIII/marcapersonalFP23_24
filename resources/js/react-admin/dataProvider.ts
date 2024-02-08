@@ -72,12 +72,20 @@ dataProvider.postLogout = () => {
 };
 
 dataProvider.update = (resource, params) => {
-    if (resource === 'users' && params.data.attachments) {
+    if (params.data.attachments) {
         let formData = new FormData();
         for (const property in params.data) {
             formData.append(property, params.data[property]);
         }
-        formData.append('avatar', params.data.attachments.rawFile);
+        switch (resource) {
+            case 'users':
+                formData.append('avatar', params.data.attachments.rawFile);
+                break;
+            case 'proyectos':
+                formData.append('fichero', params.data.attachments.rawFile);
+                break;
+        }
+
         formData.append('_method', 'PUT');
 
         const url = `${apiUrl}/${resource}/${params.id}`;
@@ -92,29 +100,8 @@ dataProvider.update = (resource, params) => {
                 data: json.json
             };
         });
-    } else if (resource === 'proyectos' && params.data.attachments) {
-    let formData = new FormData();
-    for (const property in params.data) {
-        formData.append(`${property}`, `${params.data[property]}`);
     }
 
-    formData.append('fichero', params.data.attachments.rawFile)
-    formData.append('_method', 'PUT')
-
-    const url = `${apiUrl}/${resource}/${params.id}`
-    return httpClient(url, {
-        method: 'POST',
-        body: formData,
-    })
-    .then(json => {
-        return {
-            ...json,
-            data: json.json
-        }
-    })
-} else {
-        // If conditions are not met, fall back to the original behavior
-        return originalDataProvider.update(resource, params);
-}
-}
+    return originalDataProvider.update(resource, params);
+};
 export { dataProvider };
