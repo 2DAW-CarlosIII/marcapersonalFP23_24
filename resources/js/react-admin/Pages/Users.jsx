@@ -89,9 +89,9 @@ export const UserEdit = () => (
             <TextInput source="nombre" label="Nombre" />
             <TextInput source="apellidos" label="Apellidos" />
             <TextInput source="email" label="Email" />
-            <FileInput source="attachments" label="Archivo de Avatar" >
-                <FileField source="src" title="title" />
-            </FileInput>
+            <ImageInput source="attachments" label="Archivo de Avatar" style={{ border: '2px dashed #ccc', padding: '10px', maxWidth: '180px' }} >
+                <ImageField source="src" title="title" />
+            </ImageInput>
         </SimpleForm>
     </Edit>
 );
