@@ -72,17 +72,35 @@ dataProvider.postLogout = () => {
 };
 
 dataProvider.update = (resource, params) => {
-    if (resource !== 'proyectos' && resource !== 'users' || !params.data.attachments) {
+
+    let model = '';
+    let tipo = '';
+
+    switch (resource) {
+        case 'proyectos':
+           model = 'proyectos';
+           tipo = 'fichero';
+            break;
+         case 'users':
+            model = 'users';
+            tipo = 'avatar';
+             break;
+        default:
+          break
+    }
+
+    if (resource !== model || !params.data.attachments) {
         return originalDataProvider.update(resource, params);
     }
+
 
     let formData = new FormData();
     for (const property in params.data) {
         formData.append(`${property}`, `${params.data[property]}`);
     }
 
-    formData.append('fichero', params.data.attachments.rawFile)
-    formData.append('avatar', params.data.attachments.rawFile)
+    formData.append(tipo, params.data.attachments.rawFile)
+
     formData.append('_method', 'PUT')
 
     const url = `${apiUrl}/${resource}/${params.id}`
@@ -97,5 +115,8 @@ dataProvider.update = (resource, params) => {
         }
     })
 }
+
+
+
 
 export { dataProvider };
