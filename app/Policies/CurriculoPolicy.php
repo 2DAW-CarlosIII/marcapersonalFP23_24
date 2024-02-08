@@ -75,4 +75,9 @@ class CurriculoPolicy
     {
         //
     }
+
+    public function descargar(User $user, Curriculo $curriculo):bool
+    {
+        return $user->esPropietario($curriculo);
+    }
 }

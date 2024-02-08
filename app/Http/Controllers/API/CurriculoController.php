@@ -94,8 +94,10 @@ class CurriculoController extends Controller
 
     public function descargar($id)
     {
+
         $curriculo = Curriculo::find($id);
-        $path = storage_path().'/'.'app'.'curriculos'. $curriculo->pdf_curriculum;
+        $this->authorize('descargar', $curriculo);
+        $path = storage_path().'/'.'app'.'/'. $curriculo->pdf_curriculum;
     if (file_exists($path)) {
         return Response::download($path);
     }
