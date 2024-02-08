@@ -65,6 +65,7 @@ class CurriculoController extends Controller
     {
 
         $curriculoData = $request->all();
+        $pathExistente = $curriculo->pdf_curriculum;
 
         if($curriculoPDF = $request->file('pdf_curriculum')) {
             $request->validate([
@@ -75,14 +76,18 @@ class CurriculoController extends Controller
                 'pdf_curriculum.max' => 'El tamaño del archivo no debe ser mayor a 5 MB.',
             ]);
 
-            if ($curriculo['pdf_curriculum']){
-                Storage::delete($curriculo['pdf_curriculum']);
+            if ($pathExistente){
+                Storage::delete($pathExistente);
             }
 
             $path = $curriculoPDF->store('PDFs', ['disk' => 'local']);
             $curriculoData['pdf_curriculum'] = $path;
         } else {
-            $curriculoData['pdf_curriculum'] = $curriculo->curriculum;
+            if ($pathExistente){
+                Storage::delete($pathExistente);
+                $pathExistente = null;
+            }
+            $curriculoData['pdf_curriculum'] = $pathExistente;
         }
 
         $curriculo->update($curriculoData);
