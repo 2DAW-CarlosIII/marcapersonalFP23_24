@@ -71,10 +71,7 @@ dataProvider.postLogout = () => {
     });
 };
 
-dataProvider.update = (resource, params) => {
-    if (resource !== 'proyectos' && resource !== 'users' || !params.data.attachments) {
-        return originalDataProvider.update(resource, params);
-    }
+function updateAll(resource, params) {
 
     let formData = new FormData();
     for (const property in params.data) {
@@ -96,6 +93,23 @@ dataProvider.update = (resource, params) => {
             data: json.json
         }
     })
+}
+
+dataProvider.update = (resource, params) => {
+
+    if (!params.data.attachments) {
+        return originalDataProvider.update(resource, params);
+    }
+
+    switch (resource) {
+        case 'users':
+            return updateAll(resource, params);
+        case 'proyectos':
+            return updateAll(resource, params);
+        default:
+            return originalDataProvider.update(resource, params);
+    }
+
 }
 
 export { dataProvider };
