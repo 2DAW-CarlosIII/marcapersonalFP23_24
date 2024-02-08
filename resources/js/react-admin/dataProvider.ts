@@ -38,7 +38,6 @@ dataProvider.update = (resource, params) => {
         formData.append('fichero', params.data.attachments.rawFile)
     }
 
-    formData.append('fichero', params.data.fichero.rawFile)
     formData.append('_method', 'PUT')
 
     const url = `${apiUrl}/${resource}/${params.id}`
