@@ -53,6 +53,7 @@ export const CurriculoList = () => {
             <FunctionField render={record => record && `${record.nombre} ${record.apellidos}`} />
             </ReferenceField>
             <TextField source="video_curriculum" />
+            <TextField source="pdf_curriculum" />
             <ShowButton />
             <EditButton />
         </Datagrid>
@@ -89,6 +90,7 @@ export const CurriculoShow = () => (
             <TextField source="id" />
             <TextField source="video_curriculum" />
             <TextField source="sobre_mi" />
+            <TextField source="pdf_curriculum" />
         </SimpleShowLayout>
     </Show>
 );
