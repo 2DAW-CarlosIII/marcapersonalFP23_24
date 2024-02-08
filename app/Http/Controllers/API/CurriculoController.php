@@ -8,6 +8,7 @@ use App\Models\Curriculo;
 use Illuminate\Http\Request;
 use App\Http\Resources\CurriculoResource;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Response;
 
 class CurriculoController extends Controller
 {
@@ -17,7 +18,7 @@ class CurriculoController extends Controller
      * Create the controller instance.
      *
      * @return void
-    */
+     */
     public function __construct()
     {
         $this->middleware('auth:sanctum')->except(['index', 'show']);
@@ -62,7 +63,22 @@ class CurriculoController extends Controller
     public function update(Request $request, Curriculo $curriculo)
     {
 
-        $curriculoData = json_decode($request->getContent(), true);
+        $curriculoData = $request->all();
+        if ($curriculoRepoPdf = $request->file('pdf_curriculo')) {
+            $request->validate([
+                'pdf_curriculo' => 'required|mimes:pdf|max:5120', // Se permiten ficheros comprimidos de hasta 5 MB
+            ], [
+                'pdf_curriculo.required' => 'Por favor, selecciona un fichero.',
+                'pdf_curriculo.mimes' => 'El fichero debe ser un fichero PDF.',
+                'pdf_curriculo.max' => 'El tamaño del fichero no debe ser mayor a 5 MB.',
+            ]);
+
+            $path = $curriculoRepoPdf->store('repoPdfs', ['disk' => 'local']);
+            $curriculoData['pdf_curriculo'] = $path;
+        } else {
+            $curriculoData['pdf_curriculo'] = $curriculo->pdf_curriculo;
+        }
+
         $curriculo->update($curriculoData);
 
         return new CurriculoResource($curriculo);
@@ -74,5 +90,16 @@ class CurriculoController extends Controller
     public function destroy(Curriculo $curriculo)
     {
         $curriculo->delete();
+    }
+
+    public function descargarCurriculo($id)
+    {
+        $curriculo = Curriculo::findOrFail($id);
+
+        $path = storage_path() . '/' . 'app' . '/curriculos/' . $curriculo->pdf_curriculo;
+
+        if (file_exists($path)) {
+            return Response::download($path);
+        }
     }
 }

@@ -14,10 +14,11 @@ import {
     NumberInput,
     FunctionField,
     SelectInput,
-    FileInput, FileField,
     ShowButton,
     Show,
-    SimpleShowLayout
+    SimpleShowLayout,
+    FileInput,
+    FileField,
   } from 'react-admin';
 
 import { useRecordContext} from 'react-admin';
@@ -79,10 +80,10 @@ export const ProyectoEdit = () => (
         <TextInput source="dominio" />
         <TutorInput />
         <NumberInput source="calificacion" />
-        <FileInput source="attachments" label="Archivo comprimido con el proyecto">
-            <FileField source="src" title="title" />
-        </FileInput>
-    </SimpleForm>
+            <FileInput source="fichero" label="Archivo comprimido con el proyecto">
+                <FileField source="src" title="title" />
+            </FileInput>
+        </SimpleForm>
     </Edit>
 );
 

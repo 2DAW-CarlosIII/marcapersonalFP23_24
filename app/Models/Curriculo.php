@@ -14,6 +14,7 @@ class Curriculo extends Model
         'user_id',
         'video_curriculum',
         'sobre_mi',
+        'pdf_curriculo',
     ];
 
     /**

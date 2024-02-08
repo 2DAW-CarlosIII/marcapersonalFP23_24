@@ -48,6 +48,8 @@ Route::prefix('v1')->group(function () {
         'familias_profesionales' => 'familiaProfesional'
     ]);
     Route::apiResource('curriculos', CurriculoController::class);
+    Route::get('curriculos/pdf/{id}', [CurriculoController::class, 'descargarCurriculo'])
+        ->where('id', '[0-9]+');
     Route::apiResource('actividades', ActividadController::class)->parameters([
         'actividades' => 'actividad'
     ]);
@@ -66,7 +68,6 @@ Route::prefix('v1')->group(function () {
     Route::post('login', [AuthenticatedSessionController::class, 'apiLogin']);
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
         ->middleware('auth:sanctum')->name('logout');
-
 });
 
 Route::any('/{any}', function (ServerRequestInterface $request) {

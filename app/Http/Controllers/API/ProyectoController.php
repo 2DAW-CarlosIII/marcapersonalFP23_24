@@ -64,20 +64,9 @@ class ProyectoController extends Controller
     {
         $proyectoData = $request->all();
         if($proyectoRepoZip = $request->file('fichero')) {
-            $request->validate([
-                'fichero' => 'required|mimes:zip,rar,bz,bz2,7z|max:5120', // Se permiten ficheros comprimidos de hasta 5 MB
-            ], [
-                'fichero.required' => 'Por favor, selecciona un fichero.',
-                'fichero.mimes' => 'El fichero debe ser un fichero ZIP.',
-                'fichero.max' => 'El tamaño del fichero no debe ser mayor a 5 MB.',
-            ]);
-
-            $path = $proyectoRepoZip->store('repoZips', ['disk' => 'public']);
+            $path = $proyectoRepoZip->store('public/repoZips');
             $proyectoData['fichero'] = $path;
-        } else {
-            $proyectoData['fichero'] = $proyecto->fichero;
         }
-
         $proyecto->update($proyectoData);
 
         return new ProyectoResource($proyecto);
