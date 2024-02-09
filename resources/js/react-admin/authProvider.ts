@@ -41,6 +41,7 @@ export const authProvider = {
     getIdentity: () => {
         return dataProvider.getIdentity()
             .then(( data ) => {
+                data.json.avatar = '/storage/' + data.json.avatar
                 return data.json
             })
             .catch(() => {
