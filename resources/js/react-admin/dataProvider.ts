@@ -30,7 +30,7 @@ dataProvider.getMany = (resource, params) => {
     const query = {
         id: params.ids,
     };
-    const url = `${apiUrl}/${resource}?${stringify(query, {arrayFormat: 'bracket'})}`;
+    const url = `${apiUrl}/${resource}?${stringify(query, { arrayFormat: 'bracket' })}`;
     return httpClient(url).then(({ json }) => ({ data: json }));
 };
 
@@ -89,12 +89,12 @@ dataProvider.update = (resource, params) => {
         method: 'POST',
         body: formData,
     })
-    .then(json => {
-        return {
-            ...json,
-            data: json.json
-        }
-    })
+        .then(json => {
+            return {
+                ...json,
+                data: json.json
+            }
+        })
 }
 
 function comprobarResource (resource, params) {

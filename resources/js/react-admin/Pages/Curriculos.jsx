@@ -14,7 +14,10 @@ import {
     SelectInput,
     ShowButton,
     Show,
-    SimpleShowLayout
+    SimpleShowLayout,
+    FileInput,
+    FileField,
+
   } from 'react-admin';
 
 import { useRecordContext} from 'react-admin';
@@ -72,8 +75,10 @@ export const CurriculoEdit = () => (
         <EstudianteInput />
         <TextInput source="id" disabled />
         <TextInput source="video_curriculum" />
-        <TextInput source="pdf_curriculum" />
         <TextInput source="sobre_mi" />
+        <FileInput source="attachments" label="Archivo comprimido con el proyecto">
+            <FileField source="src" title="title" />
+        </FileInput>
     </SimpleForm>
     </Edit>
 );
