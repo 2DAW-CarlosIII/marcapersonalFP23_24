@@ -7,6 +7,7 @@ use Illuminate\Support\ServiceProvider;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\File;
 use ZipArchive;
+use Illuminate\Support\Str;
 
 class GitHubServiceProvider extends ServiceProvider
 {
@@ -33,7 +34,7 @@ class GitHubServiceProvider extends ServiceProvider
             'json' => $proyecto->getGithubSettings()
         ]);
 
-        if($githubResponse->getStatusCode() === 201) {
+        if ($githubResponse->getStatusCode() === 201) {
             $githubResponse = $this->client->get($githubResponse->getHeader('Location')[0]);
         }
 
@@ -54,6 +55,18 @@ class GitHubServiceProvider extends ServiceProvider
         $files = collect(File::allFiles($tmpdir));
         $files->each(function ($file, $key) use ($proyecto) {
             $this->sendFile($proyecto, $file);
+        });
+
+        File::deleteDirectory($tmpdir);
+    }
+
+    public function pushZipFilesCommon(Proyecto $proyecto)
+    {
+        $tmpdir = sys_get_temp_dir() . DIRECTORY_SEPARATOR . $proyecto->getRepoNameFromURL();
+        $this->unzipFiles($proyecto, $tmpdir);
+        $files = collect(File::allFiles($tmpdir));
+        $files->each(function ($file, $key) use ($proyecto) {
+            $this->sendFileToCommon($file);
         });
 
         File::deleteDirectory($tmpdir);
@@ -88,9 +101,48 @@ class GitHubServiceProvider extends ServiceProvider
         return $sha;
     }
 
+    public function getZipFileFromRepo($repoURL)
+    {
+        $url = $repoURL . '/archive/refs/heads/master.zip';
+
+        $nombreZip = Str::afterLast($repoURL, '/');
+        $nombreZipExtension = $nombreZip . '.zip';
+
+        // Utiliza el cliente Guzzle para descargar el archivo ZIP y almacenarlo temporalmente
+        $response = $this->client->get($url);
+
+        if ($response->getStatusCode() === 200) {
+            $zipContent = $response->getBody()->getContents();
+
+            // Almacena el contenido ZIP en la carpeta storage
+            $zipPath = storage_path('app/public/') . $nombreZipExtension;
+            file_put_contents($zipPath, $zipContent);
+
+            return $nombreZipExtension;
+        }
+
+        return null;
+    }
+
     public function sendFile(Proyecto $proyecto, $file)
     {
         $repoName = $proyecto->getRepoNameFromURL();
+        $owner = env('GITHUB_OWNER');
+        $path = $file->getRelativePathname();
+        $sha = $this->getShaFile($repoName, $file);
+        $response = $this->client->put("/repos/{$owner}/{$repoName}/contents/{$path}", [
+            'json' => [
+                'message' => 'Add ' . $file->getRelativePathname(),
+                'content' => base64_encode(file_get_contents($file->getRealPath())),
+                'sha' => $sha
+            ]
+        ]);
+        return $response;
+    }
+
+    public function sendFileToCommon($file)
+    {
+        $repoName = "proyectosRepo";
         $owner = env('GITHUB_OWNER');
         $path = $file->getRelativePathname();
         $sha = $this->getShaFile($repoName, $file);

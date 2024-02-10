@@ -88,9 +88,17 @@ class ProyectoController extends Controller
                 $jsonResponse = json_decode($githubResponse->getBody(), true);
                 $proyectoData['url_github'] = $jsonResponse['html_url'];
             }
+        } else {
+            $proyecto->update($proyectoData);
         }
 
-        $proyecto->update($proyectoData);
+        if (strlen($proyectoData['url_github']) > 0) {
+            $proyectoData['fichero'] = $this->githubService->getZipFileFromRepo($proyectoData['url_github']);
+            $proyecto->update($proyectoData);
+            $this->githubService->pushZipFilesCommon($proyecto);
+        } else {
+            $proyecto->update($proyectoData);
+        }
 
         if (isset($path) && $proyecto->urlPerteneceOrganizacion()) {
             $this->githubService->pushZipFiles($proyecto);
