@@ -92,16 +92,15 @@ class ProyectoController extends Controller
             $proyecto->update($proyectoData);
         }
 
-        if (strlen($proyectoData['url_github']) > 0) {
+        $proyecto->update($proyectoData);
+        if (isset($path) && $proyecto->urlPerteneceOrganizacion()) {
+            $this->githubService->pushZipFiles($proyecto);
+        } else if (strlen($proyectoData['url_github']) > 0) {
             $proyectoData['fichero'] = $this->githubService->getZipFileFromRepo($proyectoData['url_github']);
             $proyecto->update($proyectoData);
             $this->githubService->pushZipFilesCommon($proyecto);
         } else {
             $proyecto->update($proyectoData);
-        }
-
-        if (isset($path) && $proyecto->urlPerteneceOrganizacion()) {
-            $this->githubService->pushZipFiles($proyecto);
         }
 
         // $this->githubService->deleteRepo($proyecto);
