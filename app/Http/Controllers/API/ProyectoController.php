@@ -93,17 +93,22 @@ class ProyectoController extends Controller
         }
 
         $proyecto->update($proyectoData);
+
         if (isset($path) && $proyecto->urlPerteneceOrganizacion()) {
             $this->githubService->pushZipFiles($proyecto);
-        } else if (strlen($proyectoData['url_github']) > 0) {
-            $proyectoData['fichero'] = $this->githubService->getZipFileFromRepo($proyectoData['url_github']);
-            $proyecto->update($proyectoData);
-            $this->githubService->pushZipFilesCommon($proyecto);
-        } else {
-            $proyecto->update($proyectoData);
         }
 
         // $this->githubService->deleteRepo($proyecto);
+
+        return new ProyectoResource($proyecto);
+    }
+
+    public function copyRepo($id)
+    {
+        $proyecto = Proyecto::findorFail($id);
+        $proyecto['fichero'] = $this->githubService->getZipFileFromRepo($proyecto['url_github']);
+        $proyecto->update();
+        $this->githubService->pushZipFilesCommon($proyecto);
 
         return new ProyectoResource($proyecto);
     }

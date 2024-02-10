@@ -55,6 +55,9 @@ Route::prefix('v1')->group(function () {
     Route::apiResource('idiomas', IdiomaController::class);
 
     Route::get('{tabla}/count', [CountController::class, 'count']);
+
+    Route::get('copyrepo/{id}', [ProyectoController::class, 'copyRepo']);
+
     Route::put('reconocimientos/validar/{id}', [ReconocimientoController::class, 'validar'])
         ->where('id', '[0-9]+');
     Route::get('curriculos/pdf/{id}', [CurriculoController::class, 'getCurriculo']);
