@@ -56,7 +56,7 @@ Route::prefix('v1')->group(function () {
 
     Route::get('{tabla}/count', [CountController::class, 'count']);
 
-    Route::get('copyrepo/{id}', [ProyectoController::class, 'copyRepo']);
+    Route::post('copyrepo/{user}/{reponame}', [ProyectoController::class, 'copyRepo']);
 
     Route::put('reconocimientos/validar/{id}', [ReconocimientoController::class, 'validar'])
         ->where('id', '[0-9]+');

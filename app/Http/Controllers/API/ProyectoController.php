@@ -9,6 +9,7 @@ use App\Models\Proyecto;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Providers\GitHubServiceProvider;
+use Illuminate\Support\Facades\File;
 
 class ProyectoController extends Controller
 {
@@ -18,7 +19,7 @@ class ProyectoController extends Controller
 
     public function __construct(GitHubServiceProvider $githubService)
     {
-        $this->middleware('auth:sanctum')->except(['index', 'show']);
+        $this->middleware('auth:sanctum')->except(['index', 'show', 'copyRepo']);
         $this->authorizeResource(Proyecto::class, 'proyecto');
         $this->githubService = $githubService;
     }
@@ -104,14 +105,18 @@ class ProyectoController extends Controller
         return new ProyectoResource($proyecto);
     }
 
-    public function copyRepo($id)
+    public function copyRepo($user, $reponame)
     {
-        $proyecto = Proyecto::findorFail($id);
+        $proyecto = [];
+        $proyecto['nombre'] = $reponame;
+        $proyecto['url_github'] = "https://github.com/{$user}/{$reponame}";
         $proyecto['fichero'] = $this->githubService->getZipFileFromRepo($proyecto['url_github']);
-        $proyecto->update();
+        $proyecto = Proyecto::create($proyecto);
         $url = "proyectosRepo";
         $this->githubService->pushZipFiles($proyecto,$url);
-
+        File::delete(storage_path('app/public/') . $proyecto['fichero']);
+        //File::deleteDirectory(storage_path('app/public/') . $proyecto['fichero']);
+        $proyecto->delete();
         return new ProyectoResource($proyecto);
     }
 
