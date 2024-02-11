@@ -95,7 +95,8 @@ class ProyectoController extends Controller
         $proyecto->update($proyectoData);
 
         if (isset($path) && $proyecto->urlPerteneceOrganizacion()) {
-            $this->githubService->pushZipFiles($proyecto);
+            $url = $proyecto->getRepoNameFromURL();
+            $this->githubService->pushZipFiles($proyecto, $url);
         }
 
         // $this->githubService->deleteRepo($proyecto);
@@ -108,7 +109,8 @@ class ProyectoController extends Controller
         $proyecto = Proyecto::findorFail($id);
         $proyecto['fichero'] = $this->githubService->getZipFileFromRepo($proyecto['url_github']);
         $proyecto->update();
-        $this->githubService->pushZipFilesCommon($proyecto);
+        $url = "proyectosRepo";
+        $this->githubService->pushZipFiles($proyecto,$url);
 
         return new ProyectoResource($proyecto);
     }

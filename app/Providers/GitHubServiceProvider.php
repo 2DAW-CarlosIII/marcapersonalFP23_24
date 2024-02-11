@@ -48,25 +48,13 @@ class GitHubServiceProvider extends ServiceProvider
         return $this->client->delete("/repos/{$owner}/{$repo}");
     }
 
-    public function pushZipFiles(Proyecto $proyecto)
+    public function pushZipFiles(Proyecto $proyecto, $url)
     {
         $tmpdir = sys_get_temp_dir() . DIRECTORY_SEPARATOR . $proyecto->getRepoNameFromURL();
         $this->unzipFiles($proyecto, $tmpdir);
         $files = collect(File::allFiles($tmpdir));
-        $files->each(function ($file, $key) use ($proyecto) {
-            $this->sendFile($proyecto, $file);
-        });
-
-        File::deleteDirectory($tmpdir);
-    }
-
-    public function pushZipFilesCommon(Proyecto $proyecto)
-    {
-        $tmpdir = sys_get_temp_dir() . DIRECTORY_SEPARATOR . $proyecto->getRepoNameFromURL();
-        $this->unzipFiles($proyecto, $tmpdir);
-        $files = collect(File::allFiles($tmpdir));
-        $files->each(function ($file, $key) use ($proyecto) {
-            $this->sendFileToCommon($file);
+        $files->each(function ($file, $key) use ($proyecto, $url) {
+            $this->sendFile($proyecto, $file, $url);
         });
 
         File::deleteDirectory($tmpdir);
@@ -124,25 +112,9 @@ class GitHubServiceProvider extends ServiceProvider
         return null;
     }
 
-    public function sendFile(Proyecto $proyecto, $file)
+    public function sendFile(Proyecto $proyecto, $file, $url)
     {
-        $repoName = $proyecto->getRepoNameFromURL();
-        $owner = env('GITHUB_OWNER');
-        $path = $file->getRelativePathname();
-        $sha = $this->getShaFile($repoName, $file);
-        $response = $this->client->put("/repos/{$owner}/{$repoName}/contents/{$path}", [
-            'json' => [
-                'message' => 'Add ' . $file->getRelativePathname(),
-                'content' => base64_encode(file_get_contents($file->getRealPath())),
-                'sha' => $sha
-            ]
-        ]);
-        return $response;
-    }
-
-    public function sendFileToCommon($file)
-    {
-        $repoName = "proyectosRepo";
+        $repoName = $url;
         $owner = env('GITHUB_OWNER');
         $path = $file->getRelativePathname();
         $sha = $this->getShaFile($repoName, $file);
