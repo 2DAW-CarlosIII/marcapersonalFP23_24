@@ -81,22 +81,24 @@ class ProyectoController extends Controller
             $proyectoData['fichero'] = $proyecto->fichero;
         }
 
-        if (isset($path) && strlen($proyecto->url_github) == 0) {
+        if ((isset($path) && strlen($proyecto->url_github) == 0) || (isset($path) && $proyecto->urlPerteneceOrganizacion())) {
+
             $proyectoData['url_github'] = env("GITHUB_PROYECTOS_REPO");
             $proyecto->update($proyectoData);
-
             $ciclos = $proyecto->ciclos;
+
+            $originalFileName = $proyectoRepoZip->getClientOriginalName();
+            $lastDotPosition = strrpos($originalFileName, '.');
+            $fileNameWithoutExt = substr($originalFileName, 0, $lastDotPosition);
 
             foreach ($ciclos as $ciclo) {
                 $ruta = $ciclo->nombre . "/" . date('Y');
                 $this->githubService->pushZipFiles($proyecto, $ruta);
             }
+            $proyectoData['url_github'] = env("GITHUB_PROYECTOS_REPO") . "/tree/master/" . $ruta . "/" . $fileNameWithoutExt;
+            $proyecto->update($proyectoData);
         } else {
             $proyecto->update($proyectoData);
-        }
-
-        if (isset($path) && $proyecto->urlPerteneceOrganizacion()) {
-            $this->githubService->pushZipFiles($proyecto, $ruta);
         }
 
         // $this->githubService->deleteRepo($proyecto);
