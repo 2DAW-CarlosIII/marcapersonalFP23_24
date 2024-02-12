@@ -42,8 +42,8 @@ export const EmpresaList = () => {
             <Datagrid bulkActionButtons={false} >
               <TextField source="id" />
               <TextField source="nif" />
+              <TextField source="nombre" />
               <TextField source="email" />
-              <TextField source="token" />
               <ShowButton />
               <EditButton />
             </Datagrid>
@@ -64,8 +64,8 @@ export const EmpresaEdit = () => (
         <SimpleForm>
             <NumberInput label="ID" source="id" />
             <TextInput source="nif" />
+            <TextInput source="nombre" />
             <TextInput source="email" />
-            <TextInput source="token" />
         </SimpleForm>
     </Edit>
 
@@ -77,8 +77,8 @@ export const EmpresaShow = () => (
         <SimpleShowLayout>
             <NumberField label="ID" source="id" />
             <TextField source="nif" />
+            <TextField source="nombre" />
             <TextField source="email" />
-            <TextField source="token" />
             <ShowButton />
             <EditButton />
         </SimpleShowLayout>
@@ -90,8 +90,8 @@ export const EmpresaCreate = () => (
         <SimpleForm>
             <NumberInput label="ID" source="id" />
             <TextInput source="nif" />
+            <TextInput source="nombre" />
             <TextInput source="email" />
-            <TextInput source="token" />
         </SimpleForm>
     </Create>
 );
