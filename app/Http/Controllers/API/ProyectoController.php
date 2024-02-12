@@ -5,13 +5,16 @@ namespace App\Http\Controllers\API;
 use App\Helpers\FilterHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ProyectoResource;
+use App\Models\Ciclo;
 use App\Models\Proyecto;
+use App\Models\ProyectoCiclo;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Providers\GitHubServiceProvider;
 
 class ProyectoController extends Controller
 {
+
 
     public $modelclass = Proyecto::class;
     protected $githubService;
@@ -39,17 +42,17 @@ class ProyectoController extends Controller
      * Store a newly created resource in storage.
      */
 
-     public function store(Request $request)
-     {
+    public function store(Request $request)
+    {
 
-         $proyecto = json_decode($request->getContent(), true);
+        $proyecto = json_decode($request->getContent(), true);
 
-         $proyecto['docente_id']= auth()->id();
+        $proyecto['docente_id'] = auth()->id();
 
-         $proyecto = Proyecto::create($proyecto);
+        $proyecto = Proyecto::create($proyecto);
 
-         return new ProyectoResource($proyecto);
-     }
+        return new ProyectoResource($proyecto);
+    }
 
 
     /**
@@ -66,7 +69,7 @@ class ProyectoController extends Controller
     public function update(Request $request, Proyecto $proyecto)
     {
         $proyectoData = $request->all();
-        if($proyectoRepoZip = $request->file('fichero')) {
+        if ($proyectoRepoZip = $request->file('fichero')) {
             $request->validate([
                 'fichero' => 'required|mimes:zip,rar,bz,bz2,7z|max:5120', // Se permiten ficheros comprimidos de hasta 5 MB
             ], [
@@ -80,22 +83,29 @@ class ProyectoController extends Controller
         } else {
             $proyectoData['fichero'] = $proyecto->fichero;
         }
-        if (isset($path) && strlen($proyecto->url_github) == 0) {
-                        $githubResponse = $this->githubService->createRepo($proyecto);
+        if (!$proyecto['url_github']) {
+            $proyectoData['url_github'] = env("GITHUB_PROYECTOS_REPO");
 
-                        if($githubResponse->getStatusCode() === 200) {
-                           $jsonResponse = json_decode($githubResponse->getBody(), true);
-                           $proyectoData['url_github'] = $jsonResponse['html_url'];
-                       }
-                   }
+        }
+
+
+
 
         $proyecto->update($proyectoData);
 
-        if (isset($path) && $proyecto->urlPerteneceOrganizacion()) {
-                        $this->githubService->pushZipFiles($proyecto);
-                    }
 
-                    // $this->githubService->deleteRepo($proyecto);
+        if (isset($path) && $proyecto->urlPerteneceOrganizacion()) {
+            $ciclos = ProyectoCiclo::all();
+
+            foreach ($ciclos as $ciclo) {
+                if($ciclo->proyecto_id == $proyecto->id){
+                    $this->githubService->pushZipFiles($proyecto, Ciclo::find($ciclo->ciclo_id));
+                }
+            }
+
+        }
+
+        // $this->githubService->deleteRepo($proyecto);
 
         return new ProyectoResource($proyecto);
     }

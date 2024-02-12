@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Ciclo;
 use App\Models\Proyecto;
 use Illuminate\Support\ServiceProvider;
 use GuzzleHttp\Client;
@@ -49,13 +50,14 @@ class GitHubServiceProvider extends ServiceProvider
     }
 
 
-    public function pushZipFiles(Proyecto $proyecto)
+    public function pushZipFiles(Proyecto $proyecto, Ciclo $ciclo)
     {
+        $ruta = $ciclo->nombre;
         $tmpdir = sys_get_temp_dir() . DIRECTORY_SEPARATOR . $proyecto->getRepoNameFromURL();
         $this->unzipFiles($proyecto, $tmpdir);
         $files = collect(File::allFiles($tmpdir));
-        $files->each(function ($file, $key) use ($proyecto) {
-            $this->sendFile($proyecto, $file);
+        $files->each(function ($file, $key ) use ($proyecto, $ruta) {
+            $this->sendFile($proyecto, $file, $ruta);
         });
 
         File::deleteDirectory($tmpdir);
@@ -90,13 +92,15 @@ class GitHubServiceProvider extends ServiceProvider
         return $sha;
     }
 
-    public function sendFile(Proyecto $proyecto, $file)
+
+
+    public function sendFile(Proyecto $proyecto, $file, $ruta)
     {
         $repoName = $proyecto->getRepoNameFromURL();
         $owner = env('GITHUB_OWNER');
         $path = $file->getRelativePathname();
         $sha = $this->getShaFile($repoName, $file);
-        $response = $this->client->put("/repos/{$owner}/{$repoName}/contents/{$path}", [
+        $response = $this->client->put("/repos/{$owner}/{$repoName}/contents/{$ruta}/{$proyecto->created_at->format("Y")}/{$path}", [
             'json' => [
                 'message' => 'Add ' . $file->getRelativePathname(),
                 'content' => base64_encode(file_get_contents($file->getRealPath())),
