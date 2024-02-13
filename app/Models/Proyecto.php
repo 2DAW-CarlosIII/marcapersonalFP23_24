@@ -17,9 +17,30 @@ class Proyecto extends Model
         'dominio',
         'metadatos',
         'calificacion',
-        'fichero'
+        'fichero',
+        'url_github',
     ];
-
+    public function getGithubSettings() {
+            // TODO obtener un nombre según curso, familia, ciclo, nombre
+            return [
+                'org' => env('GITHUB_OWNER'),
+                'name' => $this->nombre,
+                'description' => $this->metadatos,
+                'homepage' => $this->url_github,
+                'private' => false,
+                'has_issues' => true,
+                'has_projects' => false,
+                'has_wiki' => false,
+            ];
+        }
+    public function getRepoNameFromURL() {
+            $url = $this->url_github;
+            $repoName = substr($url, strripos($url, '/') + 1);
+            return $repoName;
+        }
+    public function urlPerteneceOrganizacion() {
+            return strpos($this->url_github, env('GITHUB_OWNER')) > 0;
+        }
     public static function mejoresProyectos($nProyectos)
     {
         $nProyectos = self::orderByDesc('calificacion')->take(5)->get();
