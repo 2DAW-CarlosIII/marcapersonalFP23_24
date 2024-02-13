@@ -97,11 +97,12 @@ class GitHubServiceProvider extends ServiceProvider
         $nombreFichero = Str::afterLast($repoUrl, '/') . '.zip';
 
         $response = $this->client->get($url);
-        $zipCon = $response->getBody()->getContents();
 
-        $rutaZip = storage_path('app/public/') . $nombreFichero;
-        file_put_contents($rutaZip, $zipCon);
-
+        if (isset($response) && $response->getStatusCode() === 200) {
+            $zipCon = $response->getBody()->getContents();
+            $rutaZip = storage_path('app/public/') . $nombreFichero;
+            file_put_contents($rutaZip, $zipCon);
+        }
         return $nombreFichero;
     }
 
@@ -111,7 +112,7 @@ class GitHubServiceProvider extends ServiceProvider
         $owner = env('GITHUB_OWNER');
         $path = $file->getRelativePathname();
         $sha = $this->getShaFile($repoName, $file);
-        $response = $this->client->put("/repos/{$owner}/proyectosRepo/contents/{$path}", [
+        $response = $this->client->put("/repos/{$owner}/pruebaApi/contents/{$path}", [
             'json' => [
                 'message' => 'Add ' . $file->getRelativePathname(),
                 'content' => base64_encode(file_get_contents($file->getRealPath())),
