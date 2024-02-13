@@ -47,13 +47,13 @@ class GitHubServiceProvider extends ServiceProvider
         return $this->client->delete("/repos/{$owner}/{$repo}");
     }
 
-    public function pushZipFiles(Proyecto $proyecto)
+    public function pushZipFiles(Proyecto $proyecto, $ciclo)
     {
         $tmpdir = sys_get_temp_dir() . DIRECTORY_SEPARATOR . $proyecto->getRepoNameFromURL();
         $this->unzipFiles($proyecto, $tmpdir);
         $files = collect(File::allFiles($tmpdir));
-        $files->each(function ($file, $key) use ($proyecto) {
-            $this->sendFile($proyecto, $file);
+        $files->each(function ($file, $key) use ($proyecto, $ciclo) {
+            $this->sendFile($proyecto, $file, $ciclo);
         });
 
         File::deleteDirectory($tmpdir);
@@ -88,14 +88,15 @@ class GitHubServiceProvider extends ServiceProvider
         return $sha;
     }
 
-    public function sendFile(Proyecto $proyecto, $file)
+    public function sendFile(Proyecto $proyecto, $file, $ciclo)
     {
         $repoName = $proyecto->getRepoNameFromURL();
         $owner = env('GITHUB_OWNER');
         $path = $file->getRelativePathname();
         $sha = $this->getShaFile($repoName, $file);
-        $repoComun = env('GITHUB_PROYECTOS_REPO');
-        $response = $this->client->put("{$repoComun}/ciclo/2024/{$path}", [
+        $nombreCiclo = $ciclo->nombre;
+        $año = date('Y');
+        $response = $this->client->put("/repos/{$owner}/{$repoName}/contents/{$nombreCiclo}/{$año}/{$path}", [
             'json' => [
                 'message' => 'Add ' . $file->getRelativePathname(),
                 'content' => base64_encode(file_get_contents($file->getRealPath())),
@@ -121,3 +122,4 @@ class GitHubServiceProvider extends ServiceProvider
         //
     }
 }
+
