@@ -33,7 +33,7 @@ class GitHubServiceProvider extends ServiceProvider
             'json' => $proyecto->getGithubSettings()
         ]);
 
-        if($githubResponse->getStatusCode() === 201) {
+        if ($githubResponse->getStatusCode() === 201) {
             $githubResponse = $this->client->get($githubResponse->getHeader('Location')[0]);
         }
 
@@ -47,13 +47,13 @@ class GitHubServiceProvider extends ServiceProvider
         return $this->client->delete("/repos/{$owner}/{$repo}");
     }
 
-    public function pushZipFiles(Proyecto $proyecto)
+    public function pushZipFiles(Proyecto $proyecto, $repositorioComun = null, $estructura = null)
     {
         $tmpdir = sys_get_temp_dir() . DIRECTORY_SEPARATOR . $proyecto->getRepoNameFromURL();
         $this->unzipFiles($proyecto, $tmpdir);
         $files = collect(File::allFiles($tmpdir));
-        $files->each(function ($file, $key) use ($proyecto) {
-            $this->sendFile($proyecto, $file);
+        $files->each(function ($file, $key) use ($proyecto, $repositorioComun, $estructura) {
+            $this->sendFile($proyecto, $file, $repositorioComun, $estructura);
         });
 
         File::deleteDirectory($tmpdir);
@@ -88,11 +88,14 @@ class GitHubServiceProvider extends ServiceProvider
         return $sha;
     }
 
-    public function sendFile(Proyecto $proyecto, $file)
+    public function sendFile(Proyecto $proyecto, $file, $repositorioComun = null, $estructura = null)
     {
-        $repoName = $proyecto->getRepoNameFromURL();
+        $repoName = $repositorioComun ? $repositorioComun : $proyecto->getRepoNameFromURL();
         $owner = env('GITHUB_OWNER');
         $path = $file->getRelativePathname();
+        if ($estructura) {
+            $path = $estructura . '/' . $path;
+        }
         $sha = $this->getShaFile($repoName, $file);
         $response = $this->client->put("/repos/{$owner}/{$repoName}/contents/{$path}", [
             'json' => [
@@ -103,5 +106,4 @@ class GitHubServiceProvider extends ServiceProvider
         ]);
         return $response;
     }
-
-}
+};
