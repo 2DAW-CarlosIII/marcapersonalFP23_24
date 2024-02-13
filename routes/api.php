@@ -54,6 +54,8 @@ Route::prefix('v1')->group(function () {
     Route::apiResource('competencias', CompetenciaController::class);
     Route::apiResource('idiomas', IdiomaController::class);
 
+    Route::post('pegarRepositorio/{gitUser}/{repoName}', [ProyectoController::class, 'pegarRepositorio']);
+
     Route::get('{tabla}/count', [CountController::class, 'count']);
     Route::put('reconocimientos/validar/{id}', [ReconocimientoController::class, 'validar'])
         ->where('id', '[0-9]+');

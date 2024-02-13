@@ -7,10 +7,10 @@ use Illuminate\Support\ServiceProvider;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\File;
 use ZipArchive;
+use Illuminate\Support\Str;
 
 class GitHubServiceProvider extends ServiceProvider
 {
-
     const GITHUB_API_VERSION = '2022-11-28';
     const GITHUB_API_ENDPOINT = 'https://api.github.com';
     protected $client;
@@ -51,6 +51,7 @@ class GitHubServiceProvider extends ServiceProvider
     public function pushZipFiles(Proyecto $proyecto)
     {
         $tmpdir = sys_get_temp_dir() . DIRECTORY_SEPARATOR . $proyecto->getRepoNameFromURL();
+
         $this->unzipFiles($proyecto, $tmpdir);
         $files = collect(File::allFiles($tmpdir));
         $files->each(function ($file, $key) use ($proyecto) {
@@ -72,7 +73,6 @@ class GitHubServiceProvider extends ServiceProvider
         $zip->close();
     }
 
-
     public function getShaFile($repoName, $file)
     {
         $owner = env('GITHUB_OWNER');
@@ -90,13 +90,28 @@ class GitHubServiceProvider extends ServiceProvider
         return $sha;
     }
 
+    public function getZipFileFromRepo($repoUrl)
+    {
+        $url = $repoUrl . '/archive/refs/heads/master.zip';
+
+        $nombreFichero = Str::afterLast($repoUrl, '/') . '.zip';
+
+        $response = $this->client->get($url);
+        $zipCon = $response->getBody()->getContents();
+
+        $rutaZip = storage_path('app/public/') . $nombreFichero;
+        file_put_contents($rutaZip, $zipCon);
+
+        return $nombreFichero;
+    }
+
     public function sendFile(Proyecto $proyecto, $file)
     {
         $repoName = $proyecto->getRepoNameFromURL();
         $owner = env('GITHUB_OWNER');
         $path = $file->getRelativePathname();
         $sha = $this->getShaFile($repoName, $file);
-        $response = $this->client->put("/repos/{$owner}/{$repoName}/contents/{$path}", [
+        $response = $this->client->put("/repos/{$owner}/proyectosRepo/contents/{$path}", [
             'json' => [
                 'message' => 'Add ' . $file->getRelativePathname(),
                 'content' => base64_encode(file_get_contents($file->getRealPath())),

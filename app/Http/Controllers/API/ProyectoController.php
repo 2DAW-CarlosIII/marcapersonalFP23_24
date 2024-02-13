@@ -9,6 +9,7 @@ use App\Models\Proyecto;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Providers\GitHubServiceProvider;
+use Illuminate\Support\Facades\File;
 
 class ProyectoController extends Controller
 {
@@ -18,7 +19,7 @@ class ProyectoController extends Controller
 
     public function __construct(GitHubServiceProvider $githubService)
     {
-        $this->middleware('auth:sanctum')->except(['index', 'show']);
+        $this->middleware('auth:sanctum')->except(['index', 'show', 'copyRepo']);
         $this->authorizeResource(Proyecto::class, 'proyecto');
         $this->githubService = $githubService;
     }
@@ -81,7 +82,6 @@ class ProyectoController extends Controller
             $proyectoData['fichero'] = $proyecto->fichero;
         }
 
-        //NUEVO
         if (isset($path) && strlen($proyecto->url_github) == 0) {
             $githubResponse = $this->githubService->createRepo($proyecto);
 
@@ -89,11 +89,12 @@ class ProyectoController extends Controller
                 $jsonResponse = json_decode($githubResponse->getBody(), true);
                 $proyectoData['url_github'] = $jsonResponse['html_url'];
             }
+        } else {
+            $proyecto->update($proyectoData);
         }
 
         $proyecto->update($proyectoData);
 
-        //NUEVO
         if (isset($path) && $proyecto->urlPerteneceOrganizacion()) {
             $this->githubService->pushZipFiles($proyecto);
         }
@@ -103,6 +104,26 @@ class ProyectoController extends Controller
         return new ProyectoResource($proyecto);
     }
 
+    public function pegarRepositorio($gitUser, $repoName)
+    {
+        //Crear un nuevo proyecto para almacenar el repositorio del usuario
+        $proyecto = new Proyecto();
+        $proyecto->nombre = $repoName;
+        $proyecto->url_github = "https://github.com/{$gitUser}/{$repoName}";
+
+        //Descargamos el fichero zip del repositorio del usuario. En mi caso me descara el de JavierColmena/S-Cambio-Study-Proyecto
+
+        $proyecto->fichero = $this->githubService->getZipFileFromRepo($proyecto->url_github);
+
+        //Subimos el zip al repositorio común
+        $this->githubService->pushZipFiles($proyecto);
+
+        //Eliminar archivo temporal despues de subirse al repositorio común
+        File::delete(storage_path('app/public/') . $proyecto->fichero);
+
+        //Y eliminamos el proyecto temporal que hemos creado para poder descargar y subir los archivos temporales al repositorio comun
+        $proyecto->delete();
+    }
 
     /**
      * Remove the specified resource from storage.
