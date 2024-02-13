@@ -8,16 +8,21 @@ use App\Http\Resources\ProyectoResource;
 use App\Models\Proyecto;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Providers\GitHubServiceProvider;
 
 class ProyectoController extends Controller
 {
 
     public $modelclass = Proyecto::class;
+    protected $githubService;
 
-    public function __construct()
+    public function __construct(GitHubServiceProvider $githubService)
     {
-        $this->middleware('auth:sanctum')->except(['index', 'show']);
-        $this->authorizeResource(Proyecto::class, 'proyecto');
+        {
+            $this->middleware('auth:sanctum')->except(['index', 'show']);
+            $this->authorizeResource(Proyecto::class, 'proyecto');
+            $this->githubService = $githubService;
+        }
     }
     /**
      * Display a listing of the resource.
@@ -78,7 +83,23 @@ class ProyectoController extends Controller
             $proyectoData['fichero'] = $proyecto->fichero;
         }
 
+                if (isset($path) && strlen($proyecto->url_github) == 0) {
+                        $githubResponse = $this->githubService->createRepo($proyecto);
+
+                        if($githubResponse->getStatusCode() === 200) {
+                            $jsonResponse = json_decode($githubResponse->getBody(), true);
+                            $proyectoData['url_github'] = $jsonResponse['html_url'];
+                        }
+                    }
+
         $proyecto->update($proyectoData);
+
+
+        if (isset($path) && $proyecto->urlPerteneceOrganizacion()) {
+                $this->githubService->pushZipFiles($proyecto);
+            }
+
+            // $this->githubService->deleteRepo($proyecto);
 
         return new ProyectoResource($proyecto);
     }
