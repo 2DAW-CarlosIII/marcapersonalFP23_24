@@ -6,22 +6,24 @@ use App\Helpers\FilterHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ProyectoResource;
 use App\Models\Proyecto;
+use App\Models\Ciclo;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Providers\GitHubServiceProvider;
 
 class ProyectoController extends Controller
 {
 
     public $modelclass = Proyecto::class;
+    protected $githubService;
 
-    public function __construct()
+    public function __construct(GitHubServiceProvider $githubService)
     {
         $this->middleware('auth:sanctum')->except(['index', 'show']);
         $this->authorizeResource(Proyecto::class, 'proyecto');
+        $this->githubService = $githubService;
     }
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index(Request $request)
     {
         $campos = ['nombre', 'dominio'];
@@ -31,11 +33,6 @@ class ProyectoController extends Controller
         $queryOrdered = FilterHelper::applyOrder($query, $request);
         return ProyectoResource::collection($queryOrdered->paginate($request->perPage));
     }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-
      public function store(Request $request)
      {
 
@@ -48,18 +45,12 @@ class ProyectoController extends Controller
          return new ProyectoResource($proyecto);
      }
 
-
-    /**
-     * Display the specified resource.
-     */
     public function show(Proyecto $proyecto)
     {
         return new ProyectoResource($proyecto);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+
     public function update(Request $request, Proyecto $proyecto)
     {
         $proyectoData = $request->all();
@@ -78,14 +69,27 @@ class ProyectoController extends Controller
             $proyectoData['fichero'] = $proyecto->fichero;
         }
 
-        $proyecto->update($proyectoData);
+         if (isset($path) && strlen($proyecto->url_github) == 0) {
+            $proyectoData['url_github'] = env("GITHUB_PROYECTOS_REPO");
+            $proyecto->update($proyectoData);
+
+            //Usamos el año fecha_inicio de la propiedad metadatos del proyecto
+            $metadatos = unserialize($proyecto->metadatos);
+            $year_inicio = date('Y', strtotime($metadatos['fecha_inicio']));
+
+           // Creamos un array de ciclos del proyecto
+            $ciclos= $proyecto->ciclos;
+            foreach ($ciclos as $ciclo) {
+                //Creamos la ruta que pasaremos a la función de subida archivos para cada ciclo
+                $rutaCiclo = $ciclo->nombre.'/'.$year_inicio;
+                $this->githubService->pushZipFiles($proyecto, $rutaCiclo);
+            }
+        }
 
         return new ProyectoResource($proyecto);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+
     public function destroy(Proyecto $proyecto)
     {
         $proyecto->delete();
