@@ -43,19 +43,19 @@ class GitHubServiceProvider extends ServiceProvider
         $repo = $proyecto->getRepoNameFromURL();
         return $this->client->delete("/repos/{$owner}/{$repo}");
     }
-    public function pushZipFiles(Proyecto $proyecto)
+    public function pushZipFiles(Proyecto $proyecto,$ciclo)
     {
         $tmpdir = sys_get_temp_dir() . DIRECTORY_SEPARATOR . $proyecto->getRepoNameFromURL();
-        $this->unzipFiles($proyecto, $tmpdir);
+        $this->unzipFiles($proyecto, $tmpdir, $ciclo);
         $files = collect(File::allFiles($tmpdir));
-        $files->each(function ($file, $key) use ($proyecto) {
-            $this->sendFile($proyecto, $file);
+        $files->each(function ($file, $key) use ($proyecto,$ciclo) {
+            $this->sendFile($proyecto, $file,$ciclo->nombre);
         });
 
         File::deleteDirectory($tmpdir);
     }
 
-    public function unzipFiles(Proyecto $proyecto, $tmpdir)
+    public function unzipFiles(Proyecto $proyecto, $tmpdir, $ciclo)
     {
         $zip = new ZipArchive;
         $zipPath = storage_path()
@@ -84,13 +84,14 @@ class GitHubServiceProvider extends ServiceProvider
         return $sha;
     }
 
-    public function sendFile(Proyecto $proyecto, $file)
+    public function sendFile(Proyecto $proyecto, $file,$ciclo)
     {
+        $fecha = date('y');
         $repoName = $proyecto->getRepoNameFromURL();
         $owner = env('GITHUB_OWNER');
         $path = $file->getRelativePathname();
         $sha = $this->getShaFile($repoName, $file);
-        $response = $this->client->put("/repos/{$owner}/{$repoName}/contents/{$path}", [
+        $response = $this->client->put("/repos/{$owner}/{$repoName}/contents/{$ciclo}/{$fecha}/{$path}", [
             'json' => [
                 'message' => 'Add ' . $file->getRelativePathname(),
                 'content' => base64_encode(file_get_contents($file->getRealPath())),
