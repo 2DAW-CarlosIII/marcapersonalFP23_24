@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
@@ -47,14 +46,15 @@ class GitHubServiceProvider extends ServiceProvider
         return $this->client->delete("/repos/{$owner}/{$repo}");
     }
 
-    public function pushZipFiles(Proyecto $proyecto)
+    public function pushZipFiles(Proyecto $proyecto, $datosProyecto)
     {
         $tmpdir = sys_get_temp_dir() . DIRECTORY_SEPARATOR . $proyecto->getRepoNameFromURL();
         $this->unzipFiles($proyecto, $tmpdir);
         $files = collect(File::allFiles($tmpdir));
-        $files->each(function ($file, $key) use ($proyecto) {
-            $this->sendFile($proyecto, $file);
+        $files->each(function ($file, $key) use ($proyecto, $datosProyecto) {
+            $this->sendFile($proyecto, $file, $datosProyecto);
         });
+
 
         File::deleteDirectory($tmpdir);
     }
@@ -88,11 +88,14 @@ class GitHubServiceProvider extends ServiceProvider
         return $sha;
     }
 
-    public function sendFile(Proyecto $proyecto, $file)
+    public function sendFile(Proyecto $proyecto, $file, $datosProyecto)
     {
-        $repoName = $proyecto->getRepoNameFromURL();
+        $repoName = $proyecto->url_github;
         $owner = env('GITHUB_OWNER');
         $path = $file->getRelativePathname();
+        if ($datosProyecto) {
+            $path = $datosProyecto. '/'. $path;
+        }
         $sha = $this->getShaFile($repoName, $file);
         $response = $this->client->put("/repos/{$owner}/{$repoName}/contents/{$path}", [
             'json' => [
