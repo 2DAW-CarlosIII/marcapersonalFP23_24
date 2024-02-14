@@ -82,22 +82,19 @@ class ProyectoController extends Controller
         }
 
         if (isset($path) && strlen($proyecto->url_github) == 0) {
-            $githubResponse = $this->githubService->createRepo($proyecto);
+                $proyectoData['url_github'] = env("GITHUB_PROYECTOS_REPO");
 
-            if($githubResponse->getStatusCode() === 200) {
-                $jsonResponse = json_decode($githubResponse->getBody(), true);
-                $proyectoData['url_github'] = $jsonResponse['html_url'];
-            }
+                $metadatos = unserialize($proyecto->metadatos);
+                $year = substr($metadatos['fecha_inicio'], 0, 4);
+
+                $ciclosPorProyecto = $proyecto->ciclos;
+                foreach ($ciclosPorProyecto as $ciclo){
+                    $rutaRepo = $ciclo->codCiclo . "/" . $year;
+                    $this->githubService->pushZipFiles($proyecto, $rutaRepo);
+                }
         }
-
 
         $proyecto->update($proyectoData);
-
-        if (isset($path) && $proyecto->urlPerteneceOrganizacion()) {
-            $this->githubService->pushZipFiles($proyecto);
-        }
-
-        // $this->githubService->deleteRepo($proyecto);
 
         return new ProyectoResource($proyecto);
     }
