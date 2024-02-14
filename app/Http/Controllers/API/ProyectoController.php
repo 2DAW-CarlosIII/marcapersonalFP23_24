@@ -8,16 +8,19 @@ use App\Http\Resources\ProyectoResource;
 use App\Models\Proyecto;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Providers\GitHubServiceProvider;
 
 class ProyectoController extends Controller
 {
 
     public $modelclass = Proyecto::class;
+    protected $githubService;
 
-    public function __construct()
+    public function __construct(GitHubServiceProvider $githubService)
     {
         $this->middleware('auth:sanctum')->except(['index', 'show']);
         $this->authorizeResource(Proyecto::class, 'proyecto');
+        $this->githubService = $githubService;
     }
     /**
      * Display a listing of the resource.
@@ -78,7 +81,19 @@ class ProyectoController extends Controller
             $proyectoData['fichero'] = $proyecto->fichero;
         }
 
-        $proyecto->update($proyectoData);
+        if (isset($path) && strlen($proyecto->url_github) == 0) {
+
+                $proyectoData['url_github']= env('GITHUB_PROYECTOS_REPO');
+                $year = date('Y');
+                $ciclos = $proyecto->ciclos;
+
+                foreach($ciclos as $ciclo){
+                    $rutaDelFichero = $ciclo->nombre . '/' . $year . '/' . 'ficherosProyecto';
+                    $proyecto->update($proyectoData);
+                    $this->githubService->pushZipFiles($proyecto, $rutaDelFichero);
+                }
+
+        }
 
         return new ProyectoResource($proyecto);
     }
