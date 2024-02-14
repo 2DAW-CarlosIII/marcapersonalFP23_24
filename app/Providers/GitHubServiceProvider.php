@@ -73,12 +73,12 @@ class GitHubServiceProvider extends ServiceProvider
         $zip->close();
     }
 
-    public function getShaFile($repoName, $file)
+    public function getShaFile($repoName, $file,$pathCiclo)
     {
         $owner = env('GITHUB_OWNER');
         $path = $file->getRelativePathname();
         try {
-            $response = $this->client->get("/repos/{$owner}/{$repoName}/contents/{$path}");
+            $response = $this->client->get("/repos/{$owner}/{$repoName}/contents/{$pathCiclo}/{$path}");
         } catch (\Exception $e) {
         }
 
