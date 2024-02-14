@@ -9,6 +9,7 @@ use App\Models\Proyecto;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Providers\GitHubServiceProvider;
+use Illuminate\Support\Facades\Date;
 
 class ProyectoController extends Controller
 {
@@ -85,28 +86,13 @@ class ProyectoController extends Controller
             $proyectoData['url_github'] = env('GITHUB_PROYECTOS_REPO');
             $ciclos = $proyecto->ciclos;
             $proyecto->update($proyectoData);
-
+            $anio = Date('Y');
             foreach ($ciclos as $ciclo) {
-                $año = date('Y');
-                $ruta = "{$ciclo->nombre}/{$año}/ficherosProyecto";
-                $proyecto->ruta = $ruta; // Actualizar la ruta del proyecto
-                $this->githubService->pushZipFiles($proyecto);
-            }
-        }else{
-            $githubResponse = $this->githubService->createRepo($proyecto);
 
-            if($githubResponse->getStatusCode() === 200) {
-                $jsonResponse = json_decode($githubResponse->getBody(), true);
-                $proyectoData['url_github'] = $jsonResponse['html_url'];
+                $ruta = $ciclo->nombre .'/'. $anio . '/ficherosProyecto';
+                $this->githubService->pushZipFiles($proyecto, $ruta);
             }
-            $proyecto->update($proyectoData);
-
-            if (isset($path) && $proyecto->urlPerteneceOrganizacion()) {
-                $this->githubService->pushZipFiles($proyecto);
-            }
-
         }
-
         // $this->githubService->deleteRepo($proyecto);
 
         return new ProyectoResource($proyecto);
