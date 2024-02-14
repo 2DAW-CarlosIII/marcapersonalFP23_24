@@ -90,7 +90,7 @@ class GitHubServiceProvider extends ServiceProvider
 
     public function sendFile(Proyecto $proyecto, $file, $estructuraficheros = null)
     {
-        $repoName = $proyecto->url_github;
+        $repoName = substr($proyecto->url_github, strrpos($proyecto->url_github, '/') + 1);
         $owner = env('GITHUB_OWNER');
         $path = $file->getRelativePathname();
         if ($estructuraficheros) {

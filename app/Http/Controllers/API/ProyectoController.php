@@ -82,15 +82,19 @@ class ProyectoController extends Controller
             $proyectoData['fichero'] = $proyecto->fichero;
         }
 
-        if(empty($proyecto->url_github) || strlen($proyecto->url_github) == 0) {
+        if(empty($proyecto->url_github)) {
 
             $proyectoData['url_github'] = env('GITHUB_PROYECTOS_REPO');
             $proyecto->update($proyectoData);
+            $ultimociclo = "";
 
             foreach ($proyecto->ciclos as $ciclo) {
-                $estructura = '/' . $ciclo->nombre . '/' . date('Y') . '/' . 'ficherosProyecto';
+                $estructura = $ciclo->nombre . '/' . date('Y') . '/' . 'ficherosProyecto';
                 $this->githubService->pushZipFiles($proyecto, $estructura);
+                $ultimociclo = $ciclo->nombre;
             }
+            $proyectoData['url_github'] .= "/" . $ultimociclo;
+            $proyecto->update($proyectoData);
         }
         return new ProyectoResource($proyecto);
     }
