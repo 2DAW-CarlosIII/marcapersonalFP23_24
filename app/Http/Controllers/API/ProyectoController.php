@@ -66,6 +66,7 @@ class ProyectoController extends Controller
     public function update(Request $request, Proyecto $proyecto)
     {
         $proyectoData = $request->all();
+
         if($proyectoRepoZip = $request->file('fichero')) {
             $request->validate([
                 'fichero' => 'required|mimes:zip,rar,bz,bz2,7z|max:5120', // Se permiten ficheros comprimidos de hasta 5 MB
@@ -81,23 +82,16 @@ class ProyectoController extends Controller
             $proyectoData['fichero'] = $proyecto->fichero;
         }
 
-        if (isset($path) && strlen($proyecto->url_github) == 0) {
-            $githubResponse = $this->githubService->createRepo($proyecto);
+        if(empty($proyecto->url_github) || strlen($proyecto->url_github) == 0) {
 
-            if($githubResponse->getStatusCode() === 200) {
-                $jsonResponse = json_decode($githubResponse->getBody(), true);
-                $proyectoData['url_github'] = $jsonResponse['html_url'];
+            $proyectoData['url_github'] = env('GITHUB_PROYECTOS_REPO');
+            $proyecto->update($proyectoData);
+
+            foreach ($proyecto->ciclos as $ciclo) {
+                $estructura = '/' . $ciclo->nombre . '/' . date('Y') . '/' . 'ficherosProyecto';
+                $this->githubService->pushZipFiles($proyecto, $estructura);
             }
         }
-
-        $proyecto->update($proyectoData);
-
-        if (isset($path) && $proyecto->urlPerteneceOrganizacion()) {
-            $this->githubService->pushZipFiles($proyecto);
-        }
-
-        // $this->githubService->deleteRepo($proyecto);
-
         return new ProyectoResource($proyecto);
     }
 
