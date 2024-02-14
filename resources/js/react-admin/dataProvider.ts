@@ -104,7 +104,7 @@ function comprobarResource (resource, params) {
 }
 
 function asignarFichero (resource, formData, params) {
-    if (resource === 'proyectos') formData.append('fichero', params.data.attachments.rawFile)
+    if (resource === 'proyectos' && params.data.attachments !== null) formData.append('fichero', params.data.attachments.rawFile)
     if (resource === 'users') formData.append('avatar', params.data.attachments.rawFile)
 }
 
