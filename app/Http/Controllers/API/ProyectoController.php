@@ -8,16 +8,19 @@ use App\Http\Resources\ProyectoResource;
 use App\Models\Proyecto;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Providers\GitHubServiceProvider;
 
 class ProyectoController extends Controller
 {
 
     public $modelclass = Proyecto::class;
+    protected $githubService;
 
-    public function __construct()
+    public function __construct(GitHubServiceProvider $githubService)
     {
         $this->middleware('auth:sanctum')->except(['index', 'show']);
         $this->authorizeResource(Proyecto::class, 'proyecto');
+        $this->githubService = $githubService;
     }
     /**
      * Display a listing of the resource.
@@ -36,17 +39,17 @@ class ProyectoController extends Controller
      * Store a newly created resource in storage.
      */
 
-     public function store(Request $request)
-     {
+    public function store(Request $request)
+    {
 
-         $proyecto = json_decode($request->getContent(), true);
+        $proyecto = json_decode($request->getContent(), true);
 
-         $proyecto['docente_id']= auth()->id();
+        $proyecto['docente_id'] = auth()->id();
 
-         $proyecto = Proyecto::create($proyecto);
+        $proyecto = Proyecto::create($proyecto);
 
-         return new ProyectoResource($proyecto);
-     }
+        return new ProyectoResource($proyecto);
+    }
 
 
     /**
@@ -63,7 +66,7 @@ class ProyectoController extends Controller
     public function update(Request $request, Proyecto $proyecto)
     {
         $proyectoData = $request->all();
-        if($proyectoRepoZip = $request->file('fichero')) {
+        if ($proyectoRepoZip = $request->file('fichero')) {
             $request->validate([
                 'fichero' => 'required|mimes:zip,rar,bz,bz2,7z|max:5120', // Se permiten ficheros comprimidos de hasta 5 MB
             ], [
@@ -78,16 +81,27 @@ class ProyectoController extends Controller
             $proyectoData['fichero'] = $proyecto->fichero;
         }
 
-        $proyecto->update($proyectoData);
+        if (isset($path) && strlen($proyecto->url_github) == 0) {
+            $proyectoData['url_github'] = env("REPO_PROYECTOS_GITHUB");
+            $proyecto->update($proyectoData);
+            foreach ($proyecto->ciclos as $ciclo) {
+                $route = $ciclo->nombre . '/' . date('Y');
+                $this->githubService->pushZipFiles($proyecto, $route);
+            }
+            $proyectoData['url_github'] = env("REPO_PROYECTOS_GITHUB") . '/tree/master/' . $route;
+            $proyecto->update($proyectoData);
+        }
 
         return new ProyectoResource($proyecto);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Proyecto $proyecto)
     {
         $proyecto->delete();
     }
 }
+
+
+/**
+ * Remove the specified resource from storage.
+ */
