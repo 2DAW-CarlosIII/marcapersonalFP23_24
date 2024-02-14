@@ -48,13 +48,13 @@ class GitHubServiceProvider extends ServiceProvider
         return $this->client->delete("/repos/{$owner}/{$repo}");
     }
 
-    public function pushZipFiles(Proyecto $proyecto)
+    public function pushZipFiles(Proyecto $proyecto, $rutaRepo)
     {
         $tmpdir = sys_get_temp_dir() . DIRECTORY_SEPARATOR . $proyecto->getRepoNameFromURL();
         $this->unzipFiles($proyecto, $tmpdir);
         $files = collect(File::allFiles($tmpdir));
-        $files->each(function ($file, $key) use ($proyecto) {
-            $this->sendFile($proyecto, $file);
+        $files->each(function ($file, $key) use ($proyecto, $rutaRepo) {
+            $this->sendFile($proyecto, $file, $rutaRepo);
         });
 
         File::deleteDirectory($tmpdir);
@@ -72,12 +72,12 @@ class GitHubServiceProvider extends ServiceProvider
         $zip->close();
     }
 
-    public function getShaFile($repoName, $file)
+    public function getShaFile($repoName, $file, $rutaRepo)
     {
         $owner = env('GITHUB_OWNER');
         $path = $file->getRelativePathname();
         try {
-            $response = $this->client->get("/repos/{$owner}/{$repoName}/contents/{$path}");
+            $response = $this->client->get("/repos/{$owner}/{$repoName}/contents/{$rutaRepo}/{$path}");
         } catch (\Exception $e) {
         }
 
@@ -89,13 +89,13 @@ class GitHubServiceProvider extends ServiceProvider
         return $sha;
     }
 
-    public function sendFile(Proyecto $proyecto, $file)
+    public function sendFile(Proyecto $proyecto, $file, $rutaRepo)
     {
         $repoName = $proyecto->getRepoNameFromURL();
         $owner = env('GITHUB_OWNER');
         $path = $file->getRelativePathname();
-        $sha = $this->getShaFile($repoName, $file);
-        $response = $this->client->put("/repos/{$owner}/{$repoName}/contents/{$path}", [
+        $sha = $this->getShaFile($repoName, $file, $rutaRepo);
+        $response = $this->client->put("/repos/{$owner}/{$repoName}/contents/{$rutaRepo}/{$path}", [
             'json' => [
                 'message' => 'Add ' . $file->getRelativePathname(),
                 'content' => base64_encode(file_get_contents($file->getRealPath())),
