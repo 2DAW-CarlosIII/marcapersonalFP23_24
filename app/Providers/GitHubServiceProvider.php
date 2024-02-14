@@ -47,13 +47,13 @@ class GitHubServiceProvider extends ServiceProvider
         return $this->client->delete("/repos/{$owner}/{$repo}");
     }
 
-    public function pushZipFiles(Proyecto $proyecto, $ciclo)
+    public function pushZipFiles(Proyecto $proyecto, $rutaArchivos)
     {
         $tmpdir = sys_get_temp_dir() . DIRECTORY_SEPARATOR . $proyecto->getRepoNameFromURL();
         $this->unzipFiles($proyecto, $tmpdir);
         $files = collect(File::allFiles($tmpdir));
-        $files->each(function ($file, $key) use ($proyecto, $ciclo) {
-            $this->sendFile($proyecto, $file, $ciclo);
+        $files->each(function ($file, $key) use ($proyecto, $rutaArchivos) {
+            $this->sendFile($proyecto, $file, $rutaArchivos);
         });
 
         File::deleteDirectory($tmpdir);
@@ -71,12 +71,12 @@ class GitHubServiceProvider extends ServiceProvider
         $zip->close();
     }
 
-    public function getShaFile($repoName, $file)
+    public function getShaFile($repoName, $file, $rutaArchivos)
     {
         $owner = env('GITHUB_OWNER');
         $path = $file->getRelativePathname();
         try {
-            $response = $this->client->get("/repos/{$owner}/{$repoName}/contents/{$path}");
+            $response = $this->client->get("/repos/{$owner}/{$repoName}/contents/$rutaArchivos/{$path}");
         } catch (\Exception $e) {
         }
 
@@ -88,15 +88,13 @@ class GitHubServiceProvider extends ServiceProvider
         return $sha;
     }
 
-    public function sendFile(Proyecto $proyecto, $file, $ciclo)
+    public function sendFile(Proyecto $proyecto, $file, $rutaArchivos)
     {
         $repoName = $proyecto->getRepoNameFromURL();
         $owner = env('GITHUB_OWNER');
         $path = $file->getRelativePathname();
-        $sha = $this->getShaFile($repoName, $file);
-        $nombreCiclo = $ciclo->nombre;
-        $año = date('Y');
-        $response = $this->client->put("/repos/{$owner}/{$repoName}/contents/{$nombreCiclo}/{$año}/{$path}", [
+        $sha = $this->getShaFile($repoName, $file, $rutaArchivos);
+        $response = $this->client->put("/repos/{$owner}/{$repoName}/contents/$rutaArchivos/{$path}", [
             'json' => [
                 'message' => 'Add ' . $file->getRelativePathname(),
                 'content' => base64_encode(file_get_contents($file->getRealPath())),

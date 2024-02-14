@@ -88,7 +88,8 @@ class ProyectoController extends Controller
             $proyecto->update($proyectoData);
 
             foreach ($proyecto->ciclos as $ciclo) {
-                $this->githubService->pushZipFiles($proyecto, $ciclo);
+                $rutaArchivos = $ciclo->nombre . '/' . date('Y');
+                $this->githubService->pushZipFiles($proyecto, $rutaArchivos);
             }
 
         }
