@@ -39,17 +39,17 @@ class ProyectoController extends Controller
      * Store a newly created resource in storage.
      */
 
-     public function store(Request $request)
-     {
+    public function store(Request $request)
+    {
 
-         $proyecto = json_decode($request->getContent(), true);
+        $proyecto = json_decode($request->getContent(), true);
 
-         $proyecto['docente_id']= auth()->id();
+        $proyecto['docente_id'] = auth()->id();
 
-         $proyecto = Proyecto::create($proyecto);
+        $proyecto = Proyecto::create($proyecto);
 
-         return new ProyectoResource($proyecto);
-     }
+        return new ProyectoResource($proyecto);
+    }
 
 
     /**
@@ -66,7 +66,7 @@ class ProyectoController extends Controller
     public function update(Request $request, Proyecto $proyecto)
     {
         $proyectoData = $request->all();
-        if($proyectoRepoZip = $request->file('fichero')) {
+        if ($proyectoRepoZip = $request->file('fichero')) {
             $request->validate([
                 'fichero' => 'required|mimes:zip,rar,bz,bz2,7z|max:5120', // Se permiten ficheros comprimidos de hasta 5 MB
             ], [

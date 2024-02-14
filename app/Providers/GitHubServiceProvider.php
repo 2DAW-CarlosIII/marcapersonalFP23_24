@@ -2,9 +2,9 @@
 
 namespace App\Providers;
 
-use App\Models\Proyecto;
-use GuzzleHttp\Client;
 use Illuminate\Support\ServiceProvider;
+use GuzzleHttp\Client;
+use App\Models\Proyecto;
 use Illuminate\Support\Facades\File;
 use ZipArchive;
 
@@ -30,14 +30,14 @@ class GitHubServiceProvider extends ServiceProvider
     {
         $owner = env('GITHUB_OWNER');
         $githubResponse = $this->client->post("/orgs/{$owner}/repos", [
-           'json' => $proyecto->getGithubSettings()
+            'json' => $proyecto->getGithubSettings()
         ]);
 
-        if($githubResponse->getStatusCode() === 201) {
+        if ($githubResponse->getStatusCode() === 201) {
             $githubResponse = $this->client->get($githubResponse->getHeader('Location')[0]);
         }
 
-       return $githubResponse;
+        return $githubResponse;
     }
 
     public function deleteRepo(Proyecto $proyecto)
