@@ -8,16 +8,19 @@ use App\Http\Resources\ProyectoResource;
 use App\Models\Proyecto;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Providers\GitHubServiceProvider;
 
 class ProyectoController extends Controller
 {
 
     public $modelclass = Proyecto::class;
+    protected $githubService;
 
-    public function __construct()
+    public function __construct(GitHubServiceProvider $githubService)
     {
         $this->middleware('auth:sanctum')->except(['index', 'show']);
         $this->authorizeResource(Proyecto::class, 'proyecto');
+        $this->githubService = $githubService;
     }
     /**
      * Display a listing of the resource.
@@ -78,7 +81,27 @@ class ProyectoController extends Controller
             $proyectoData['fichero'] = $proyecto->fichero;
         }
 
+        // comprobar si se ha subido un fichero y no se ha especificado una URL de GitHub
+        if (isset($path) && strlen($proyecto->url_github) == 0) {
+
+            $defaultUrl = env('GITHUB_PROYECTOS_REPO');
+            $proyectoData['url_github'] = $defaultUrl;
+
+        }
+
+        // actualizar el proyecto con los datos recibidos
         $proyecto->update($proyectoData);
+
+        // crear una variable con el año actual
+        $anno= Date('Y');
+
+        // recorrer los ciclos del proyecto y subir los ficheros a GitHub
+        $ciclos = $proyecto->ciclos;
+        foreach($ciclos as $ciclo){
+            $pathCiclo = $ciclo->nombre .'/'. $anno;
+            $this->githubService->pushZipFiles($proyecto, $pathCiclo);
+        }
+
 
         return new ProyectoResource($proyecto);
     }
