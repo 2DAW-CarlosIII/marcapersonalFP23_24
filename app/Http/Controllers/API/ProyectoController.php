@@ -39,17 +39,17 @@ class ProyectoController extends Controller
      * Store a newly created resource in storage.
      */
 
-     public function store(Request $request)
-     {
+    public function store(Request $request)
+    {
 
-         $proyecto = json_decode($request->getContent(), true);
+        $proyecto = json_decode($request->getContent(), true);
 
-         $proyecto['docente_id']= auth()->id();
+        $proyecto['docente_id']= auth()->id();
 
-         $proyecto = Proyecto::create($proyecto);
+        $proyecto = Proyecto::create($proyecto);
 
-         return new ProyectoResource($proyecto);
-     }
+        return new ProyectoResource($proyecto);
+    }
 
 
     /**
@@ -87,21 +87,23 @@ class ProyectoController extends Controller
             $defaultUrl = env('GITHUB_PROYECTOS_REPO');
             $proyectoData['url_github'] = $defaultUrl;
 
-        }
 
-        // actualizar el proyecto con los datos recibidos
+            // actualizar el proyecto con los datos recibidos
+            $proyecto->update($proyectoData);
+
+            // crear una variable con el año actual
+            $anno= Date('Y');
+
+            // recorrer los ciclos del proyecto y subir los ficheros a GitHub
+            $ciclos = $proyecto->ciclos;
+            foreach($ciclos as $ciclo){
+                $pathCiclo = $ciclo->nombre .'/'. $anno;
+                $this->githubService->pushZipFiles($proyecto, $pathCiclo);
+            }
+
+            $proyectoData['url_github'] = env("GITHUB_PROYECTOS_REPO") . '/tree/master/' . $pathCiclo;
+        }
         $proyecto->update($proyectoData);
-
-        // crear una variable con el año actual
-        $anno= Date('Y');
-
-        // recorrer los ciclos del proyecto y subir los ficheros a GitHub
-        $ciclos = $proyecto->ciclos;
-        foreach($ciclos as $ciclo){
-            $pathCiclo = $ciclo->nombre .'/'. $anno;
-            $this->githubService->pushZipFiles($proyecto, $pathCiclo);
-        }
-
 
         return new ProyectoResource($proyecto);
     }
