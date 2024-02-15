@@ -64,18 +64,23 @@ class ProyectoController extends Controller
             ]);
 
             $path = $proyectoRepoZip->store('repoZips', ['disk' => 'public']);
+            $fileName = $proyectoRepoZip->getClientOriginalName();
             $proyectoData['fichero'] = $path;
         } else {
             $proyectoData['fichero'] = $proyecto->fichero;
         }
 
          if (isset($path) && strlen($proyecto->url_github) == 0) {
-            $proyectoData['url_github'] = env("GITHUB_PROYECTOS_REPO");
-            $proyecto->update($proyectoData);
 
             //Usamos el año fecha_inicio de la propiedad metadatos del proyecto
             $metadatos = unserialize($proyecto->metadatos);
             $year_inicio = date('Y', strtotime($metadatos['fecha_inicio']));
+
+            $firstCiclo = $proyecto->ciclos->first();
+
+            $proyectoData['url_github'] = env("GITHUB_PROYECTOS_REPO") . '/' . $firstCiclo->nombre . "/" . $year_inicio . "/" . $fileName;
+            $proyecto->update($proyectoData);
+
 
            // Creamos un array de ciclos del proyecto
             $ciclos= $proyecto->ciclos;

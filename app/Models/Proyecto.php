@@ -47,10 +47,15 @@ class Proyecto extends Model
             }
 
             public function getRepoNameFromURL() {
-                        $url = $this->url_github;
-                        $repoName = substr($url, strripos($url, '/') + 1);
-                        return $repoName;
-                    }
+                $url = $this->url_github;
+                $lastSlashPos = strrpos($url, '/');
+                $penultimateSlashPos = strrpos($url, '/', $lastSlashPos - strlen($url) - 1);
+                $posPenultimate = strrpos($url, '/', $lastSlashPos - strlen($url) - 1);
+                $antepenultimateSlashPos = strrpos($url, '/', $penultimateSlashPos - strlen($url) - 1);
+                $beforeAntepenultimateSlashPos = strrpos($url, '/', $antepenultimateSlashPos - strlen($url) - 1);
+                $repoName = substr($url, $beforeAntepenultimateSlashPos + 1, $antepenultimateSlashPos - $beforeAntepenultimateSlashPos - 1);                return $repoName;
+            }
+
 
             public function urlPerteneceOrganizacion() {
                     return strpos($this->url_github, env('GITHUB_OWNER')) > 0;
