@@ -54,6 +54,7 @@ class Proyecto extends Model
                 $thirdPos = strrpos($url, '/', $secondPos - strlen($url) - 1);
                 $fourthPos = strrpos($url, '/', $thirdPos - strlen($url) - 1);
                 $fifthPos = strrpos($url, '/', $fourthPos - strlen($url) - 1);
+                $sixthPos = strrpos($url, '/', $fifthPos - strlen($url) - 1);
                 // Extract the substring between the 4th-to-last and 5th-to-last slashes
                 $repoName = substr($url, $fifthPos + 1, $fourthPos - $fifthPos - 1);
                 return $repoName;

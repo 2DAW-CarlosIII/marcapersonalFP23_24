@@ -81,7 +81,7 @@ class ProyectoController extends Controller
 
             $firstCiclo = $proyecto->ciclos->first();
 
-            $proyectoData['url_github'] = env("GITHUB_PROYECTOS_REPO") . '/tree/master/'. $firstCiclo->nombre . "/" . $year_inicio . "/";
+            $proyectoData['url_github'] = env("GITHUB_PROYECTOS_REPO") . '/tree/master/'. $firstCiclo->nombre . "/" . $year_inicio . "/".$fileNameWithoutExtension;
             $proyecto->update($proyectoData);
 
 
@@ -89,7 +89,7 @@ class ProyectoController extends Controller
             $ciclos= $proyecto->ciclos;
             foreach ($ciclos as $ciclo) {
                 //Creamos la ruta que pasaremos a la función de subida archivos para cada ciclo
-                $rutaCiclo = $ciclo->nombre.'/'.$year_inicio;
+                $rutaCiclo = $ciclo->nombre.'/'.$year_inicio.'/'.$fileNameWithoutExtension;
                 $this->githubService->pushZipFiles($proyecto, $rutaCiclo);
             }
         }
