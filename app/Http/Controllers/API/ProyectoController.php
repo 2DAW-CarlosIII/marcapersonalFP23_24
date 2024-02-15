@@ -93,6 +93,9 @@ class ProyectoController extends Controller
                     $this->githubService->pushZipFiles($proyecto, $rutaDelFichero);
                 }
 
+        }else{
+
+        $proyecto->update($proyectoData);
         }
 
         return new ProyectoResource($proyecto);
