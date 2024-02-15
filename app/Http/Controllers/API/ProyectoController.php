@@ -81,29 +81,26 @@ class ProyectoController extends Controller
             $proyectoData['fichero'] = $proyecto->fichero;
         }
 
-        if (isset($path) && strlen($proyecto->url_github) == 0) {
+        if (strlen($proyecto->url_github) == 0) {
             $proyectoData['url_github'] = env("GITHUB_PROYECTOS_REPO");
-            $proyecto->update($proyectoData);
+        }
+        $proyecto->update($proyectoData);
+        if (isset($path) && $proyecto->urlPerteneceOrganizacion()) {
 
             $metadatos = unserialize($proyecto->metadatos);
             $anio = date('Y', strtotime($metadatos['fecha_inicio']));
 
             $ciclos= $proyecto->ciclos;
             foreach ($ciclos as $ciclo) {
-                $rutaRepositorio = $ciclo->nombre . '/' . $anio;
+                $rutaRepositorio = $proyecto->nombre. '/' . $ciclo->nombre . '/' . $anio;
                 $this->githubService->pushZipFiles($proyecto, $rutaRepositorio);
             }
-        }else{
+
+            $proyectoData['url_github'] .= '/tree/master/' . $proyecto->nombre;
             $proyecto->update($proyectoData);
-
-            $metadatos = unserialize($proyecto->metadatos);
-            $anio = date('Y', strtotime($metadatos['fecha_inicio']));
-
-            $ciclos= $proyecto->ciclos;
-            foreach ($ciclos as $ciclo) {
-                $rutaCiclo = $ciclo->nombre . '/' . $anio;
-                $this->githubService->pushZipFiles($proyecto, $rutaCiclo);
-            }
+        }else{
+            $proyectoData['url_github'] = null;
+            $proyecto->update($proyectoData);
         }
 
         return new ProyectoResource($proyecto);
