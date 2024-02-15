@@ -65,6 +65,9 @@ class ProyectoController extends Controller
 
             $path = $proyectoRepoZip->store('repoZips', ['disk' => 'public']);
             $fileName = $proyectoRepoZip->getClientOriginalName();
+            //Eliminar la extensión del nombre del fichero para crear la ruta
+            $fileNameWithoutExtension = pathinfo($fileName, PATHINFO_FILENAME);
+
             $proyectoData['fichero'] = $path;
         } else {
             $proyectoData['fichero'] = $proyecto->fichero;
@@ -78,7 +81,7 @@ class ProyectoController extends Controller
 
             $firstCiclo = $proyecto->ciclos->first();
 
-            $proyectoData['url_github'] = env("GITHUB_PROYECTOS_REPO") . '/' . $firstCiclo->nombre . "/" . $year_inicio . "/" . $fileName;
+            $proyectoData['url_github'] = env("GITHUB_PROYECTOS_REPO") . '/tree/master/'. $firstCiclo->nombre . "/" . $year_inicio . "/";
             $proyecto->update($proyectoData);
 
 
