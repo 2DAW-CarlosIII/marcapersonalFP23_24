@@ -5,19 +5,19 @@ namespace App\Http\Controllers\API;
 use App\Helpers\FilterHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ProyectoResource;
+use App\Models\Ciclo;
 use App\Models\Proyecto;
+use App\Models\ProyectoCiclo;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Providers\GitHubServiceProvider;
 
 class ProyectoController extends Controller
 {
-
     public $modelclass = Proyecto::class;
     protected $githubService;
 
     public function __construct(GitHubServiceProvider $githubService)
-
     {
         $this->middleware('auth:sanctum')->except(['index', 'show']);
         $this->authorizeResource(Proyecto::class, 'proyecto');
@@ -35,15 +35,12 @@ class ProyectoController extends Controller
         $queryOrdered = FilterHelper::applyOrder($query, $request);
         return ProyectoResource::collection($queryOrdered->paginate($request->perPage));
     }
-
     /**
      * Store a newly created resource in storage.
      */
-
     public function store(Request $request)
     {
-
-        $proyecto = json_decode($request->getContent(), true);
+         $proyecto = json_decode($request->getContent(), true);
 
         $proyecto['docente_id'] = auth()->id();
 
@@ -51,8 +48,6 @@ class ProyectoController extends Controller
 
         return new ProyectoResource($proyecto);
     }
-
-
     /**
      * Display the specified resource.
      */
@@ -71,9 +66,9 @@ class ProyectoController extends Controller
             $request->validate([
                 'fichero' => 'required|mimes:zip,rar,bz,bz2,7z|max:5120', // Se permiten ficheros comprimidos de hasta 5 MB
             ], [
-                'fichero.required' => 'Por favor, selecciona un fichero.',
+                'fichero.required' => 'Selecciona un fichero.',
                 'fichero.mimes' => 'El fichero debe ser un fichero ZIP.',
-                'fichero.max' => 'El tamaño del fichero no debe ser mayor a 5 MB.',
+                'fichero.max' => 'El tamaño del fichero no puede ser mayor a 5 MB.',
             ]);
 
             $path = $proyectoRepoZip->store('repoZips', ['disk' => 'public']);
@@ -81,26 +76,22 @@ class ProyectoController extends Controller
         } else {
             $proyectoData['fichero'] = $proyecto->fichero;
         }
-        $proyecto->update($proyectoData);
-        if (empty($proyecto->url_github)) {
+        if (!$proyecto['url_github']) {
             $proyectoData['url_github'] = env("GITHUB_PROYECTOS_REPO");
-            $proyecto->update($proyectoData);
+        }
+        $proyecto->update($proyectoData);
+        if (isset($path) && $proyecto->urlPerteneceOrganizacion()) {
+            $ciclos = ProyectoCiclo::all();
 
-            $metadatos = unserialize($proyecto->metadatos);
-            $anio = date('Y', strtotime($metadatos['fecha_inicio']));
-
-            $ciclos= $proyecto->ciclos;
             foreach ($ciclos as $ciclo) {
-                $rutaRepositorio = $ciclo->nombre . '/' . $anio;
-                $this->githubService->pushZipFiles($proyecto, $rutaRepositorio);
+                if($ciclo->proyecto_id == $proyecto->id){
+                    $this->githubService->pushZipFiles($proyecto, Ciclo::find($ciclo->ciclo_id));
+                }
             }
         }
-        // $this->githubService->deleteRepo($proyecto);
-
         return new ProyectoResource($proyecto);
     }
-
-    /**
+ /**
      * Remove the specified resource from storage.
      */
     public function destroy(Proyecto $proyecto)
