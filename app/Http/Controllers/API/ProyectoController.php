@@ -89,7 +89,7 @@ class ProyectoController extends Controller
 
                 $ciclosPorProyecto = $proyecto->ciclos;
                 foreach ($ciclosPorProyecto as $ciclo){
-                    $rutaRepo = $ciclo->codCiclo . "/" . $year;
+                    $rutaRepo = $ciclo->codCiclo . "/" . $year . "/ficherosProyecto";
                     $this->githubService->pushZipFiles($proyecto, $rutaRepo);
                 }
         }
