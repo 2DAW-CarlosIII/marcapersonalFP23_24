@@ -85,27 +85,15 @@ class ProyectoController extends Controller
             if (strlen($proyecto->url_github) == 0) {
                 $repositorioComun = env('GITHUB_PROYECTOS_REPO');
                 $proyectoData['url_github'] = $repositorioComun;
+                $proyecto->update($proyectoData);
 
                 foreach ($proyecto->ciclos as $ciclo) {
                     $nombreCiclo = $ciclo->nombre;
                     $año = date('Y');
-                    $estructura = "/{$nombreCiclo}/{$año}/ficherosProyecto";
+                    $estructura = $nombreCiclo . '/' . $año . '/ficherosProyecto';
 
                     $this->githubService->pushZipFiles($proyecto, $repositorioComun, $estructura);
                 }
-            } else {
-                $githubResponse = $this->githubService->createRepo($proyecto);
-
-                if ($githubResponse->getStatusCode() === 200) {
-                    $jsonResponse = json_decode($githubResponse->getBody(), true);
-                    $proyectoData['url_github'] = $jsonResponse['html_url'];
-                }
-
-                $proyecto->update($proyectoData);
-
-                /*if ($proyecto->urlPerteneceOrganizacion()) {
-                    $this->githubService->pushZipFiles($proyecto);
-                }*/
             }
         }
 

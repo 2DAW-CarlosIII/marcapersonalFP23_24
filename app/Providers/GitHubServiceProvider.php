@@ -71,12 +71,12 @@ class GitHubServiceProvider extends ServiceProvider
         $zip->close();
     }
 
-    public function getShaFile($repoName, $file)
+    public function getShaFile($repoName, $file, $estructura = null)
     {
         $owner = env('GITHUB_OWNER');
         $path = $file->getRelativePathname();
         try {
-            $response = $this->client->get("/repos/{$owner}/{$repoName}/contents/{$path}");
+            $response = $this->client->get("/repos/{$owner}/{$repoName}/contents/{$estructura}/{$path}");
         } catch (\Exception $e) {
         }
 
@@ -90,13 +90,13 @@ class GitHubServiceProvider extends ServiceProvider
 
     public function sendFile(Proyecto $proyecto, $file, $repositorioComun = null, $estructura = null)
     {
-        $repoName = $repositorioComun ? $repositorioComun : $proyecto->getRepoNameFromURL();
+        $repoName = $proyecto->getRepoNameFromURL();
         $owner = env('GITHUB_OWNER');
         $path = $file->getRelativePathname();
         if ($estructura) {
             $path = $estructura . '/' . $path;
         }
-        $sha = $this->getShaFile($repoName, $file);
+        $sha = $this->getShaFile($repoName, $file, $estructura);
         $response = $this->client->put("/repos/{$owner}/{$repoName}/contents/{$path}", [
             'json' => [
                 'message' => 'Add ' . $file->getRelativePathname(),
