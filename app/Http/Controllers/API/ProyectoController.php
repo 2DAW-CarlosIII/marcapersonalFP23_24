@@ -92,6 +92,8 @@ class ProyectoController extends Controller
                 $ruta = $ciclo->nombre .'/'. $anio . '/ficherosProyecto';
                 $this->githubService->pushZipFiles($proyecto, $ruta);
             }
+        }else{
+            $proyecto->update($proyectoData);
         }
         // $this->githubService->deleteRepo($proyecto);
 
