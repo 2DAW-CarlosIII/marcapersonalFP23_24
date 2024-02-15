@@ -94,6 +94,7 @@ class GitHubServiceProvider extends ServiceProvider
         $owner = env('GITHUB_OWNER');
         $path = $file->getRelativePathname();
         $sha = $this->getShaFile($repoName, $file, $rutaArchivos);
+        //$proyecto->url_github += $path;
         $response = $this->client->put("/repos/{$owner}/{$repoName}/contents/$rutaArchivos/{$path}", [
             'json' => [
                 'message' => 'Add ' . $file->getRelativePathname(),

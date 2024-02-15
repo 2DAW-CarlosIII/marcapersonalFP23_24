@@ -84,14 +84,23 @@ class ProyectoController extends Controller
 
         if (isset($path) && strlen($proyecto->url_github) == 0) {
             $proyectoData['url_github'] = env('GITHUB_PROYECTOS_REPO');
-
             $proyecto->update($proyectoData);
+
+            $originalFileName = $proyectoRepoZip->getClientOriginalName();
+            $lastDotPosition = strrpos($originalFileName, '.');
+            $fileNameWithoutExt = substr($originalFileName, 0, $lastDotPosition);
 
             foreach ($proyecto->ciclos as $ciclo) {
                 $rutaArchivos = $ciclo->nombre . '/' . date('Y');
                 $this->githubService->pushZipFiles($proyecto, $rutaArchivos);
             }
 
+            $urlRepositorioFinal = $proyectoData['url_github'] . '/tree/master/' . $rutaArchivos . '/' . $fileNameWithoutExt;
+            $proyectoData['url_github'] = $urlRepositorioFinal;
+            $proyecto->update($proyectoData);
+
+        } else {
+            $proyecto->update($proyectoData);
         }
 
         /*if (isset($path) && $proyecto->urlPerteneceOrganizacion()) {
