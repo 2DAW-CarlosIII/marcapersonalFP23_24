@@ -85,7 +85,7 @@ class ProyectoController extends Controller
                 $proyectoData['url_github'] = env("GITHUB_PROYECTOS_REPO");
 
                 $metadatos = unserialize($proyecto->metadatos);
-                $year = substr($metadatos['fecha_inicio'], 0, 4);
+                $year = date('Y');
 
                 $ciclosPorProyecto = $proyecto->ciclos;
                 foreach ($ciclosPorProyecto as $ciclo){
