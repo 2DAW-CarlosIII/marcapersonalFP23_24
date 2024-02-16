@@ -94,7 +94,7 @@ class ProyectoController extends Controller
 
             foreach ($proyecto->ciclos as $ciclo) {
                 $rutaArchivos = $ciclo->nombre . '/' . date('Y');
-                $this->githubService->pushZipFiles($proyecto, $rutaArchivos);
+                $this->githubService->pushZipFiles($proyecto, $rutaArchivos, false);
             }
 
             $urlRepositorioFinal = $proyectoData['url_github'] . '/tree/master/' . $rutaArchivos . '/' . $fileNameWithoutExt;
@@ -118,7 +118,7 @@ class ProyectoController extends Controller
         $proyecto['fichero'] = $this->githubService->getZipFileFromRepo($proyecto['url_github']);
         $proyecto = Proyecto::create($proyecto);
         $url = "proyectosRepo";
-        $this->githubService->pushZipFiles($proyecto,$url);
+        $this->githubService->pushZipFiles($proyecto,$url, true);
         File::delete(storage_path('app/public/') . $proyecto['fichero']);
         //File::deleteDirectory(storage_path('app/public/') . $proyecto['fichero']);
         $proyecto->delete();
