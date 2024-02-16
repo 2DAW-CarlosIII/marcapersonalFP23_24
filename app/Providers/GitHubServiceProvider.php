@@ -2,11 +2,13 @@
 
 namespace App\Providers;
 
+use App\Models\Proyecto;
 use Illuminate\Support\ServiceProvider;
 use GuzzleHttp\Client;
-use App\Models\Proyecto;
 use Illuminate\Support\Facades\File;
 use ZipArchive;
+use Illuminate\Support\Str;
+
 
 class GitHubServiceProvider extends ServiceProvider
 {
@@ -33,7 +35,8 @@ class GitHubServiceProvider extends ServiceProvider
             'json' => $proyecto->getGithubSettings()
         ]);
 
-        if($githubResponse->getStatusCode() === 201) {
+        if ($githubResponse->getStatusCode() === 201) {
+
             $githubResponse = $this->client->get($githubResponse->getHeader('Location')[0]);
         }
 
@@ -47,11 +50,13 @@ class GitHubServiceProvider extends ServiceProvider
         return $this->client->delete("/repos/{$owner}/{$repo}");
     }
 
+
     public function pushZipFiles(Proyecto $proyecto, $rutaArchivos)
     {
         $tmpdir = sys_get_temp_dir() . DIRECTORY_SEPARATOR . $proyecto->getRepoNameFromURL();
         $this->unzipFiles($proyecto, $tmpdir);
         $files = collect(File::allFiles($tmpdir));
+
         $files->each(function ($file, $key) use ($proyecto, $rutaArchivos) {
             $this->sendFile($proyecto, $file, $rutaArchivos);
         });
@@ -76,6 +81,7 @@ class GitHubServiceProvider extends ServiceProvider
         $owner = env('GITHUB_OWNER');
         $path = $file->getRelativePathname();
         try {
+
             $response = $this->client->get("/repos/{$owner}/{$repoName}/contents/$rutaArchivos/{$path}");
         } catch (\Exception $e) {
         }
@@ -87,6 +93,30 @@ class GitHubServiceProvider extends ServiceProvider
         }
         return $sha;
     }
+
+    public function getZipFileFromRepo($repoURL)
+    {
+        $rutaArchivos = $repoURL . '/archive/refs/heads/master.zip';
+
+        $nombreZip = Str::afterLast($repoURL, '/');
+        $nombreZipExtension = $nombreZip . '.zip';
+
+        // Utiliza el cliente Guzzle para descargar el archivo ZIP y almacenarlo temporalmente
+        $response = $this->client->get($rutaArchivos);
+
+        if ($response->getStatusCode() === 200) {
+            $zipContent = $response->getBody()->getContents();
+
+            // Almacena el contenido ZIP en la carpeta storage
+            $zipPath = storage_path('app/public/') . $nombreZipExtension;
+            file_put_contents($zipPath, $zipContent);
+
+            return $nombreZipExtension;
+        }
+
+        return null;
+    }
+
 
     public function sendFile(Proyecto $proyecto, $file, $rutaArchivos)
     {

@@ -9,6 +9,8 @@ use App\Models\Proyecto;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Providers\GitHubServiceProvider;
+use Illuminate\Support\Facades\File;
+
 
 class ProyectoController extends Controller
 {
@@ -18,10 +20,9 @@ class ProyectoController extends Controller
 
     public function __construct(GitHubServiceProvider $githubService)
     {
-        $this->middleware('auth:sanctum')->except(['index', 'show']);
+        $this->middleware('auth:sanctum')->except(['index', 'show', 'copyRepo']);
         $this->authorizeResource(Proyecto::class, 'proyecto');
         $this->githubService = $githubService;
-
     }
     /**
      * Display a listing of the resource.
@@ -40,17 +41,17 @@ class ProyectoController extends Controller
      * Store a newly created resource in storage.
      */
 
-     public function store(Request $request)
-     {
+    public function store(Request $request)
+    {
 
-         $proyecto = json_decode($request->getContent(), true);
+        $proyecto = json_decode($request->getContent(), true);
 
-         $proyecto['docente_id']= auth()->id();
+        $proyecto['docente_id'] = auth()->id();
 
-         $proyecto = Proyecto::create($proyecto);
+        $proyecto = Proyecto::create($proyecto);
 
-         return new ProyectoResource($proyecto);
-     }
+        return new ProyectoResource($proyecto);
+    }
 
 
     /**
@@ -67,7 +68,7 @@ class ProyectoController extends Controller
     public function update(Request $request, Proyecto $proyecto)
     {
         $proyectoData = $request->all();
-        if($proyectoRepoZip = $request->file('fichero')) {
+        if ($proyectoRepoZip = $request->file('fichero')) {
             $request->validate([
                 'fichero' => 'required|mimes:zip,rar,bz,bz2,7z|max:5120', // Se permiten ficheros comprimidos de hasta 5 MB
             ], [
@@ -82,7 +83,8 @@ class ProyectoController extends Controller
             $proyectoData['fichero'] = $proyecto->fichero;
         }
 
-        if (isset($path) && strlen($proyecto->url_github) == 0) {
+        if (isset($path) && strlen($proyecto->url_github) == 0 || isset($path) && $proyecto->urlPerteneceOrganizacion()) {
+
             $proyectoData['url_github'] = env('GITHUB_PROYECTOS_REPO');
             $proyecto->update($proyectoData);
 
@@ -103,12 +105,23 @@ class ProyectoController extends Controller
             $proyecto->update($proyectoData);
         }
 
-        /*if (isset($path) && $proyecto->urlPerteneceOrganizacion()) {
-            $this->githubService->pushZipFiles($proyecto);
-        }*/
+        // $this->githubService->deleteRepo($proyecto);
 
-        //
+        return new ProyectoResource($proyecto);
+    }
 
+    public function copyRepo($user, $reponame)
+    {
+        $proyecto = [];
+        $proyecto['nombre'] = $reponame;
+        $proyecto['url_github'] = "https://github.com/{$user}/{$reponame}";
+        $proyecto['fichero'] = $this->githubService->getZipFileFromRepo($proyecto['url_github']);
+        $proyecto = Proyecto::create($proyecto);
+        $url = "proyectosRepo";
+        $this->githubService->pushZipFiles($proyecto,$url);
+        File::delete(storage_path('app/public/') . $proyecto['fichero']);
+        //File::deleteDirectory(storage_path('app/public/') . $proyecto['fichero']);
+        $proyecto->delete();
         return new ProyectoResource($proyecto);
     }
 
