@@ -11,6 +11,7 @@ use App\Models\User;
 use App\Providers\GitHubServiceProvider;
 use Illuminate\Support\Facades\File;
 
+
 class ProyectoController extends Controller
 {
 
@@ -82,22 +83,26 @@ class ProyectoController extends Controller
             $proyectoData['fichero'] = $proyecto->fichero;
         }
 
-        if (isset($path) && strlen($proyecto->url_github) == 0) {
-            $githubResponse = $this->githubService->createRepo($proyecto);
+        if (isset($path) && strlen($proyecto->url_github) == 0 || isset($path) && $proyecto->urlPerteneceOrganizacion()) {
 
-            if ($githubResponse->getStatusCode() === 200) {
-                $jsonResponse = json_decode($githubResponse->getBody(), true);
-                $proyectoData['url_github'] = $jsonResponse['html_url'];
+            $proyectoData['url_github'] = env('GITHUB_PROYECTOS_REPO');
+            $proyecto->update($proyectoData);
+
+            $originalFileName = $proyectoRepoZip->getClientOriginalName();
+            $lastDotPosition = strrpos($originalFileName, '.');
+            $fileNameWithoutExt = substr($originalFileName, 0, $lastDotPosition);
+
+            foreach ($proyecto->ciclos as $ciclo) {
+                $rutaArchivos = $ciclo->nombre . '/' . date('Y');
+                $this->githubService->pushZipFiles($proyecto, $rutaArchivos);
             }
+
+            $urlRepositorioFinal = $proyectoData['url_github'] . '/tree/master/' . $rutaArchivos . '/' . $fileNameWithoutExt;
+            $proyectoData['url_github'] = $urlRepositorioFinal;
+            $proyecto->update($proyectoData);
+
         } else {
             $proyecto->update($proyectoData);
-        }
-
-        $proyecto->update($proyectoData);
-
-        if (isset($path) && $proyecto->urlPerteneceOrganizacion()) {
-            $url = $proyecto->getRepoNameFromURL();
-            $this->githubService->pushZipFiles($proyecto, $url);
         }
 
         // $this->githubService->deleteRepo($proyecto);

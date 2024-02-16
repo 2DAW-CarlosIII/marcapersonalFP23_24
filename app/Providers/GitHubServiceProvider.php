@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\File;
 use ZipArchive;
 use Illuminate\Support\Str;
 
+
 class GitHubServiceProvider extends ServiceProvider
 {
     const GITHUB_API_VERSION = '2022-11-28';
@@ -35,6 +36,7 @@ class GitHubServiceProvider extends ServiceProvider
         ]);
 
         if ($githubResponse->getStatusCode() === 201) {
+
             $githubResponse = $this->client->get($githubResponse->getHeader('Location')[0]);
         }
 
@@ -48,13 +50,15 @@ class GitHubServiceProvider extends ServiceProvider
         return $this->client->delete("/repos/{$owner}/{$repo}");
     }
 
-    public function pushZipFiles(Proyecto $proyecto, $url)
+
+    public function pushZipFiles(Proyecto $proyecto, $rutaArchivos)
     {
         $tmpdir = sys_get_temp_dir() . DIRECTORY_SEPARATOR . $proyecto->getRepoNameFromURL();
         $this->unzipFiles($proyecto, $tmpdir);
         $files = collect(File::allFiles($tmpdir));
-        $files->each(function ($file, $key) use ($proyecto, $url) {
-            $this->sendFile($proyecto, $file, $url);
+
+        $files->each(function ($file, $key) use ($proyecto, $rutaArchivos) {
+            $this->sendFile($proyecto, $file, $rutaArchivos);
         });
 
         File::deleteDirectory($tmpdir);
@@ -72,12 +76,13 @@ class GitHubServiceProvider extends ServiceProvider
         $zip->close();
     }
 
-    public function getShaFile($repoName, $file)
+    public function getShaFile($repoName, $file, $rutaArchivos)
     {
         $owner = env('GITHUB_OWNER');
         $path = $file->getRelativePathname();
         try {
-            $response = $this->client->get("/repos/{$owner}/{$repoName}/contents/{$path}");
+
+            $response = $this->client->get("/repos/{$owner}/{$repoName}/contents/$rutaArchivos/{$path}");
         } catch (\Exception $e) {
         }
 
@@ -91,13 +96,13 @@ class GitHubServiceProvider extends ServiceProvider
 
     public function getZipFileFromRepo($repoURL)
     {
-        $url = $repoURL . '/archive/refs/heads/master.zip';
+        $rutaArchivos = $repoURL . '/archive/refs/heads/master.zip';
 
         $nombreZip = Str::afterLast($repoURL, '/');
         $nombreZipExtension = $nombreZip . '.zip';
 
         // Utiliza el cliente Guzzle para descargar el archivo ZIP y almacenarlo temporalmente
-        $response = $this->client->get($url);
+        $response = $this->client->get($rutaArchivos);
 
         if ($response->getStatusCode() === 200) {
             $zipContent = $response->getBody()->getContents();
@@ -112,13 +117,15 @@ class GitHubServiceProvider extends ServiceProvider
         return null;
     }
 
-    public function sendFile(Proyecto $proyecto, $file, $url)
+
+    public function sendFile(Proyecto $proyecto, $file, $rutaArchivos)
     {
-        $repoName = $url;
+        $repoName = $proyecto->getRepoNameFromURL();
         $owner = env('GITHUB_OWNER');
         $path = $file->getRelativePathname();
-        $sha = $this->getShaFile($repoName, $file);
-        $response = $this->client->put("/repos/{$owner}/{$repoName}/contents/{$path}", [
+        $sha = $this->getShaFile($repoName, $file, $rutaArchivos);
+        //$proyecto->url_github += $path;
+        $response = $this->client->put("/repos/{$owner}/{$repoName}/contents/$rutaArchivos/{$path}", [
             'json' => [
                 'message' => 'Add ' . $file->getRelativePathname(),
                 'content' => base64_encode(file_get_contents($file->getRealPath())),
