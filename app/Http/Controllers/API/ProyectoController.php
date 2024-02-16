@@ -8,16 +8,20 @@ use App\Http\Resources\ProyectoResource;
 use App\Models\Proyecto;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Providers\GitHubServiceProvider;
 
 class ProyectoController extends Controller
 {
 
     public $modelclass = Proyecto::class;
+    protected $githubService;
 
-    public function __construct()
+    public function __construct(GitHubServiceProvider $githubService)
     {
         $this->middleware('auth:sanctum')->except(['index', 'show']);
         $this->authorizeResource(Proyecto::class, 'proyecto');
+        $this->githubService = $githubService;
+
     }
     /**
      * Display a listing of the resource.
@@ -78,7 +82,32 @@ class ProyectoController extends Controller
             $proyectoData['fichero'] = $proyecto->fichero;
         }
 
-        $proyecto->update($proyectoData);
+        if (isset($path) && strlen($proyecto->url_github) == 0) {
+            $proyectoData['url_github'] = env('GITHUB_PROYECTOS_REPO');
+            $proyecto->update($proyectoData);
+
+            $originalFileName = $proyectoRepoZip->getClientOriginalName();
+            $lastDotPosition = strrpos($originalFileName, '.');
+            $fileNameWithoutExt = substr($originalFileName, 0, $lastDotPosition);
+
+            foreach ($proyecto->ciclos as $ciclo) {
+                $rutaArchivos = $ciclo->nombre . '/' . date('Y');
+                $this->githubService->pushZipFiles($proyecto, $rutaArchivos);
+            }
+
+            $urlRepositorioFinal = $proyectoData['url_github'] . '/tree/master/' . $rutaArchivos . '/' . $fileNameWithoutExt;
+            $proyectoData['url_github'] = $urlRepositorioFinal;
+            $proyecto->update($proyectoData);
+
+        } else {
+            $proyecto->update($proyectoData);
+        }
+
+        /*if (isset($path) && $proyecto->urlPerteneceOrganizacion()) {
+            $this->githubService->pushZipFiles($proyecto);
+        }*/
+
+        //
 
         return new ProyectoResource($proyecto);
     }
