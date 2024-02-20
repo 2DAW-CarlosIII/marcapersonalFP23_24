@@ -34,7 +34,6 @@ class DatabaseSeeder extends Seeder
         $this->call(Users_ciclosTableSeeder::class);
         $this->call(CompetenciasTableSeeder::class);
         $this->call(UsersCompetenciasTableSeeder::class);
-        $this->call(EmpresasTableSeeder::class);
         $this->call(IdiomasTableSeeder::class);
         $this->call(UsersIdiomasTableSeeder::class);
 
