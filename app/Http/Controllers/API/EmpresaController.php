@@ -5,8 +5,11 @@ namespace App\Http\Controllers\API;
 use App\Helpers\FilterHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\EmpresaResource;
+use App\Mail\EmpresaAccesoRegistrado;
 use App\Models\Empresa;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class EmpresaController extends Controller
 {
@@ -19,7 +22,7 @@ class EmpresaController extends Controller
     */
     public function __construct()
     {
-        $this->middleware('auth:sanctum')->except(['index', 'show']);
+        $this->middleware('auth:sanctum')->except(['index', 'show', 'accesoPorToken']);
         $this->authorizeResource(Empresa::class, 'empresa');
     }
 
@@ -70,5 +73,14 @@ class EmpresaController extends Controller
     public function destroy(Empresa $empresa)
     {
         $empresa->delete();
+    }
+
+    public function accesoPorToken($token)
+    {
+        $empresa = Empresa::where('token', $token)->firstOrFail();
+        $usuario = $empresa->user;
+        Auth::login($usuario);
+        Mail::to($empresa->email)->send(new EmpresaAccesoRegistrado($empresa));
+        return redirect(route('home'));
     }
 }

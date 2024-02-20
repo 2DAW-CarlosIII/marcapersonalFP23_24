@@ -44,6 +44,7 @@ Route::prefix('v1')->group(function () {
     Route::apiResource('users', UserController::class);
     Route::apiResource('proyectos', ProyectoController::class);
     Route::apiResource('empresas', EmpresaController::class);
+    Route::get('empresas/acceso/{token}', [EmpresaController::class, 'accesoPorToken'])->name('empresas.acceso');
     Route::apiResource('familias_profesionales', FamiliaProfesionalController::class)->parameters([
         'familias_profesionales' => 'familiaProfesional'
     ]);
