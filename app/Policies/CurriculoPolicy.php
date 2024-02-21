@@ -77,7 +77,12 @@ class CurriculoPolicy
     }
 
     public function getCurriculo(User $user, Curriculo $curriculo): bool
-    {//De momento solo se lo podrá descargar el propietario y el admin, ya que el pdf contiene información sensible.
+    {
+        return $user->esPropietario($curriculo) || $user->esEmpresa();
+    }
+
+    public function autorizar(User $user, Curriculo $curriculo): bool
+    {
         return $user->esPropietario($curriculo);
     }
 

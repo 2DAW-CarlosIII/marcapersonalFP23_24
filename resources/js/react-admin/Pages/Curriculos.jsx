@@ -21,7 +21,7 @@ import {
   } from 'react-admin';
 
 import { useRecordContext} from 'react-admin';
-import { useMediaQuery } from '@mui/material';
+import { useMediaQuery, Button } from '@mui/material';
 
 const EstudianteInput = () => (
     <ReferenceInput label="Estudiante" source="user_id" reference="users" alwaysOn >
@@ -91,7 +91,19 @@ export const CurriculoShow = () => (
             </ReferenceField>
             <TextField source="id" />
             <TextField source="video_curriculum" />
-            <TextField source="pdf_curriculum" />
+            <FunctionField
+                render={
+                    record => {
+                        if (record.pdf_curriculum) {
+                            return (
+                                <Button variant="contained" color="primary" href={`${import.meta.env.VITE_JSON_SERVER_URL}/curriculos/pdf/${record.id}`}>
+                                    Descargar currículo de estudiante
+                                </Button>
+                            )
+                        }
+                    }
+                }
+            />
             <TextField source="sobre_mi" />
         </SimpleShowLayout>
     </Show>

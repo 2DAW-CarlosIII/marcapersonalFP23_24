@@ -7,6 +7,11 @@ use App\Http\Controllers\Controller;
 use App\Models\Curriculo;
 use Illuminate\Http\Request;
 use App\Http\Resources\CurriculoResource;
+use App\Mail\EmpresaAutorizadaVerCurriculo;
+use App\Mail\EmpresaQuiereVerTuCurriculo;
+use App\Models\Empresa;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Response;
 
 class CurriculoController extends Controller
@@ -20,7 +25,7 @@ class CurriculoController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:sanctum')->except(['index', 'show']);
+        $this->middleware('auth:sanctum')->except(['index', 'show', 'getCurriculoByMd5']);
         $this->authorizeResource(Curriculo::class, 'curriculo');
     }
     /**
@@ -90,7 +95,34 @@ class CurriculoController extends Controller
     {
         $curriculo = Curriculo::findOrFail($id);
         $this->authorize('getCurriculo', $curriculo);
-        $path = storage_path('app/' . $curriculo->pdf_curriculum);
+        $user = Auth::user();
+        if ($user->esEmpresa()) {
+            Mail::to($curriculo->user->email)->send(new EmpresaQuiereVerTuCurriculo($user->empresa, $curriculo));
+            abort(401, "Se le ha solicitado permiso al estudiante. En caso de aprobación, se le enviará un correo con el enlace al archivo.");
+        }
+        $path = $curriculo->getStoragePathPdfCurriculum();
+        if (!file_exists($path)) {
+            abort(404, "El archivo no fue encontrado.");
+        }
+        return Response::download($path);
+    }
+
+    public function autorizar($id)
+    {
+        $curriculo = Auth::user()->curriculo;
+        $empresa = Empresa::findOrFail($id);
+        $this->authorize('autorizar', $curriculo);
+        Mail::to($empresa->user->email)->send(new EmpresaAutorizadaVerCurriculo($empresa, $curriculo));
+        return "Hemos enviado un correo a la empresa para que pueda ver tu currículo.";
+    }
+
+    public function getCurriculoByMd5($id, $md5)
+    {
+        $curriculo = Curriculo::findOrFail($id);
+        if ($curriculo->getMd5FileFromPdfCurriculum() !== $md5) {
+            abort(404, "El archivo no fue encontrado.");
+        }
+        $path = $curriculo->getStoragePathPdfCurriculum();
         if (!file_exists($path)) {
             abort(404, "El archivo no fue encontrado.");
         }

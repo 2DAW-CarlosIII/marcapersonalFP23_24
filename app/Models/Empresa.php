@@ -18,6 +18,15 @@ class Empresa extends Model
         'nombre',
     ];
 
+    /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var array<int, string>
+     */
+    protected $hidden = [
+        'token',
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class);
