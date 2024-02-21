@@ -72,7 +72,7 @@ dataProvider.postLogout = () => {
 };
 
 dataProvider.update = (resource, params) => {
-    if (comprobarResource(resource, params)) {
+    if(!anyadirFichero(resource, params)) {
         return originalDataProvider.update(resource, params);
     }
 
@@ -97,15 +97,25 @@ dataProvider.update = (resource, params) => {
         })
 }
 
-function comprobarResource (resource, params) {
-    if (resource !== 'proyectos' || !params.data.attachments) return false
-    if (resource !== 'users' || !params.data.attachments) return false
-    return true
+function anyadirFichero (resource, params) {
+    let ficheroPresente = false
+    const recursosConFicheros = ['proyectos', 'users', 'curriculos']
+    recursosConFicheros.forEach(recurso => {
+        if (recurso === resource && params.data.attachments) ficheroPresente = true
+    })
+    return ficheroPresente
 }
 
 function asignarFichero (resource, formData, params) {
-    if (resource === 'proyectos') formData.append('fichero', params.data.attachments.rawFile)
-    if (resource === 'users') formData.append('avatar', params.data.attachments.rawFile)
+
+    const recursosConFicheros = [
+        {recurso:'proyectos', archivo:'fichero'},
+        {recurso:'users', archivo:'avatar'},
+        {recurso:'curriculos', archivo:'pdf_curriculum'}
+    ]
+    recursosConFicheros.forEach(recurso => {
+        if (recurso.recurso === resource) formData.append(recurso.archivo, params.data.attachments.rawFile)
+    })
 }
 
 

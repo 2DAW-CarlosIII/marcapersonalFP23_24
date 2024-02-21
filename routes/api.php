@@ -44,10 +44,14 @@ Route::prefix('v1')->group(function () {
     Route::apiResource('users', UserController::class);
     Route::apiResource('proyectos', ProyectoController::class);
     Route::apiResource('empresas', EmpresaController::class);
+    Route::get('empresas/acceso/{token}', [EmpresaController::class, 'accesoPorToken'])->name('empresas.acceso');
     Route::apiResource('familias_profesionales', FamiliaProfesionalController::class)->parameters([
         'familias_profesionales' => 'familiaProfesional'
     ]);
     Route::apiResource('curriculos', CurriculoController::class);
+    Route::get('curriculos/pdf/{id}', [CurriculoController::class, 'getCurriculo']);
+    Route::get('curriculos/{id}/autorizar', [CurriculoController::class, 'autorizar'])->name('curriculos.autorizar');
+    Route::get('curriculos/pdf/{id}/{md5}', [CurriculoController::class, 'getCurriculoByMd5'])->name('curriculos.getCurriculoByMd5');
     Route::apiResource('actividades', ActividadController::class)->parameters([
         'actividades' => 'actividad'
     ]);
@@ -60,7 +64,6 @@ Route::prefix('v1')->group(function () {
 
     Route::put('reconocimientos/validar/{id}', [ReconocimientoController::class, 'validar'])
         ->where('id', '[0-9]+');
-    Route::get('curriculos/pdf/{id}', [CurriculoController::class, 'getCurriculo']);
     // emite un nuevo token
     Route::post('tokens', [TokenController::class, 'store']);
     // elimina el token del usuario autenticado

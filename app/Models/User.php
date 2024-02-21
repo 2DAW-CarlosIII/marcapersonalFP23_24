@@ -59,6 +59,14 @@ class User extends Authenticatable
     }
 
     /**
+     * Get the empresa associated with the user.
+     */
+    public function empresa(): HasOne
+    {
+        return $this->hasOne(Empresa::class);
+    }
+
+    /**
      * The idiomas that belong to the user.
      */
     public function idiomas(): BelongsToMany
@@ -124,6 +132,11 @@ class User extends Authenticatable
     public function esPropietario($recurso, $propiedad = 'user_id'): bool
     {
         return $recurso && $recurso->$propiedad === $this->id;
+    }
+
+    public function esEmpresa(): bool
+    {
+        return Empresa::where('user_id', $this->id)->exists();
     }
 
     private function getEmailDomain(): string

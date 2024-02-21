@@ -6,5 +6,5 @@
     <li>Teléfono: {{ $empresa->telefono }}</li>
 </ul>
 <p>Para visitarnos, por favor, haga clic en el siguiente enlace:
-    <a href="{{ url('empresas/acceso', $empresa->token) }}">Registro en Marca Personal F.P.</a></p>
+    <a href="{{ route('empresas.acceso', $empresa->token) }}">Registro en Marca Personal F.P.</a></p>
 </p>

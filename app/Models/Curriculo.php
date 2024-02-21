@@ -25,4 +25,18 @@ class Curriculo extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function getStoragePathPdfCurriculum(): string
+    {
+        return storage_path('app/' . $this->pdf_curriculum);
+    }
+
+    /**
+     * Get the md5 hash of pdf_curriculum file.
+     */
+    public function getMd5FileFromPdfCurriculum(): string
+    {
+        return md5_file($this->getStoragePathPdfCurriculum());
+    }
+
+
 }

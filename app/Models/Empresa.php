@@ -14,7 +14,17 @@ class Empresa extends Model
     protected $fillable=[
         'nif',
         'email',
-        'token'
+        'token',
+        'nombre',
+    ];
+
+    /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var array<int, string>
+     */
+    protected $hidden = [
+        'token',
     ];
 
     public function user()
@@ -27,13 +37,14 @@ class Empresa extends Model
         static::created(function ($empresa) {
             $empresa->token = Str::random(60);
 
-            $empresa->user()->create([
-                'name' => Str::slug($empresa->nombre),
-                'nombre' => $empresa->nombre,
+            $usuario = User::create([
+                'name' => Str::slug($empresa->nif),
+                'nombre' => substr($empresa->nombre, 0, 50),
                 'email' => $empresa->email,
                 'password' => bcrypt('token'),
             ]);
 
+            $empresa->user()->associate($usuario);
             $empresa->save();
             Mail::to($empresa->email)->send(new NuevaEmpresaRegistrada($empresa));
         });
