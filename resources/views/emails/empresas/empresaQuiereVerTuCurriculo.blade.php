@@ -7,7 +7,7 @@
 </ul>
 
 <p>Si <strong>aceptas</strong> que la empresa <strong>{{ $empresa->nombre }}</strong> vea tu currículo en pdf, haz click en el siguiente enlace:<br />
-    <a href="{{ route('curriculos.autorizar', $curriculo->id) }}">
+    <a href="{{ route('curriculos.autorizar', $empresa->id) }}">
         Acepto compartir mi currículo con la empresa <strong>{{ $empresa->nombre }}</strong>
     </a>
 </p>
