@@ -39,31 +39,6 @@ Route::prefix('v1')->group(function () {
         });
     });
 
-    Route::apiResource('ciclos', CicloController::class);
-    Route::apiResource('reconocimientos', ReconocimientoController::class);
-    Route::apiResource('users', UserController::class);
-    Route::apiResource('proyectos', ProyectoController::class);
-    Route::apiResource('empresas', EmpresaController::class);
-    Route::get('empresas/acceso/{token}', [EmpresaController::class, 'accesoPorToken'])->name('empresas.acceso');
-    Route::apiResource('familias_profesionales', FamiliaProfesionalController::class)->parameters([
-        'familias_profesionales' => 'familiaProfesional'
-    ]);
-    Route::apiResource('curriculos', CurriculoController::class);
-    Route::get('curriculos/pdf/{id}', [CurriculoController::class, 'getCurriculo']);
-    Route::get('curriculos/{id}/autorizar', [CurriculoController::class, 'autorizar'])->name('curriculos.autorizar');
-    Route::get('curriculos/pdf/{id}/{md5}', [CurriculoController::class, 'getCurriculoByMd5'])->name('curriculos.getCurriculoByMd5');
-    Route::apiResource('actividades', ActividadController::class)->parameters([
-        'actividades' => 'actividad'
-    ]);
-    Route::apiResource('competencias', CompetenciaController::class);
-    Route::apiResource('idiomas', IdiomaController::class);
-
-    Route::get('{tabla}/count', [CountController::class, 'count']);
-
-    Route::post('copyrepo/{user}/{reponame}', [ProyectoController::class, 'copyRepo']);
-
-    Route::put('reconocimientos/validar/{id}', [ReconocimientoController::class, 'validar'])
-        ->where('id', '[0-9]+');
     // emite un nuevo token
     Route::post('tokens', [TokenController::class, 'store']);
     // elimina el token del usuario autenticado
@@ -72,7 +47,47 @@ Route::prefix('v1')->group(function () {
     Route::post('login', [AuthenticatedSessionController::class, 'apiLogin']);
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
         ->middleware('auth:sanctum')->name('logout');
+
+    Route::apiResource('actividades', ActividadController::class)->parameters([
+        'actividades' => 'actividad'
+    ]);
+
+    Route::apiResource('ciclos', CicloController::class);
+
+    Route::apiResource('competencias', CompetenciaController::class);
+
+    Route::apiResource('curriculos', CurriculoController::class);
+        Route::get('curriculos/{id}/pdf', [CurriculoController::class, 'getCurriculo'])
+            ->name('curriculos.getCurriculoPDF');
+        Route::get('curriculos/{id}/autorizar', [CurriculoController::class, 'autorizar'])
+            ->name('curriculos.autorizar');
+        Route::get('curriculos/{id}/pdf/{md5}', [CurriculoController::class, 'getCurriculoByMd5'])
+            ->name('curriculos.getCurriculoPDFByMd5');
+
+    Route::apiResource('empresas', EmpresaController::class);
+        Route::get('empresas/acceso/{token}', [EmpresaController::class, 'accesoPorToken'])
+            ->name('empresas.acceso');
+
+    Route::apiResource('familias_profesionales', FamiliaProfesionalController::class)->parameters([
+        'familias_profesionales' => 'familiaProfesional'
+    ]);
+
+    Route::apiResource('idiomas', IdiomaController::class);
+
+    Route::apiResource('proyectos', ProyectoController::class);
+        Route::post('proyectos/copyrepo/{user}/{reponame}', [ProyectoController::class, 'copyRepo']);
+
+    Route::apiResource('reconocimientos', ReconocimientoController::class);
+    Route::put('reconocimientos/{id}/validar', [ReconocimientoController::class, 'validar'])
+        ->where('id', '[0-9]+');
+
+    Route::apiResource('users', UserController::class);
+
+    Route::get('{tabla}/count', [CountController::class, 'count']);
 });
+
+// Ya no las utilizamos
+/*
 Route::any('/{any}', function (ServerRequestInterface $request) {
     $config = new Config([
         'address' => env('DB_HOST', '127.0.0.1'),
@@ -91,3 +106,4 @@ Route::any('/{any}', function (ServerRequestInterface $request) {
     }
     return $response;
 })->where('any', '.*');
+*/

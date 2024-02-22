@@ -96,7 +96,7 @@ export const CurriculoShow = () => (
                     record => {
                         if (record.pdf_curriculum) {
                             return (
-                                <Button variant="contained" color="primary" href={`${import.meta.env.VITE_JSON_SERVER_URL}/curriculos/pdf/${record.id}`}>
+                                <Button variant="contained" color="primary" href={`${import.meta.env.VITE_JSON_SERVER_URL}/curriculos/${record.id}/pdf`}>
                                     Descargar currículo de estudiante
                                 </Button>
                             )
