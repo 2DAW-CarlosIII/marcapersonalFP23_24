@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\Empresa;
 use App\Models\Estudiante;
 use App\Models\Proyecto;
 use Illuminate\Database\Eloquent\Model;
@@ -38,11 +39,24 @@ class DatabaseSeeder extends Seeder
         $this->call(UsersIdiomasTableSeeder::class);
 
         $this->call(ProyectoCicloTableSeeder::class);
+        $empresa = self::seedEmpresa();
+        $this->command->info('Token de la empresa de prueba: ' . $empresa->token);
 
         $this->command->info('Tablas inicializadas con datos!');
 
         Model::reguard();
         Schema::enableForeignKeyConstraints();
+    }
+
+    private static function seedEmpresa(): Empresa
+    {
+        Empresa::truncate();
+        $empresa = Empresa::create([
+            'nif' => 'A12345678',
+            'email' => env('EMAIL_EMPRESA'),
+            'nombre' => 'Empresa de Prueba',
+        ]);
+        return $empresa;
     }
 
     private static function seedProyectos(): void
