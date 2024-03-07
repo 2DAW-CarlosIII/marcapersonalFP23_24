@@ -1,0 +1,363 @@
+const alumnos = {
+"alumnos": [
+	{ "id": 1,
+	  "nombre": "José García Sánchez",
+	  "email": "torphy.serenity@example.com",
+	  "avatar":"https://source.unsplash.com/random/200x200/?{persona}",
+	  "ciclos": [{"id":1, "nombre":"DAW"}],
+	  "familiaProfesional" : [{"id":1, "nombre":"Informática y comuicaciones"}],
+      "sobreMi" : "Buen profesional y trabajador. Me gusta el trabajo en equipo",
+      "idiomas" : [{"nombre": "Ingles",  "nivel": "B1", "certificado" : true},
+                 {"nombre": "Frances", "nivel": "B2", "certificado" : true}],
+      "PC" : [{"nombre": "Comunicación", "nivel": 30},
+            {"nombre": "Inteligencia emocional", "nivel": 10},
+            {"nombre": "Pensamiento crítico", "nivel": 10},
+            {"nombre": "Responsabilidad", "nivel": 20},
+            {"nombre": "Gestión del cambio", "nivel": 10},
+            {"nombre": "Creatividad", "nivel": 20}]
+	},
+    {
+        "id": 2,
+        "nombre": "Ana Martínez López",
+        "email": "torphy.serenity@example.com",
+	  "avatar": "https://source.unsplash.com/random/200x200/?persona",
+		"ciclos": [{"id":1, "nombre":"DAW"}],
+		"familiaProfesional" : [{"id":1, "nombre":"Informática y comuicaciones"}],
+        "sobreMi": "Apasionada por la tecnología y la innovación. Busco constantemente aprender y crecer profesionalmente.",
+        "idiomas": [
+          {"nombre": "Francés", "nivel": "Nativo", "certificado" : false},
+          {"nombre": "Inglés", "nivel": "B2", "certificado" : true}
+        ],
+        "competencias": [
+          {"nombre": "Trabajo en equipo", "nivel": 25},
+          {"nombre": "Adaptabilidad", "nivel": 15},
+          {"nombre": "Resolución de problemas", "nivel": 20},
+          {"nombre": "Liderazgo", "nivel": 15},
+          {"nombre": "Comunicación efectiva", "nivel": 25}
+        ]
+      },
+      {
+        "id": 3,
+        "nombre": "Carlos Rodríguez Pérez",
+        "email": "torphy.serenity@example.com",
+	  "avatar": "https://source.unsplash.com/random/200x200/?persona",
+		"ciclos": [{"id":2, "nombre":"DAM"}],
+   	    "familiaProfesional" : [{"id":1, "nombre":"Informática y comuicaciones"}],
+        "sobreMi": "Desarrollador apasionado con experiencia en proyectos complejos. Siempre buscando soluciones innovadoras.",
+        "idiomas": [
+          {"nombre": "Alemán", "nivel": "Nativo", "certificado" : false},
+          {"nombre": "Inglés", "nivel": "C1", "certificado" : true}
+        ],
+        "competencias": [
+          {"nombre": "Programación", "nivel": 30},
+          {"nombre": "Resolución de problemas", "nivel": 25},
+          {"nombre": "Colaboración", "nivel": 20},
+          {"nombre": "Innovación", "nivel": 15},
+          {"nombre": "Comunicación", "nivel": 10}
+        ]
+      },
+      {
+        "id": 4,
+        "nombre": "Laura Fernández González",
+        "email": "torphy.serenity@example.com",
+	  "avatar": "https://source.unsplash.com/random/200x200/?persona",
+		"ciclos": [{"id":1, "nombre":"DAW"}],
+		"familiaProfesional" : [{"id":1, "nombre":"Informática y comuicaciones"}],
+        "sobreMi": "Analista de datos con habilidades para transformar datos en información valiosa. En constante búsqueda de conocimiento.",
+        "idiomas": [
+          {"nombre": "Alemán", "nivel": "Nativo", "certificado" : false},
+          {"nombre": "Inglés", "nivel": "B2", "certificado" : true}
+        ],
+        "competencias": [
+          {"nombre": "Análisis de datos", "nivel": 30},
+          {"nombre": "Visualización de datos", "nivel": 25},
+          {"nombre": "Comunicación efectiva", "nivel": 20},
+          {"nombre": "Resolución de problemas", "nivel": 15},
+          {"nombre": "Adaptabilidad", "nivel": 10}
+        ]
+      },
+      {
+        "id": 5,
+        "nombre": "Marta Ruiz Sánchez",
+        "email": "torphy.serenity@example.com",
+	  "avatar": "https://source.unsplash.com/random/200x200/?persona",
+		"ciclos": [{"id":1, "nombre":"DAW"}],
+		"familiaProfesional" : [{"id":1, "nombre":"Informática y comuicaciones"}],        
+        "sobreMi": "Ingeniera de software enfocada en la creación de soluciones eficientes. Apasionada por la calidad del código.",
+        "idiomas": [
+          {"nombre": "Portugués", "nivel": "Nativo", "certificado" : false},
+          {"nombre": "Inglés", "nivel": "B2", "certificado" : true}
+        ],
+        "competencias": [
+          {"nombre": "Desarrollo de software", "nivel": 30},
+          {"nombre": "Calidad del código", "nivel": 25},
+          {"nombre": "Trabajo en equipo", "nivel": 20},
+          {"nombre": "Innovación", "nivel": 15},
+          {"nombre": "Comunicación", "nivel": 10}
+        ]
+      },
+      {
+        "id": 6,
+        "nombre": "Javier López García",
+        "email": "torphy.serenity@example.com",
+	  "avatar": "https://source.unsplash.com/random/200x200/?persona",
+		"ciclos": [{"id":1, "nombre":"DAW"},{"id":2, "nombre":"DAM"}],
+        "familiaProfesional" : [{"id":1, "nombre":"Informática y comuicaciones"}],
+        "sobreMi": "Especialista en ciberseguridad con experiencia en la protección de sistemas críticos. Comprometido con la seguridad digital.",
+        "idiomas": [
+          {"nombre": "Portugués", "nivel": "Nativo", "certificado" : false},
+          {"nombre": "Inglés", "nivel": "C1", "certificado" : true}
+        ],
+        "competencias": [
+          {"nombre": "Ciberseguridad", "nivel": 30},
+          {"nombre": "Análisis de riesgos", "nivel": 25},
+          {"nombre": "Resolución de incidentes", "nivel": 20},
+          {"nombre": "Colaboración", "nivel": 15},
+          {"nombre": "Comunicación efectiva", "nivel": 10}
+        ]
+      },
+      {
+        "id": 7,
+        "nombre": "Sara Martínez Rodríguez",
+        "email": "torphy.serenity@example.com",
+	  "avatar": "https://source.unsplash.com/random/200x200/?persona",
+		"ciclos": [{"id":1, "nombre":"DAW"}],
+        "familiaProfesional" : [{"id":1, "nombre":"Informática y comuicaciones"}],
+        "sobreMi": "Especialista en inteligencia artificial con experiencia en la creación de modelos predictivos. Apasionada por la innovación.",
+        "idiomas": [
+          {"nombre": "Alemán", "nivel": "Nativo", "certificado" : false},
+          {"nombre": "Inglés", "nivel": "C1", "certificado" : true}
+        ],
+        "competencias": [
+          {"nombre": "Inteligencia artificial", "nivel": 30},
+          {"nombre": "Modelos predictivos", "nivel": 25},
+          {"nombre": "Innovación", "nivel": 20},
+          {"nombre": "Colaboración", "nivel": 15},
+          {"nombre": "Comunicación efectiva", "nivel": 10}
+        ]
+      },
+      {
+        "id": 8,
+        "nombre": "Diego Pérez Martínez",
+        "email": "torphy.serenity@example.com",
+	  "avatar": "https://source.unsplash.com/random/200x200/?persona",
+		"ciclos": [{"id":1, "nombre":"DAW"}],
+        "familiaProfesional" : [{"id":1, "nombre":"Informática y comuicaciones"}],
+        "sobreMi": "Desarrollador web con experiencia en la creación de sitios interactivos y amigables. En constante aprendizaje.",
+        "idiomas": [
+          {"nombre": "Francés", "nivel": "Nativo", "certificado" : false},
+          {"nombre": "Inglés", "nivel": "B2", "certificado" : true}
+        ],
+        "competencias": [
+          {"nombre": "Desarrollo web", "nivel": 30},
+          {"nombre": "Experiencia de usuario", "nivel": 25},
+          {"nombre": "Colaboración", "nivel": 20},
+          {"nombre": "Innovación", "nivel": 15},
+          {"nombre": "Comunicación efectiva", "nivel": 10}
+        ]
+      },
+      {
+        "id": 9,
+        "nombre": "Elena Sánchez Pérez",
+        "email": "torphy.serenity@example.com",
+	  "avatar": "https://source.unsplash.com/random/200x200/?persona",
+		"ciclos": [{"id":3, "nombre":"ASIR"}],
+        "familiaProfesional" : [{"id":1, "nombre":"Informática y comuicaciones"}],
+        "sobreMi": "Analista de sistemas con habilidades para identificar y resolver problemas complejos. Apasionada por la mejora continua.",
+        "idiomas": [
+          {"nombre": "Francés", "nivel": "Nativo", "certificado" : false},
+          {"nombre": "Inglés", "nivel": "B1", "certificado" : false}
+        ],
+        "competencias": [
+          {"nombre": "Análisis de sistemas", "nivel": 30},
+          {"nombre": "Resolución de problemas", "nivel": 25},
+          {"nombre": "Colaboración", "nivel": 20},
+          {"nombre": "Innovación", "nivel": 15},
+          {"nombre": "Comunicación efectiva", "nivel": 10}
+        ]
+      },
+      {
+        "id": 10,
+        "nombre": "Mario González López",
+        "email": "torphy.serenity@example.com",
+	  "avatar": "https://source.unsplash.com/random/200x200/?persona",
+		"ciclos": [{"id":2, "nombre":"DAM"}],
+        "familiaProfesional" : [{"id":1, "nombre":"Informática y comuicaciones"}],
+        "sobreMi": "Ingeniero de redes con experiencia en la implementación y mantenimiento de infraestructuras de red. Comprometido con la seguridad.",
+        "idiomas": [
+          {"nombre": "Inglés", "nivel": "Nativo", "certificado" : false},
+          {"nombre": "Francés", "nivel": "B2", "certificado" : true}
+        ],
+        "competencias": [
+          {"nombre": "Diseño de redes", "nivel": 30},
+          {"nombre": "Mantenimiento de infraestructuras", "nivel": 25},
+          {"nombre": "Seguridad de redes", "nivel": 20},
+          {"nombre": "Colaboración", "nivel": 15},
+          {"nombre": "Comunicación efectiva", "nivel": 10}
+        ]
+      },
+      {
+        "id": 12,
+        "nombre": "Carlos Martínez Sánchez",
+        "email": "torphy.serenity@example.com",
+	  "avatar": "https://source.unsplash.com/random/200x200/?persona",
+		"ciclos": [{"id":3, "nombre":"ASIR"}],
+        "familiaProfesional" : [{"id":1, "nombre":"Informática y comuicaciones"}],
+        "sobreMi": "Experto en ciberseguridad con amplia experiencia en la protección de datos sensibles. Comprometido con la seguridad informática.",
+        "idiomas": [
+          {"nombre": "Italiano", "nivel": "Nativo", "certificado" : false},
+          {"nombre": "Inglés", "nivel": "C1", "certificado" : true}
+        ],
+        "competencias": [
+          {"nombre": "Ciberseguridad", "nivel": 30},
+          {"nombre": "Análisis de riesgos", "nivel": 25},
+          {"nombre": "Resolución de incidentes", "nivel": 20},
+          {"nombre": "Colaboración", "nivel": 15},
+          {"nombre": "Comunicación efectiva", "nivel": 10}
+        ]
+      },
+      {
+        "id": 13,
+        "nombre": "Laura Pérez Martínez",
+        "email": "torphy.serenity@example.com",
+	  "avatar": "https://source.unsplash.com/random/200x200/?persona",
+		"ciclos": [{"id":1, "nombre":"DAW"}],
+        "familiaProfesional" : [{"id":1, "nombre":"Informática y comuicaciones"}],
+        "sobreMi": "Ingeniera de software especializada en el desarrollo de aplicaciones móviles. En constante aprendizaje de nuevas tecnologías.",
+        "idiomas": [
+          {"nombre": "Inglés", "nivel": "Nativo", "certificado" : false},
+          {"nombre": "Italiano", "nivel": "B2", "certificado" : true}
+        ],
+        "competencias": [
+          {"nombre": "Desarrollo de aplicaciones móviles", "nivel": 30},
+          {"nombre": "Experiencia de usuario", "nivel": 25},
+          {"nombre": "Colaboración", "nivel": 20},
+          {"nombre": "Innovación", "nivel": 15},
+          {"nombre": "Comunicación efectiva", "nivel": 10}
+        ]
+      },
+      {
+        "id": 14,
+        "nombre": "Ana Sánchez Rodríguez",
+        "email": "torphy.serenity@example.com",
+	  "avatar": "https://source.unsplash.com/random/200x200/?persona",
+		"ciclos": [{"id":1, "nombre":"DAW"}],
+        "familiaProfesional" : [{"id":1, "nombre":"Informática y comuicaciones"}],
+        "sobreMi": "Analista de datos con enfoque en la extracción de información valiosa para la toma de decisiones. Apasionada por el análisis estadístico.",
+        "idiomas": [
+          {"nombre": "Italiano", "nivel": "Nativo", "certificado" : false},
+          {"nombre": "Inglés", "nivel": "B2", "certificado" : true}
+        ],
+        "competencias": [
+          {"nombre": "Análisis de datos", "nivel": 30},
+          {"nombre": "Visualización de datos", "nivel": 25},
+          {"nombre": "Comunicación efectiva", "nivel": 20},
+          {"nombre": "Resolución de problemas", "nivel": 15},
+          {"nombre": "Adaptabilidad", "nivel": 10}
+        ]
+      },
+      {
+        "id": 15,
+        "nombre": "Javier González Sánchez",
+        "email": "torphy.serenity@example.com",
+	  "avatar": "https://source.unsplash.com/random/200x200/?persona",
+		"ciclos": [{"id":2, "nombre":"DAM"}],
+        "familiaProfesional" : [{"id":1, "nombre":"Informática y comuicaciones"}],
+        "sobreMi": "Especialista en inteligencia artificial con experiencia en la creación de sistemas de aprendizaje automático. Apasionado por la innovación.",
+        "idiomas": [
+          {"nombre": "Alemán", "nivel": "Nativo", "certificado" : false},
+          {"nombre": "Inglés", "nivel": "C1", "certificado" : true}
+        ],
+        "competencias": [
+          {"nombre": "Inteligencia artificial", "nivel": 30},
+          {"nombre": "Aprendizaje automático", "nivel": 25},
+          {"nombre": "Innovación", "nivel": 20},
+          {"nombre": "Colaboración", "nivel": 15},
+          {"nombre": "Comunicación efectiva", "nivel": 10}
+        ]
+      },
+      {
+        "id": 16,
+        "nombre": "Sofía Martínez López",
+        "email": "torphy.serenity@example.com",
+	  "avatar": "https://source.unsplash.com/random/200x200/?persona",
+		"ciclos": [{"id":1, "nombre":"DAW"}],
+        "familiaProfesional" : [{"id":1, "nombre":"Informática y comuicaciones"}],
+        "sobreMi": "Desarrolladora web con experiencia en la creación de sitios web interactivos y modernos. En constante búsqueda de nuevas tendencias.",
+        "idiomas": [
+          {"nombre": "Español", "nivel": "Nativo", "certificado" : false},
+          {"nombre": "Inglés", "nivel": "B2", "certificado" : true}
+        ],
+        "competencias": [
+          {"nombre": "Desarrollo web", "nivel": 30},
+          {"nombre": "Experiencia de usuario", "nivel": 25},
+          {"nombre": "Colaboración", "nivel": 20},
+          {"nombre": "Innovación", "nivel": 15},
+          {"nombre": "Comunicación efectiva", "nivel": 10}
+        ]
+      },
+      {
+        "id": 19,
+        "nombre": "Marta González Martínez",
+        "email": "torphy.serenity@example.com",
+	  "avatar": "https://source.unsplash.com/random/200x200/?persona",
+		"ciclos": [{"id":1, "nombre":"DAW"},{"id":3, "nombre":"ASIR"}],
+        "familiaProfesional" : [{"id":1, "nombre":"Informática y comuicaciones"}],
+        "sobreMi": "Analista de sistemas con habilidades para la identificación y resolución de problemas complejos. Apasionada por la mejora continua.",
+        "idiomas": [
+          {"nombre": "Francés", "nivel": "Nativo", "certificado" : false},
+          {"nombre": "Inglés", "nivel": "B2", "certificado" : true}
+        ],
+        "competencias": [
+          {"nombre": "Análisis de sistemas", "nivel": 30},
+          {"nombre": "Resolución de problemas", "nivel": 25},
+          {"nombre": "Colaboración", "nivel": 20},
+          {"nombre": "Innovación", "nivel": 15},
+          {"nombre": "Comunicación efectiva", "nivel": 10}
+        ]
+      },
+      {
+        "id": 18,
+        "nombre": "Elena Sánchez López",
+        "email": "torphy.serenity@example.com",
+	  "avatar": "https://source.unsplash.com/random/200x200/?persona",
+		"ciclos": [{"id":2, "nombre":"DAM"}],
+        "familiaProfesional" : [{"id":1, "nombre":"Informática y comuicaciones"}],
+        "sobreMi": "Desarrolladora de software especializada en el desarrollo de aplicaciones empresariales. En constante búsqueda de la eficiencia y la calidad.",
+        "idiomas": [
+          {"nombre": "Francés", "nivel": "Nativo", "certificado" : false},
+          {"nombre": "Inglés", "nivel": "B2", "certificado" : true}
+        ],
+        "competencias": [
+          {"nombre": "Desarrollo de aplicaciones empresariales", "nivel": 30},
+          {"nombre": "Eficiencia en el código", "nivel": 25},
+          {"nombre": "Colaboración", "nivel": 20},
+          {"nombre": "Innovación", "nivel": 15},
+          {"nombre": "Comunicación efectiva", "nivel": 10}
+        ]
+      },
+      {
+        "id": 20,
+        "nombre": "Mario Sánchez López",
+        "email": "torphy.serenity@example.com",
+	  "avatar": "https://source.unsplash.com/random/200x200/?persona",
+		"ciclos": [{"id":1, "nombre":"DAW"}, {"id":3, "nombre":"ASIR"}],
+        "familiaProfesional" : [{"id":1, "nombre":"Informática y comuicaciones"}],
+        "sobreMi": "Ingeniero de redes con experiencia en la planificación y mantenimiento de infraestructuras de red. Comprometido con la seguridad informática.",
+        "idiomas": [
+          {"nombre": "Inglés", "nivel": "Nativo", "certificado" : false},
+          {"nombre": "Italiano", "nivel": "B2", "certificado" : true}
+        ],
+        "competencias": [
+          {"nombre": "Diseño de redes", "nivel": 30},
+          {"nombre": "Mantenimiento de infraestructuras", "nivel": 25},
+          {"nombre": "Seguridad de redes", "nivel": 20},
+          {"nombre": "Colaboración", "nivel": 15},
+          {"nombre": "Comunicación efectiva", "nivel": 10}
+        ]
+      }
+        
+    ]
+  }
+
+  export default alumnos;

@@ -1,0 +1,28 @@
+.imageMaxiCard {
+    height: 13rem;
+    width: 15rem;
+    border-radius: 0.5rem;
+  }
+
+  .nameMaxiCard {
+    font-size: 1.5rem;
+    line-height: 1.75rem;
+    font-weight: 500;    
+    color: #364f59;
+  }
+
+  .AlumnoMinCardSobreMi{ margin-top: 1rem;
+   text-align: left;}
+
+   .flex {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    margin: 0 4px;
+  }
+  
+
+  .ant-tabs-tab{color:#ffffff!important;
+                font-size: 1.1rem!important;}
+  .ant-tabs-tab-active .ant-tabs-tab-btn {color:#364f59!important}
+  .ant-tabs-ink-bar, .ant-tabs-ink-bar-animated {background:#364f59!important}

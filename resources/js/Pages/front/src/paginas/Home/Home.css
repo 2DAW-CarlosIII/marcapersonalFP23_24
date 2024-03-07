@@ -1,0 +1,17 @@
+@import url(https://db.onlinewebfonts.com/c/0801c08e5412f54e4b4e9ad146d83a12?family=Ink+Free);
+
+.fondo{background-image:url(/src/assets/img/mp-logoAzul10fondo.png);background-repeat:repeat;background-attachment:fixed;background-size:20px;}
+
+.altura {min-height: 54vh;
+        align-content: center;}
+
+a {color: #364f59 !important;}
+
+.imagen:hover {filter: saturate(120%);}
+.imagen {filter: saturate(60%);}
+
+
+
+
+
+      

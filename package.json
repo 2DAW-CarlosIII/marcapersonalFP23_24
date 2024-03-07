@@ -11,20 +11,22 @@
         "format": "prettier --write ./src"
     },
     "dependencies": {
+        "antd": "^5.15.1",
         "ra-data-json-server": "^4.16.0",
         "react": "^18.2.0",
         "react-admin": "^4.16.0",
-        "react-dom": "^18.2.0"
+        "react-dom": "^18.2.0",
+        "react-router-dom": "^6.22.2"
     },
     "devDependencies": {
         "@headlessui/react": "^1.4.2",
         "@inertiajs/react": "^1.0.0",
         "@tailwindcss/forms": "^0.5.3",
-        "@typescript-eslint/parser": "^5.60.1",
-        "@typescript-eslint/eslint-plugin": "^5.60.1",
         "@types/node": "^18.16.1",
         "@types/react": "^18.0.22",
         "@types/react-dom": "^18.0.7",
+        "@typescript-eslint/eslint-plugin": "^5.60.1",
+        "@typescript-eslint/parser": "^5.60.1",
         "@vitejs/plugin-react": "^4.0.1",
         "alpinejs": "^3.4.2",
         "autoprefixer": "^10.4.12",

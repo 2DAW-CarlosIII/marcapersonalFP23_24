@@ -1,0 +1,10 @@
+.flexAlumnoIdiomaMaxiCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 40px;
+  }
+.destacadoColor {color: #F59432}
+.colorTextoMaxiCard { color : #364f59}
+
+.destacadoRojo{color:red}

@@ -84,6 +84,7 @@ Route::prefix('v1')->group(function () {
     Route::apiResource('users', UserController::class);
 
     Route::get('{tabla}/count', [CountController::class, 'count']);
+    Route::get('totales', [CountController::class, 'totales']);
 });
 
 // Ya no las utilizamos

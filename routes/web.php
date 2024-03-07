@@ -25,21 +25,21 @@ use Inertia\Inertia;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+/*
 Route::get('/', function () {
     return view('home');
 })->name('home');
+*/
 
-/*
 Route::get('/', function () {
-    return Inertia::render('Welcome', [
+    return Inertia::render('front/src/main', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
     ]);
 })->name('home');
-*/
+
 
 Route::prefix('catalog')->group(function () {
     Route::get('/', [CatalogController::class, 'getIndex'])->name('proyectos');
