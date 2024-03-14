@@ -10,9 +10,12 @@ use App\Http\Resources\CurriculoResource;
 use App\Mail\EmpresaAutorizadaVerCurriculo;
 use App\Mail\EmpresaQuiereVerTuCurriculo;
 use App\Models\Empresa;
+use App\Models\Permiso;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Response;
+use App\Models\PermisoDescarga;
+use App\Models\User;
 
 class CurriculoController extends Controller
 {
@@ -60,7 +63,15 @@ class CurriculoController extends Controller
     {
         return new CurriculoResource($curriculo);
     }
+    public function permisoDescarga($id){
 
+        $permiso = Permiso::create();
+        $permiso->curriculo_id=$id;
+        $permiso->empresa_id = Auth::user()->id;
+        $permiso->validado = null;
+        $permiso->save();
+        return new PermisoDescarga($permiso);
+    }
     /**
      * Update the specified resource in storage.
      */

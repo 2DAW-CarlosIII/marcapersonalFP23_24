@@ -52,6 +52,8 @@ Route::prefix('v1')->group(function () {
         'actividades' => 'actividad'
     ]);
 
+
+
     Route::apiResource('ciclos', CicloController::class);
 
     Route::apiResource('competencias', CompetenciaController::class);
@@ -61,6 +63,9 @@ Route::prefix('v1')->group(function () {
             ->name('curriculos.getCurriculoPDF');
         Route::get('curriculos/{id}/autorizar', [CurriculoController::class, 'autorizar'])
             ->name('curriculos.autorizar');
+        Route::get('curriculos/{id}/permisoDescarga', [CurriculoController::class, 'permisoDescarga'])
+            ->name('curriculos.permisoDescarga');
+            
         Route::get('curriculos/{id}/pdf/{md5}', [CurriculoController::class, 'getCurriculoByMd5'])
             ->name('curriculos.getCurriculoPDFByMd5');
 

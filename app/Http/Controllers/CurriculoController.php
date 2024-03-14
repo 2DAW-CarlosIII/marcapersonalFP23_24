@@ -53,6 +53,8 @@ class CurriculoController extends Controller
 
     public function store(Request $request)
     {
+
+        
         $curriculo = new Curriculo();
         $curriculo->user_id = $request->user()->id;
         if ($request->hasFile('pdf_curriculum') && $request->pdf_curriculum->getClientOriginalExtension() === 'pdf') {

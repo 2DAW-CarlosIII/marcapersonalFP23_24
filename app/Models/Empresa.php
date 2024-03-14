@@ -46,7 +46,7 @@ class Empresa extends Model
 
             $empresa->user()->associate($usuario);
             $empresa->save();
-            Mail::to($empresa->email)->send(new NuevaEmpresaRegistrada($empresa));
+           // Mail::to($empresa->email)->send(new NuevaEmpresaRegistrada($empresa));
         });
     }
 
