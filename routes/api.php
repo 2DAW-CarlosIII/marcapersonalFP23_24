@@ -63,6 +63,11 @@ Route::prefix('v1')->group(function () {
             ->name('curriculos.autorizar');
         Route::get('curriculos/{id}/pdf/{md5}', [CurriculoController::class, 'getCurriculoByMd5'])
             ->name('curriculos.getCurriculoPDFByMd5');
+        Route::post('curriculos/{id}/permisoDescarga', [CurriculoController::class, 'permisoDescarga'])
+            //->middleware('ban')
+            ->name('curriculos.permisoDescarga');
+        Route::put('curriculos/{id}/permitirDescarga', [CurriculoController::class, 'permitirDescarga'])
+            ->name('curriculos.permitirDescarga');
 
     Route::apiResource('empresas', EmpresaController::class);
         Route::get('empresas/acceso/{token}', [EmpresaController::class, 'accesoPorToken'])

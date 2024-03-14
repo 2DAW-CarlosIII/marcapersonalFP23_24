@@ -46,7 +46,8 @@ class Empresa extends Model
 
             $empresa->user()->associate($usuario);
             $empresa->save();
-            Mail::to($empresa->email)->send(new NuevaEmpresaRegistrada($empresa));
+            //Mail::to($empresa->email)->send(new NuevaEmpresaRegistrada($empresa));
+            //Token de la empresa de prueba: rPWnM4HvJEwedzevqPTj2SrypsbKxYJUu7MkEqt7gvZ0rJohbEzLxrOcRtPz
         });
     }
 

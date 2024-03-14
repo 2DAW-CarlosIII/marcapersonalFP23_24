@@ -7,12 +7,15 @@ use App\Http\Controllers\Controller;
 use App\Models\Curriculo;
 use Illuminate\Http\Request;
 use App\Http\Resources\CurriculoResource;
+use App\Http\Resources\PermisoDescargaResource;
 use App\Mail\EmpresaAutorizadaVerCurriculo;
 use App\Mail\EmpresaQuiereVerTuCurriculo;
 use App\Models\Empresa;
+use App\Models\Permiso_Descarga;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\DB;
 
 class CurriculoController extends Controller
 {
@@ -135,5 +138,38 @@ class CurriculoController extends Controller
     public function destroy(Curriculo $curriculo)
     {
         $curriculo->delete();
+    }
+
+    public function permisoDescarga($id){
+
+        $curriculo = Curriculo::findOrFail($id);
+        $user = Auth::user();
+        $this->authorize('permisoDescarga', $curriculo);
+        $permisoDescarga = Permiso_Descarga::create([
+            'curriculo_id' => $curriculo->id,
+            'empresa_id'   => $user->id,
+            'validado'     => null,
+        ]);
+        $permisoDescarga->save();
+        return new PermisoDescargaResource($permisoDescarga);
+    }
+
+    public function permitirDescarga($id){
+        $user = Auth::user();
+        $curriculo = $user->curriculo;
+        /*buscar la fila (sólo una), en la tabla permisos_descargas, que cumpla que:
+        el valor de curriculo_id es el id del Curriculo encontrado en el punto anterior
+        y el valor de empresa_id es el id enviado como parámetro*/
+        $this->authorize('permitirDescarga', $curriculo);
+
+        $permisoDescarga = DB::table('permisos_descargas')->where('curriculo_id', $curriculo->id)->where('empresa_id', $id)->first();
+        $permisoDescarga->validado = true;
+        $permisoDescarga = Permiso_Descarga::findOrFail($permisoDescarga->id);
+        $permisoDescarga->update([
+            'validado' => true,
+        ]);
+
+        return new PermisoDescargaResource($permisoDescarga);
+
     }
 }
