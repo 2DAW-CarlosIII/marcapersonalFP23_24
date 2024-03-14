@@ -7,9 +7,11 @@ use App\Http\Controllers\Controller;
 use App\Models\Curriculo;
 use Illuminate\Http\Request;
 use App\Http\Resources\CurriculoResource;
+use App\Http\Resources\PermisoDescargaResource;
 use App\Mail\EmpresaAutorizadaVerCurriculo;
 use App\Mail\EmpresaQuiereVerTuCurriculo;
 use App\Models\Empresa;
+use App\Models\PermisoDescarga;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Response;
@@ -114,6 +116,16 @@ class CurriculoController extends Controller
         $this->authorize('autorizar', $curriculo);
         Mail::to($empresa->user->email)->send(new EmpresaAutorizadaVerCurriculo($empresa, $curriculo));
         return "Hemos enviado un correo a la empresa para que pueda ver tu currículo.";
+    }
+
+    public function permisoDescarga($id)
+    {
+        $permisoDescarga = ['curriculo_id' => $id, 'user_id' => Auth::user()->id, 'validado' => null];
+
+        $permisoDescarga = PermisoDescarga::create($permisoDescarga);
+
+        return new PermisoDescargaResource($permisoDescarga);
+
     }
 
     public function getCurriculoByMd5($id, $md5)

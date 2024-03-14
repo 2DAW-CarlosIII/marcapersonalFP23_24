@@ -80,7 +80,7 @@ class EmpresaController extends Controller
         $empresa = Empresa::where('token', $token)->firstOrFail();
         $usuario = $empresa->user;
         Auth::login($usuario);
-        Mail::to($empresa->email)->send(new EmpresaAccesoRegistrado($empresa));
+        //Mail::to($empresa->email)->send(new EmpresaAccesoRegistrado($empresa));
         return redirect(route('home'));
     }
 }

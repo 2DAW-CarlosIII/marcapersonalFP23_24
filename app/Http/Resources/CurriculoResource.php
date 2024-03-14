@@ -16,6 +16,7 @@ class CurriculoResource extends JsonResource
     public function toArray(Request $request): array
     {
         return array_merge(parent::toArray($request), [
+            'permiso_descarga' => new PermisoDescargaResource($this->permisoDescarga),
             'attachments' => $this->pdf_curriculum
                 ? [
                     'src' => ('/storage/' . $this->pdf_curriculum),

@@ -66,6 +66,11 @@ class User extends Authenticatable
         return $this->hasOne(Empresa::class);
     }
 
+    public function permisoDescarga(): HasMany
+    {
+        return $this->hasMany(PermisoDescarga::class, 'empresa_id', 'id');
+    }
+
     /**
      * The idiomas that belong to the user.
      */

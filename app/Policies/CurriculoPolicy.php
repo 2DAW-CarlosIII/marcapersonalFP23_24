@@ -86,4 +86,9 @@ class CurriculoPolicy
         return $user->esPropietario($curriculo);
     }
 
+    public function permisoDescarga(User $user): bool
+    {
+        return $user->esEmpresa();
+    }
+
 }

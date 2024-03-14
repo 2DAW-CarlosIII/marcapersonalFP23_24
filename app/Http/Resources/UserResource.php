@@ -23,6 +23,7 @@ class UserResource extends JsonResource
             'proyectos' => ProyectoResource::collection($this->proyectos),
             'competencias' => CompetenciaResource::collection($this->competencias),
             'ciclos' => CicloResource::collection($this->ciclos),
+            'permiso_descarga' => new PermisoDescargaResource($this->permisoDescarga),
             'attachments' => $this->avatar
                 ? [
                     'src' => ('/storage/' . $this->avatar),

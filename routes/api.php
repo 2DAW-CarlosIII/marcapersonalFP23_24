@@ -18,6 +18,7 @@ use App\Http\Controllers\API\EmpresaController;
 use App\Http\Controllers\API\TokenController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\API\CountController;
+use App\Models\Curriculo;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,6 +48,10 @@ Route::prefix('v1')->group(function () {
     Route::post('login', [AuthenticatedSessionController::class, 'apiLogin']);
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
         ->middleware('auth:sanctum')->name('logout');
+
+    Route::post('curriculos/{id}/permisoDescarga', [CurriculoController::class, 'permisoDescarga']);
+
+    //Route::put('curriculos/{id}/permitirDescarga', [CurriculoController::class, 'permitirDescarga']);
 
     Route::apiResource('actividades', ActividadController::class)->parameters([
         'actividades' => 'actividad'
