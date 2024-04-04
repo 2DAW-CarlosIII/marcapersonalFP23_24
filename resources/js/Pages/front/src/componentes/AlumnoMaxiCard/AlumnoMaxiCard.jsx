@@ -9,10 +9,12 @@ import CiclosFormativosMaxiCard from "../CiclosFormativosMaxiCard/CiclosFormativ
 import AlumnoProyectosMaxiCard from "../AlumnoProyectosMaxiCard/AlumnoProyectosMaxiCard";
 import AlumnoActividadesMaxiCard from "../AlumnoActividadesMaxiCard/AlumnoActividadesMaxiCard";
 
+import imagenPorDefecto from '../../assets/img/student-boy-svgrepo-com.svg';
+
 import './AlumnoMaxiCard.css'
 
 const AlumnoMaxiCard = () => {
-   
+
     // En {idAlumno} tenemos el id del alumno que usaremos para recuperar los datos del mismo con el hook useAlumno
     let {id} = useParams();
 
@@ -60,15 +62,22 @@ const AlumnoMaxiCard = () => {
         setActiveTabKey2(key);
       };
 
+      function imagenAlumno() {
+
+        console.log(imagenPorDefecto);
+        return alumno.alumno.avatar===null?imagenPorDefecto:alumno.alumno.avatar;
+    }
+
+
     return (
 
           <div>
 
 
-              <>              
-                <div className="infos">              
-                  <div className="imageMaxiCard"><img src={alumno.alumno.avatar} className="imageMaxiCard  mx-auto d-block img-thumbnail" alt="Alumno"/>
-                  </div>    
+              <>
+                <div className="infos">
+                  <div className="imageMaxiCard"><img src={imagenAlumno()} className="imageMaxiCard  mx-auto d-block img-thumbnail" alt="Alumno"/>
+                  </div>
                   <div className="flexMaxiCard flex-col ">
                     <span className="AlumnoMaxiCardSobreMi">Contacto.</span>
                     <p><span className="AlumnoMaxiCardSobreMi"> {alumno.alumno.email}</span></p>
@@ -76,13 +85,13 @@ const AlumnoMaxiCard = () => {
                     <p><span className="AlumnoMaxiCardSobreMi"> {videoCV} {pdfCV}</span></p>
                     <span className="AlumnoMaxiCardSobreMi">Sobre mi.</span>
                     <p><span className="AlumnoMaxiCardSobreMi"> {alumno.alumno.sobre_mi}</span></p>
-                    
+
                   </div>
 
-                </div>                
+                </div>
                 <div className="nameMaxiCard">{alumno.alumno.nombre} {alumno.alumno.apellidos}</div>
-                
-                
+
+
                 <Card
                   style={{
                     width: '100%',
@@ -99,14 +108,14 @@ const AlumnoMaxiCard = () => {
                 >
                   {contentListNoTitle[activeTabKey2]}
                 </Card>
-                
+
               </>
 
 
 
 
           <hr></hr>
-                  <Link to="/empresa/alumnos">Volver</Link>   
+                  <Link to="/empresa/alumnos">Volver</Link>
 
 
           </div>

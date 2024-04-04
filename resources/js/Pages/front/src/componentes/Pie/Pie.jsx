@@ -83,19 +83,19 @@ const Pie = () => {
 
 
 
-        <hr className="mt-0"/>        
+        <hr className="mt-0"/>
         {/*<!--Social buttons-->*/}
-        <div className="text-center">          
+        <div className="text-center">
         <li className="list-inline-item"><h4>CIFP Carlos III </h4></li>
         <ul className="list-unstyled list-inline ">
         <li className="list-inline-item"><small>C/ Carlos III, 30201 - Cartagena | 30019702@murciaeduca.es |  968321301</small></li>
         </ul>
           <ul className="list-unstyled list-inline ">
-            <li className="list-inline-item"><img src={Facebook} width="30"  alt=""></img></li>
-            <li className="list-inline-item"><img src={Twitter} width="30"  alt=""></img></li>
-            <li className="list-inline-item"><img src={Instagram} width="31" alt=""></img></li>
-            <li className="list-inline-item"><img src={TikTok} width="33"  alt=""></img></li>
-            <li className="list-inline-item"><img src={Youtube} width="30"  alt=""></img></li>
+            <li className="list-inline-item"><a href="https://www.facebook.com/cifpcarlos3" target='_blank'><img src={Facebook} width="30"  alt=""></img></a></li>
+            <li className="list-inline-item"><a href="https://twitter.com/cifpcarlos3" target='_blank'><img src={Twitter} width="30"  alt=""></img></a></li>
+            <li className="list-inline-item"><a href="https://www.instagram.com/cifpcarlos3/" target='_blank'><img src={Instagram} width="31" alt=""></img></a></li>
+            <li className="list-inline-item"><a href="https://www.tiktok.com/@cifpcarlos3" target='_blank'><img src={TikTok} width="33"  alt=""></img></a></li>
+            <li className="list-inline-item"><a href="https://www.youtube.com/c/cifpcarlosiiicartagena" target='_blank'><img src={Youtube} width="30"  alt=""></img></a></li>
           </ul>
         </div>
        {/* <!--/.Footer Links-->*/}
@@ -104,7 +104,7 @@ const Pie = () => {
         <div className="py-3 text-center">
         <h6><img src={LogoInvertido} className="align-baseline" width="70" height="30"  alt="Logo Marca Personal"></img>Marca PersonaL FP <small> | {idiomas[idioma].disenoInicial.op1} CFGS Desarrollo de Aplicaciones Web © 2023</small></h6>
         </div>
-        
+
         </footer>
     )
 }

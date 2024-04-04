@@ -9,5 +9,6 @@ export function getAllTotales () {
     .then(response => response.json())
     .then(response => {
         const data = response;
+        console.log(data);
         return (data)});
 }

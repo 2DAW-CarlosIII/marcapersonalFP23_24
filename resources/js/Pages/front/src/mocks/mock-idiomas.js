@@ -15,6 +15,12 @@ const idiomas = {
                     op2: "Proyectos",
                     op3: "Alumnos"
       },
+      filtros: { op1: "Busca a tus alumnos",
+                 op2: "Filtra por perfil competencial",
+                 op3: "Filtra por famila profesional",
+                 op4: "Resultados",
+                 op5: "Búsqueda de Proyectos"
+      }
     },
     "gb" : {
       botoneraInicial: {op1: "Companies",
@@ -30,7 +36,14 @@ const idiomas = {
       menuEmpresa: {op1: "Company",
                     op2: "Projects",
                     op3: "Students"
+      },
+      filtros: { op1: "Search for your Students",
+                 op2: "Filter by competency profile",
+                 op3: "Filter by professional family",
+                 op4: "Results",
+                 op5: "Project Search"
       }
+
     }
     };
   export default idiomas;
