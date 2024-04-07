@@ -20,25 +20,24 @@ class DatabaseSeeder extends Seeder
         Model::unguard();
         Schema::disableForeignKeyConstraints();
 
-        // llamadas a otros ficheros de seed
         $this->call(UsersTableSeeder::class);
-        // llamadas a otros ficheros de seed
-
-        $this->call(ReconocimientosTableSeeder::class);
-        $this->call(CurriculosTableSeeder::class);
-        $this->call(ActividadesTableSeeder::class);
         $this->call(FamiliasProfesionalesSeeder::class);
         $this->call(CiclosSeeder::class);
-        self::seedProyectos();
-        $this->call(ParticipantesProyectosTableSeeder::class);
-        $this->call(Users_ciclosTableSeeder::class);
         $this->call(CompetenciasTableSeeder::class);
-        $this->call(UsersCompetenciasTableSeeder::class);
         $this->call(IdiomasTableSeeder::class);
-        $this->call(UsersIdiomasTableSeeder::class);
 
-        $this->call(ProyectoCicloTableSeeder::class);
+        if(env('APP_DEBUG') === true) {
+            $this->call(ReconocimientosTableSeeder::class);
+            $this->call(CurriculosTableSeeder::class);
+            $this->call(ActividadesTableSeeder::class);
+            self::seedProyectos();
+            $this->call(ParticipantesProyectosTableSeeder::class);
+            $this->call(Users_ciclosTableSeeder::class);
+            $this->call(UsersCompetenciasTableSeeder::class);
+            $this->call(UsersIdiomasTableSeeder::class);
 
+            $this->call(ProyectoCicloTableSeeder::class);
+        }
         $this->command->info('Tablas inicializadas con datos!');
 
         Model::reguard();
