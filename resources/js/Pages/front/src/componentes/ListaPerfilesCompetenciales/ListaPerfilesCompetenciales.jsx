@@ -15,8 +15,8 @@ const ListaPerfilesCompetenciales = () => {
 
     function muestraPerfil(perfil) {
 
-        return <PerfilCompetencial key={perfil.idPerfil} 
-                                   perfil={perfil}>                        
+        return <PerfilCompetencial key={perfil.id}
+                                   perfil={perfil}>
                </PerfilCompetencial>
 
     }
@@ -24,7 +24,7 @@ const ListaPerfilesCompetenciales = () => {
     return (
 
         <div>
-            {perfiles.buscando ? <AjaxLoader></AjaxLoader> 
+            {perfiles.buscando ? <AjaxLoader></AjaxLoader>
                       : hasPerfiles ? perfiles.listaPerfiles.map(muestraPerfil)
                                     : sinPerfiles}
         </div>

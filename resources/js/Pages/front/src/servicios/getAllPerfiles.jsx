@@ -7,7 +7,7 @@ export function getAllPerfiles () {
     // una promesa, la respuesta de la REST API es los que devolvemos
     //return fetch("https://run.mocky.io/v3/39a28fc6-d19f-42ac-9a3c-ecc29b4cdb27")
     // TODO: Change the URL to the real of "perfiles competenciales"
-    return fetch(apiUrl + "/competencias")
+    return fetch(apiUrl + "/competencias?_start=1&_end=20")
 
 
 

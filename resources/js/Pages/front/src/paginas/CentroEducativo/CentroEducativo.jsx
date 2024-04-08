@@ -1,9 +1,12 @@
+//import Login from "../../../../Auth/Login";
+import Dashboard from "../../../../Dashboard";
 const CentroEducativo = () => {
 
 
     return (
-
-        <div>CENTRO EDUCATIVO</div>
+        <>
+            <Dashboard></Dashboard>
+        </>
     )
 
 }

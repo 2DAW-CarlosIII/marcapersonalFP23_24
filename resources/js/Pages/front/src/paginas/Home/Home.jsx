@@ -26,9 +26,11 @@ import IdiomaContext from "../../contextos/IdiomaContext";
 import './Home.css'
 import BotonLanding from "../../componentes/BotonLanding/BotonLanding";
 
-
+import { dashboardURL, appUrl } from "../../settings";
 
 const Home = () => {
+
+    //const dashboardURL =  appUrl + "/dashboard";
 
     const idioma = useContext(IdiomaContext);
 
@@ -44,10 +46,10 @@ const Home = () => {
                     <div className="col-md-4 ">
 
                     <div className="cardLP">
-                    <Link to="/centroeducativo">
+                    <a href= {dashboardURL}>
                     <BotonLanding  titulo ={idiomas[idioma].botoneraInicial.op2}
                                    sourceImg ={School} ></BotonLanding>
-                            </Link>
+                            </a>
                     </div>
 
 
@@ -63,7 +65,7 @@ const Home = () => {
                     </Link>
 
 
-                    </div>                            
+                    </div>
             </div>
             <div className="row">
                     <div className="col-md-12"><Pie></Pie></div>

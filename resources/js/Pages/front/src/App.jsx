@@ -24,10 +24,10 @@ import AlumnoMaxiCard from "./componentes/AlumnoMaxiCard/AlumnoMaxiCard";
 
 /*
 ICONOS SVG https://www.svgrepo.com/
-GENERADOR DE ENDPOINT https://designer.mocky.io/design 
-FONDOS DE PANTALLA https://bg.ibelick.com/?fbclid=IwAR1kkzbtPPD8oTZow073AJ6ikYwmIUR_eksXaOjgiyTZMfdDMTg6ADfc0bQ 
+GENERADOR DE ENDPOINT https://designer.mocky.io/design
+FONDOS DE PANTALLA https://bg.ibelick.com/?fbclid=IwAR1kkzbtPPD8oTZow073AJ6ikYwmIUR_eksXaOjgiyTZMfdDMTg6ADfc0bQ
 
-FOOTER SACADO DE https://ordinarycoders.com/blog/article/bootstrap-footers 
+FOOTER SACADO DE https://ordinarycoders.com/blog/article/bootstrap-footers
 PALETA DE COLORES https://mycolor.space/?hex=%23364F59&sub=1
 
 COMPONENTES https://uiverse.io/WhiteNervosa/orange-chipmunk-72
@@ -35,7 +35,7 @@ COMPONENTES https://uiverse.io/WhiteNervosa/orange-chipmunk-72
 EFECTO ICONOS LANDING PAGE https://uiverse.io/gharsh11032000/selfish-owl-57
 
 GRÁFICAS
-https://apexcharts.com/docs/installation/ 
+https://apexcharts.com/docs/installation/
 
 TABCARD
 https://ant.design/components/card
@@ -43,15 +43,15 @@ https://ant.design/components/card
 CARDS
   https://mdbootstrap.com/docs/standard/extended/profiles/
   https://uiverse.io/Sujitkavaiya/mighty-pig-81
-  
+
   FONT AWESOME
-  
+
   https://www.w3schools.com/icons/fontawesome5_icons_brands.asp
 */
 
 
 function App() {
-  
+
   const [idiomaElegido, setIdiomaElegido] = useState(ES);
 
 
@@ -67,16 +67,16 @@ function App() {
       <div className="row">
         <div className="col-md-12">
           <Cabecera seleccionarIdioma = {seleccionarIdioma}></Cabecera>
-        </div>        
+        </div>
       </div>
-     
+
       <IdiomaContext.Provider value={idiomaElegido}>
         <div className="row">
           <div className="col-md-12">
               <Routes>
                 <Route path="/"                           element={<Home></Home>}></Route>
                 <Route path="/empresa"                    element={<Empresa></Empresa>}></Route>
-                <Route path="/centroeducativo"            element={<CentroEducativo></CentroEducativo>}></Route>
+                <Route path="/centroeducativo"            element={<CentroEducativo></CentroEducativo>}></Route>}
                 <Route path="/alumno"                     element={<Alumno></Alumno>}></Route>
                 <Route path="/empresa/alumnos"            element={<BusquedaAlumnos></BusquedaAlumnos>}></Route>
                 <Route path="/empresa/proyectos"          element={<BusquedaProyectos></BusquedaProyectos>}></Route>
@@ -85,7 +85,7 @@ function App() {
           </div>
       </div>
      </IdiomaContext.Provider>
-    
+
     </div>
   )
 }

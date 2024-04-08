@@ -1,4 +1,4 @@
-import { Admin, Resource, ListGuesser, EditGuesser, ShowGuesser } from 'react-admin';
+import { Admin, Resource, ListGuesser, EditGuesser, ShowGuesser, radiantLightTheme } from 'react-admin';
 import { dataProvider } from './dataProvider';
 import { authProvider } from './authProvider';
 
@@ -32,6 +32,7 @@ export const App = () => (
         dataProvider={dataProvider}
         authProvider={authProvider}
         basename='/dashboard'
+        theme={radiantLightTheme}
     >
         <Resource
             name="users"
@@ -88,7 +89,7 @@ export const App = () => (
             show={ReconocimientoShow}
             create={ReconocimientoCreate}
         />
-    
+
     <Resource
             name="empresas"
             icon={EmpresaIcon}
