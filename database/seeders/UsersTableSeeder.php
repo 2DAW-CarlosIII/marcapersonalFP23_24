@@ -15,16 +15,19 @@ class UsersTableSeeder extends Seeder
     {
         User::truncate();
 
-        User::factory()->create([
+        User::create([
             'name' => 'admin',
             'email' => env('ADMIN_EMAIL', 'admin@email.com'),
             'password' => env('ADMIN_PASSWORD', 'password'),
         ]);
 
-        // Crear 10 usuarios con el estado docente
-        User::factory(10)->docente()->create();
-        // Crear 30 usuarios con el estado estudiante
-        User::factory(30)->estudiante()->create();
+        if(env('APP_DEBUG') === true) {
+            // Crear 10 usuarios con el estado docente
+            User::factory(10)->docente()->create();
+            // Crear 30 usuarios con el estado estudiante
+            User::factory(30)->estudiante()->create();
+            return;
+        }
 
 
     }
