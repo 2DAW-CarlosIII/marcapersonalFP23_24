@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Idioma;
-use App\Models\User;
+use App\Models\Estudiante;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -17,15 +17,17 @@ class UsersIdiomasTableSeeder extends Seeder
     {
         DB::table('users_idiomas')->truncate();
         $nivel = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'];
-        $idiomas = Idioma::all();
-        $users = User::all();
+        $users = Estudiante::all();
         foreach($users as $user) {
             $cantidad = rand(0, 2);
             for ($i=0; $i < $cantidad; $i++) {
-                $idioma = $idiomas[rand(0, count($idiomas)-1)];
-                while($user->idiomas->contains($idioma)) {
-                    $idioma = $idiomas[rand(0, count($idiomas)-1)];
-                }
+                do {
+                    $idioma = Idioma::where('alpha2', self::$idiomas[rand(0, count(self::$idiomas)-1)])->first();
+                } while(
+                    $user->belongsToMany(Idioma::class, 'users_idiomas', 'user_id', 'idioma_id')
+                    ->wherePivot('idioma_id', $idioma->id)->count()
+                     > 0
+                );
                 $user->idiomas()->attach($idioma->id, [
                     'nivel' => $nivel[rand(0, count($nivel)-1)],
                     'certificado' => rand(0,1),
@@ -33,4 +35,9 @@ class UsersIdiomasTableSeeder extends Seeder
             }
         }
     }
+
+    private static $idiomas = [
+        'en', 'en', 'en', 'en', 'en', 'fr', 'fr', 'de', 'it', 'pt'
+    ];
+
 }

@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Ciclo;
-use App\Models\User;
+use App\Models\Estudiante;
 use App\Models\User_ciclo;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -18,11 +18,10 @@ class Users_ciclosTableSeeder extends Seeder
         //seed de la tabla pivote users_ciclos
         User_ciclo::truncate();
         $ciclo = Ciclo::all();
-        $user = User::all();
+        $user = Estudiante::all();
         $randomId_old=0;
-        $randomId=1;
         foreach ($user as $user) {
-            $numVeces= rand(0, 2);
+            $numVeces= ceil(rand(1, 15) / 14);
             for ($i=1; $i <= $numVeces; $i++) {
                 do{
                     $randomId = $ciclo->random()->id;

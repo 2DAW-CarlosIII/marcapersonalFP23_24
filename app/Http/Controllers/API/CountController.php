@@ -5,7 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Models\Empresa;
 use App\Models\Proyecto;
-use App\Models\User;
+use App\Models\Estudiante;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
@@ -26,7 +26,7 @@ class CountController extends Controller
             [
                 'empresas' => Empresa::count(),
                 'proyectos' => Proyecto::count(),
-                'alumnos' => User::count(),
+                'alumnos' => Estudiante::count(),
             ]
         );
     }
