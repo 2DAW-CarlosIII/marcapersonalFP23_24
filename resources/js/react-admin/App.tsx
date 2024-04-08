@@ -1,6 +1,7 @@
 import { Admin, Resource, ListGuesser, EditGuesser, ShowGuesser, radiantLightTheme } from 'react-admin';
 import { dataProvider } from './dataProvider';
 import { authProvider } from './authProvider';
+import { MPFPLayout } from './Layouts/mpfpLayout';
 
 // Icons
 import UserIcon from '@mui/icons-material/AccountCircle';
@@ -31,6 +32,7 @@ export const App = () => (
     <Admin
         dataProvider={dataProvider}
         authProvider={authProvider}
+        layout={MPFPLayout}
         basename='/dashboard'
         theme={radiantLightTheme}
     >
