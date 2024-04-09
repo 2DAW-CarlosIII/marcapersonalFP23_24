@@ -22,8 +22,12 @@ const AlumnoMaxiCard = () => {
 
     console.log(alumno.buscando)
 
-    const pdfCV = alumno.buscando ? "" : alumno.alumno.curriculo.pdf_curriculum;
-    const videoCV = alumno.buscando ? "" : alumno.alumno.curriculo.video_curriculum;
+    const pdfCV = alumno.buscando ? "" :
+                        alumno.alumno.curriculo===null ? ""
+                                                       :alumno.alumno.curriculo.pdf_curriculum;
+    const videoCV = alumno.buscando ? "" :
+                        alumno.alumno.curriculo===null ? ""
+                                                       : alumno.alumno.curriculo.video_curriculum;
 
     const idiomas = alumno.buscando ? [] : alumno.alumno.idiomas;
 

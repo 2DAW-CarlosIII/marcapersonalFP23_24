@@ -1,4 +1,4 @@
-import { Admin, Resource, ListGuesser, EditGuesser, ShowGuesser, radiantLightTheme } from 'react-admin';
+import { Admin, Resource, ListGuesser, EditGuesser, ShowGuesser } from 'react-admin';
 import { dataProvider } from './dataProvider';
 import { authProvider } from './authProvider';
 import { MPFPLayout } from './Layouts/mpfpLayout';
@@ -28,13 +28,15 @@ import { FamiliaProfesionalCreate, FamiliaProfesionalEdit, FamiliaProfesionalLis
 import { CompetenciaCreate, CompetenciaEdit, CompetenciaList, CompetenciaShow } from './Pages/Competencias'
 import { IdiomaCreate, IdiomaEdit, IdiomaList, IdiomaShow } from './Pages/Idiomas';
 
+import marcaPersonalTheme from './Theme/marcaPersonalTheme';
+
 export const App = () => (
     <Admin
         dataProvider={dataProvider}
         authProvider={authProvider}
         layout={MPFPLayout}
         basename='/dashboard'
-        theme={radiantLightTheme}
+        theme={marcaPersonalTheme}
     >
         <Resource
             name="users"

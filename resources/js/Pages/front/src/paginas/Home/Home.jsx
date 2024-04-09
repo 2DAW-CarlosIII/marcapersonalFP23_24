@@ -57,12 +57,12 @@ const Home = () => {
                     </div>
                     <div className="col-md-4">
 
-                    <Link to="/alumno">
+                    <a href= {dashboardURL}>
                     <div className="cardLP" >
                     <BotonLanding  titulo ={idiomas[idioma].botoneraInicial.op3}
                                    sourceImg ={Student} ></BotonLanding>
                     </div>
-                    </Link>
+                    </a>
 
 
                     </div>
