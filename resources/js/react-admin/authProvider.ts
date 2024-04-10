@@ -21,7 +21,6 @@ export const authProvider = {
               throw new Error(response.statusText);
             }
         })
-        .then(() => {return `${import.meta.env.VITE_JSON_SERVER_URL}/../../`})
         .catch((e) => {
                 throw new Error('Network error')
         });
@@ -32,10 +31,14 @@ export const authProvider = {
                 return data.json
             })
             .catch(() => {
-                throw new Error('Network error')
+                throw new Error('Unatuhenticated')
             });
     },
     checkError: (error) => {
+        const status = error.status;
+        if (status === 401 || status === 403) {
+            return Promise.reject();
+        }
         return Promise.resolve();
     },
     getIdentity: () => {
@@ -45,7 +48,7 @@ export const authProvider = {
                 return data.json
             })
             .catch(() => {
-                throw new Error('Network error')
+                throw new Error('Unatuhenticated')
             });
     },
     getPermissions: () => Promise.resolve('')
