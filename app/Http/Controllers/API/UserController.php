@@ -6,6 +6,8 @@ use App\Helpers\DateFilterHelper;
 use App\Helpers\FilterHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
+use App\Models\Docente;
+use App\Models\Estudiante;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Date;
@@ -20,9 +22,10 @@ class UserController extends Controller
     */
     public function __construct()
     {
-        $this->middleware('auth:sanctum')->except(['index', 'show', 'store']);
+        $this->middleware('auth:sanctum')->except(['index', 'getDocentes', 'getEstudiantes', 'show', 'store']);
         $this->authorizeResource(User::class, 'user');
     }
+
     /**
      * Display a listing of the resource.
      */
@@ -34,6 +37,24 @@ class UserController extends Controller
         $request->attributes->set('total_count', $query->count());
         $queryOrdered = FilterHelper::applyOrder($query, $request);
         return UserResource::collection($queryOrdered->paginate($request->perPage));
+    }
+
+    /**
+     * Display a listing of the teachers.
+     */
+    public function getDocentes(Request $request)
+    {
+        $this->modelclass = Docente::class;
+        return $this->index($request);
+    }
+
+    /**
+     * Display a listing of the students.
+     */
+    public function getEstudiantes(Request $request)
+    {
+        $this->modelclass = Estudiante::class;
+        return $this->index($request);
     }
 
     /**

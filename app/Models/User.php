@@ -55,7 +55,7 @@ class User extends Authenticatable
      */
     public function curriculo(): HasOne
     {
-        return $this->hasOne(Curriculo::class);
+        return $this->hasOne(Curriculo::class, 'user_id');
     }
 
     /**
@@ -100,7 +100,7 @@ class User extends Authenticatable
 
     public function reconocimientos(): HasMany
     {
-        return $this->hasMany(Reconocimiento::class, 'id');
+        return $this->hasMany(Reconocimiento::class, 'estudiante_id');
     }
 
     public function ciclos(): BelongsToMany
