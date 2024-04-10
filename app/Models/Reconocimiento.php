@@ -24,6 +24,6 @@ class Reconocimiento extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'estudiante_id');
     }
 }
