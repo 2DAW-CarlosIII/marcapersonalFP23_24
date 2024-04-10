@@ -7,10 +7,14 @@ const LogoCabecera = () => {
 
     return(
       <ul className="nav navbar-nav">
-            <li><a href={ appUrl + "/" }><img src={Logo} width="90" height="60" alt="Logo Marca Personal"></img><span className="sr-only">(current)</span></a></li>
+            <li>
+                <Link to="/">
+                    <img src={Logo} width="90" height="60" alt="Logo Marca Personal"></img><span className="sr-only">(current)</span>
+                </Link>
+            </li>
      </ul>
-      
+
     )
-    
+
     }
     export default LogoCabecera;
