@@ -22,7 +22,9 @@ export const authProvider = {
             }
         })
         .catch((e) => {
-                throw new Error('Network error')
+            if (e.status != 401) {
+                throw new Error(e.message)
+            }
         });
     },
     checkAuth: () =>{
