@@ -37,6 +37,7 @@ export const App = () => (
         layout={MPFPLayout}
         basename='/dashboard'
         theme={marcaPersonalTheme}
+        requireAuth
     >
         <Resource
             name="users"

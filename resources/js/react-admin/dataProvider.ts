@@ -38,21 +38,30 @@ dataProvider.createToken = (email, password) => {
     return httpClient(`${apiUrl}/tokens`, {
         method: 'POST',
         body: JSON.stringify({ email, password }),
-        headers: new Headers({ 'Content-Type': 'application/json' }),
+        headers: new Headers({
+            'Content-Type': 'application/json',
+            'accept': 'application/json',
+        }),
     });
 };
 
 dataProvider.deleteToken = () => {
     return httpClient(`${apiUrl}/tokens`, {
         method: 'DELETE',
-        headers: new Headers({ 'Content-Type': 'application/json' }),
+        headers: new Headers({
+            'Content-Type': 'application/json',
+            'accept': 'application/json',
+        }),
     });
 };
 
 dataProvider.getIdentity = () => {
     return httpClient(`${apiUrl}/user`, {
         method: 'GET',
-        headers: new Headers({ 'Content-Type': 'application/json' }),
+        headers: new Headers({
+            'Content-Type': 'application/json',
+            'accept': 'application/json',
+        }),
     });
 };
 
@@ -60,14 +69,20 @@ dataProvider.postLogin = (email, password) => {
     return httpClient(`${apiUrl}/login`, {
         method: 'POST',
         body: JSON.stringify({ email, password }),
-        headers: new Headers({ 'Content-Type': 'application/json' }),
+        headers: new Headers({
+            'Content-Type': 'application/json',
+            'accept': 'application/json',
+        }),
     });
 };
 
 dataProvider.postLogout = () => {
     return httpClient(`${apiUrl}/logout`, {
         method: 'POST',
-        headers: new Headers({ 'Content-Type': 'application/json' }),
+        headers: new Headers({
+            'Content-Type': 'application/json',
+            'accept': 'application/json',
+        }),
     });
 };
 
