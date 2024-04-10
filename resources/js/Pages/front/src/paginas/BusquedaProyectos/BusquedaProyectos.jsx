@@ -7,20 +7,23 @@ import ResultadosBusquedaProyectos from '../../componentes/ResultadosBusquedaPro
 import idiomas from "../../mocks/mock-idiomas";
 // Contextos -----------------------------------------------------------------------------------------------
 import IdiomaContext from "../../contextos/IdiomaContext";
+import useDropUpDown from '../../hooks/useDropUpDown';
 
 
 const BusquedaProyectos = () => {
 
     const idioma = useContext(IdiomaContext);
 
-    const [familiasSeleccionadas, setFamiliasSeleccionadas] = useState([]);
+    const dropFamilia = useDropUpDown();
 
+    const [familiasSeleccionadas, setFamiliasSeleccionadas] = useState([]);
 
     function dameFamiliasSeleccionadas(familias) {
 
         setFamiliasSeleccionadas([...familias]);
 
     }
+
     return (
         <>
             <div className="row">
@@ -32,8 +35,9 @@ const BusquedaProyectos = () => {
                     <div className="card ">
                         <h5 className="card-header h5 colorTexto1">{idiomas[idioma].filtros.op5}</h5>
                             <div className="card-body">
-                                <p className="card-title">{idiomas[idioma].filtros.op3}</p>
-                                <p className="card-text"><ListaFamiliaProfesionales dameFamiliasSeleccionadas = {dameFamiliasSeleccionadas}></ListaFamiliaProfesionales></p>
+                                <p className="card-title">{idiomas[idioma].filtros.op3}<img onClick={dropFamilia.desplegarLista}  id="dropdown" src={dropFamilia.dropImgSrc} width="30" alt=""></img></p>
+                                <p className="card-text">{dropFamilia.dropImg ? <ListaFamiliaProfesionales dameFamiliasSeleccionadas = {dameFamiliasSeleccionadas} visible="listaVisible"></ListaFamiliaProfesionales>
+                                                                  : <ListaFamiliaProfesionales dameFamiliasSeleccionadas = {dameFamiliasSeleccionadas} visible="listaOculta"></ListaFamiliaProfesionales>}</p>
                             </div>
                     </div>
                 </div>

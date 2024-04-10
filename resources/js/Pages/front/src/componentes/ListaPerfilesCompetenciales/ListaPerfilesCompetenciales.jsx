@@ -6,7 +6,7 @@ import PerfilCompetencial from "../PerfilCompetencial/PerfilCompetencia";
 // Custom Hooks
 import usePerfiles from "../../hooks/usePerfiles";
 
-const ListaPerfilesCompetenciales = () => {
+const ListaPerfilesCompetenciales = (props) => {
 
     const perfiles = usePerfiles();
 
@@ -15,7 +15,7 @@ const ListaPerfilesCompetenciales = () => {
 
     function muestraPerfil(perfil) {
 
-        return <PerfilCompetencial key={perfil.id}
+        return <PerfilCompetencial key={perfil.idPerfil}
                                    perfil={perfil}>
                </PerfilCompetencial>
 
@@ -23,7 +23,7 @@ const ListaPerfilesCompetenciales = () => {
 
     return (
 
-        <div>
+        <div className={props.visible}>
             {perfiles.buscando ? <AjaxLoader></AjaxLoader>
                       : hasPerfiles ? perfiles.listaPerfiles.map(muestraPerfil)
                                     : sinPerfiles}

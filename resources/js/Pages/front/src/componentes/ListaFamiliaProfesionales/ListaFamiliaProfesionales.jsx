@@ -21,7 +21,7 @@ const ListaFamiliaProfesionales = (props) => {
         if (marcado) {
             setFamiliasSeleccionadas([...familiasSeleccionadas, id]);
             props.dameFamiliasSeleccionadas([...familiasSeleccionadas, id]);
-    
+
         } else {
 
             let fam = familiasSeleccionadas.filter(item => {return item !== id});
@@ -34,7 +34,7 @@ const ListaFamiliaProfesionales = (props) => {
 
     function muestraFamilia(familia) {
 
-        return <FamiliaProfesional key={familia.id} 
+        return <FamiliaProfesional key={familia.id}
                                    familia={familia}
                                    dameFamiliaSeleccionada = {dameFamiliasSeleccionadas}>
                </FamiliaProfesional>
@@ -42,8 +42,8 @@ const ListaFamiliaProfesionales = (props) => {
 
     return (
 
-        <div>
-            {familias.buscando ? <AjaxLoader></AjaxLoader> 
+        <div className={props.visible}>
+            {familias.buscando ? <AjaxLoader></AjaxLoader>
                       : hasFamilias ? familias.listaFamilias.map(muestraFamilia)
                                     : sinFamilias}
         </div>

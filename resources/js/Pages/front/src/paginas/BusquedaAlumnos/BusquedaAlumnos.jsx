@@ -5,6 +5,8 @@ import ListaFamiliaProfesionales from '../../componentes/ListaFamiliaProfesional
 import MenuEmpresa from '../../componentes/MenuEmpresa/MenuEmpresa';
 import ResultadosBusquedaAlumnos from '../../componentes/ResultdosBusquedaAlumnos/ResultadosBusquedaAlumnos';
 
+import useDropUpDown from '../../hooks/useDropUpDown';
+
 import idiomas from "../../mocks/mock-idiomas";
 // Contextos -----------------------------------------------------------------------------------------------
 import IdiomaContext from "../../contextos/IdiomaContext";
@@ -12,6 +14,9 @@ import IdiomaContext from "../../contextos/IdiomaContext";
 const BusquedaAlumnos = () => {
 
     const idioma = useContext(IdiomaContext);
+
+    const dropFamilia = useDropUpDown();
+    const dropPerfilC = useDropUpDown();
 
     const [familiasSeleccionadas, setFamiliasSeleccionadas] = useState([]);
 
@@ -21,7 +26,6 @@ const BusquedaAlumnos = () => {
         setFamiliasSeleccionadas([...familias]);
 
     }
-
 
     return (
             <>
@@ -33,10 +37,12 @@ const BusquedaAlumnos = () => {
                     <div className="card ">
                             <h5 className="card-header h5 colorTexto1">{idiomas[idioma].filtros.op1}</h5>
                             <div className="card-body">
-                                <p className="card-title">{idiomas[idioma].filtros.op2}</p>
-                                <p className="card-text"><ListaPerfilesCompetenciales></ListaPerfilesCompetenciales></p>
-                                <p className="card-title">{idiomas[idioma].filtros.op3}</p>
-                                <p className="card-text"><ListaFamiliaProfesionales dameFamiliasSeleccionadas = {dameFamiliasSeleccionadas}></ListaFamiliaProfesionales></p>
+                                <p className="card-title">{idiomas[idioma].filtros.op2}<img onClick={dropPerfilC.desplegarLista}  id="dropdown" src={dropPerfilC.dropImgSrc} width="30" alt=""></img></p>
+                                <p className="card-text">{dropPerfilC.dropImg ? <ListaPerfilesCompetenciales visible="listaVisible"></ListaPerfilesCompetenciales>
+                                                                              : <ListaPerfilesCompetenciales visible="listaOculta"></ListaPerfilesCompetenciales>} </p>
+                                <p className="card-title">{idiomas[idioma].filtros.op3}<img onClick={dropFamilia.desplegarLista}  id="dropdown" src={dropFamilia.dropImgSrc} width="30" alt=""></img></p>
+                                <p className="card-text">{dropFamilia.dropImg ? <ListaFamiliaProfesionales dameFamiliasSeleccionadas = {dameFamiliasSeleccionadas} visible="listaVisible"></ListaFamiliaProfesionales>
+                                                                              : <ListaFamiliaProfesionales dameFamiliasSeleccionadas = {dameFamiliasSeleccionadas} visible="listaOculta"></ListaFamiliaProfesionales>}</p>
                             </div>
 
                     </div>
@@ -50,4 +56,3 @@ const BusquedaAlumnos = () => {
 }
 
 export default BusquedaAlumnos;
-
