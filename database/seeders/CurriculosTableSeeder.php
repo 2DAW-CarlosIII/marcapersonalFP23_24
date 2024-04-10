@@ -10,44 +10,44 @@ class CurriculosTableSeeder extends Seeder
 {
     private static $arrayCurriculos = [
         [
-            'user_id' => 1,
-            'video_curriculum' => 'Ds8lRXWfoPE',
-        ],
-        [
-            'user_id' => 2,
+            'user_id' => 12,
             'video_curriculum' => 'fabDpTOfKns',
         ],
         [
-            'user_id' => 3,
+            'user_id' => 13,
             'video_curriculum' => '2in5XMTlSWg',
         ],
         [
-            'user_id' => 4,
+            'user_id' => 14,
             'video_curriculum' => 'Sn-Za-l--e0',
         ],
         [
-            'user_id' => 5,
+            'user_id' => 15,
             'video_curriculum' => 'T72HF3a2xL4',
         ],
         [
-            'user_id' => 6,
+            'user_id' => 16,
             'video_curriculum' => 'uTgscfzdbCc',
         ],
         [
-            'user_id' => 7,
+            'user_id' => 17,
             'video_curriculum' => 'bIPgAncy3Q0',
         ],
         [
-            'user_id' => 8,
+            'user_id' => 18,
             'video_curriculum' => 'DCHp1F13R8k',
         ],
         [
-            'user_id' => 9,
+            'user_id' => 19,
             'video_curriculum' => 'nL7dnv_egaI',
         ],
         [
-            'user_id' => 10,
+            'user_id' => 20,
             'video_curriculum' => 'AKLJxNRrvjc',
+        ],
+        [
+            'user_id' => 21,
+            'video_curriculum' => 'Ds8lRXWfoPE',
         ],
     ];
 
