@@ -6,13 +6,34 @@ import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import { Head, Link, useForm } from '@inertiajs/react';
+import { useNavigate } from 'react-router-dom';
+import {useCheckAuth, useLogin, useNotify, useSafeSetState, } from 'ra-core';
 
-export default function Login({ status, canResetPassword }) {
-    const { data, setData, post, processing, errors, reset } = useForm({
+export const Login = (props) => {
+    const { data, setData, processing, errors, reset } = useForm({
         email: '',
         password: '',
         remember: false,
     });
+    const canResetPassword = true;
+
+    const { redirectTo, className } = props;
+    const [loading, setLoading] = useSafeSetState(false);
+    const login = useLogin();
+    const notify = useNotify();
+
+    const checkAuth = useCheckAuth();
+    const navigate = useNavigate();
+    useEffect(() => {
+        checkAuth({}, false)
+            .then(() => {
+                // already authenticated, redirect to the home page
+                navigate('/');
+            })
+            .catch(() => {
+                // not authenticated, stay on the login page
+            });
+    }, [checkAuth, navigate]);
 
     useEffect(() => {
         return () => {
@@ -20,10 +41,38 @@ export default function Login({ status, canResetPassword }) {
         };
     }, []);
 
-    const submit = (e) => {
-        e.preventDefault();
-
-        post(route('login'));
+    const submit = (values) => {
+        values.preventDefault()
+        setLoading(true);
+        login({
+            email: email.value,
+            password: password.value,
+            rememberChecked: values.target.elements.remember.checked
+        })
+        .then(() => {
+                setLoading(false);
+            })
+        .catch(error => {
+                setLoading(false);
+                notify(
+                    typeof error === 'string'
+                        ? error
+                        : typeof error === 'undefined' || !error.message
+                        ? 'ra.auth.sign_in_error'
+                        : error.message,
+                    {
+                        type: 'error',
+                        messageArgs: {
+                            _:
+                                typeof error === 'string'
+                                    ? error
+                                    : error && error.message
+                                    ? error.message
+                                    : undefined,
+                        },
+                    }
+                );
+            });
     };
 
     return (
@@ -42,7 +91,7 @@ export default function Login({ status, canResetPassword }) {
                         name="email"
                         value={data.email}
                         className="mt-1 block w-full"
-                        autoComplete="username"
+                        autoComplete="email"
                         isFocused={true}
                         onChange={(e) => setData('email', e.target.value)}
                     />

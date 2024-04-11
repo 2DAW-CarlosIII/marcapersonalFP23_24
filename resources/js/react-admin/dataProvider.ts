@@ -65,10 +65,10 @@ dataProvider.getIdentity = () => {
     });
 };
 
-dataProvider.postLogin = (email, password) => {
+dataProvider.postLogin = (email, password, rememberChecked) => {
     return httpClient(`${apiUrl}/login`, {
         method: 'POST',
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ email, password, rememberChecked }),
         headers: new Headers({
             'Content-Type': 'application/json',
             'accept': 'application/json',
