@@ -5,14 +5,35 @@ import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
-import { Head, Link, useForm } from '@inertiajs/react';
+import { Head, useForm } from '@inertiajs/react';
+import { useNavigate, Link } from 'react-router-dom';
+import {useCheckAuth, useLogin, useNotify, useSafeSetState, } from 'ra-core';
 
-export default function Login({ status, canResetPassword }) {
-    const { data, setData, post, processing, errors, reset } = useForm({
+export const Login = (props) => {
+    const { data, setData, processing, errors, reset } = useForm({
         email: '',
         password: '',
         remember: false,
     });
+    const canResetPassword = true;
+
+    const { redirectTo, className } = props;
+    const [loading, setLoading] = useSafeSetState(false);
+    const login = useLogin();
+    const notify = useNotify();
+
+    const checkAuth = useCheckAuth();
+    const navigate = useNavigate();
+    useEffect(() => {
+        checkAuth({}, false)
+            .then(() => {
+                // already authenticated, redirect to the home page
+                navigate('/');
+            })
+            .catch(() => {
+                // not authenticated, stay on the login page
+            });
+    }, [checkAuth, navigate]);
 
     useEffect(() => {
         return () => {
@@ -20,10 +41,38 @@ export default function Login({ status, canResetPassword }) {
         };
     }, []);
 
-    const submit = (e) => {
-        e.preventDefault();
-
-        post(route('login'));
+    const submit = (values) => {
+        values.preventDefault()
+        setLoading(true);
+        login({
+            email: email.value,
+            password: password.value,
+            rememberChecked: values.target.elements.remember.checked
+        })
+        .then(() => {
+                setLoading(false);
+            })
+        .catch(error => {
+                setLoading(false);
+                notify(
+                    typeof error === 'string'
+                        ? error
+                        : typeof error === 'undefined' || !error.message
+                        ? 'ra.auth.sign_in_error'
+                        : error.message,
+                    {
+                        type: 'error',
+                        messageArgs: {
+                            _:
+                                typeof error === 'string'
+                                    ? error
+                                    : error && error.message
+                                    ? error.message
+                                    : undefined,
+                        },
+                    }
+                );
+            });
     };
 
     return (
@@ -42,7 +91,7 @@ export default function Login({ status, canResetPassword }) {
                         name="email"
                         value={data.email}
                         className="mt-1 block w-full"
-                        autoComplete="username"
+                        autoComplete="email"
                         isFocused={true}
                         onChange={(e) => setData('email', e.target.value)}
                     />
@@ -79,8 +128,7 @@ export default function Login({ status, canResetPassword }) {
 
                 <div className="flex items-center justify-end mt-4">
                     {canResetPassword && (
-                        <Link
-                            href={route('password.request')}
+                        <Link to="/forgot-password"
                             className="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                         >
                             Forgot your password?
@@ -92,6 +140,17 @@ export default function Login({ status, canResetPassword }) {
                     </PrimaryButton>
                 </div>
             </form>
+
+            <div className="block mt-4">
+                <label className="flex items-center">
+                    <span className="ms-2 text-sm text-gray-600">Not Registered</span>
+                    <Link to="/register"
+                            className="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                        >
+                            Sign Up
+                    </Link>
+                </label>
+            </div>
         </GuestLayout>
     );
 }

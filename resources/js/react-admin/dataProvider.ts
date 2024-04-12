@@ -65,10 +65,10 @@ dataProvider.getIdentity = () => {
     });
 };
 
-dataProvider.postLogin = (email, password) => {
+dataProvider.postLogin = (email, password, rememberChecked) => {
     return httpClient(`${apiUrl}/login`, {
         method: 'POST',
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ email, password, rememberChecked }),
         headers: new Headers({
             'Content-Type': 'application/json',
             'accept': 'application/json',
@@ -79,6 +79,28 @@ dataProvider.postLogin = (email, password) => {
 dataProvider.postLogout = () => {
     return httpClient(`${apiUrl}/logout`, {
         method: 'POST',
+        headers: new Headers({
+            'Content-Type': 'application/json',
+            'accept': 'application/json',
+        }),
+    });
+};
+
+dataProvider.postRegister = (user) => {
+    return httpClient(`${apiUrl}/register`, {
+        method: 'POST',
+        body: JSON.stringify(user),
+        headers: new Headers({
+            'Content-Type': 'application/json',
+            'accept': 'application/json',
+        }),
+    });
+};
+
+dataProvider.postForgotPassword = (email) => {
+    return httpClient(`${apiUrl}/forgot-password`, {
+        method: 'POST',
+        body: JSON.stringify({email}),
         headers: new Headers({
             'Content-Type': 'application/json',
             'accept': 'application/json',

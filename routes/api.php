@@ -18,6 +18,9 @@ use App\Http\Controllers\API\EmpresaController;
 use App\Http\Controllers\API\TokenController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\API\CountController;
+use App\Http\Controllers\Auth\NewPasswordController;
+use App\Http\Controllers\Auth\PasswordResetLinkController;
+use App\Http\Controllers\Auth\RegisteredUserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,6 +50,16 @@ Route::prefix('v1')->group(function () {
     Route::post('login', [AuthenticatedSessionController::class, 'apiLogin']);
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
         ->middleware('auth:sanctum')->name('logout');
+    Route::post('register', [RegisteredUserController::class, 'apiRegister']);
+
+    Route::post('forgot-password', [PasswordResetLinkController::class, 'apiForgotPassword'])
+                ->name('password.email');
+
+    Route::get('reset-password/{token}', [NewPasswordController::class, 'create'])
+                ->name('password.reset');
+
+    Route::post('reset-password', [NewPasswordController::class, 'store'])
+                ->name('password.store');
 
     Route::apiResource('actividades', ActividadController::class)->parameters([
         'actividades' => 'actividad'

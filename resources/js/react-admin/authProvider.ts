@@ -3,15 +3,15 @@
 import { dataProvider } from "./dataProvider";
 
 export const authProvider = {
-    login: ({ username, password }) => {
-        return dataProvider.postLogin( username, password )
+    login: ({ email, password, rememberChecked = false }) => {
+        return dataProvider.postLogin( email, password, rememberChecked )
         .then(response => {
             if (response.status < 200 || response.status >= 300) {
               throw new Error(response.statusText);
             }
         })
         .catch((e) => {
-                throw new Error('Network error')
+                throw new Error(e.message)
         });
     },
     logout: () => {

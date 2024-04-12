@@ -2,6 +2,7 @@ import { Admin, Resource, ListGuesser, EditGuesser, ShowGuesser } from 'react-ad
 import { dataProvider } from './dataProvider';
 import { authProvider } from './authProvider';
 import { MPFPLayout } from './Layouts/mpfpLayout';
+import { Login as MPFPLogin} from '../Pages/Auth/Login';
 
 // Icons
 import UserIcon from '@mui/icons-material/AccountCircle';
@@ -37,6 +38,7 @@ export const App = () => (
         layout={MPFPLayout}
         basename='/dashboard'
         theme={marcaPersonalTheme}
+        loginPage={MPFPLogin}
         requireAuth
     >
         <Resource
