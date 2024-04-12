@@ -86,6 +86,17 @@ dataProvider.postLogout = () => {
     });
 };
 
+dataProvider.postRegister = (user) => {
+    return httpClient(`${apiUrl}/register`, {
+        method: 'POST',
+        body: JSON.stringify(user),
+        headers: new Headers({
+            'Content-Type': 'application/json',
+            'accept': 'application/json',
+        }),
+    });
+};
+
 dataProvider.update = (resource, params) => {
     if(!anyadirFichero(resource, params)) {
         return originalDataProvider.update(resource, params);

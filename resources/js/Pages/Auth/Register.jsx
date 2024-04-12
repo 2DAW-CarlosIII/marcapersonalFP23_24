@@ -4,15 +4,20 @@ import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
-import { Head, Link, useForm } from '@inertiajs/react';
+import { Head, useForm } from '@inertiajs/react';
+import { useNavigate, Link } from 'react-router-dom';
+import { dataProvider } from '../../react-admin/dataProvider';
 
 export default function Register() {
     const { data, setData, post, processing, errors, reset } = useForm({
-        name: '',
+        nombre: '',
+        apellidos: '',
         email: '',
         password: '',
         password_confirmation: '',
     });
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         return () => {
@@ -22,8 +27,17 @@ export default function Register() {
 
     const submit = (e) => {
         e.preventDefault();
-
-        post(route('register'));
+        dataProvider.postRegister({
+            nombre: nombre.value,
+            apellidos: apellidos.value,
+            email: email.value,
+            password: password.value,
+            password_confirmation: password_confirmation.value,
+        }).then(() => {
+            navigate('/');
+        }).catch((error) => {
+            throw new Error(error.message)
+        });
     };
 
     return (
@@ -32,20 +46,36 @@ export default function Register() {
 
             <form onSubmit={submit}>
                 <div>
-                    <InputLabel htmlFor="name" value="Name" />
+                    <InputLabel htmlFor="nombre" value="nombre" />
 
                     <TextInput
-                        id="name"
-                        name="name"
-                        value={data.name}
+                        id="nombre"
+                        name="nombre"
+                        value={data.nombre}
                         className="mt-1 block w-full"
-                        autoComplete="name"
+                        autoComplete="nombre"
                         isFocused={true}
-                        onChange={(e) => setData('name', e.target.value)}
+                        onChange={(e) => setData('nombre', e.target.value)}
                         required
                     />
 
-                    <InputError message={errors.name} className="mt-2" />
+                    <InputError message={errors.nombre} className="mt-2" />
+                </div>
+                <div>
+                    <InputLabel htmlFor="apellidos" value="apellidos" />
+
+                    <TextInput
+                        id="apellidos"
+                        name="apellidos"
+                        value={data.apellidos}
+                        className="mt-1 block w-full"
+                        autoComplete="apellidos"
+                        isFocused={true}
+                        onChange={(e) => setData('apellidos', e.target.value)}
+                        required
+                    />
+
+                    <InputError message={errors.apellidos} className="mt-2" />
                 </div>
 
                 <div className="mt-4">
@@ -57,7 +87,7 @@ export default function Register() {
                         name="email"
                         value={data.email}
                         className="mt-1 block w-full"
-                        autoComplete="username"
+                        autoComplete="email"
                         onChange={(e) => setData('email', e.target.value)}
                         required
                     />
@@ -101,7 +131,7 @@ export default function Register() {
 
                 <div className="flex items-center justify-end mt-4">
                     <Link
-                        href={route('login')}
+                        to="/dashboard/login"
                         className="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                     >
                         Already registered?

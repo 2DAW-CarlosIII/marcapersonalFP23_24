@@ -5,8 +5,8 @@ import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
-import { Head, Link, useForm } from '@inertiajs/react';
-import { useNavigate } from 'react-router-dom';
+import { Head, useForm } from '@inertiajs/react';
+import { useNavigate, Link } from 'react-router-dom';
 import {useCheckAuth, useLogin, useNotify, useSafeSetState, } from 'ra-core';
 
 export const Login = (props) => {
@@ -129,7 +129,7 @@ export const Login = (props) => {
                 <div className="flex items-center justify-end mt-4">
                     {canResetPassword && (
                         <Link
-                            href={route('password.request')}
+                            to={route('password.request')}
                             className="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                         >
                             Forgot your password?
@@ -141,6 +141,17 @@ export const Login = (props) => {
                     </PrimaryButton>
                 </div>
             </form>
+
+            <div className="block mt-4">
+                <label className="flex items-center">
+                    <span className="ms-2 text-sm text-gray-600">Not Registered</span>
+                    <Link to="/register"
+                            className="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                        >
+                            Sign Up
+                    </Link>
+                </label>
+            </div>
         </GuestLayout>
     );
 }
