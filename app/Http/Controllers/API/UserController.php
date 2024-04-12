@@ -11,6 +11,7 @@ use App\Models\Estudiante;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Date;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -22,7 +23,7 @@ class UserController extends Controller
     */
     public function __construct()
     {
-        $this->middleware('auth:sanctum')->except(['index', 'getDocentes', 'getEstudiantes', 'show', 'store']);
+        $this->middleware('auth:sanctum')->except(['index', 'getDocentes', 'getEstudiantes', 'show', 'store', 'getPermissions']);
         $this->authorizeResource(User::class, 'user');
     }
 
@@ -104,5 +105,11 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $user->delete();
+    }
+
+    public function getPermissions()
+    {
+        $user = Auth::user();
+        return response()->json($user ? $user->getAllPermissions() : []);
     }
 }

@@ -42,6 +42,8 @@ Route::prefix('v1')->group(function () {
         });
     });
 
+    Route::get('/user/permissions',  [UserController::class, 'getPermissions']);
+
     // emite un nuevo token
     Route::post('tokens', [TokenController::class, 'store']);
     // elimina el token del usuario autenticado
