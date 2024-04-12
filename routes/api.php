@@ -52,7 +52,7 @@ Route::prefix('v1')->group(function () {
         ->middleware('auth:sanctum')->name('logout');
     Route::post('register', [RegisteredUserController::class, 'apiRegister']);
 
-    Route::post('forgot-password', [PasswordResetLinkController::class, 'store'])
+    Route::post('forgot-password', [PasswordResetLinkController::class, 'apiForgotPassword'])
                 ->name('password.email');
 
     Route::get('reset-password/{token}', [NewPasswordController::class, 'create'])

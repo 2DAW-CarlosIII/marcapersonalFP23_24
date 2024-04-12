@@ -17,6 +17,7 @@ import IdiomaContext from './contextos/IdiomaContext';
 import AlumnoMaxiCard from "./componentes/AlumnoMaxiCard/AlumnoMaxiCard";
 import Dashboard from "../../Dashboard";
 import Register from "../../Auth/Register";
+import ForgotPassword from "../../Auth/ForgotPassword";
 
 
 
@@ -80,6 +81,7 @@ function App() {
                 <Route path="/empresa/alumno/:id"         element={<AlumnoMaxiCard></AlumnoMaxiCard>}></Route>
                 <Route path="/dashboard/*"                element={<Dashboard />} />
                 <Route path="/register"                   element={<Register />} />
+                <Route path="/forgot-password"            element={<ForgotPassword />}></Route>
               </Routes>
           </div>
       </div>

@@ -97,6 +97,17 @@ dataProvider.postRegister = (user) => {
     });
 };
 
+dataProvider.postForgotPassword = (email) => {
+    return httpClient(`${apiUrl}/forgot-password`, {
+        method: 'POST',
+        body: JSON.stringify({email}),
+        headers: new Headers({
+            'Content-Type': 'application/json',
+            'accept': 'application/json',
+        }),
+    });
+};
+
 dataProvider.update = (resource, params) => {
     if(!anyadirFichero(resource, params)) {
         return originalDataProvider.update(resource, params);

@@ -3,16 +3,24 @@ import InputError from '@/Components/InputError';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import { Head, useForm } from '@inertiajs/react';
+import { useNavigate } from 'react-router-dom';
+import { dataProvider } from '../../react-admin/dataProvider';
 
 export default function ForgotPassword({ status }) {
     const { data, setData, post, processing, errors } = useForm({
         email: '',
     });
 
+    const navigate = useNavigate();
+
     const submit = (e) => {
         e.preventDefault();
-
-        post(route('password.email'));
+        dataProvider.postForgotPassword(email.value)
+        .then(() => {
+            navigate('/dashboard');
+        }).catch((error) => {
+            throw new Error(error.message)
+        });
     };
 
     return (

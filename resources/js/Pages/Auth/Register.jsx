@@ -34,7 +34,7 @@ export default function Register() {
             password: password.value,
             password_confirmation: password_confirmation.value,
         }).then(() => {
-            navigate('/');
+            navigate('/dashboard');
         }).catch((error) => {
             throw new Error(error.message)
         });
