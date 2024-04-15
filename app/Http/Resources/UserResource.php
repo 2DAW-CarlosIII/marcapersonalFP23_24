@@ -2,7 +2,7 @@
 
 namespace App\Http\Resources;
 
-use App\Models\UserCompetencia;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -16,7 +16,7 @@ class UserResource extends JsonResource
     public function toArray(Request $request): array
     {
 
-        return array_merge(parent::toArray($request), [
+        $jsonToReturn = array_merge(parent::toArray($request), [
             'curriculo' => new CurriculoResource($this->curriculo),
             'idiomas' => $this->getIdiomasFromUser(),
             'actividades' => ActividadResource::collection($this->actividades),
@@ -30,6 +30,12 @@ class UserResource extends JsonResource
                   ]
                 : null,
         ]);
+
+        return ($this->resource instanceof User)
+            ? array_merge($jsonToReturn, [
+                'ownersId' => [$this->id],
+            ])
+            : $jsonToReturn;
     }
 
     public function getIdiomasFromUser() {
