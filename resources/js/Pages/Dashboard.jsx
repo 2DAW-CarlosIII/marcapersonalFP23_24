@@ -4,9 +4,9 @@ import { App } from "../react-admin/App";
 
 const Dashboard = () => {
     return(
-        <React.StrictMode>
+//        <React.StrictMode>
             <App />
-        </React.StrictMode>
+        //</React.StrictMode>
     );
 }
 

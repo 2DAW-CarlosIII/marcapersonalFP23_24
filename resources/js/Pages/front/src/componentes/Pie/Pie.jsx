@@ -102,7 +102,7 @@ const Pie = () => {
         <hr className="mb-0"/>
         {/*<!--Copyright-->*/}
         <div className="py-3 text-center">
-        <h6><img id="LogoInvertidoPie" src={LogoInvertido} className="align-baseline" width="70" height="30"  alt="Logo Marca Personal"></img>Marca PersonaL FP <small> | {idiomas[idioma].disenoInicial.op1} CFGS Desarrollo de Aplicaciones Web © 2023</small></h6>
+        <h6><img id="LogoInvertidoPie" src={LogoInvertido} className="align-baseline" width="70" height="30"  alt="Logo Marca Personal"></img>Marca PersonaL FP <small> | {idiomas[idioma].disenoInicial.op1} CFGS Desarrollo de Aplicaciones Web © 2024</small></h6>
         </div>
 
         </footer>

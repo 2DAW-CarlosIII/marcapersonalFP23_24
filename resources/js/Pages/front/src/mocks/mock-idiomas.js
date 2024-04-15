@@ -15,6 +15,10 @@ const idiomas = {
                     op2: "Proyectos",
                     op3: "Alumnos"
       },
+      menuCentroEducativo: {op1: "Centro educativo",
+                            op2: "Login",
+                            op3: ""
+},
       filtros: { op1: "Busca a tus alumnos",
                  op2: "Filtra por perfil competencial",
                  op3: "Filtra por famila profesional",
