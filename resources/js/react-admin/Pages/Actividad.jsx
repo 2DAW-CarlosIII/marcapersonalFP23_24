@@ -13,14 +13,25 @@ import {
     FunctionField,
     SelectInput,
     ShowButton,
+    CreateButton,
     Show,
     SimpleShowLayout,
     usePermissions,
-    useListContext,
+    ExportButton,
+    FilterButton,
+    TopToolbar,
   } from 'react-admin';
 
 import { useRecordContext} from 'react-admin';
 import { useMediaQuery } from '@mui/material';
+
+const ListActions = () => (
+  <TopToolbar>
+      <FilterButton/>
+      <RenderCreateButton/>
+      <ExportButton/>
+  </TopToolbar>
+);
 
 const OrganizadorInput = () => (
     <ReferenceInput label="Organizador" source="docente_id" reference="users" alwaysOn >
@@ -35,17 +46,27 @@ const actividadesFilters = [
     OrganizadorInput(),
 ];
 
+const RenderCreateButton = (props) => {
+  const { permissions, isLoading } = usePermissions();
+
+  if (!isLoading && (permissions.role === 'docente' || permissions.role === 'admin')) {
+    return <CreateButton {...props} />;
+  }
+
+  return null;
+};
+
 const RenderEditButton = () => {
   const { permissions, isLoading } = usePermissions();
   const record = useRecordContext();
   if (!record || isLoading) return null;
-  return (permissions.role === 'admin' || record.ownerId === permissions.id) && <EditButton />;
+  return (permissions.role === 'admin' || record.ownersId.includes(permissions.id)) && <EditButton />;
 };
 
 export const ActividadList = () => {
   const isSmall = useMediaQuery((theme) => theme.breakpoints.down('sm'));
   return (
-    <List filters={actividadesFilters} >
+    <List filters={actividadesFilters} actions={<ListActions />}>
       {isSmall ? (
         <SimpleList
           primaryText="%{nombre}"
