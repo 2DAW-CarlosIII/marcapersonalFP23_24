@@ -16,6 +16,7 @@ class ActividadResource extends JsonResource
     public function toArray(Request $request): array
     {
         return array_merge(parent::toArray($request), [
+            'ownerId' => $this->docente_id,
             'reconocimientos' => new ReconocimientoResource($this->reconocimientos),
             'competencias' => CompetenciaResource::collection($this->competencias),
         ]);

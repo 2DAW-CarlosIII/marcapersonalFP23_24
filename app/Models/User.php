@@ -141,16 +141,17 @@ class User extends Authenticatable
 
     public function getAllPermissions(): array
     {
-        $permissions = [];
+        $permissions['id'] = $this->id;
         if ($this->esAdmin()) {
-            $permissions = ['*'];
+            $permissions['role'] = 'admin';
         } elseif ($this->esDocente()) {
-            $permissions = ['docente'];
+            $permissions['role']  = 'docente';
         } elseif ($this->esEstudiante()) {
-            $permissions = ['estudiante'];
+            $permissions['role']  = 'estudiante';
         } elseif ($this->esEmpresa()) {
-            $permissions = ['empresa'];
+            $permissions['role']  = 'empresa';
         }
+
         return $permissions;
     }
 

@@ -14,7 +14,9 @@ import {
     SelectInput,
     ShowButton,
     Show,
-    SimpleShowLayout
+    SimpleShowLayout,
+    usePermissions,
+    useListContext,
   } from 'react-admin';
 
 import { useRecordContext} from 'react-admin';
@@ -33,6 +35,13 @@ const actividadesFilters = [
     OrganizadorInput(),
 ];
 
+const RenderEditButton = () => {
+  const { permissions, isLoading } = usePermissions();
+  const record = useRecordContext();
+  if (!record || isLoading) return null;
+  return (permissions.role === 'admin' || record.ownerId === permissions.id) && <EditButton />;
+};
+
 export const ActividadList = () => {
   const isSmall = useMediaQuery((theme) => theme.breakpoints.down('sm'));
   return (
@@ -43,7 +52,7 @@ export const ActividadList = () => {
           secondaryText="%{insignia}"
           linkType={(record) => (record.canEdit ? 'edit' : 'show')}
         >
-          <EditButton />
+          <RenderEditButton />
         </SimpleList>
       ) : (
         <Datagrid bulkActionButtons={false} >
@@ -54,7 +63,7 @@ export const ActividadList = () => {
             <FunctionField render={record => record && `${record.nombre} ${record.apellidos}`} />
           </ReferenceField>
           <ShowButton />
-          <EditButton />
+          <RenderEditButton />
         </Datagrid>
       )}
     </List>
