@@ -139,6 +139,22 @@ class User extends Authenticatable
         return Empresa::where('user_id', $this->id)->exists();
     }
 
+    public function getAllPermissions(): array
+    {
+        $permissions['id'] = $this->id;
+        if ($this->esAdmin()) {
+            $permissions['role'] = 'admin';
+        } elseif ($this->esDocente()) {
+            $permissions['role']  = 'docente';
+        } elseif ($this->esEstudiante()) {
+            $permissions['role']  = 'estudiante';
+        } elseif ($this->esEmpresa()) {
+            $permissions['role']  = 'empresa';
+        }
+
+        return $permissions;
+    }
+
     private function getEmailDomain(): string
     {
         $dominio = explode('@', $this->email)[1];

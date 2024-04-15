@@ -65,6 +65,16 @@ dataProvider.getIdentity = () => {
     });
 };
 
+dataProvider.getPermissions = () => {
+    return httpClient(`${apiUrl}/user/permissions`, {
+        method: 'GET',
+        headers: new Headers({
+            'Content-Type': 'application/json',
+            'accept': 'application/json',
+        }),
+    });
+};
+
 dataProvider.postLogin = (email, password, rememberChecked) => {
     return httpClient(`${apiUrl}/login`, {
         method: 'POST',

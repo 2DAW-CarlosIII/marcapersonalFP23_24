@@ -53,5 +53,13 @@ export const authProvider = {
                 throw new Error('Unatuhenticated')
             });
     },
-    getPermissions: () => Promise.resolve('')
+    getPermissions: () => {
+        return dataProvider.getPermissions()
+            .then(( permissions ) => {
+                return permissions.json
+            })
+            .catch((error) => {
+                throw new Error(error.message)
+            });
+    }
 };
