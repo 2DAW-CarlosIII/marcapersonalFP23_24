@@ -46,7 +46,7 @@ const Home = () => {
                     <div className="col-md-4 ">
 
                     <div className="cardLP">
-                            <Link to="/dashboard">
+                            <Link to="/centroeducativo">
                                 <BotonLanding  titulo ={idiomas[idioma].botoneraInicial.op2}
                                             sourceImg ={School} ></BotonLanding>
                             </Link>

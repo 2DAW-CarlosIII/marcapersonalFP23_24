@@ -3,6 +3,7 @@ import ListaFamiliaProfesionales from '../../componentes/ListaFamiliaProfesional
 import MenuEmpresa from '../../componentes/MenuEmpresa/MenuEmpresa';
 import ResultadosBusquedaProyectos from '../../componentes/ResultadosBusquedaProyectos/ResultadosBusquedaProyectos';
 
+import './BusquedaProyectos.css';
 
 import idiomas from "../../mocks/mock-idiomas";
 // Contextos -----------------------------------------------------------------------------------------------

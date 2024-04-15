@@ -1,6 +1,5 @@
 import { Layout, AppBar, TitlePortal } from 'react-admin';
 import Box from '@mui/material/Box';
-import Cabecera from '../../Pages/front/src/componentes/Cabecera/Cabecera';
 import LogoCabecera from '../../Pages/front/src/componentes/LogoCabecera/LogoCabecera';
 
 export const MPFPLayout = (props) => (
