@@ -1,7 +1,8 @@
 import { useNavigate} from "react-router-dom";
+import { useEffect } from 'react';
 import MenuCentroEducativo from "../../componentes/MenuCentroEducativo/MenuCentroEducativo";
-import {useCheckAuth} from 'ra-core';
-import { useEffect } from "react";
+import AjaxLoader from "../../componentes/AjaxLoader/AjaxLoader";
+import { useAuthState, useAuthenticated, Loading, useLogin, useGetIdentity } from 'react-admin';
 
 /* ALUMNO
     Registrarse en Marca personal
@@ -22,40 +23,48 @@ import { useEffect } from "react";
         </Link>
 */
 const CentroEducativo = () => {
+
+
+const authenticated = localStorage.getItem('authenticated')
+console.log("autenticated", authenticated);
+const navigate = useNavigate();
+
 /*
-console.log("1");
-    const checkAuth = useCheckAuth();
-    console.log("2", checkAuth);
-    const navigate = useNavigate();
-    console.log("3");
-    useEffect(() => {
-        checkAuth({}, false)
-            .then(() => {
+    console.log("2xxx ");
+    const { isLoading, authenticated } = useAuthState();
+    console.log("4xxx ", isLoading, authenticated);
 
-                // already authenticated, redirect to the home page
-                navigate('/dashboard');
-            })
-            .catch(() => {
+<div>
+                       : authenticated ? navigate('/dashboard')
+                                       :
+                                       (<div>
+                                       <div className="row">
+                                               <div className="col-md-12"><MenuCentroEducativo></MenuCentroEducativo></div>
+                                       </div>
+                                       <p>Invitar empresas</p>
+                                       <p>Crear y configurar los proyectos de sus alumnos</p>
+                                       <p>Crear Actividades</p>
+                                       <p>Asociar competencias a las actividades</p>
+                                       <p>Validar la participación de los alumnos en las actividades</p>
+                                        </div>)
+                           }
+        </div>
+    */
+        useEffect(() => { if (authenticated) navigate('/dashboard')}, [authenticated])
 
-                // not authenticated, stay on the login page
-            });
-    }, [checkAuth, navigate]);
 
-*/
     return (
 
-        <div>
-            <div className="row">
-                    <div className="col-md-12"><MenuCentroEducativo></MenuCentroEducativo></div>
-            </div>
-            <p>Invitar empresas</p>
-            <p>Crear y configurar los proyectos de sus alumnos</p>
-            <p>Crear Actividades</p>
-            <p>Asociar competencias a las actividades</p>
-            <p>Validar la participación de los alumnos en las actividades</p>
-
-        </div>
+                                       <div>
+                                       <div className="row">
+                                               <div className="col-md-12"><MenuCentroEducativo></MenuCentroEducativo></div>
+                                       </div>
+                                       <p>Invitar empresas</p>
+                                       <p>Crear y configurar los proyectos de sus alumnos</p>
+                                       <p>Crear Actividades</p>
+                                       <p>Asociar competencias a las actividades</p>
+                                       <p>Validar la participación de los alumnos en las actividades</p>
+                                        </div>
     )
-
-}
+                        }
 export default CentroEducativo;

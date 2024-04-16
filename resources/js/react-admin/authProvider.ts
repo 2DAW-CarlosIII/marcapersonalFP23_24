@@ -6,6 +6,7 @@ export const authProvider = {
     login: ({ email, password, rememberChecked = false }) => {
         return dataProvider.postLogin( email, password, rememberChecked )
         .then(response => {
+            localStorage.setItem('authenticated', true);
             if (response.status < 200 || response.status >= 300) {
               throw new Error(response.statusText);
             }
@@ -17,6 +18,7 @@ export const authProvider = {
     logout: () => {
         return dataProvider.postLogout()
         .then(response => {
+            localStorage.removeItem('authenticated');
             if (response.status < 200 || response.status >= 300) {
               throw new Error(response.statusText);
             }
