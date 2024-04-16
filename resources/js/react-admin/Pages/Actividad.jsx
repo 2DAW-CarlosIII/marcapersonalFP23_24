@@ -4,28 +4,27 @@ import {
     Datagrid,
     TextField,
     ReferenceField,
-    EditButton,
     Edit,
     Create,
     SimpleForm,
+    SaveButton,
     ReferenceInput,
     TextInput,
     FunctionField,
     SelectInput,
     ShowButton,
-    CreateButton,
     Show,
     SimpleShowLayout,
-    usePermissions,
     ExportButton,
     FilterButton,
     TopToolbar,
+    Toolbar,
     useRecordContext,
   } from 'react-admin';
 
 import { useMediaQuery } from '@mui/material';
 
-import { RenderCreateButton, RenderEditButton } from '../Components/BotonesPermissions';
+import { RenderCreateButton, RenderEditButton, RenderDeleteButton } from '../Components/BotonesPermissions';
 
 const ListActions = () => (
   <TopToolbar>
@@ -33,6 +32,15 @@ const ListActions = () => (
       <RenderCreateButton permisos={{ role: 'docente' }} />
       <ExportButton/>
   </TopToolbar>
+);
+
+const EditActions = () => (
+  <Toolbar>
+    <div class="RaToolbar-defaultToolbar">
+      <SaveButton/>
+      <RenderDeleteButton />
+    </div>
+  </Toolbar>
 );
 
 const OrganizadorInput = () => (
@@ -70,6 +78,7 @@ export const ActividadList = () => {
           </ReferenceField>
           <ShowButton />
           <RenderEditButton />
+          <RenderDeleteButton />
         </Datagrid>
       )}
     </List>
@@ -82,8 +91,8 @@ export const ActividadTitle = () => {
 };
 
 export const ActividadEdit = () => (
-    <Edit title={<ActividadTitle />}>
-        <SimpleForm>
+    <Edit title={<ActividadTitle />} >
+        <SimpleForm toolbar={<EditActions />}>
             <TextInput source="id" disabled />
             <TextInput source="nombre" />
             <TextInput source="insignia" />
