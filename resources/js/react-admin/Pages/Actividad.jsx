@@ -20,21 +20,23 @@ import {
     ExportButton,
     FilterButton,
     TopToolbar,
+    useRecordContext,
   } from 'react-admin';
 
-import { useRecordContext} from 'react-admin';
 import { useMediaQuery } from '@mui/material';
+
+import { RenderCreateButton, RenderEditButton } from '../Components/BotonesPermissions';
 
 const ListActions = () => (
   <TopToolbar>
       <FilterButton/>
-      <RenderCreateButton/>
+      <RenderCreateButton permisos={{ role: 'docente' }} />
       <ExportButton/>
   </TopToolbar>
 );
 
 const OrganizadorInput = () => (
-    <ReferenceInput label="Organizador" source="docente_id" reference="users" alwaysOn >
+    <ReferenceInput label="Organizador" source="docente_id" reference="docentes" alwaysOn >
         <SelectInput
         label="Organizador"
         source="docente_id"
@@ -45,23 +47,6 @@ const actividadesFilters = [
     <TextInput source="q" label="Search" alwaysOn />,
     OrganizadorInput(),
 ];
-
-const RenderCreateButton = (props) => {
-  const { permissions, isLoading } = usePermissions();
-
-  if (!isLoading && (permissions.role === 'docente' || permissions.role === 'admin')) {
-    return <CreateButton {...props} />;
-  }
-
-  return null;
-};
-
-const RenderEditButton = () => {
-  const { permissions, isLoading } = usePermissions();
-  const record = useRecordContext();
-  if (!record || isLoading) return null;
-  return (permissions.role === 'admin' || record.ownersId.includes(permissions.id)) && <EditButton />;
-};
 
 export const ActividadList = () => {
   const isSmall = useMediaQuery((theme) => theme.breakpoints.down('sm'));
@@ -102,7 +87,9 @@ export const ActividadEdit = () => (
             <TextInput source="id" disabled />
             <TextInput source="nombre" />
             <TextInput source="insignia" />
-            <OrganizadorInput />
+            <ReferenceField label="Organizador" source="docente_id" reference="users">
+                <FunctionField render={record => record && `Organizador: ${record.nombre} ${record.apellidos}`} />
+            </ReferenceField>
         </SimpleForm>
     </Edit>
 );
@@ -113,9 +100,6 @@ export const ActividadShow = () => (
             <TextField source="id" />
             <TextField source="nombre" />
             <TextField source="insignia" />
-            <ReferenceField label="Organizador" source="docente_id" reference="users">
-                <FunctionField render={record => record && `${record.nombre} ${record.apellidos}`} />
-            </ReferenceField>
         </SimpleShowLayout>
     </Show>
 );
@@ -125,7 +109,9 @@ export const ActividadCreate = () => (
         <SimpleForm>
             <TextInput source="nombre" />
             <TextInput source="insignia" />
-            <OrganizadorInput />
+            <ReferenceField label="Organizador" source="docente_id" reference="users">
+                <FunctionField render={record => record && `${record.nombre} ${record.apellidos}`} />
+            </ReferenceField>
         </SimpleForm>
     </Create>
 );

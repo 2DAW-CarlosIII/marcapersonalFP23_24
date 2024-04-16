@@ -94,8 +94,8 @@ Route::prefix('v1')->group(function () {
         ->where('id', '[0-9]+');
 
     Route::apiResource('users', UserController::class);
-    Route::get('estudiantes', [UserController::class, 'getEstudiantes']);
-    Route::get('docentes', [UserController::class, 'getDocentes']);
+    Route::get('estudiantes', [UserController::class, 'getEstudiantes'])->name('estudiantes.index');
+    Route::get('docentes', [UserController::class, 'getDocentes'])->name('docentes.index');
 
     Route::get('{tabla}/count', [CountController::class, 'count']);
     Route::get('totales', [CountController::class, 'totales']);
