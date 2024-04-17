@@ -55,7 +55,6 @@ class UserController extends Controller
      */
     public function getDocentes(Request $request)
     {
-        $this->modelclass = Docente::class;
         return $this->index($request);
     }
 
@@ -64,7 +63,6 @@ class UserController extends Controller
      */
     public function getEstudiantes(Request $request)
     {
-        $this->modelclass = Estudiante::class;
         return $this->index($request);
     }
 
