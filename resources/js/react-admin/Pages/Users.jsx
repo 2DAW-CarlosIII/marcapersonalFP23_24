@@ -18,9 +18,34 @@ import {
     SimpleShowLayout,
     DateInput,
     PasswordInput,
+    SaveButton,
+    ListButton,
+    TopToolbar,
+    ExportButton,
+    FilterButton,
+    Toolbar,
 } from 'react-admin';
 
 import { useMediaQuery } from '@mui/material';
+import { RenderCreateButton, RenderEditButton, RenderDeleteButton } from '../Components/BotonesPermissions';
+
+const ListActions = () => (
+    <TopToolbar>
+        <FilterButton/>
+        <RenderCreateButton permisos={{ role: null }} />
+        <ExportButton/>
+    </TopToolbar>
+);
+
+const EditActions = () => (
+    <Toolbar>
+      <div class="RaToolbar-defaultToolbar">
+        <SaveButton/>
+        <RenderDeleteButton />
+      </div>
+    </Toolbar>
+);
+
 
 const DesdeInput = () => (
     <DateInput source="created_at" label="Fecha de alta desde" />
@@ -39,24 +64,23 @@ const validatePasswordMatch = (value, allValues) => {
 
 const UserFilters = [
     <TextInput source="q" label="Search" alwaysOn />,
-    DesdeInput(),
-    HastaInput(),
 ];
-
-
 
 export const UserList = () => {
     const isSmall = useMediaQuery((theme) => theme.breakpoints.down('sm'));
 
     return (
-        <List filters={UserFilters}>
+        <List filters={UserFilters} actions={<ListActions />} >
             {isSmall ? (
                 <SimpleList
                     primaryText={(record) => record.nombre}
                     secondaryText={(record) => record.email}
                     tertiaryText={(record) => record.created_at}
                     linkType={(record) => (record.canEdit ? 'edit' : 'show')}
-                />
+                >
+                    <RenderEditButton />
+                    <RenderDeleteButton />
+                </SimpleList>
             ) : (
                 <Datagrid bulkActionButtons={false}>
                     <TextField source="id" />
@@ -66,7 +90,8 @@ export const UserList = () => {
                     <EmailField source="email" label="Email" />
                     <DateField source="created_at" label="Fecha de alta" />
                     <ShowButton />
-                    <EditButton />
+                    <RenderEditButton />
+                    <RenderDeleteButton />
                 </Datagrid>
             )}
         </List>
@@ -81,7 +106,7 @@ export const UserTitle = ({ record }) => {
 
 export const UserEdit = () => (
     <Edit title={<UserTitle />}>
-        <SimpleForm>
+        <SimpleForm toolbar={<EditActions />} >
             <TextInput source="id" disabled />
             <TextInput source="name" label="Usuario" />
             <TextInput source="nombre" label="Nombre" />
@@ -95,7 +120,7 @@ export const UserEdit = () => (
 );
 
 export const UserShow = () => (
-    <Show>
+    <Show actions={<ListButton />} >
         <SimpleShowLayout>
         <ImageField source="attachments.src" title="attachments.title" label="Foto de perfil" />
             <TextField source="id" />

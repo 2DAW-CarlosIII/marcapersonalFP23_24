@@ -15,6 +15,7 @@ import {
     ShowButton,
     Show,
     SimpleShowLayout,
+    ListButton,
     ExportButton,
     FilterButton,
     TopToolbar,
@@ -24,7 +25,7 @@ import {
 
 import { useMediaQuery } from '@mui/material';
 
-import { RenderCreateButton, RenderEditButton, RenderDeleteButton } from '../Components/BotonesPermissions';
+import { RenderCreateButton, RenderEditButton, RenderDeleteButton, MySelf } from '../Components/BotonesPermissions';
 
 const ListActions = () => (
   <TopToolbar>
@@ -94,21 +95,23 @@ export const ActividadEdit = () => (
     <Edit title={<ActividadTitle />} >
         <SimpleForm toolbar={<EditActions />}>
             <TextInput source="id" disabled />
-            <TextInput source="nombre" />
+            <TextInput source="nombre" label="Nombre Actividad" />
             <TextInput source="insignia" />
-            <ReferenceField label="Organizador" source="docente_id" reference="users">
-                <FunctionField render={record => record && `Organizador: ${record.nombre} ${record.apellidos}`} />
-            </ReferenceField>
+            <MySelf />
         </SimpleForm>
     </Edit>
 );
 
 export const ActividadShow = () => (
-    <Show>
+    <Show actions={<ListButton />}>
         <SimpleShowLayout>
             <TextField source="id" />
-            <TextField source="nombre" />
+            <TextField source="nombre" label="Nombre Actividad" />
             <TextField source="insignia" />
+            <ReferenceField label="Organizador" source="docente_id" reference="users">
+              <FunctionField render={record => record && `${record.nombre} ${record.apellidos}`} />
+            </ReferenceField>
+            <ListButton />
         </SimpleShowLayout>
     </Show>
 );
@@ -116,11 +119,9 @@ export const ActividadShow = () => (
 export const ActividadCreate = () => (
     <Create>
         <SimpleForm>
-            <TextInput source="nombre" />
+            <TextInput source="nombre" label="Nombre Actividad" />
             <TextInput source="insignia" />
-            <ReferenceField label="Organizador" source="docente_id" reference="users">
-                <FunctionField render={record => record && `${record.nombre} ${record.apellidos}`} />
-            </ReferenceField>
+            <MySelf />
         </SimpleForm>
     </Create>
 );

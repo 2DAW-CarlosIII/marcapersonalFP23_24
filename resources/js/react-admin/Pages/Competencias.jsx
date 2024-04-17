@@ -3,24 +3,43 @@ import {
     SimpleList,
     Datagrid,
     TextField,
-    ReferenceField,
-    EditButton,
     Edit,
     Create,
     SimpleForm,
-    ReferenceInput,
     TextInput,
     NumberField,
     NumberInput,
-    FunctionField,
-    SelectInput,
     ShowButton,
     Show,
-    SimpleShowLayout
+    SimpleShowLayout,
+    SaveButton,
+    ListButton,
+    TopToolbar,
+    ExportButton,
+    FilterButton,
+    Toolbar,
 } from 'react-admin';
 
 import { useMediaQuery } from '@mui/material';
 import { useRecordContext } from 'react-admin';
+import { RenderCreateButton, RenderEditButton, RenderDeleteButton } from '../Components/BotonesPermissions';
+
+const ListActions = () => (
+    <TopToolbar>
+        <FilterButton/>
+        <RenderCreateButton permisos={{ role: null }} />
+        <ExportButton/>
+    </TopToolbar>
+);
+
+const EditActions = () => (
+    <Toolbar>
+      <div class="RaToolbar-defaultToolbar">
+        <SaveButton/>
+        <RenderDeleteButton />
+      </div>
+    </Toolbar>
+);
 
 const competenciasFilters = [
     <TextInput source="q" label="Search" alwaysOn />,
@@ -29,14 +48,15 @@ const competenciasFilters = [
 export const CompetenciaList = () => {
     const isSmall = useMediaQuery((theme) => theme.breakpoints.down('sm'));
     return (
-        <List filters={competenciasFilters} >
+        <List filters={competenciasFilters} actions={<ListActions />} >
             {isSmall ? (
                 <SimpleList
                     primaryText="%{nombre}"
                     secondaryText="%{color}"
                     linkType={(record) => (record.canEdit ? 'edit' : 'show')}
                 >
-                    <EditButton />
+                    <RenderEditButton />
+                    <RenderDeleteButton />
                 </SimpleList>
             ) : (
                 <Datagrid bulkActionButtons={false} >
@@ -44,7 +64,8 @@ export const CompetenciaList = () => {
                     <TextField label="nombre" source="nombre" />
                     <TextField label="color" source="color" />
                     <ShowButton />
-                    <EditButton />
+                    <RenderEditButton />
+                    <RenderDeleteButton />
                 </Datagrid>
             )}
         </List>
@@ -53,8 +74,6 @@ export const CompetenciaList = () => {
 
 };
 
-
-
 export const CompetenciaTitle = () => {
     const record = useRecordContext();
     return <span>Competencia {record ? `"${record.nombre}"` : ''}</span>;
@@ -62,7 +81,7 @@ export const CompetenciaTitle = () => {
 
 export const CompetenciaEdit = () => (
     <Edit title={<CompetenciaTitle />}>
-        <SimpleForm>
+        <SimpleForm toolbar={<EditActions />} >
             <NumberInput label="ID" source="id" />
             <TextInput label="nombre" source="nombre" />
             <TextInput label="color" source="color" />
@@ -73,13 +92,11 @@ export const CompetenciaEdit = () => (
 );
 
 export const CompetenciaShow = () => (
-    <Show>
+    <Show actions={<ListButton />} >
         <SimpleShowLayout>
             <NumberField label="ID" source="id" />
             <TextField label="nombre" source="nombre" />
             <TextField source="color" />
-            <ShowButton />
-            <EditButton />
         </SimpleShowLayout>
     </Show>
 );

@@ -1,39 +1,56 @@
 // in resources/js/react-admin/pages/proyectos.jsx
 import {
     List,
-    Filter,
     SimpleList,
     Datagrid,
     TextField,
     DateField,
     ReferenceField,
-    EditButton,
     Edit,
     Create,
     SimpleForm,
     ReferenceInput,
-    TextInput,
-    NumberField,
-    NumberInput,
     FunctionField,
-    SelectInput,
     ShowButton,
     Show,
     SimpleShowLayout,
-    FileInput,
+    SaveButton,
+    ListButton,
+    TopToolbar,
+    ExportButton,
+    FilterButton,
+    Toolbar,
+    AutocompleteInput,
   } from 'react-admin';
 
 import { useRecordContext} from 'react-admin';
 import { useMediaQuery } from '@mui/material';
+import { RenderCreateButton, RenderEditButton, RenderDeleteButton } from '../Components/BotonesPermissions';
 
+const ListActions = () => (
+    <TopToolbar>
+        <FilterButton/>
+        <RenderCreateButton permisos={{ role: null }} />
+        <ExportButton/>
+    </TopToolbar>
+);
+
+const EditActions = () => (
+    <Toolbar>
+      <div class="RaToolbar-defaultToolbar">
+        <SaveButton/>
+        <RenderDeleteButton />
+      </div>
+    </Toolbar>
+);
 
 //TODO mostraremos id_estudiante como nombre (referenceFIeld + input para validad),
 //id_actividad como nombre (reference field), docente_validador como texto (reference field) y fecha como fecha
 
 //inputs para luego poder filtrar por docente_validador, por estudiante y por actividad
 const DocenteInput = () => (
-    <ReferenceInput label="Docente" source="docente_validador" reference="users" alwaysOn >
-        <SelectInput
+    <ReferenceInput label="Docente" source="docente_validador" reference="docentes" alwaysOn >
+        <AutocompleteInput
         label="Docente"
         source="docente_validador"
         optionText={record => record && `${record.nombre} ${record.apellidos}`} />
@@ -41,8 +58,8 @@ const DocenteInput = () => (
 )
 
 const EstudianteInput = () => (
-    <ReferenceInput label="Estudiante" source="estudiante_id" reference="users" alwaysOn >
-        <SelectInput
+    <ReferenceInput label="Estudiante" source="estudiante_id" reference="estudiantes" alwaysOn >
+        <AutocompleteInput
         label="Estudiante"
         source="estudiante_id"
         optionText={record => record && `${record.nombre} ${record.apellidos}`} />
@@ -51,7 +68,7 @@ const EstudianteInput = () => (
 
 const ActividadInput = () => (
     <ReferenceInput label="Actividad" source="actividad_id" reference="actividades">
-        <SelectInput
+        <AutocompleteInput
         label="Actividad"
         source="actividad_id"
         optionText={record => record && `${record.nombre}`} />
@@ -61,8 +78,8 @@ const ActividadInput = () => (
 //filtros por docente_validador, por estudiante y por actividad
 
 const EstudiantesFilter = () => (
-    <ReferenceInput label="Estudiante" source="estudiante_id" reference="users" alwaysOn >
-        <SelectInput
+    <ReferenceInput label="Estudiante" source="estudiante_id" reference="estudiantes" alwaysOn >
+        <AutocompleteInput
         label="Estudiante"
         source="estudiante_id"
         optionText={record => record && `${record.nombre} ${record.apellidos}`} />
@@ -71,7 +88,7 @@ const EstudiantesFilter = () => (
 
 const ActividadesFilter = () => (
     <ReferenceInput label="Actividad" source="actividad_id" reference="actividades" alwaysOn >
-        <SelectInput
+        <AutocompleteInput
         label="Actividad"
         source="actividad_id"
         optionText={record => record && `${record.nombre}`} />
@@ -79,8 +96,8 @@ const ActividadesFilter = () => (
 );
 
 const DocentesFilter = () => (
-    <ReferenceInput label="Docente" source="docente_validador" reference="users" alwaysOn >
-        <SelectInput
+    <ReferenceInput label="Docente" source="docente_validador" reference="docentes" alwaysOn >
+        <AutocompleteInput
         label="Docente"
         source="docente_validador"
         optionText={record => record && `${record.nombre} ${record.apellidos}`} />
@@ -96,7 +113,7 @@ const reconocimientosFilters = [
 export const ReconocimientoList = (props) => {
     const isSmall = useMediaQuery((theme) => theme.breakpoints.down('sm'));
     return (
-        <List {...props} filters={reconocimientosFilters}>
+        <List {...props} filters={reconocimientosFilters} actions={<ListActions />} >
         {isSmall ? (
                 <SimpleList
                     primaryText="%{estudiante_id}"
@@ -104,7 +121,8 @@ export const ReconocimientoList = (props) => {
                     tertiaryText="%{docente_validador}"
                     linkType={(record) => (record.canEdit ? 'edit' : 'show')}
                 >
-                    <EditButton />
+                    <RenderEditButton />
+                    <RenderDeleteButton />
                 </SimpleList>
             ) : (
                 <Datagrid bulkActionButtons={false} >
@@ -120,7 +138,8 @@ export const ReconocimientoList = (props) => {
                     </ReferenceField>
                     <DateField source="fecha" />
                     <ShowButton />
-                    <EditButton />
+                    <RenderEditButton />
+                    <RenderDeleteButton />
                 </Datagrid>
             )}
         </List>
@@ -134,7 +153,7 @@ export const ReconocimientoTitle = () => {
 
 export const ReconocimientoEdit = () => (
     <Edit title={<ReconocimientoTitle />}>
-    <SimpleForm>
+    <SimpleForm toolbar={<EditActions />} >
         <EstudianteInput />
         <DocenteInput />
         <ActividadInput />
@@ -143,7 +162,7 @@ export const ReconocimientoEdit = () => (
 );
 
 export const ReconocimientoShow = () => (
-    <Show>
+    <Show actions={<ListButton />} >
         <SimpleShowLayout>
                     <ReferenceField label="Estudiante" source="estudiante_id" reference="users">
                         <FunctionField render={record => record && `${record.nombre} ${record.apellidos}`} />

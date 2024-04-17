@@ -3,24 +3,43 @@ import {
     SimpleList,
     Datagrid,
     TextField,
-    ReferenceField,
-    EditButton,
     Edit,
     Create,
     SimpleForm,
-    ReferenceInput,
     TextInput,
-    FunctionField,
-    SelectInput,
     ShowButton,
     Show,
     SimpleShowLayout,
     NumberField,
-    NumberInput
+    ListButton,
+    TopToolbar,
+    ExportButton,
+    FilterButton,
+    Toolbar,
+    SaveButton,
   } from 'react-admin';
 
 import { useRecordContext} from 'react-admin';
 import { useMediaQuery } from '@mui/material';
+import { RenderCreateButton, RenderEditButton, RenderDeleteButton } from '../Components/BotonesPermissions';
+
+const ListActions = () => (
+    <TopToolbar>
+        <FilterButton/>
+        <RenderCreateButton permisos={{ role: 'docente' }} />
+        <ExportButton/>
+    </TopToolbar>
+);
+
+const EditActions = () => (
+    <Toolbar>
+      <div class="RaToolbar-defaultToolbar">
+        <SaveButton/>
+        <RenderDeleteButton />
+      </div>
+    </Toolbar>
+);
+
 
 const empresasFilters = [
     <TextInput source="q" label="Search" alwaysOn />,
@@ -29,23 +48,25 @@ const empresasFilters = [
 export const EmpresaList = () => {
     const isSmall = useMediaQuery((theme) => theme.breakpoints.down('sm'));
     return (
-        <List filters={empresasFilters} >
+        <List filters={empresasFilters} actions={<ListActions />} >
           {isSmall ? (
             <SimpleList
               primaryText="%{nif}"
               secondaryText="%{email}"
               linkType={(record) => (record.canEdit ? 'edit' : 'show')}
             >
-              <EditButton />
+              <RenderEditButton />
+              <RenderDeleteButton />
             </SimpleList>
           ) : (
             <Datagrid bulkActionButtons={false} >
               <TextField source="id" />
               <TextField source="nif" />
-              <TextField source="nombre" />
+{/*}              <TextField source="nombre" /> */}
               <TextField source="email" />
               <ShowButton />
-              <EditButton />
+              <RenderEditButton permisos={{ role: 'docente' }} />
+              <RenderDeleteButton />
             </Datagrid>
           )}
         </List>
@@ -61,10 +82,9 @@ export const EmpresaTitle = () => {
 
 export const EmpresaEdit = () => (
     <Edit title={<EmpresaTitle />}>
-        <SimpleForm>
-            <NumberInput label="ID" source="id" />
+        <SimpleForm toolbar={<EditActions />}>
+            <NumberField label="ID" source="id" />
             <TextInput source="nif" />
-            <TextInput source="nombre" />
             <TextInput source="email" />
         </SimpleForm>
     </Edit>
@@ -73,14 +93,11 @@ export const EmpresaEdit = () => (
 );
 
 export const EmpresaShow = () => (
-    <Show>
+    <Show actions={<ListButton />} >
         <SimpleShowLayout>
             <NumberField label="ID" source="id" />
             <TextField source="nif" />
-            <TextField source="nombre" />
             <TextField source="email" />
-            <ShowButton />
-            <EditButton />
         </SimpleShowLayout>
     </Show>
 );
@@ -88,9 +105,7 @@ export const EmpresaShow = () => (
 export const EmpresaCreate = () => (
     <Create>
         <SimpleForm>
-            <NumberInput label="ID" source="id" />
             <TextInput source="nif" />
-            <TextInput source="nombre" />
             <TextInput source="email" />
         </SimpleForm>
     </Create>
