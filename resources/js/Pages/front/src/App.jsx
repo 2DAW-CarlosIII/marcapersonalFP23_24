@@ -19,6 +19,7 @@ import AlumnoMaxiCard from "./componentes/AlumnoMaxiCard/AlumnoMaxiCard";
 import Dashboard from "../../Dashboard";
 import Register from "../../Auth/Register";
 import ForgotPassword from "../../Auth/ForgotPassword";
+import Alumnos from "./paginas/Alumnos/Alumnos";
 
 
 
@@ -81,6 +82,7 @@ function App() {
                 <Route path="/empresa/proyectos"          element={<BusquedaProyectos></BusquedaProyectos>}></Route>
                 <Route path="/empresa/alumno/:id"         element={<AlumnoMaxiCard></AlumnoMaxiCard>}></Route>
                 <Route path="/centroeducativo"            element={<CentroEducativo />} />
+                <Route path="/alumnos"                    element={<Alumnos />} />
                 <Route path="/dashboard/*"                element={<Dashboard />} />
                 <Route path="/register"                   element={<Register />} />
                 <Route path="/forgot-password"            element={<ForgotPassword />}></Route>

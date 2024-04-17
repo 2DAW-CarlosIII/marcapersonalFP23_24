@@ -17,8 +17,11 @@ const idiomas = {
       },
       menuCentroEducativo: {op1: "Centro educativo",
                             op2: "Login",
-                            op3: ""
-},
+                            op3: ""},
+      menuAlumnos: {op1: "Alumnos",
+                    op2: "Login",
+                    op3: ""},
+
       filtros: { op1: "Busca a tus alumnos",
                  op2: "Filtra por perfil competencial",
                  op3: "Filtra por famila profesional",
@@ -41,6 +44,13 @@ const idiomas = {
                     op2: "Projects",
                     op3: "Students"
       },
+      menuCentroEducativo: {op1: "High shool",
+                            op2: "Login",
+                            op3: ""},
+      menuAlumnos: {op1: "Students",
+                    op2: "Login",
+                    op3: ""},
+
       filtros: { op1: "Search for your Students",
                  op2: "Filter by competency profile",
                  op3: "Filter by professional family",

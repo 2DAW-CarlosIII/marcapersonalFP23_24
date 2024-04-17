@@ -18,6 +18,7 @@ import {
     SimpleShowLayout,
     DateInput,
     PasswordInput,
+    Button,
 } from 'react-admin';
 
 import { useMediaQuery } from '@mui/material';
@@ -43,6 +44,10 @@ const UserFilters = [
     HastaInput(),
 ];
 
+
+const UserFiltersMini = [
+    <TextInput source="q" label="Search" alwaysOn />,
+];
 
 
 export const UserList = () => {
@@ -72,6 +77,32 @@ export const UserList = () => {
         </List>
     );
 };
+
+
+export const UserListMini = () => {
+    const isSmall = useMediaQuery((theme) => theme.breakpoints.down('sm'));
+
+    return (
+        <List filters={UserFiltersMini} hasCreate={false}>
+            {isSmall ? (
+                <SimpleList
+                primaryText={(record) => record.nombre}
+                secondaryText={(record) => record.email}
+                tertiaryText={(record) => record.created_at}
+                linkType={(record) => (record.canEdit ? 'edit' : 'show')}
+                />
+            ) : (
+                <Datagrid bulkActionButtons={false}>
+                    <TextField source="nombre" label="Nombre" />
+                    <TextField source="apellidos" label="Apellidos" />
+                    <EmailField source="email" label="Email" />
+                    <Button>Añadir</Button>
+                </Datagrid>
+            )}
+        </List>
+    );
+};
+
 
 
 

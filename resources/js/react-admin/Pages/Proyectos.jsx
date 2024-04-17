@@ -23,6 +23,11 @@ import {
 import { useRecordContext} from 'react-admin';
 import { useMediaQuery } from '@mui/material';
 
+
+import { UserListMini} from '../Pages/Users';
+
+
+
 const TutorInput = () => (
     <ReferenceInput label="Tutor" source="docente_id" reference="users" alwaysOn >
         <SelectInput
@@ -82,6 +87,7 @@ export const ProyectoEdit = () => (
         <FileInput source="attachments" label="Archivo comprimido con el proyecto">
             <FileField source="src" title="title" />
         </FileInput>
+        <UserListMini></UserListMini>
     </SimpleForm>
     </Edit>
 );

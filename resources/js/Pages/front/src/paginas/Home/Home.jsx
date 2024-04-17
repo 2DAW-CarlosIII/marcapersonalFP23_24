@@ -2,15 +2,6 @@ import { Link } from "react-router-dom";
 
 import { useContext } from "react";
 
-//import Company from '../../assets/imgHome/company-small-24px-svgrepo-com.svg';
-//import Student from '../../assets/imgHome/student-person-svgrepo-com.svg';
-//import School from '../../assets/imgHome/school-college-svgrepo-com.svg';
-
-// Componentes ---------------------------------------------------------------------------------------------
-//import Company from '../../assets/imgHome/company-small-24px-svgrepo-com-Azul.svg';
-//import Student from '../../assets/imgHome/student-person-svgrepo-com-Azul.svg';
-//import School from '../../assets/imgHome/school-college-svgrepo-com-Azul.svg';
-
 import Company from '../../assets/imgHome/empresa.jpg';
 import Student from '../../assets/imgHome/student.jpg';
 import School from '../../assets/imgHome/school.jpg';
@@ -26,11 +17,7 @@ import IdiomaContext from "../../contextos/IdiomaContext";
 import './Home.css'
 import BotonLanding from "../../componentes/BotonLanding/BotonLanding";
 
-import { dashboardURL, appUrl } from "../../settings";
-
 const Home = () => {
-
-    //const dashboardURL =  appUrl + "/dashboard";
 
     const idioma = useContext(IdiomaContext);
 
@@ -56,7 +43,7 @@ const Home = () => {
 
                     </div>
                     <div className="col-md-4">
-                        <Link to="/dashboard">
+                        <Link to="/alumnos">
                             <div className="cardLP" >
                             <BotonLanding  titulo ={idiomas[idioma].botoneraInicial.op3}
                                         sourceImg ={Student} ></BotonLanding>

@@ -9,15 +9,14 @@ import IdiomaContext from "../../contextos/IdiomaContext";
 
 import idiomas from "../../mocks/mock-idiomas";
 
-const MenuCentroEducativo = () => {
+const MenuAlumnos = () => {
 
     const idioma = useContext(IdiomaContext);
 
 return(
 
-
     <nav className="navbar navbar-expand-lg navbar-light bg-light justify-content-between sticky-top ">
-        <span className="destacado mayuscula colorTexto largo">[ {idiomas[idioma].menuCentroEducativo.op1} ]</span>
+        <span className="destacado mayuscula colorTexto largo">[ {idiomas[idioma].menuAlumnos.op1} ]</span>
 
         <button className="navbar-toggler"
                 type="button"
@@ -32,14 +31,12 @@ return(
         <div className="navbar-collapse " id="navbarSupportedContent">
             <ul className="navbar-nav mr-auto ">
                 <li className="nav-item">
-                <Link className="nav-link" to="/dashboard">{idiomas[idioma].menuCentroEducativo.op2}</Link>
+                <Link className="nav-link" to="/dashboard">{idiomas[idioma].menuAlumnos.op2}</Link>
                 </li>
             </ul>
         </div>
     </nav>
-
-
 )
 
 }
-export default MenuCentroEducativo;
+export default MenuAlumnos;
