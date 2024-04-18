@@ -12,6 +12,7 @@
     },
     "dependencies": {
         "antd": "^5.15.1",
+        "ra-data-fakerest": "^4.16.15",
         "ra-data-json-server": "^4.16.0",
         "react": "^18.2.0",
         "react-admin": "^4.16.0",

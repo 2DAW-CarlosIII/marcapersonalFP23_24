@@ -1,3 +1,5 @@
+
+
 // in resources/js/react-admin/pages/users.jsx
 import {
     List,
@@ -25,10 +27,12 @@ import {
     FilterButton,
     Toolbar,
     Button,
+    ArrayField,
 } from 'react-admin';
 
 import { useMediaQuery } from '@mui/material';
 import { RenderCreateButton, RenderEditButton, RenderDeleteButton } from '../Components/BotonesPermissions';
+
 
 const ListActions = () => (
     <TopToolbar>
@@ -108,7 +112,7 @@ export const UserListMini = () => {
     const isSmall = useMediaQuery((theme) => theme.breakpoints.down('sm'));
 
     return (
-        <List filters={UserFiltersMini} hasCreate={false}>
+        <List filters={UserFiltersMini} actions={""} resource="estudiantes" title={" "}>
             {isSmall ? (
                 <SimpleList
                 primaryText={(record) => record.nombre}
@@ -118,6 +122,7 @@ export const UserListMini = () => {
                 />
             ) : (
                 <Datagrid bulkActionButtons={false}>
+                    <TextField source="id" disabled />
                     <TextField source="nombre" label="Nombre" />
                     <TextField source="apellidos" label="Apellidos" />
                     <EmailField source="email" label="Email" />
@@ -128,6 +133,28 @@ export const UserListMini = () => {
     );
 };
 
+export const UserListMiniSelected = () => {
+    const isSmall = useMediaQuery((theme) => theme.breakpoints.down('sm'));
+
+// Lo haremos con ReferenceArrayField https://marmelab.com/react-admin/ReferenceArrayField.html
+// o con  ReferenceManyField https://marmelab.com/react-admin/ReferenceManyField.html
+
+
+    return (
+        <SimpleShowLayout >
+        <ArrayField   source = "selected">
+            <Datagrid bulkActionButtons={false}>
+                    <TextField source="id" disabled />
+                    <TextField source="nombre" label="Nombre" />
+                    <TextField source="apellidos" label="Apellidos" />
+                    <EmailField source="email" label="Email" />
+            </Datagrid>
+        </ArrayField>
+        </SimpleShowLayout>
+
+
+    );
+};
 
 
 
