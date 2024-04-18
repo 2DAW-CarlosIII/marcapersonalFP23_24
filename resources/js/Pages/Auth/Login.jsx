@@ -10,6 +10,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import {useCheckAuth, useLogin, useNotify, useSafeSetState, } from 'ra-core';
 
 export const Login = (props) => {
+
     const { data, setData, processing, errors, reset } = useForm({
         email: '',
         password: '',
@@ -22,7 +23,9 @@ export const Login = (props) => {
     const login = useLogin();
     const notify = useNotify();
 
+    console.log("1");
     const checkAuth = useCheckAuth();
+    console.log("2", checkAuth);
     const navigate = useNavigate();
     useEffect(() => {
         checkAuth({}, false)
@@ -76,7 +79,7 @@ export const Login = (props) => {
     };
 
     return (
-        <GuestLayout>
+        <GuestLayout >
             <Head title="Log in" />
 
             {status && <div className="mb-4 font-medium text-sm text-green-600">{status}</div>}

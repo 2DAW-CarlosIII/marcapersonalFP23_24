@@ -14,17 +14,17 @@ const Cabecera = (props) => {
     }
 
     return(
-      
+
         <nav className="navbar navbar-expand-md navbar-light bg-light">
         <LogoCabecera></LogoCabecera>
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
             <span className="navbar-toggler-icon"></span>
         </button>
-        <div className="collapse navbar-collapse" id="navbarNav">
+        <div className="navbar-collapse" id="navbarNav">
             <ul className="navbar-nav mr-auto">
             </ul>
             <ul className="navbar-nav mr-auto">
-            <li className="fuenteRara">                
+            <li className="fuenteRara extraLargo">
                     <h1 className="colorTexto">Marca Personal FP</h1>
             </li>
             </ul>
@@ -36,6 +36,6 @@ const Cabecera = (props) => {
 
 
     )
-    
+
     }
     export default Cabecera;

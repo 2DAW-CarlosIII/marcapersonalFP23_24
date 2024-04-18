@@ -1,6 +1,6 @@
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-import './MenuEmpresa.css'
+import '../MenuEmpresa/MenuEmpresa';
 
 import { useContext } from "react";
 
@@ -9,7 +9,7 @@ import IdiomaContext from "../../contextos/IdiomaContext";
 
 import idiomas from "../../mocks/mock-idiomas";
 
-const MenuEmpresa = () => {
+const MenuCentroEducativo = () => {
 
     const idioma = useContext(IdiomaContext);
 
@@ -17,7 +17,7 @@ return(
 
 
     <nav className="navbar navbar-expand-lg navbar-light bg-light justify-content-between sticky-top ">
-        <span className="destacado mayuscula colorTexto largo">[ {idiomas[idioma].menuEmpresa.op1} ]</span>
+        <span className="destacado mayuscula colorTexto largo">[ {idiomas[idioma].menuCentroEducativo.op1} ]</span>
 
         <button className="navbar-toggler"
                 type="button"
@@ -32,10 +32,7 @@ return(
         <div className="navbar-collapse " id="navbarSupportedContent">
             <ul className="navbar-nav mr-auto ">
                 <li className="nav-item">
-                <Link className="nav-link" to="/empresa/proyectos">{idiomas[idioma].menuEmpresa.op2}</Link>
-                </li>
-                <li className="nav-item">
-                <Link className="nav-link" to="/empresa/alumnos">{idiomas[idioma].menuEmpresa.op3}</Link>
+                <Link className="nav-link" to="/dashboard">{idiomas[idioma].menuCentroEducativo.op2}</Link>
                 </li>
             </ul>
         </div>
@@ -45,4 +42,4 @@ return(
 )
 
 }
-export default MenuEmpresa;
+export default MenuCentroEducativo;

@@ -10,31 +10,31 @@
     .shfooter ul {
       margin-bottom: 0;
     }
-  
+
     .shfooter .collapse {
       display: none;
     }
-  
+
     .shfooter .collapse.show {
       display: block;
     }
-  
+
     .shfooter .title .fa-angle-up,
     .shfooter .title[aria-expanded=true] .fa-angle-down {
       display: none;
     }
-  
+
     .shfooter .title[aria-expanded=true] .fa-angle-up {
       display: block;
     }
-  
+
     .shfooter .navbar-toggler {
       display: inline-block;
       padding: 0;
     }
-  
+
   }
-  
+
   .resize {
     text-align: center;
   }
@@ -46,7 +46,7 @@
   .fa-angle-double-right {
     animation: rightanime 1s linear infinite;
   }
-  
+
   .fa-angle-double-left {
     animation: leftanime 1s linear infinite;
   }
@@ -70,3 +70,4 @@
       opacity: 0;
     }
   }
+  #LogoInvertidoPie{display:inline};

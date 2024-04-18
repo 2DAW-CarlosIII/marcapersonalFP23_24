@@ -46,6 +46,11 @@ const EditActions = () => (
     </Toolbar>
 );
 
+
+import { UserListMini} from '../Pages/Users';
+
+
+
 const TutorInput = () => (
     <ReferenceInput label="Tutor" source="docente_id" reference="docentes" alwaysOn >
         <AutocompleteInput
@@ -107,6 +112,7 @@ export const ProyectoEdit = () => (
         <FileInput source="attachments" label="Archivo comprimido con el proyecto">
             <FileField source="src" title="title" />
         </FileInput>
+        <UserListMini></UserListMini>
     </SimpleForm>
     </Edit>
 );

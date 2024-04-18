@@ -7,6 +7,8 @@ import ResultadosBusquedaAlumnos from '../../componentes/ResultdosBusquedaAlumno
 
 import useDropUpDown from '../../hooks/useDropUpDown';
 
+import './BusquedaAlumnos.css';
+
 import idiomas from "../../mocks/mock-idiomas";
 // Contextos -----------------------------------------------------------------------------------------------
 import IdiomaContext from "../../contextos/IdiomaContext";

@@ -4,6 +4,7 @@ import { useState } from "react";
 // Componentes ---------------------------------------------------------------------------------------------
 import './App.css'
 import Empresa from "./paginas/Empresa/Empresa";
+import CentroEducativo from "./paginas/CentroEducativo/CentroEducativo";
 import Home from "./paginas/Home/Home";
 import BusquedaAlumnos from "./paginas/BusquedaAlumnos/BusquedaAlumnos";
 import BusquedaProyectos from "./paginas/BusquedaProyectos/BusquedaProyectos";
@@ -18,6 +19,7 @@ import AlumnoMaxiCard from "./componentes/AlumnoMaxiCard/AlumnoMaxiCard";
 import Dashboard from "../../Dashboard";
 import Register from "../../Auth/Register";
 import ForgotPassword from "../../Auth/ForgotPassword";
+import Alumnos from "./paginas/Alumnos/Alumnos";
 
 
 
@@ -79,6 +81,8 @@ function App() {
                 <Route path="/empresa/alumnos"            element={<BusquedaAlumnos></BusquedaAlumnos>}></Route>
                 <Route path="/empresa/proyectos"          element={<BusquedaProyectos></BusquedaProyectos>}></Route>
                 <Route path="/empresa/alumno/:id"         element={<AlumnoMaxiCard></AlumnoMaxiCard>}></Route>
+                <Route path="/centroeducativo"            element={<CentroEducativo />} />
+                <Route path="/alumnos"                    element={<Alumnos />} />
                 <Route path="/dashboard/*"                element={<Dashboard />} />
                 <Route path="/register"                   element={<Register />} />
                 <Route path="/forgot-password"            element={<ForgotPassword />}></Route>
