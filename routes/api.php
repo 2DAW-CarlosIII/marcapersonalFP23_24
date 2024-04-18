@@ -18,9 +18,11 @@ use App\Http\Controllers\API\EmpresaController;
 use App\Http\Controllers\API\TokenController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\API\CountController;
+use App\Http\Controllers\API\ParticipanteProyectoController;
 use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Models\ParticipanteProyecto;
 
 /*
 |--------------------------------------------------------------------------
@@ -88,6 +90,8 @@ Route::prefix('v1')->group(function () {
 
     Route::apiResource('proyectos', ProyectoController::class);
         Route::post('proyectos/copyrepo/{user}/{reponame}', [ProyectoController::class, 'copyRepo']);
+
+    Route::apiResource('proyectos.users', ParticipanteProyectoController::class);
 
     Route::apiResource('reconocimientos', ReconocimientoController::class);
     Route::put('reconocimientos/{id}/validar', [ReconocimientoController::class, 'validar'])
