@@ -3,18 +3,41 @@ import {
     SimpleList,
     Datagrid,
     TextField,
-    EditButton,
     Edit,
     Create,
     SimpleForm,
     TextInput,
     ShowButton,
     Show,
-    SimpleShowLayout
+    SimpleShowLayout,
+    SaveButton,
+    ListButton,
+    TopToolbar,
+    ExportButton,
+    FilterButton,
+    Toolbar,
   } from 'react-admin';
 
 import { useRecordContext} from 'react-admin';
 import { useMediaQuery } from '@mui/material';
+import { RenderCreateButton, RenderEditButton, RenderDeleteButton } from '../Components/BotonesPermissions';
+
+const ListActions = () => (
+    <TopToolbar>
+        <FilterButton/>
+        <RenderCreateButton permisos={{ role: null }} />
+        <ExportButton/>
+    </TopToolbar>
+);
+
+const EditActions = () => (
+    <Toolbar>
+      <div class="RaToolbar-defaultToolbar">
+        <SaveButton/>
+        <RenderDeleteButton />
+      </div>
+    </Toolbar>
+);
 
 const familiasProfesionalesFilters = [
     <TextInput source="q" label="Search" alwaysOn />,
@@ -23,14 +46,15 @@ const familiasProfesionalesFilters = [
 export const FamiliaProfesionalList = () => {
   const isSmall = useMediaQuery((theme) => theme.breakpoints.down('sm'));
   return (
-    <List filters={familiasProfesionalesFilters} >
+    <List filters={familiasProfesionalesFilters} actions={<ListActions />} >
       {isSmall ? (
         <SimpleList
           primaryText="%{nombre}"
           secondaryText="%{codigo}"
           linkType={(record) => (record.canEdit ? 'edit' : 'show')}
         >
-          <EditButton />
+          <RenderEditButton />
+          <RenderDeleteButton />
         </SimpleList>
       ) : (
         <Datagrid bulkActionButtons={false} >
@@ -38,7 +62,8 @@ export const FamiliaProfesionalList = () => {
           <TextField source="codigo" />
           <TextField source="nombre" />
           <ShowButton />
-          <EditButton />
+          <RenderEditButton />
+          <RenderDeleteButton />
         </Datagrid>
       )}
     </List>
@@ -52,7 +77,7 @@ export const FamiliaProfesionalTitle = () => {
 
 export const FamiliaProfesionalEdit = () => (
     <Edit title={<FamiliaProfesionalTitle />}>
-    <SimpleForm>
+    <SimpleForm toolbar={<EditActions />}>
         <TextInput source="id" disabled />
         <TextInput source="codigo" />
         <TextInput source="nombre" />
@@ -61,7 +86,7 @@ export const FamiliaProfesionalEdit = () => (
 );
 
 export const FamiliaProfesionalShow = () => (
-    <Show>
+    <Show actions={<ListButton />}>
         <SimpleShowLayout>
             <TextField source="id" />
             <TextField source="codigo" />

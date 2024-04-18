@@ -22,6 +22,20 @@ class UsersTableSeeder extends Seeder
         ]);
 
         if(env('APP_DEBUG') === true) {
+            User::create([
+                'name' => 'docente',
+                'nombre' => 'Docente',
+                'apellidos' => 'Bueno',
+                'email' => 'docente@' . env('TEACHER_EMAIL_DOMAIN', 'murciaeduca.es'),
+                'password' => 'password',
+            ]);
+            User::create([
+                'name' => 'estudiante',
+                'nombre' => 'Estudiante',
+                'apellidos' => 'Excelente',
+                'email' => 'estudiante@' . env('STUDENT_EMAIL_DOMAIN', 'murciaeduca.es'),
+                'password' => 'password',
+            ]);
             // Crear 10 usuarios con el estado docente
             User::factory(10)->docente()->create();
             // Crear 30 usuarios con el estado estudiante

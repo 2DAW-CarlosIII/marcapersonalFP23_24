@@ -3,23 +3,41 @@ import {
     SimpleList,
     Datagrid,
     TextField,
-    ReferenceField,
-    EditButton,
     Edit,
     Create,
     SimpleForm,
-    ReferenceInput,
     TextInput,
-    FunctionField,
-    SelectInput,
     ShowButton,
     Show,
-    SimpleShowLayout
+    SimpleShowLayout,
+    SaveButton,
+    ListButton,
+    TopToolbar,
+    ExportButton,
+    FilterButton,
+    Toolbar,
   } from 'react-admin';
 
 import { useRecordContext} from 'react-admin';
 import { useMediaQuery } from '@mui/material';
+import { RenderCreateButton, RenderEditButton, RenderDeleteButton } from '../Components/BotonesPermissions';
 
+const ListActions = () => (
+    <TopToolbar>
+        <FilterButton/>
+        <RenderCreateButton permisos={{ role: null }} />
+        <ExportButton/>
+    </TopToolbar>
+);
+
+const EditActions = () => (
+    <Toolbar>
+      <div class="RaToolbar-defaultToolbar">
+        <SaveButton/>
+        <RenderDeleteButton />
+      </div>
+    </Toolbar>
+);
 
 const IdiomasFilters = [
     <TextInput source="q" label="Search" alwaysOn />,
@@ -28,14 +46,15 @@ const IdiomasFilters = [
 export const IdiomaList = () => {
   const isSmall = useMediaQuery((theme) => theme.breakpoints.down('sm'));
   return (
-    <List filters={IdiomasFilters} >
+    <List filters={IdiomasFilters} actions={<ListActions />} >
       {isSmall ? (
         <SimpleList
           primaryText="%{id}"
           secondaryText="%{english_name}"
           linkType={(record) => (record.canEdit ? 'edit' : 'show')}
         >
-          <EditButton />
+          <RenderEditButton />
+          <RenderDeleteButton />
         </SimpleList>
       ) : (
         <Datagrid bulkActionButtons={false} >
@@ -43,7 +62,8 @@ export const IdiomaList = () => {
           <TextField source="english_name" />
           <TextField source="native_name" />
           <ShowButton />
-          <EditButton />
+          <RenderEditButton />
+          <RenderDeleteButton />
         </Datagrid>
       )}
     </List>
@@ -57,7 +77,7 @@ export const IdiomaTitle = () => {
 
 export const IdiomaEdit = () => (
     <Edit title={<IdiomaTitle />}>
-        <SimpleForm>
+        <SimpleForm toolbar={<EditActions />} >
         <TextInput source="id" disabled />
             <TextInput source="alpha2" />
             <TextInput source="alpha3t" />
@@ -69,7 +89,7 @@ export const IdiomaEdit = () => (
 );
 
 export const IdiomaShow = () => (
-    <Show>
+    <Show actions={<ListButton />} >
         <SimpleShowLayout>
         <TextField source="id" />
           <TextField source="alpha2" />

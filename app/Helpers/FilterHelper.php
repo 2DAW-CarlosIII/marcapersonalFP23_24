@@ -16,9 +16,11 @@ class FilterHelper
             $filterValue = $request->q;
             /* Barra de búsqueda*/
             if ($filterValue) {
-                foreach ($filterColumns as $column) {
-                    $query->orWhere($column, 'like', '%' . $filterValue . '%');
-                }
+                $query->where(function ($query) use ($filterColumns, $filterValue) {
+                    foreach ($filterColumns as $column) {
+                        $query->orWhere($column, 'like', '%' . $filterValue . '%');
+                    }
+                });
             }
 
             /* Resto de filtros (desplegables)*/

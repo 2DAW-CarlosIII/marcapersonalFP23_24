@@ -47,6 +47,8 @@ class CurriculoController extends Controller
     public function store(Request $request)
     {
         $curriculo = json_decode($request->getContent(), true);
+ 
+        $curriculo['user_id'] = auth()->user()->id;
 
         $curriculo = Curriculo::create($curriculo);
 
@@ -66,6 +68,12 @@ class CurriculoController extends Controller
      */
     public function update(Request $request, Curriculo $curriculo)
     {
+        if (!$request->hasFile('pdf_curriculum')) {
+            if (!$request->get('attachments') && $curriculo->pdf_curriculum) {
+                unset($curriculo->pdf_curriculum);
+            }
+            $request->request->remove('pdf_curriculum');
+        }
         $this->validateCurriculo($request);
 
         $curriculoData = $request->all();
@@ -83,9 +91,8 @@ class CurriculoController extends Controller
     private function validateCurriculo(Request $request)
     {
         $request->validate([
-            'pdf_curriculum' => 'sometimes|required|mimes:pdf|max:5120',
+            'pdf_curriculum' => 'nullable|mimes:pdf|max:5120',
         ], [
-            'pdf_curriculum.required' => 'Por favor, selecciona un pdf.',
             'pdf_curriculum.mimes' => 'El fichero debe ser un pdf.',
             'pdf_curriculum.max' => 'El tamaño del pdf no debe ser mayor a 5 MB.',
         ]);

@@ -4,7 +4,6 @@ import {
     Datagrid,
     TextField,
     ReferenceField,
-    EditButton,
     Edit,
     Create,
     SimpleForm,
@@ -17,36 +16,78 @@ import {
     SimpleShowLayout,
     FileInput,
     FileField,
-
+    SaveButton,
+    ListButton,
+    TopToolbar,
+    ExportButton,
+    FilterButton,
+    Toolbar,
+    AutocompleteInput,
   } from 'react-admin';
 
 import { useRecordContext} from 'react-admin';
 import { useMediaQuery, Button } from '@mui/material';
+import { RenderCreateButton, RenderEditButton, RenderDeleteButton, MySelf } from '../Components/BotonesPermissions';
+
+const ListActions = () => (
+    <TopToolbar>
+        <FilterButton/>
+        <RenderCreateButton permisos={{ role: 'estudiante' }} />
+        <ExportButton/>
+    </TopToolbar>
+);
+
+const EditActions = () => (
+    <Toolbar>
+      <div class="RaToolbar-defaultToolbar">
+        <SaveButton/>
+        <RenderDeleteButton />
+      </div>
+    </Toolbar>
+);
+
+const CurriculoFileInput = () => {
+    return (
+        <FunctionField
+            render={
+                record => {
+                    if (record.pdf_curriculum) {
+                        return (
+                            <Button variant="contained" color="primary" href={`${import.meta.env.VITE_JSON_SERVER_URL}/curriculos/${record.id}/pdf`}>
+                                Descargar currículo de estudiante
+                            </Button>
+                        )
+                    }
+                }
+            }
+        />
+    );
+};
 
 const EstudianteInput = () => (
-    <ReferenceInput label="Estudiante" source="user_id" reference="users" alwaysOn >
-        <SelectInput
+    <ReferenceInput label="Estudiante" source="user_id" reference="estudiantes" alwaysOn enableGetChoices={({ q }) => q && q.length >= 3} >
+        <AutocompleteInput
         label="Estudiante"
         source="user_id"
         optionText={record => record && `${record.nombre} ${record.apellidos}`} />
     </ReferenceInput>
 )
 const curriculosFilters = [
-    <TextInput source="q" label="Search" alwaysOn />,
     EstudianteInput(),
 ];
 
 export const CurriculoList = () => {
   const isSmall = useMediaQuery((theme) => theme.breakpoints.down('sm'));
   return (
-    <List filters={curriculosFilters} >
+    <List filters={curriculosFilters} actions={<ListActions />} >
       {isSmall ? (
         <SimpleList
           primaryText="%{video_curriculo}"
           secondaryText="%{pdf_curriculo}"
           linkType={(record) => (record.canEdit ? 'edit' : 'show')}
         >
-          <EditButton />
+            <RenderEditButton />
+            <RenderDeleteButton />
         </SimpleList>
       ) : (
         <Datagrid bulkActionButtons={false} >
@@ -57,7 +98,8 @@ export const CurriculoList = () => {
             <TextField source="video_curriculum" />
             <TextField source="pdf_curriculum" />
             <ShowButton />
-            <EditButton />
+            <RenderEditButton />
+            <RenderDeleteButton />
         </Datagrid>
       )}
     </List>
@@ -69,24 +111,25 @@ export const CurriculoTitle = () => {
   return <span>Curriculo {record ? `"${record.nombre}"` : ''}</span>;
 };
 
-export const CurriculoEdit = () => (
-    <Edit title={<CurriculoTitle />}>
-    <SimpleForm>
-        <EstudianteInput />
-        <TextInput source="id" disabled />
-        <TextInput source="video_curriculum" />
-        <TextInput source="sobre_mi" />
-        <FileInput source="attachments" label="Archivo comprimido con el proyecto">
-            <FileField source="src" title="title" />
-        </FileInput>
-    </SimpleForm>
+export const CurriculoEdit = (props) => (
+    <Edit title={<CurriculoTitle />} >
+        <SimpleForm toolbar={<EditActions />} >
+            <MySelf />
+            <TextInput source="id" disabled />
+            <TextInput source="video_curriculum" />
+            <TextInput source="sobre_mi" />
+            <CurriculoFileInput {...props} />
+            <FileInput source="attachments" label="Archivo comprimido con el proyecto">
+                <FileField source="src" title={"curriculo"} download="curriculo"/>
+            </FileInput>
+        </SimpleForm>
     </Edit>
 );
 
 export const CurriculoShow = () => (
-    <Show>
+    <Show actions={<ListButton />} >
         <SimpleShowLayout>
-            <ReferenceField label="Estudiante" source="user_id" reference="users">
+            <ReferenceField label="Estudiante" source="user_id" reference="estudiantes">
                 <FunctionField render={record => record && `${record.nombre} ${record.apellidos}`} />
             </ReferenceField>
             <TextField source="id" />
@@ -112,7 +155,7 @@ export const CurriculoShow = () => (
 export const CurriculoCreate = () => (
     <Create title={<CurriculoTitle />}>
         <SimpleForm>
-            <EstudianteInput />
+            <MySelf />
             <TextInput source="video_curriculum" />
             <TextInput source="pdf_curriculum" />
         </SimpleForm>

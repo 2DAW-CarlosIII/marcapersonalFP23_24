@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Curriculo;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -15,7 +16,7 @@ class CurriculoResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return array_merge(parent::toArray($request), [
+        $jsonToReturn = array_merge(parent::toArray($request), [
             'attachments' => $this->pdf_curriculum
                 ? [
                     'src' => ('/storage/' . $this->pdf_curriculum),
@@ -23,5 +24,11 @@ class CurriculoResource extends JsonResource
                 ]
                 : null,
         ]);
+
+        return ($this->resource instanceof Curriculo)
+            ? array_merge($jsonToReturn, [
+                'ownersId' => [$this->user_id],
+            ])
+            : $jsonToReturn;
     }
 }

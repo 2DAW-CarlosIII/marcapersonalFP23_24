@@ -4,7 +4,6 @@ import {
     Datagrid,
     TextField,
     ReferenceField,
-    EditButton,
     Edit,
     Create,
     SimpleForm,
@@ -16,11 +15,35 @@ import {
     SelectInput,
     ShowButton,
     Show,
-    SimpleShowLayout
+    SimpleShowLayout,
+    SaveButton,
+    ListButton,
+    TopToolbar,
+    ExportButton,
+    FilterButton,
+    Toolbar,
 } from 'react-admin';
 
 import { useMediaQuery } from '@mui/material';
 import { useRecordContext } from 'react-admin';
+import { RenderCreateButton, RenderEditButton, RenderDeleteButton } from '../Components/BotonesPermissions';
+
+const ListActions = () => (
+  <TopToolbar>
+      <FilterButton/>
+      <RenderCreateButton permisos={{ role: null }} />
+      <ExportButton/>
+  </TopToolbar>
+);
+
+const EditActions = () => (
+  <Toolbar>
+    <div class="RaToolbar-defaultToolbar">
+      <SaveButton/>
+      <RenderDeleteButton />
+    </div>
+  </Toolbar>
+);
 
 const FamiliaProfesionalInput = () => (
     <ReferenceInput label="Familia Profesional" source="familia_id" reference="familias_profesionales" alwaysOn >
@@ -38,7 +61,7 @@ const ciclosFilters = [
 export const CicloList = () => {
     const isSmall = useMediaQuery((theme) => theme.breakpoints.down('sm'));
     return (
-        <List filters={ciclosFilters} >
+        <List filters={ciclosFilters} actions={<ListActions />} >
             {isSmall ? (
                 <SimpleList
                     primaryText="%{nombre}"
@@ -46,7 +69,8 @@ export const CicloList = () => {
                     tertiaryText="%{codFamilia}"
                     linkType={(record) => (record.canEdit ? 'edit' : 'show')}
                 >
-                    <EditButton />
+                    <RenderEditButton />
+                    <RenderDeleteButton />
                 </SimpleList>
             ) : (
                 <Datagrid bulkActionButtons={false} >
@@ -61,7 +85,8 @@ export const CicloList = () => {
                     <TextField source="grado" />
                     <TextField source="nombre" />
                     <ShowButton />
-                    <EditButton />
+                    <RenderEditButton />
+                    <RenderDeleteButton />
                 </Datagrid>
             )}
         </List>
@@ -97,7 +122,7 @@ export const CicloTitle = () => {
 
 export const CicloEdit = () => (
     <Edit title={<CicloTitle />}>
-        <SimpleForm>
+        <SimpleForm toolbar={<EditActions />}>
             <NumberInput label="ID" source="id" />
             <TextInput label="COD Ciclo" source="codCiclo" />
             <CodFamiliaInput />
@@ -111,7 +136,7 @@ export const CicloEdit = () => (
 );
 
 export const CicloShow = () => (
-    <Show>
+    <Show actions={<ListButton />}>
         <SimpleShowLayout>
             <NumberField label="ID" source="id" />
             <TextField label="COD Ciclo" source="codCiclo" />
@@ -123,8 +148,6 @@ export const CicloShow = () => (
             </ReferenceField>
             <TextField source="grado" />
             <TextField source="nombre" />
-            <ShowButton />
-            <EditButton />
         </SimpleShowLayout>
     </Show>
 );

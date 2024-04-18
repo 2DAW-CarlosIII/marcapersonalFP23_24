@@ -4,10 +4,10 @@ import {
     Datagrid,
     TextField,
     ReferenceField,
-    EditButton,
     Edit,
     Create,
     SimpleForm,
+    SaveButton,
     ReferenceInput,
     TextInput,
     FunctionField,
@@ -15,15 +15,37 @@ import {
     ShowButton,
     Show,
     SimpleShowLayout,
-    usePermissions,
-    useListContext,
+    ListButton,
+    ExportButton,
+    FilterButton,
+    TopToolbar,
+    Toolbar,
+    useRecordContext,
   } from 'react-admin';
 
-import { useRecordContext} from 'react-admin';
 import { useMediaQuery } from '@mui/material';
 
+import { RenderCreateButton, RenderEditButton, RenderDeleteButton, MySelf } from '../Components/BotonesPermissions';
+
+const ListActions = () => (
+  <TopToolbar>
+      <FilterButton/>
+      <RenderCreateButton permisos={{ role: 'docente' }} />
+      <ExportButton/>
+  </TopToolbar>
+);
+
+const EditActions = () => (
+  <Toolbar>
+    <div class="RaToolbar-defaultToolbar">
+      <SaveButton/>
+      <RenderDeleteButton />
+    </div>
+  </Toolbar>
+);
+
 const OrganizadorInput = () => (
-    <ReferenceInput label="Organizador" source="docente_id" reference="users" alwaysOn >
+    <ReferenceInput label="Organizador" source="docente_id" reference="docentes" alwaysOn >
         <SelectInput
         label="Organizador"
         source="docente_id"
@@ -35,17 +57,10 @@ const actividadesFilters = [
     OrganizadorInput(),
 ];
 
-const RenderEditButton = () => {
-  const { permissions, isLoading } = usePermissions();
-  const record = useRecordContext();
-  if (!record || isLoading) return null;
-  return (permissions.role === 'admin' || record.ownerId === permissions.id) && <EditButton />;
-};
-
 export const ActividadList = () => {
   const isSmall = useMediaQuery((theme) => theme.breakpoints.down('sm'));
   return (
-    <List filters={actividadesFilters} >
+    <List filters={actividadesFilters} actions={<ListActions />}>
       {isSmall ? (
         <SimpleList
           primaryText="%{nombre}"
@@ -64,6 +79,7 @@ export const ActividadList = () => {
           </ReferenceField>
           <ShowButton />
           <RenderEditButton />
+          <RenderDeleteButton />
         </Datagrid>
       )}
     </List>
@@ -76,25 +92,26 @@ export const ActividadTitle = () => {
 };
 
 export const ActividadEdit = () => (
-    <Edit title={<ActividadTitle />}>
-        <SimpleForm>
+    <Edit title={<ActividadTitle />} >
+        <SimpleForm toolbar={<EditActions />}>
             <TextInput source="id" disabled />
-            <TextInput source="nombre" />
+            <TextInput source="nombre" label="Nombre Actividad" />
             <TextInput source="insignia" />
-            <OrganizadorInput />
+            <MySelf />
         </SimpleForm>
     </Edit>
 );
 
 export const ActividadShow = () => (
-    <Show>
+    <Show actions={<ListButton />}>
         <SimpleShowLayout>
             <TextField source="id" />
-            <TextField source="nombre" />
+            <TextField source="nombre" label="Nombre Actividad" />
             <TextField source="insignia" />
             <ReferenceField label="Organizador" source="docente_id" reference="users">
-                <FunctionField render={record => record && `${record.nombre} ${record.apellidos}`} />
+              <FunctionField render={record => record && `${record.nombre} ${record.apellidos}`} />
             </ReferenceField>
+            <ListButton />
         </SimpleShowLayout>
     </Show>
 );
@@ -102,9 +119,9 @@ export const ActividadShow = () => (
 export const ActividadCreate = () => (
     <Create>
         <SimpleForm>
-            <TextInput source="nombre" />
+            <TextInput source="nombre" label="Nombre Actividad" />
             <TextInput source="insignia" />
-            <OrganizadorInput />
+            <MySelf />
         </SimpleForm>
     </Create>
 );

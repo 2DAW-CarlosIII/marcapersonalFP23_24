@@ -21,10 +21,20 @@ class UserController extends Controller
      *
      * @return void
     */
-    public function __construct()
+    public function __construct(Request $request)
     {
         $this->middleware('auth:sanctum')->except(['index', 'getDocentes', 'getEstudiantes', 'show', 'store', 'getPermissions']);
         $this->authorizeResource(User::class, 'user');
+
+        $uri = $request->getRequestUri();
+
+        if (str_contains($uri, 'users')) {
+            $this->modelclass = User::class;
+        } elseif (str_contains($uri, 'docentes')) {
+            $this->modelclass = Docente::class;
+        } elseif (str_contains($uri, 'estudiantes')) {
+            $this->modelclass = Estudiante::class;
+        }
     }
 
     /**
@@ -45,7 +55,6 @@ class UserController extends Controller
      */
     public function getDocentes(Request $request)
     {
-        $this->modelclass = Docente::class;
         return $this->index($request);
     }
 
@@ -54,7 +63,6 @@ class UserController extends Controller
      */
     public function getEstudiantes(Request $request)
     {
-        $this->modelclass = Estudiante::class;
         return $this->index($request);
     }
 
