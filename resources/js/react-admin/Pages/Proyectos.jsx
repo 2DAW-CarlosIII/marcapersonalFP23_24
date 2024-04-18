@@ -47,7 +47,7 @@ const EditActions = () => (
 );
 
 
-import { UserListMini} from '../Pages/Users';
+import { UserListMini, UserListMiniSelected} from '../Pages/Users';
 
 
 
@@ -113,6 +113,7 @@ export const ProyectoEdit = () => (
             <FileField source="src" title="title" />
         </FileInput>
         <UserListMini></UserListMini>
+        <UserListMiniSelected></UserListMiniSelected>
     </SimpleForm>
     </Edit>
 );
