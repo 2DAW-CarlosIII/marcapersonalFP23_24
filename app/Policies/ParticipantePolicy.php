@@ -2,11 +2,12 @@
 
 namespace App\Policies;
 
-use App\Models\ParticipanteProyecto;
+use App\Models\Participante;
+use App\Models\Proyecto;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
 
-class ParticipanteProyectoPolicy
+class ParticipantePolicy
 {
 
     public function before(User $user, $ability)
@@ -17,7 +18,7 @@ class ParticipanteProyectoPolicy
     /**
      * Determine whether the user can view any models.
      */
-    public function viewAny(?User $user): bool
+    public function viewAny(?User $user, Proyecto $proyecto): bool
     {
         return true;
     }
@@ -25,7 +26,7 @@ class ParticipanteProyectoPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(?User $user, ParticipanteProyecto $participanteProyecto): bool
+    public function view(?User $user, Proyecto $proyecto, User $participante): bool
     {
         return true;
     }
@@ -33,31 +34,31 @@ class ParticipanteProyectoPolicy
     /**
      * Determine whether the user can create models.
      */
-    public function create(User $user): bool
+    public function create(User $user, Proyecto $proyecto): bool
     {
-        return $user->esDocente();
+        return $user->esPropietario($proyecto, 'docente_id');
     }
 
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, ParticipanteProyecto $participanteProyecto): bool
+    public function update(User $user, Proyecto $proyecto, User $participante): bool
     {
-        return $user->esDocente();
+        return $user->esPropietario($proyecto, 'docente_id');
     }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, ParticipanteProyecto $participanteProyecto): bool
+    public function delete(User $user, Proyecto $proyecto, User $participante): bool
     {
-        return $user->esDocente();
+        return $user->esPropietario($proyecto, 'docente_id');
     }
 
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, ParticipanteProyecto $participanteProyecto): bool
+    public function restore(User $user, Proyecto $proyecto, User $participante): bool
     {
         //
     }
@@ -65,7 +66,7 @@ class ParticipanteProyectoPolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, ParticipanteProyecto $participanteProyecto): bool
+    public function forceDelete(User $user, Proyecto $proyecto, User $participante): bool
     {
         //
     }
