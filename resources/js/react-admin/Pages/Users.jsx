@@ -28,10 +28,12 @@ import {
     Toolbar,
     Button,
     ArrayField,
+    useDataProvider,
 } from 'react-admin';
 
 import { useMediaQuery } from '@mui/material';
 import { RenderCreateButton, RenderEditButton, RenderDeleteButton } from '../Components/BotonesPermissions';
+import { dataProvider } from '../dataProvider';
 
 
 const ListActions = () => (
@@ -107,8 +109,23 @@ export const UserList = () => {
     );
 };
 
+const BotonAddParticipanteProyecto = () => {
+    const handleClick = () => {
+        dataProvider.postParticipanteProyecto(proyecto_id, estudiante_id);
+    };
 
-export const UserListMini = () => {
+    return <Button onClick={handleClick}>Añadir al proyecto</Button>;
+};
+
+const BotonDeleteParticipanteProyecto = () => {
+    const handleClick = () => {
+        dataProvider.deleteParticipanteProyecto(proyecto_id, estudiante_id);
+    };
+
+    return <Button onClick={handleClick}>Eliminar del proyecto</Button>;
+};
+
+export const UserListMini = (proyecto) => {
     const isSmall = useMediaQuery((theme) => theme.breakpoints.down('sm'));
 
     return (
@@ -126,7 +143,8 @@ export const UserListMini = () => {
                     <TextField source="nombre" label="Nombre" />
                     <TextField source="apellidos" label="Apellidos" />
                     <EmailField source="email" label="Email" />
-                    <Button>Añadir</Button>
+                    <BotonAddParticipanteProyecto />
+                    <BotonDeleteParticipanteProyecto />
                 </Datagrid>
             )}
         </List>

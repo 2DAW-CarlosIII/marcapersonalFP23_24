@@ -39,7 +39,7 @@ const ListActions = () => (
 
 const EditActions = () => (
     <Toolbar>
-      <div class="RaToolbar-defaultToolbar">
+      <div className="RaToolbar-defaultToolbar">
         <SaveButton/>
         <RenderDeleteButton />
       </div>
@@ -101,7 +101,9 @@ export const ProyectoTitle = () => {
   return <span>Proyecto {record ? `"${record.nombre}"` : ''}</span>;
 };
 
-export const ProyectoEdit = () => (
+export const ProyectoEdit = () => {
+  const record = useRecordContext();
+  return (
     <Edit title={<ProyectoTitle />}>
     <SimpleForm toolbar={<EditActions />} >
         <TextInput source="id" disabled />
@@ -112,11 +114,12 @@ export const ProyectoEdit = () => (
         <FileInput source="attachments" label="Archivo comprimido con el proyecto">
             <FileField source="src" title="title" />
         </FileInput>
-        <UserListMini></UserListMini>
+        <UserListMini proyecto={record}></UserListMini>
         <UserListMiniSelected></UserListMiniSelected>
     </SimpleForm>
     </Edit>
-);
+  );
+}
 
 export const ProyectoShow = () => (
     <Show actions={<ListButton />} >

@@ -2,6 +2,7 @@
 import { fetchUtils } from 'react-admin';
 import jsonServerProvider from "ra-data-json-server";
 import { stringify } from 'query-string';
+import { data } from 'autoprefixer';
 
 const httpClient = (url, options = {}) => {
     if (!options.headers) {
@@ -142,6 +143,27 @@ dataProvider.update = (resource, params) => {
                 data: json.json
             }
         })
+}
+
+dataProvider.postParticipanteProyecto = (proyectoId, userId) => {
+    return httpClient(`${apiUrl}/proyectos/${proyectoId}/participantes`, {
+        method: 'POST',
+        body: JSON.stringify({estudiante_id: userId}),
+        headers: new Headers({
+            'Content-Type': 'application/json',
+            'accept': 'application/json',
+        }),
+    });
+}
+
+dataProvider.deleteParticipanteProyecto = (proyectoId, userId) => {
+    return httpClient(`${apiUrl}/proyectos/${proyectoId}/participantes/${userId}`, {
+        method: 'DELETE',
+        headers: new Headers({
+            'Content-Type': 'application/json',
+            'accept': 'application/json',
+        }),
+    });
 }
 
 function anyadirFichero (resource, params) {

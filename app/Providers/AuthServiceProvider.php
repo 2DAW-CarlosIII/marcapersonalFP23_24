@@ -17,12 +17,14 @@ use App\Policies\EmpresaPolicy;
 use App\Models\FamiliaProfesional;
 use App\Policies\FamiliaProfesionalPolicy;
 use App\Models\Idioma;
+use App\Models\Participante;
 use App\Policies\IdiomaPolicy;
 use App\Models\Proyecto;
 use App\Policies\ProyectoPolicy;
 use App\Models\Reconocimiento;
 use App\Policies\ReconocimientoPolicy;
 use App\Models\User;
+use App\Policies\ParticipantePolicy;
 use App\Policies\UsersPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
@@ -43,6 +45,7 @@ class AuthServiceProvider extends ServiceProvider
         Idioma::class => IdiomaPolicy::class,
         Proyecto::class => ProyectoPolicy::class,
         Reconocimiento::class => ReconocimientoPolicy::class,
+        Participante::class => ParticipantePolicy::class,
         User::class => UsersPolicy::class,
     ];
 
