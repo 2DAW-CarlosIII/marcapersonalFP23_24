@@ -9,6 +9,8 @@ use App\Policies\ActividadPolicy;
 use App\Models\Competencia;
 use App\Policies\CompetenciaPolicy;
 use App\Models\Ciclo;
+use App\Models\CicloEstudiado;
+use App\Policies\CicloEstudiantePolicy;
 use App\Policies\CicloPolicy;
 use App\Models\Curriculo;
 use App\Policies\CurriculoPolicy;
@@ -47,6 +49,7 @@ class AuthServiceProvider extends ServiceProvider
         Reconocimiento::class => ReconocimientoPolicy::class,
         Participante::class => ParticipantePolicy::class,
         User::class => UsersPolicy::class,
+        CicloEstudiado::class => CicloEstudiantePolicy::class,
     ];
 
     /**
