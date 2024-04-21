@@ -166,6 +166,27 @@ dataProvider.deleteParticipanteProyecto = (proyectoId, userId) => {
     });
 }
 
+dataProvider.postCicloEstudiante = (estudianteId, cicloId) => {
+    return httpClient(`${apiUrl}/estudiantes/${estudianteId}/ciclos`, {
+        method: 'POST',
+        body: JSON.stringify({ciclo_id: cicloId}),
+        headers: new Headers({
+            'Content-Type': 'application/json',
+            'accept': 'application/json',
+        }),
+    });
+}
+
+dataProvider.deleteCicloEstudiante = (estudianteId, cicloId) => {
+    return httpClient(`${apiUrl}/estudiantes/${estudianteId}/ciclos/${cicloId}`, {
+        method: 'DELETE',
+        headers: new Headers({
+            'Content-Type': 'application/json',
+            'accept': 'application/json',
+        }),
+    });
+}
+
 function anyadirFichero (resource, params) {
     let ficheroPresente = false
     const recursosConFicheros = ['proyectos', 'users', 'curriculos']

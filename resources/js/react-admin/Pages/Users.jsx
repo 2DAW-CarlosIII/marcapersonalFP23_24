@@ -28,12 +28,13 @@ import {
     Toolbar,
     Button,
     ArrayField,
-    useDataProvider,
+    useRecordContext,
 } from 'react-admin';
 
 import { useMediaQuery } from '@mui/material';
 import { RenderCreateButton, RenderEditButton, RenderDeleteButton } from '../Components/BotonesPermissions';
 import { dataProvider } from '../dataProvider';
+import { CicloListMini, CicloListMiniSelected} from '../Pages/Ciclos';
 
 
 const ListActions = () => (
@@ -109,17 +110,19 @@ export const UserList = () => {
     );
 };
 
-const BotonAddParticipanteProyecto = () => {
+const BotonAddParticipanteProyecto = (proyecto) => {
+    const record = useRecordContext();
     const handleClick = () => {
-        dataProvider.postParticipanteProyecto(proyecto_id, estudiante_id);
+        dataProvider.postParticipanteProyecto(proyecto.id, record.id);
     };
 
     return <Button onClick={handleClick}>Añadir al proyecto</Button>;
 };
 
-const BotonDeleteParticipanteProyecto = () => {
+const BotonDeleteParticipanteProyecto = (proyecto) => {
+    const record = useRecordContext();
     const handleClick = () => {
-        dataProvider.deleteParticipanteProyecto(proyecto_id, estudiante_id);
+        dataProvider.deleteParticipanteProyecto(proyecto.id, record.id);
     };
 
     return <Button onClick={handleClick}>Eliminar del proyecto</Button>;
@@ -143,8 +146,8 @@ export const UserListMini = (proyecto) => {
                     <TextField source="nombre" label="Nombre" />
                     <TextField source="apellidos" label="Apellidos" />
                     <EmailField source="email" label="Email" />
-                    <BotonAddParticipanteProyecto />
-                    <BotonDeleteParticipanteProyecto />
+                    <BotonAddParticipanteProyecto proyecto={proyecto} />
+                    <BotonDeleteParticipanteProyecto proyecto={proyecto} />
                 </Datagrid>
             )}
         </List>
@@ -180,7 +183,9 @@ export const UserTitle = ({ record }) => {
     return <span>User {record ? `"${record.nombre}"` : ''}</span>;
 };
 
-export const UserEdit = () => (
+export const UserEdit = () => {
+    const record = useRecordContext();
+    return (
     <Edit title={<UserTitle />}>
         <SimpleForm toolbar={<EditActions />} >
             <TextInput source="id" disabled />
@@ -191,9 +196,11 @@ export const UserEdit = () => (
             <ImageInput source="attachments" label='Imagen de Avatar' accept="image/*">
                 <ImageField source="src" title="title" label="Foto de perfil" />
             </ImageInput>
+            <CicloListMini estudiante={record}></CicloListMini>
+            <CicloListMiniSelected></CicloListMiniSelected>
         </SimpleForm>
     </Edit>
-);
+);}
 
 export const UserShow = () => (
     <Show actions={<ListButton />} >
