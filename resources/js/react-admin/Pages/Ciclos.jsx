@@ -99,7 +99,7 @@ export const CicloList = () => {
 
 };
 
-const BotonAddCicloEstudiante = (estudiante) => {
+const BotonAddCicloEstudiante = ({estudiante}) => {
     const record = useRecordContext();
     const handleClick = () => {
         dataProvider.postCicloEstudiante(estudiante.id, record.id);
@@ -108,7 +108,7 @@ const BotonAddCicloEstudiante = (estudiante) => {
     return <Button onClick={handleClick}>Añadir estudios</Button>;
 };
 
-const BotonDeleteCicloEstudiante = (estudiante) => {
+const BotonDeleteCicloEstudiante = ({estudiante}) => {
     const record = useRecordContext();
     const handleClick = () => {
         dataProvider.deleteCicloEstudiante(estudiante.id, record.id);
@@ -121,9 +121,10 @@ const CicloFiltersMini = [
     <TextInput source="q" label="Search" alwaysOn />,
 ];
 
-export const CicloListMini = (estudiante) => {
+export const CicloListMini = () => {
     const isSmall = useMediaQuery((theme) => theme.breakpoints.down('sm'));
     const permisos = usePermissions();
+    const record = useRecordContext();
     if (permisos.permissions.role != 'estudiante' && permisos.permissions.role != 'admin' ) return null;
     return (
         <List filters={CicloFiltersMini} actions={""} resource="ciclos" title={" "}>
@@ -140,8 +141,8 @@ export const CicloListMini = (estudiante) => {
                     <TextField source="cod_ciclo" label="Código" />
                     <TextField source="nombre" label="Nombre" />
                     <TextField source="grado" label="Grado" />
-                    <BotonAddCicloEstudiante estudiante={estudiante} />
-                    <BotonDeleteCicloEstudiante estudiante={estudiante} />
+                    <BotonAddCicloEstudiante estudiante={record} />
+                    <BotonDeleteCicloEstudiante estudiante={record} />
                 </Datagrid>
             )}
         </List>

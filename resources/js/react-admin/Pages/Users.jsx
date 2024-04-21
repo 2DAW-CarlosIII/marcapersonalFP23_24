@@ -110,7 +110,7 @@ export const UserList = () => {
     );
 };
 
-const BotonAddParticipanteProyecto = (proyecto) => {
+const BotonAddParticipanteProyecto = ({proyecto}) => {
     const record = useRecordContext();
     const handleClick = () => {
         dataProvider.postParticipanteProyecto(proyecto.id, record.id);
@@ -119,7 +119,7 @@ const BotonAddParticipanteProyecto = (proyecto) => {
     return <Button onClick={handleClick}>Añadir al proyecto</Button>;
 };
 
-const BotonDeleteParticipanteProyecto = (proyecto) => {
+const BotonDeleteParticipanteProyecto = ({proyecto}) => {
     const record = useRecordContext();
     const handleClick = () => {
         dataProvider.deleteParticipanteProyecto(proyecto.id, record.id);
@@ -130,7 +130,7 @@ const BotonDeleteParticipanteProyecto = (proyecto) => {
 
 export const UserListMini = (proyecto) => {
     const isSmall = useMediaQuery((theme) => theme.breakpoints.down('sm'));
-
+    const record = useRecordContext();
     return (
         <List filters={UserFiltersMini} actions={""} resource="estudiantes" title={" "}>
             {isSmall ? (
@@ -146,8 +146,8 @@ export const UserListMini = (proyecto) => {
                     <TextField source="nombre" label="Nombre" />
                     <TextField source="apellidos" label="Apellidos" />
                     <EmailField source="email" label="Email" />
-                    <BotonAddParticipanteProyecto proyecto={proyecto} />
-                    <BotonDeleteParticipanteProyecto proyecto={proyecto} />
+                    <BotonAddParticipanteProyecto proyecto={record} />
+                    <BotonDeleteParticipanteProyecto proyecto={record} />
                 </Datagrid>
             )}
         </List>
