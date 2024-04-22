@@ -34,7 +34,8 @@ import {
 import { useMediaQuery } from '@mui/material';
 import { RenderCreateButton, RenderEditButton, RenderDeleteButton } from '../Components/BotonesPermissions';
 import { dataProvider } from '../dataProvider';
-import { CicloListMini, CicloListMiniSelected} from '../Pages/Ciclos';
+import { CicloListMini, CicloListMiniSelected} from './Ciclos';
+import { IdiomaListMini, IdiomaListMiniSelected } from './Idiomas';
 
 
 const ListActions = () => (
@@ -198,6 +199,8 @@ export const UserEdit = () => {
             </ImageInput>
             <CicloListMini estudiante={record}></CicloListMini>
             <CicloListMiniSelected></CicloListMiniSelected>
+            <IdiomaListMini estudiante={record}></IdiomaListMini>
+            <IdiomaListMiniSelected></IdiomaListMiniSelected>
         </SimpleForm>
     </Edit>
 );}

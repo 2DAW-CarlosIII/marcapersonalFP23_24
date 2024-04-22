@@ -187,6 +187,27 @@ dataProvider.deleteCicloEstudiante = (estudianteId, cicloId) => {
     });
 }
 
+dataProvider.postIdiomaEstudiante = (estudianteId, idiomaId) => {
+    return httpClient(`${apiUrl}/estudiantes/${estudianteId}/idiomas`, {
+        method: 'POST',
+        body: JSON.stringify({idioma_id: idiomaId}),
+        headers: new Headers({
+            'Content-Type': 'application/json',
+            'accept': 'application/json',
+        }),
+    });
+}
+
+dataProvider.deleteIdiomaEstudiante = (estudianteId, idiomaId) => {
+    return httpClient(`${apiUrl}/estudiantes/${estudianteId}/idiomas/${idiomaId}`, {
+        method: 'DELETE',
+        headers: new Headers({
+            'Content-Type': 'application/json',
+            'accept': 'application/json',
+        }),
+    });
+}
+
 function anyadirFichero (resource, params) {
     let ficheroPresente = false
     const recursosConFicheros = ['proyectos', 'users', 'curriculos']

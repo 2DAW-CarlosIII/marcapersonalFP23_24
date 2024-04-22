@@ -19,6 +19,7 @@ use App\Http\Controllers\API\EmpresaController;
 use App\Http\Controllers\API\TokenController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\API\CountController;
+use App\Http\Controllers\API\IdiomaEstudianteController;
 use App\Http\Controllers\API\ParticipanteController;
 use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
@@ -103,6 +104,8 @@ Route::prefix('v1')->group(function () {
     Route::get('docentes', [UserController::class, 'getDocentes'])->name('docentes.index');
 
     Route::apiResource('estudiantes.ciclos', CicloEstudianteController::class)
+        ->except(['update']);
+    Route::apiResource('estudiantes.idiomas', IdiomaEstudianteController::class)
         ->except(['update']);
 
     Route::get('{tabla}/count', [CountController::class, 'count']);

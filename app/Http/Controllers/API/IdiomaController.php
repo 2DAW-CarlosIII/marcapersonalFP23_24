@@ -23,7 +23,7 @@ class IdiomaController extends Controller
      */
     public function index(Request $request)
     {
-        $campo = ['english_name'];
+        $campo = ['english_name', 'native_name'];
         $query = FilterHelper::applyFilter($request, $campo);
         $request->attributes->set('total_count', $query->count());
         $queryOrdered = FilterHelper::applyOrder($query, $request);

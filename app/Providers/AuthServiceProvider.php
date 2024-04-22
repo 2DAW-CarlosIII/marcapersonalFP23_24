@@ -19,6 +19,8 @@ use App\Policies\EmpresaPolicy;
 use App\Models\FamiliaProfesional;
 use App\Policies\FamiliaProfesionalPolicy;
 use App\Models\Idioma;
+use App\Models\IdiomaConocido;
+use App\Policies\IdiomaEstudiantePolicy;
 use App\Models\Participante;
 use App\Policies\IdiomaPolicy;
 use App\Models\Proyecto;
@@ -50,6 +52,7 @@ class AuthServiceProvider extends ServiceProvider
         Participante::class => ParticipantePolicy::class,
         User::class => UsersPolicy::class,
         CicloEstudiado::class => CicloEstudiantePolicy::class,
+        IdiomaConocido::class => IdiomaEstudiantePolicy::class,
     ];
 
     /**
