@@ -35,7 +35,7 @@ import { useMediaQuery } from '@mui/material';
 import { RenderCreateButton, RenderEditButton, RenderDeleteButton } from '../Components/BotonesPermissions';
 import { dataProvider } from '../dataProvider';
 import { CicloListMini, CicloListMiniSelected} from './Ciclos';
-import { IdiomaListMini, IdiomaListMiniSelected } from './Idiomas';
+import { FormAddIdiomaEstudiante, IdiomaListMiniSelected } from './Idiomas';
 
 
 const ListActions = () => (
@@ -197,10 +197,10 @@ export const UserEdit = () => {
             <ImageInput source="attachments" label='Imagen de Avatar' accept="image/*">
                 <ImageField source="src" title="title" label="Foto de perfil" />
             </ImageInput>
-            <CicloListMini estudiante={record}></CicloListMini>
-            <CicloListMiniSelected></CicloListMiniSelected>
-            <IdiomaListMini estudiante={record}></IdiomaListMini>
-            <IdiomaListMiniSelected></IdiomaListMiniSelected>
+            <CicloListMini estudiante={record} />
+            <CicloListMiniSelected />
+            <FormAddIdiomaEstudiante />
+            <IdiomaListMiniSelected />
         </SimpleForm>
     </Edit>
 );}

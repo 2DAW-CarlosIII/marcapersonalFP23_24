@@ -187,10 +187,10 @@ dataProvider.deleteCicloEstudiante = (estudianteId, cicloId) => {
     });
 }
 
-dataProvider.postIdiomaEstudiante = (estudianteId, idiomaId) => {
-    return httpClient(`${apiUrl}/estudiantes/${estudianteId}/idiomas`, {
+dataProvider.postIdiomaEstudiante = (data) => {
+    return httpClient(`${apiUrl}/estudiantes/${data.estudiante_id}/idiomas`, {
         method: 'POST',
-        body: JSON.stringify({idioma_id: idiomaId}),
+        body: JSON.stringify(data),
         headers: new Headers({
             'Content-Type': 'application/json',
             'accept': 'application/json',
