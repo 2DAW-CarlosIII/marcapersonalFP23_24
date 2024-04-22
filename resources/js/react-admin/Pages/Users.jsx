@@ -29,6 +29,8 @@ import {
     Button,
     ArrayField,
     useDataProvider,
+    CreateActions,
+    CreateButton,
 } from 'react-admin';
 
 import { useMediaQuery } from '@mui/material';
@@ -111,23 +113,27 @@ export const UserList = () => {
 
 const BotonAddParticipanteProyecto = () => {
     const handleClick = () => {
+
+        console.log(props.estudiante)
         dataProvider.postParticipanteProyecto(proyecto_id, estudiante_id);
     };
 
     return <Button onClick={handleClick}>Añadir al proyecto</Button>;
 };
 
-const BotonDeleteParticipanteProyecto = () => {
+const BotonDeleteParticipanteProyecto = (props) => {
     const handleClick = () => {
+        console.log(props.estudiante)
         dataProvider.deleteParticipanteProyecto(proyecto_id, estudiante_id);
     };
 
     return <Button onClick={handleClick}>Eliminar del proyecto</Button>;
 };
 
-export const UserListMini = (proyecto) => {
+export const UserListMini = (props) => {
     const isSmall = useMediaQuery((theme) => theme.breakpoints.down('sm'));
 
+    console.log(props.proyecto)
     return (
         <List filters={UserFiltersMini} actions={""} resource="estudiantes" title={" "}>
             {isSmall ? (
@@ -144,7 +150,6 @@ export const UserListMini = (proyecto) => {
                     <TextField source="apellidos" label="Apellidos" />
                     <EmailField source="email" label="Email" />
                     <BotonAddParticipanteProyecto />
-                    <BotonDeleteParticipanteProyecto />
                 </Datagrid>
             )}
         </List>
@@ -160,12 +165,14 @@ export const UserListMiniSelected = () => {
 
     return (
         <SimpleShowLayout >
-        <ArrayField   source = "selected">
+        <ArrayField   source = "selected" resource="estudiantes">
             <Datagrid bulkActionButtons={false}>
                     <TextField source="id" disabled />
                     <TextField source="nombre" label="Nombre" />
                     <TextField source="apellidos" label="Apellidos" />
                     <EmailField source="email" label="Email" />
+                    <BotonDeleteParticipanteProyecto />
+
             </Datagrid>
         </ArrayField>
         </SimpleShowLayout>
