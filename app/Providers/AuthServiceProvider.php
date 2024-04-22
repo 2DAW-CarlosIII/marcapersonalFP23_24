@@ -9,6 +9,8 @@ use App\Policies\ActividadPolicy;
 use App\Models\Competencia;
 use App\Policies\CompetenciaPolicy;
 use App\Models\Ciclo;
+use App\Models\CicloEstudiado;
+use App\Policies\CicloEstudiantePolicy;
 use App\Policies\CicloPolicy;
 use App\Models\Curriculo;
 use App\Policies\CurriculoPolicy;
@@ -17,6 +19,8 @@ use App\Policies\EmpresaPolicy;
 use App\Models\FamiliaProfesional;
 use App\Policies\FamiliaProfesionalPolicy;
 use App\Models\Idioma;
+use App\Models\IdiomaConocido;
+use App\Policies\IdiomaEstudiantePolicy;
 use App\Models\Participante;
 use App\Policies\IdiomaPolicy;
 use App\Models\Proyecto;
@@ -47,6 +51,8 @@ class AuthServiceProvider extends ServiceProvider
         Reconocimiento::class => ReconocimientoPolicy::class,
         Participante::class => ParticipantePolicy::class,
         User::class => UsersPolicy::class,
+        CicloEstudiado::class => CicloEstudiantePolicy::class,
+        IdiomaConocido::class => IdiomaEstudiantePolicy::class,
     ];
 
     /**

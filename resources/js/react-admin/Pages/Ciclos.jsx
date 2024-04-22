@@ -22,11 +22,15 @@ import {
     ExportButton,
     FilterButton,
     Toolbar,
+    usePermissions,
+    Button,
+    ArrayField,
 } from 'react-admin';
 
 import { useMediaQuery } from '@mui/material';
 import { useRecordContext } from 'react-admin';
 import { RenderCreateButton, RenderEditButton, RenderDeleteButton } from '../Components/BotonesPermissions';
+import { dataProvider } from '../dataProvider';
 
 const ListActions = () => (
   <TopToolbar>
@@ -93,6 +97,79 @@ export const CicloList = () => {
     );
 
 
+};
+
+const BotonAddCicloEstudiante = ({estudiante}) => {
+    const record = useRecordContext();
+    const handleClick = () => {
+        dataProvider.postCicloEstudiante(estudiante.id, record.id);
+    };
+
+    return <Button onClick={handleClick}>Añadir estudios</Button>;
+};
+
+const BotonDeleteCicloEstudiante = ({estudiante}) => {
+    const record = useRecordContext();
+    const handleClick = () => {
+        dataProvider.deleteCicloEstudiante(estudiante.id, record.id);
+    };
+
+    return <Button onClick={handleClick}>Eliminar estudios</Button>;
+};
+
+const CicloFiltersMini = [
+    <TextInput source="q" label="Search" alwaysOn />,
+];
+
+export const CicloListMini = () => {
+    const isSmall = useMediaQuery((theme) => theme.breakpoints.down('sm'));
+    const permisos = usePermissions();
+    const record = useRecordContext();
+    if (permisos.permissions.role != 'estudiante' && permisos.permissions.role != 'admin' ) return null;
+    return (
+        <List filters={CicloFiltersMini} actions={""} resource="ciclos" title={" "}>
+            {isSmall ? (
+                <SimpleList
+                primaryText={(record) => record.nombre}
+                secondaryText={(record) => record.cod_ciclo}
+                tertiaryText={(record) => record.grado}
+                linkType={(record) => (record.canEdit ? 'edit' : 'show')}
+                />
+            ) : (
+                <Datagrid bulkActionButtons={false}>
+                    <TextField source="id" disabled />
+                    <TextField source="cod_ciclo" label="Código" />
+                    <TextField source="nombre" label="Nombre" />
+                    <TextField source="grado" label="Grado" />
+                    <BotonAddCicloEstudiante estudiante={record} />
+                    <BotonDeleteCicloEstudiante estudiante={record} />
+                </Datagrid>
+            )}
+        </List>
+    );
+};
+
+export const CicloListMiniSelected = () => {
+    const isSmall = useMediaQuery((theme) => theme.breakpoints.down('sm'));
+    const permisos = usePermissions();
+    if (permisos.permissions.role != 'estudiante' && permisos.permissions.role != 'admin' ) return null;
+
+// Lo haremos con ReferenceArrayField https://marmelab.com/react-admin/ReferenceArrayField.html
+// o con  ReferenceManyField https://marmelab.com/react-admin/ReferenceManyField.html
+    return (
+        <SimpleShowLayout >
+        <ArrayField source = "selected">
+            <Datagrid bulkActionButtons={false}>
+                    <TextField source="id" disabled />
+                    <TextField source="cod_ciclo" label="Código" />
+                    <TextField source="nombre" label="Nombre" />
+                    <TextField source="grado" label="Grado" />
+            </Datagrid>
+        </ArrayField>
+        </SimpleShowLayout>
+
+
+    );
 };
 
 const FamiliaInput = () => (

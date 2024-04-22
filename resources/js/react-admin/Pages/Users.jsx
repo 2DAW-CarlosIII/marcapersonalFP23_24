@@ -28,6 +28,7 @@ import {
     Toolbar,
     Button,
     ArrayField,
+    useRecordContext,
     useDataProvider,
     CreateActions,
     CreateButton,
@@ -36,6 +37,8 @@ import {
 import { useMediaQuery } from '@mui/material';
 import { RenderCreateButton, RenderEditButton, RenderDeleteButton } from '../Components/BotonesPermissions';
 import { dataProvider } from '../dataProvider';
+import { CicloListMini, CicloListMiniSelected} from './Ciclos';
+import { FormAddIdiomaEstudiante, IdiomaListMiniSelected } from './Idiomas';
 
 
 const ListActions = () => (
@@ -111,20 +114,19 @@ export const UserList = () => {
     );
 };
 
-const BotonAddParticipanteProyecto = () => {
+const BotonAddParticipanteProyecto = ({proyecto}) => {
+    const record = useRecordContext();
     const handleClick = () => {
-
-        console.log(props.estudiante)
-        dataProvider.postParticipanteProyecto(proyecto_id, estudiante_id);
+        dataProvider.postParticipanteProyecto(proyecto.id, record.id);
     };
 
     return <Button onClick={handleClick}>Añadir al proyecto</Button>;
 };
 
-const BotonDeleteParticipanteProyecto = (props) => {
+const BotonDeleteParticipanteProyecto = ({proyecto}) => {
+    const record = useRecordContext();
     const handleClick = () => {
-        console.log(props.estudiante)
-        dataProvider.deleteParticipanteProyecto(proyecto_id, estudiante_id);
+        dataProvider.deleteParticipanteProyecto(proyecto.id, record.id);
     };
 
     return <Button onClick={handleClick}>Eliminar del proyecto</Button>;
@@ -132,8 +134,7 @@ const BotonDeleteParticipanteProyecto = (props) => {
 
 export const UserListMini = (props) => {
     const isSmall = useMediaQuery((theme) => theme.breakpoints.down('sm'));
-
-    console.log(props.proyecto)
+    const record = useRecordContext();
     return (
         <List filters={UserFiltersMini} actions={""} resource="estudiantes" title={" "}>
             {isSmall ? (
@@ -149,7 +150,7 @@ export const UserListMini = (props) => {
                     <TextField source="nombre" label="Nombre" />
                     <TextField source="apellidos" label="Apellidos" />
                     <EmailField source="email" label="Email" />
-                    <BotonAddParticipanteProyecto />
+                    <BotonAddParticipanteProyecto proyecto={record} />
                 </Datagrid>
             )}
         </List>
@@ -187,7 +188,9 @@ export const UserTitle = ({ record }) => {
     return <span>User {record ? `"${record.nombre}"` : ''}</span>;
 };
 
-export const UserEdit = () => (
+export const UserEdit = () => {
+    const record = useRecordContext();
+    return (
     <Edit title={<UserTitle />}>
         <SimpleForm toolbar={<EditActions />} >
             <TextInput source="id" disabled />
@@ -198,9 +201,13 @@ export const UserEdit = () => (
             <ImageInput source="attachments" label='Imagen de Avatar' accept="image/*">
                 <ImageField source="src" title="title" label="Foto de perfil" />
             </ImageInput>
+            <CicloListMini estudiante={record} />
+            <CicloListMiniSelected />
+            <FormAddIdiomaEstudiante />
+            <IdiomaListMiniSelected />
         </SimpleForm>
     </Edit>
-);
+);}
 
 export const UserShow = () => (
     <Show actions={<ListButton />} >

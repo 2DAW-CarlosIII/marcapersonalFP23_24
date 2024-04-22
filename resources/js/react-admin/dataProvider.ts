@@ -166,6 +166,48 @@ dataProvider.deleteParticipanteProyecto = (proyectoId, userId) => {
     });
 }
 
+dataProvider.postCicloEstudiante = (estudianteId, cicloId) => {
+    return httpClient(`${apiUrl}/estudiantes/${estudianteId}/ciclos`, {
+        method: 'POST',
+        body: JSON.stringify({ciclo_id: cicloId}),
+        headers: new Headers({
+            'Content-Type': 'application/json',
+            'accept': 'application/json',
+        }),
+    });
+}
+
+dataProvider.deleteCicloEstudiante = (estudianteId, cicloId) => {
+    return httpClient(`${apiUrl}/estudiantes/${estudianteId}/ciclos/${cicloId}`, {
+        method: 'DELETE',
+        headers: new Headers({
+            'Content-Type': 'application/json',
+            'accept': 'application/json',
+        }),
+    });
+}
+
+dataProvider.postIdiomaEstudiante = (data) => {
+    return httpClient(`${apiUrl}/estudiantes/${data.estudiante_id}/idiomas`, {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: new Headers({
+            'Content-Type': 'application/json',
+            'accept': 'application/json',
+        }),
+    });
+}
+
+dataProvider.deleteIdiomaEstudiante = (estudianteId, idiomaId) => {
+    return httpClient(`${apiUrl}/estudiantes/${estudianteId}/idiomas/${idiomaId}`, {
+        method: 'DELETE',
+        headers: new Headers({
+            'Content-Type': 'application/json',
+            'accept': 'application/json',
+        }),
+    });
+}
+
 function anyadirFichero (resource, params) {
     let ficheroPresente = false
     const recursosConFicheros = ['proyectos', 'users', 'curriculos']
