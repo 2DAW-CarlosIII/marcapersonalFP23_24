@@ -29,6 +29,9 @@ import {
     Button,
     ArrayField,
     useRecordContext,
+    useDataProvider,
+    CreateActions,
+    CreateButton,
 } from 'react-admin';
 
 import { useMediaQuery } from '@mui/material';
@@ -129,7 +132,7 @@ const BotonDeleteParticipanteProyecto = ({proyecto}) => {
     return <Button onClick={handleClick}>Eliminar del proyecto</Button>;
 };
 
-export const UserListMini = (proyecto) => {
+export const UserListMini = (props) => {
     const isSmall = useMediaQuery((theme) => theme.breakpoints.down('sm'));
     const record = useRecordContext();
     return (
@@ -148,7 +151,6 @@ export const UserListMini = (proyecto) => {
                     <TextField source="apellidos" label="Apellidos" />
                     <EmailField source="email" label="Email" />
                     <BotonAddParticipanteProyecto proyecto={record} />
-                    <BotonDeleteParticipanteProyecto proyecto={record} />
                 </Datagrid>
             )}
         </List>
@@ -164,12 +166,14 @@ export const UserListMiniSelected = () => {
 
     return (
         <SimpleShowLayout >
-        <ArrayField   source = "selected">
+        <ArrayField   source = "selected" resource="estudiantes">
             <Datagrid bulkActionButtons={false}>
                     <TextField source="id" disabled />
                     <TextField source="nombre" label="Nombre" />
                     <TextField source="apellidos" label="Apellidos" />
                     <EmailField source="email" label="Email" />
+                    <BotonDeleteParticipanteProyecto />
+
             </Datagrid>
         </ArrayField>
         </SimpleShowLayout>

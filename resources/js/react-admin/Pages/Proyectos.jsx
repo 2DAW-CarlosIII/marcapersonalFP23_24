@@ -103,6 +103,7 @@ export const ProyectoTitle = () => {
 
 export const ProyectoEdit = () => {
   const record = useRecordContext();
+  //console.log("RE", record)
   return (
     <Edit title={<ProyectoTitle />}>
     <SimpleForm toolbar={<EditActions />} >
