@@ -23,7 +23,7 @@ import {
     ExportButton,
     FilterButton,
     Toolbar,
-    ArrayField
+    useEditContext
   } from 'react-admin';
 
 import { useRecordContext} from 'react-admin';
@@ -104,6 +104,18 @@ export const ProyectoTitle = () => {
 
 export const ProyectoEdit = () => {
   const record = useRecordContext();
+
+/*
+  const {record, refetch} = useEditContext();
+
+  const refrescarLista = () =>{
+
+      console.log("refresco ", record);
+      refetch()
+  }
+
+
+*/
   return (
     <Edit title={<ProyectoTitle />}>
     <SimpleForm toolbar={<EditActions />} >

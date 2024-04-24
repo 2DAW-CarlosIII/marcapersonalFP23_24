@@ -29,9 +29,7 @@ import {
     Button,
     ArrayField,
     useRecordContext,
-    useDataProvider,
-    CreateActions,
-    CreateButton,
+    useEditContext
 } from 'react-admin';
 
 import { useMediaQuery } from '@mui/material';
@@ -114,19 +112,24 @@ export const UserList = () => {
     );
 };
 
-const BotonAddParticipanteProyecto = ({proyecto}) => {
+const BotonAddParticipanteProyecto = ({proyecto, refrescarLista}) => {
     const record = useRecordContext();
     const handleClick = () => {
         dataProvider.postParticipanteProyecto(proyecto.id, record.id);
+        console.log("REFRESCO DESDE BOTON ADD");
+        refrescarLista();
     };
 
     return <Button onClick={handleClick}>Añadir al proyecto</Button>;
 };
 
-const BotonDeleteParticipanteProyecto = ({proyecto}) => {
+const BotonDeleteParticipanteProyecto = ({proyecto, refrescarLista}) => {
     const record = useRecordContext();
+
     const handleClick = () => {
         dataProvider.deleteParticipanteProyecto(proyecto.id, record.id);
+        console.log("REFRESCO DESDE BOTON DELETE");
+        refrescarLista();
     };
 
     return <Button onClick={handleClick}>Eliminar del proyecto</Button>;
@@ -137,6 +140,15 @@ export const UserListMini = () => {
 
     // record va a tener los datos del proyecto que estamos editando
     const record = useRecordContext();
+
+    const {refetch} = useEditContext();
+
+    const refrescarLista = () =>{
+
+        //console.log("refresco ", record);
+        refetch()
+    }
+
 
     return (
         <List filters={UserFiltersMini} actions={""} resource="estudiantes" title={" "}>
@@ -153,7 +165,7 @@ export const UserListMini = () => {
                     <TextField source="nombre" label="Nombre" />
                     <TextField source="apellidos" label="Apellidos" />
                     <EmailField source="email" label="Email" />
-                    <BotonAddParticipanteProyecto proyecto={record} />
+                    <BotonAddParticipanteProyecto proyecto={record} refrescarLista={refrescarLista}/>
                 </Datagrid>
             )}
         </List>
@@ -163,33 +175,33 @@ export const UserListMini = () => {
 export const UserListMiniSelected = () => {
     const isSmall = useMediaQuery((theme) => theme.breakpoints.down('sm'));
 
-// Lo haremos con ReferenceArrayField https://marmelab.com/react-admin/ReferenceArrayField.html
-// o con  ReferenceManyField https://marmelab.com/react-admin/ReferenceManyField.html
+const {refetch} = useEditContext();
 
+const refrescarLista = () =>{
 
-// Mirar https://marmelab.com/react-admin/useListContext.html para refrescar el ArrayField
-// al borrar un participante del proyecto
+    //console.log("refresco ", record);
+    refetch()
+}
+
 const record = useRecordContext();
+
 
     return (
         <SimpleShowLayout >
         <ArrayField   source="estudiantes">
-            <Datagrid bulkActionButtons={false}>
+            <Datagrid bulkActionButtons={false} >
                     <TextField source="id" disabled />
                     <TextField source="nombre" label="Nombre" />
                     <TextField source="apellidos" label="Apellidos" />
                     <EmailField source="email" label="Email" />
-                    <BotonDeleteParticipanteProyecto proyecto={record}/>
+                    <BotonDeleteParticipanteProyecto proyecto={record} refrescarLista={refrescarLista}/>
 
             </Datagrid>
         </ArrayField>
         </SimpleShowLayout>
 
-
     );
 };
-
-
 
 export const UserTitle = ({ record }) => {
     return <span>User {record ? `"${record.nombre}"` : ''}</span>;
