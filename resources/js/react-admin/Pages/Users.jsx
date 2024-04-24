@@ -132,9 +132,12 @@ const BotonDeleteParticipanteProyecto = ({proyecto}) => {
     return <Button onClick={handleClick}>Eliminar del proyecto</Button>;
 };
 
-export const UserListMini = (props) => {
+export const UserListMini = () => {
     const isSmall = useMediaQuery((theme) => theme.breakpoints.down('sm'));
+
+    // record va a tener los datos del proyecto que estamos editando
     const record = useRecordContext();
+
     return (
         <List filters={UserFiltersMini} actions={""} resource="estudiantes" title={" "}>
             {isSmall ? (
@@ -164,15 +167,19 @@ export const UserListMiniSelected = () => {
 // o con  ReferenceManyField https://marmelab.com/react-admin/ReferenceManyField.html
 
 
+// Mirar https://marmelab.com/react-admin/useListContext.html para refrescar el ArrayField
+// al borrar un participante del proyecto
+const record = useRecordContext();
+
     return (
         <SimpleShowLayout >
-        <ArrayField   source = "selected" resource="estudiantes">
+        <ArrayField   source="estudiantes">
             <Datagrid bulkActionButtons={false}>
                     <TextField source="id" disabled />
                     <TextField source="nombre" label="Nombre" />
                     <TextField source="apellidos" label="Apellidos" />
                     <EmailField source="email" label="Email" />
-                    <BotonDeleteParticipanteProyecto />
+                    <BotonDeleteParticipanteProyecto proyecto={record}/>
 
             </Datagrid>
         </ArrayField>

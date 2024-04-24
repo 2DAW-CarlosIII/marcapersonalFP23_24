@@ -23,6 +23,7 @@ import {
     ExportButton,
     FilterButton,
     Toolbar,
+    ArrayField
   } from 'react-admin';
 
 import { useRecordContext} from 'react-admin';
@@ -103,7 +104,6 @@ export const ProyectoTitle = () => {
 
 export const ProyectoEdit = () => {
   const record = useRecordContext();
-  //console.log("RE", record)
   return (
     <Edit title={<ProyectoTitle />}>
     <SimpleForm toolbar={<EditActions />} >
@@ -115,6 +115,8 @@ export const ProyectoEdit = () => {
         <FileInput source="attachments" label="Archivo comprimido con el proyecto">
             <FileField source="src" title="title" />
         </FileInput>
+
+
         <UserListMini proyecto={record}></UserListMini>
         <UserListMiniSelected></UserListMiniSelected>
     </SimpleForm>
