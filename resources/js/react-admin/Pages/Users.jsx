@@ -33,6 +33,8 @@ import {
     usePermissions
 } from 'react-admin';
 
+import AjaxLoader from '../../../js/Pages/front/src/componentes/AjaxLoader/AjaxLoader';
+
 import { useMediaQuery } from '@mui/material';
 import { RenderCreateButton, RenderEditButton, RenderDeleteButton } from '../Components/BotonesPermissions';
 import { dataProvider } from '../dataProvider';
@@ -155,7 +157,7 @@ export const UserListMini = () => {
 
     return (
         <List filters={UserFiltersMini} actions={""} resource="estudiantes" title={" "}>
-            {isSmall ? (
+            { isSmall ? (
                 <SimpleList
                 primaryText={(record) => record.nombre}
                 secondaryText={(record) => record.email}
@@ -178,7 +180,7 @@ export const UserListMini = () => {
 export const UserListMiniSelected = () => {
     const isSmall = useMediaQuery((theme) => theme.breakpoints.down('sm'));
 
-    const {refetch, record} = useEditContext();
+    const {refetch, record, isFetching} = useEditContext();
 
     const refrescarLista = () =>{
         //console.log("refresco ", record);
@@ -188,14 +190,16 @@ export const UserListMiniSelected = () => {
     return (
         <SimpleShowLayout >
         <ArrayField   source="estudiantes">
-            <Datagrid bulkActionButtons={false} >
+            { isFetching ? ( <AjaxLoader/>)
+            : (<Datagrid bulkActionButtons={false} >
                     <TextField source="id" disabled />
                     <TextField source="nombre" label="Nombre" />
                     <TextField source="apellidos" label="Apellidos" />
                     <EmailField source="email" label="Email" />
                     <BotonDeleteParticipanteProyecto proyecto={record} refrescarLista={refrescarLista}/>
 
-            </Datagrid>
+            </Datagrid>)
+            }
         </ArrayField>
         </SimpleShowLayout>
 
