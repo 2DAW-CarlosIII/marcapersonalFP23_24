@@ -29,7 +29,8 @@ import {
     Button,
     ArrayField,
     useRecordContext,
-    useEditContext
+    useEditContext,
+    usePermissions
 } from 'react-admin';
 
 import { useMediaQuery } from '@mui/material';
@@ -124,6 +125,8 @@ const BotonAddParticipanteProyecto = ({proyecto, refrescarLista}) => {
 };
 
 const BotonDeleteParticipanteProyecto = ({proyecto, refrescarLista}) => {
+    const permisos = usePermissions();
+    if(permisos.permissions.role != 'docente' && permisos.permissions.role != 'admin') return null;
     const record = useRecordContext();
 
     const handleClick = () => {
@@ -136,12 +139,12 @@ const BotonDeleteParticipanteProyecto = ({proyecto, refrescarLista}) => {
 };
 
 export const UserListMini = () => {
+    const permisos = usePermissions();
+    if(permisos.permissions.role != 'docente' && permisos.permissions.role != 'admin') return null;
     const isSmall = useMediaQuery((theme) => theme.breakpoints.down('sm'));
 
     // record va a tener los datos del proyecto que estamos editando
-    const record = useRecordContext();
-
-    const {refetch} = useEditContext();
+    const {refetch, record} = useEditContext();
 
     const refrescarLista = () =>{
 
@@ -175,16 +178,12 @@ export const UserListMini = () => {
 export const UserListMiniSelected = () => {
     const isSmall = useMediaQuery((theme) => theme.breakpoints.down('sm'));
 
-const {refetch} = useEditContext();
+    const {refetch, record} = useEditContext();
 
-const refrescarLista = () =>{
-
-    //console.log("refresco ", record);
-    refetch()
-}
-
-const record = useRecordContext();
-
+    const refrescarLista = () =>{
+        //console.log("refresco ", record);
+        refetch()
+    }
 
     return (
         <SimpleShowLayout >
