@@ -41,6 +41,7 @@ import { dataProvider } from '../dataProvider';
 import { CicloListMini, CicloListMiniSelected} from './Ciclos';
 import { FormAddIdiomaEstudiante, IdiomaListMiniSelected } from './Idiomas';
 
+import { useState } from 'react';
 
 const ListActions = () => (
     <TopToolbar>
@@ -123,11 +124,11 @@ const BotonAddParticipanteProyecto = ({proyecto, refrescarLista}) => {
         refrescarLista();
     };
 
-    return <Button onClick={handleClick}>Añadir al proyecto</Button>;
+    return <Button onClick={handleClick}>Añadir</Button>;
 };
 
 const BotonDeleteParticipanteProyecto = ({proyecto, refrescarLista}) => {
-    const permisos = usePermissions();
+   const permisos = usePermissions();
     if(permisos.permissions.role != 'docente' && permisos.permissions.role != 'admin') return null;
     const record = useRecordContext();
 
@@ -137,7 +138,7 @@ const BotonDeleteParticipanteProyecto = ({proyecto, refrescarLista}) => {
         refrescarLista();
     };
 
-    return <Button onClick={handleClick}>Eliminar del proyecto</Button>;
+    return <Button onClick={handleClick}>Eliminar</Button>;
 };
 
 export const UserListMini = () => {
@@ -188,8 +189,8 @@ export const UserListMiniSelected = () => {
     }
 
     return (
-        <SimpleShowLayout >
-        <ArrayField   source="estudiantes">
+        <SimpleShowLayout>
+        <ArrayField   source="estudiantes" >
             { isFetching ? ( <AjaxLoader/>)
             : (<Datagrid bulkActionButtons={false} >
                     <TextField source="id" disabled />
@@ -197,7 +198,6 @@ export const UserListMiniSelected = () => {
                     <TextField source="apellidos" label="Apellidos" />
                     <EmailField source="email" label="Email" />
                     <BotonDeleteParticipanteProyecto proyecto={record} refrescarLista={refrescarLista}/>
-
             </Datagrid>)
             }
         </ArrayField>

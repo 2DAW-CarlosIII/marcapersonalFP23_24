@@ -47,10 +47,7 @@ const EditActions = () => (
     </Toolbar>
 );
 
-
 import { UserListMini, UserListMiniSelected} from '../Pages/Users';
-
-
 
 const TutorInput = () => (
     <ReferenceInput label="Tutor" source="docente_id" reference="docentes" alwaysOn >
@@ -128,9 +125,15 @@ export const ProyectoEdit = () => {
             <FileField source="src" title="title" />
         </FileInput>
 
+        <div className="row altura">
+            <div className="col-md-7">
+                <UserListMini proyecto={record}></UserListMini>
+            </div>
+            <div className="col-md-5 align-self-center">
+                <UserListMiniSelected></UserListMiniSelected>
+            </div>
+        </div>
 
-        <UserListMini proyecto={record}></UserListMini>
-        <UserListMiniSelected></UserListMiniSelected>
     </SimpleForm>
     </Edit>
   );
