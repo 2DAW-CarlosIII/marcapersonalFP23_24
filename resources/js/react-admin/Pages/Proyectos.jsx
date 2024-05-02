@@ -29,7 +29,7 @@ import {
 import { useRecordContext} from 'react-admin';
 import { useMediaQuery } from '@mui/material';
 import { RenderCreateButton, RenderEditButton, RenderDeleteButton } from '../Components/BotonesPermissions';
-
+import useDropUpDown from '../../Pages/front/src/hooks/useDropUpDown';
 const ListActions = () => (
     <TopToolbar>
         <FilterButton/>
@@ -102,17 +102,8 @@ export const ProyectoTitle = () => {
 export const ProyectoEdit = () => {
   const record = useRecordContext();
 
-/*
-  const {record, refetch} = useEditContext();
+const dropPerfilC = useDropUpDown();
 
-  const refrescarLista = () =>{
-
-      console.log("refresco ", record);
-      refetch()
-  }
-
-
-*/
   return (
     <Edit title={<ProyectoTitle />}>
     <SimpleForm toolbar={<EditActions />} >
@@ -121,18 +112,17 @@ export const ProyectoEdit = () => {
         <TextInput source="dominio" />
         <TutorInput />
         <NumberInput source="calificacion" />
-        <FileInput source="attachments" label="Archivo comprimido con el proyecto">
-            <FileField source="src" title="title" />
+        <FileInput  source="attachments"
+                    label="Archivo comprimido con el proyecto"
+                    sx={{'& .RaFileInput-dropZone':{textAlign:'left'}}}>
+            <FileField  source="src" title="title" />
         </FileInput>
 
-        <div className="row altura">
-            <div className="col-md-7">
-                <UserListMini proyecto={record}></UserListMini>
-            </div>
-            <div className="col-md-5 align-self-center">
-                <UserListMiniSelected></UserListMiniSelected>
-            </div>
-        </div>
+        <UserListMiniSelected></UserListMiniSelected>
+
+        <p style={{color:'#F59432', fontSize:20}}>Busca a un estudiante y añádelo al proyecto<img onClick={dropPerfilC.desplegarLista}  id="dropdown" src={dropPerfilC.dropImgSrc} width="30" alt=""></img></p>
+        {dropPerfilC.dropImg ?<UserListMini proyecto={record}></UserListMini>
+                             : <p></p>}
 
     </SimpleForm>
     </Edit>

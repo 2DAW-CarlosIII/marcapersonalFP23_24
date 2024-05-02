@@ -32,7 +32,7 @@ const ListActions = () => (
 
 const EditActions = () => (
     <Toolbar>
-      <div class="RaToolbar-defaultToolbar">
+      <div c>
         <SaveButton/>
         <RenderDeleteButton />
       </div>

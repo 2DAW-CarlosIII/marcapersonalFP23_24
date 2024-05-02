@@ -23,9 +23,7 @@ export const Login = (props) => {
     const login = useLogin();
     const notify = useNotify();
 
-    console.log("1");
     const checkAuth = useCheckAuth();
-    console.log("2", checkAuth);
     const navigate = useNavigate();
     useEffect(() => {
         checkAuth({}, false)

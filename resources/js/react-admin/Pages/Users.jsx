@@ -30,7 +30,8 @@ import {
     ArrayField,
     useRecordContext,
     useEditContext,
-    usePermissions
+    usePermissions,
+    Labeled
 } from 'react-admin';
 
 import AjaxLoader from '../../../js/Pages/front/src/componentes/AjaxLoader/AjaxLoader';
@@ -41,7 +42,6 @@ import { dataProvider } from '../dataProvider';
 import { CicloListMini, CicloListMiniSelected} from './Ciclos';
 import { FormAddIdiomaEstudiante, IdiomaListMiniSelected } from './Idiomas';
 
-import { useState } from 'react';
 
 const ListActions = () => (
     <TopToolbar>
@@ -53,7 +53,7 @@ const ListActions = () => (
 
 const EditActions = () => (
     <Toolbar>
-      <div class="RaToolbar-defaultToolbar">
+      <div className="RaToolbar-defaultToolbar">
         <SaveButton/>
         <RenderDeleteButton />
       </div>
@@ -151,13 +151,18 @@ export const UserListMini = () => {
 
     const refrescarLista = () =>{
 
-        //console.log("refresco ", record);
+        console.log("refresco insertar", record);
         refetch()
     }
 
-
     return (
-        <List filters={UserFiltersMini} actions={""} resource="estudiantes" title={" "}>
+        <>
+        <List filters={UserFiltersMini}
+              actions={""}
+              resource="estudiantes"
+              title={" "}
+              perPage={5}
+              sx={{background:'#F7F7F7'}}>
             { isSmall ? (
                 <SimpleList
                 primaryText={(record) => record.nombre}
@@ -166,15 +171,27 @@ export const UserListMini = () => {
                 linkType={(record) => (record.canEdit ? 'edit' : 'show')}
                 />
             ) : (
-                <Datagrid bulkActionButtons={false}>
+
+                <Datagrid bulkActionButtons={false}
+                sx={{
+                    "& .RaDatagrid-table": {
+                        backgroundColor: "#F7F7F7",
+                    },
+                    "& .RaDatagrid-headerCell": {
+                        backgroundColor: "#F7F7F7",
+                    }
+                }}>
                     <TextField source="id" disabled />
                     <TextField source="nombre" label="Nombre" />
                     <TextField source="apellidos" label="Apellidos" />
                     <EmailField source="email" label="Email" />
                     <BotonAddParticipanteProyecto proyecto={record} refrescarLista={refrescarLista}/>
                 </Datagrid>
+
             )}
         </List>
+
+        </>
     );
 };
 
@@ -184,24 +201,27 @@ export const UserListMiniSelected = () => {
     const {refetch, record, isFetching} = useEditContext();
 
     const refrescarLista = () =>{
-        //console.log("refresco ", record);
+        console.log("refresco borrar ", record);
         refetch()
     }
 
     return (
-        <SimpleShowLayout>
+        <Labeled label="Estudiantes incluidos en el proyecto">
+        <SimpleShowLayout >
         <ArrayField   source="estudiantes" >
             { isFetching ? ( <AjaxLoader/>)
-            : (<Datagrid bulkActionButtons={false} >
+            : (<Datagrid bulkActionButtons={false}>
                     <TextField source="id" disabled />
-                    <TextField source="nombre" label="Nombre" />
+                    <TextField source="nombre" label="Nombre"/>
                     <TextField source="apellidos" label="Apellidos" />
                     <EmailField source="email" label="Email" />
                     <BotonDeleteParticipanteProyecto proyecto={record} refrescarLista={refrescarLista}/>
             </Datagrid>)
             }
         </ArrayField>
+
         </SimpleShowLayout>
+        </Labeled>
 
     );
 };
