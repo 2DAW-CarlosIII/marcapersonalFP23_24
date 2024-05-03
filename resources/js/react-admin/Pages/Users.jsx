@@ -119,9 +119,8 @@ export const UserList = () => {
 const BotonAddParticipanteProyecto = ({proyecto, refrescarLista}) => {
     const record = useRecordContext();
     const handleClick = () => {
-        dataProvider.postParticipanteProyecto(proyecto.id, record.id);
-        console.log("REFRESCO DESDE BOTON ADD");
-        refrescarLista();
+        dataProvider.postParticipanteProyecto(proyecto.id, record.id)
+        .then(() => refrescarLista());
     };
 
     return <Button onClick={handleClick}>Añadir</Button>;
@@ -133,9 +132,8 @@ const BotonDeleteParticipanteProyecto = ({proyecto, refrescarLista}) => {
     const record = useRecordContext();
 
     const handleClick = () => {
-        dataProvider.deleteParticipanteProyecto(proyecto.id, record.id);
-        console.log("REFRESCO DESDE BOTON DELETE");
-        refrescarLista();
+        dataProvider.deleteParticipanteProyecto(proyecto.id, record.id)
+        .then(() => refrescarLista());
     };
 
     return <Button onClick={handleClick}>Eliminar</Button>;
