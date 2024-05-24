@@ -31,15 +31,14 @@ Route::get('/', function () {
 })->name('home');
 */
 
-Route::get('/', function () {
+Route::get('/{any}', function () {
     return Inertia::render('front/src/main', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
     ]);
-})->name('home');
-
+})->name('home')->where('any', '.*');
 
 Route::prefix('catalog')->group(function () {
     Route::get('/', [CatalogController::class, 'getIndex'])->name('proyectos');
