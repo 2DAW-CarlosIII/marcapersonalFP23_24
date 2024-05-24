@@ -22,6 +22,8 @@ import {
     ArrayField,
     SelectInput,
     BooleanInput,
+    useNotify,
+    useRefresh,
   } from 'react-admin';
 
 import { useRecordContext, useGetList} from 'react-admin';
@@ -39,8 +41,8 @@ const ListActions = () => (
 
 const validateIdioma2Estudiante = (values) => {
   const errors = {};
-  if (!values.idioma) {
-      errors.idioma = 'El idioma es requerido';
+  if (!values.idioma_id) {
+      errors.idioma_id = 'El idioma es requerido';
   }
   if (!values.nivel) {
       errors.nivel = 'El nivel es requerido';
@@ -65,16 +67,25 @@ const IdiomaInput = () => {
 }
 
 export const FormAddIdiomaEstudiante = () => {
-  const record = useRecordContext(); //estudiante
-  const handleClick = (data) => {
-    dataProvider.postIdiomaEstudiante(data);
-  };
+  const record = useRecordContext(); //idioma
   const permisos = usePermissions();
+  const notify = useNotify();
+  const refresh = useRefresh();
+  const addIdiomaToEstudiante = (data) => {
+    dataProvider.postIdiomaEstudiante(data)
+      .then(() => {
+        refresh();
+        notify('Idioma añadido correctamente', { type: 'success' });
+    })
+      .catch((error) => {
+        notify(`Error: ${error.message}`, { type: 'error' });
+      });
+  };
   if (permisos.permissions.role != 'estudiante' && permisos.permissions.role != 'admin' ) return null;
   return (
-      <SimpleForm onSubmit={handleClick} id="add_idioma_estudiante" validate={validateIdioma2Estudiante}>
-        <TextInput source="estudiante_id" defaultValue={record.id} value="{record.id}" type="hidden"/>
-        <IdiomaInput />
+      <SimpleForm onSubmit={addIdiomaToEstudiante} id="add_idioma_estudiante" validate={validateIdioma2Estudiante}>
+        <TextInput source="estudiante_id" defaultValue={permisos.permissions.id} value="{permisos.permissions.id}" type="hidden"/>
+        <TextInput source="idioma_id" defaultValue={record.id} value="{record.id}" type="hidden"/>
         <SelectInput source="nivel" choices={[
             { id: 'A1', name: 'A1' },
             { id: 'A2', name: 'A2' },
@@ -84,8 +95,7 @@ export const FormAddIdiomaEstudiante = () => {
             { id: 'C2', name: 'C2' },
           ]} />
           <BooleanInput source="certificado" />
-          <Button variant="contained" type='submit' >Añadir idioma</Button>
-      </SimpleForm>
+    </SimpleForm>
   );
 };
 
@@ -154,6 +164,7 @@ export const IdiomaList = () => {
           <ShowButton />
           <RenderEditButton />
           <RenderDeleteButton />
+            <FormAddIdiomaEstudiante />
         </Datagrid>
       )}
     </List>

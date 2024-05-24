@@ -12,6 +12,8 @@ class IdiomaEstudiante extends Model
     protected $fillable = [
         'idioma_id',
         'user_id',
+        'nivel',
+        'certificado',
     ];
 
     protected $table = 'users_idiomas';

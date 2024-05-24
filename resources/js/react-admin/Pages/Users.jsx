@@ -243,7 +243,6 @@ export const UserEdit = () => {
             </ImageInput>
             <CicloListMini estudiante={record} />
             <CicloListMiniSelected />
-            <FormAddIdiomaEstudiante />
             <IdiomaListMiniSelected />
         </SimpleForm>
     </Edit>
