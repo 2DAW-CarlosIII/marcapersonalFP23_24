@@ -81,8 +81,8 @@ function App() {
                 <Route path="/empresa/alumnos"            element={<BusquedaAlumnos></BusquedaAlumnos>}></Route>
                 <Route path="/empresa/proyectos"          element={<BusquedaProyectos></BusquedaProyectos>}></Route>
                 <Route path="/empresa/alumno/:id"         element={<AlumnoMaxiCard></AlumnoMaxiCard>}></Route>
-                <Route path="/centroeducativo"            element={<CentroEducativo />} />
-                <Route path="/alumnos"                    element={<Alumnos />} />
+                <Route path="/centroeducativo"            element={<Dashboard />} />
+                <Route path="/alumnos"                    element={<Dashboard />} />
                 <Route path="/dashboard/*"                element={<Dashboard />} />
                 <Route path="/register"                   element={<Register />} />
                 <Route path="/forgot-password"            element={<ForgotPassword />}></Route>
