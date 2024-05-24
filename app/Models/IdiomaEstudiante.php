@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 
 class IdiomaEstudiante extends Model
 {
@@ -24,4 +25,13 @@ class IdiomaEstudiante extends Model
     ];
 
     public $incrementing = false;
+
+    protected function setKeysForSaveQuery($query)
+    {
+        $query
+            ->where('user_id', '=', $this->getAttribute('user_id'))
+            ->where('idioma_id', '=', $this->getAttribute('idioma_id'));
+
+        return $query;
+    }
 }

@@ -47,7 +47,10 @@ class IdiomaEstudianteController extends Controller
 
         $idiomaEstudiante = json_decode($request->getContent(), true);
         $idiomaEstudiante['user_id'] = $estudiante->id;
-        $idiomaEstudiante = IdiomaEstudiante::create($idiomaEstudiante);
+        $idiomaEstudiante = IdiomaEstudiante::updateOrCreate(
+            ['idioma_id' => $idiomaEstudiante['idioma_id'], 'user_id' => $idiomaEstudiante['estudiante_id']], 
+            ['nivel' => $idiomaEstudiante['nivel'], 'certificado' => $idiomaEstudiante['certificado']]
+        );
         return new IdiomaEstudianteResource($idiomaEstudiante);
     }
 

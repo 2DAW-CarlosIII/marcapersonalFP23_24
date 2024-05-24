@@ -187,6 +187,16 @@ dataProvider.deleteCicloEstudiante = (estudianteId, cicloId) => {
     });
 }
 
+dataProvider.getIdiomasEstudiante = (estudiante_id) => {
+    return httpClient(`${apiUrl}/estudiantes/${estudiante_id}/idiomas`, {
+        method: 'GET',
+        headers: new Headers({
+            'Content-Type': 'application/json',
+            'accept': 'application/json',
+        }),
+    });
+}
+
 dataProvider.postIdiomaEstudiante = (data) => {
     return httpClient(`${apiUrl}/estudiantes/${data.estudiante_id}/idiomas`, {
         method: 'POST',
@@ -198,8 +208,8 @@ dataProvider.postIdiomaEstudiante = (data) => {
     });
 }
 
-dataProvider.deleteIdiomaEstudiante = (estudianteId, idiomaId) => {
-    return httpClient(`${apiUrl}/estudiantes/${estudianteId}/idiomas/${idiomaId}`, {
+dataProvider.deleteIdiomaEstudiante = (estudiante_id, idioma_id) => {
+    return httpClient(`${apiUrl}/estudiantes/${estudiante_id}/idiomas/${idioma_id}`, {
         method: 'DELETE',
         headers: new Headers({
             'Content-Type': 'application/json',

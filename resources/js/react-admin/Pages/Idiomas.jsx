@@ -6,7 +6,6 @@ import {
     Edit,
     Create,
     SimpleForm,
-    Form,
     TextInput,
     ShowButton,
     Show,
@@ -24,12 +23,16 @@ import {
     BooleanInput,
     useNotify,
     useRefresh,
+    Loading,
+    DeleteButton,
   } from 'react-admin';
 
 import { useRecordContext, useGetList} from 'react-admin';
 import { useMediaQuery } from '@mui/material';
 import { RenderCreateButton, RenderEditButton, RenderDeleteButton } from '../Components/BotonesPermissions';
 import { dataProvider } from '../dataProvider';
+import React, { useState, useEffect } from 'react';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 const ListActions = () => (
     <TopToolbar>
@@ -66,7 +69,46 @@ const IdiomaInput = () => {
   );
 }
 
-export const FormAddIdiomaEstudiante = () => {
+const BotonDeleteIdiomaEstudiante = () => {
+  const record = useRecordContext(); //idioma
+  const permisos = usePermissions();
+  const notify = useNotify();
+  const refresh = useRefresh();
+    const deleteClick = (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      dataProvider.deleteIdiomaEstudiante(permisos.permissions.id, record.id)
+          .then(() => {
+              refresh();
+              notify('Idioma eliminado correctamente', { type: 'success' });
+          })
+          .catch((error) => {
+              notify(`Error: ${error.message}`, { type: 'error' });
+          });
+    };
+
+    return(
+      <Button label="Eliminar idioma" onClick={deleteClick} >
+          <DeleteIcon />
+      </Button>
+    )
+};
+
+const IdiomaEstudianteToolBar = props => {
+  return props?.idiomaestudiante ? (
+  <Toolbar {...props} >
+      <SaveButton />
+      <BotonDeleteIdiomaEstudiante />
+  </Toolbar>
+  )
+  : (
+      <Toolbar {...props} >
+          <SaveButton />
+      </Toolbar>
+  );
+}
+
+export const FormAddIdiomaEstudiante = ({registrosIdiomasEstudiante}) => {
   const record = useRecordContext(); //idioma
   const permisos = usePermissions();
   const notify = useNotify();
@@ -82,30 +124,23 @@ export const FormAddIdiomaEstudiante = () => {
       });
   };
   if (permisos.permissions.role != 'estudiante' && permisos.permissions.role != 'admin' ) return null;
-  return (
-      <SimpleForm onSubmit={addIdiomaToEstudiante} id="add_idioma_estudiante" validate={validateIdioma2Estudiante}>
-        <TextInput source="estudiante_id" defaultValue={permisos.permissions.id} value="{permisos.permissions.id}" type="hidden"/>
-        <TextInput source="idioma_id" defaultValue={record.id} value="{record.id}" type="hidden"/>
-        <SelectInput source="nivel" choices={[
-            { id: 'A1', name: 'A1' },
-            { id: 'A2', name: 'A2' },
-            { id: 'B1', name: 'B1' },
-            { id: 'B2', name: 'B2' },
-            { id: 'C1', name: 'C1' },
-            { id: 'C2', name: 'C2' },
-          ]} />
-          <BooleanInput source="certificado" />
-    </SimpleForm>
-  );
-};
 
-const BotonDeleteIdiomaEstudiante = ({estudiante}) => {
-    const record = useRecordContext();
-    const handleClick = () => {
-        dataProvider.deleteIdiomaEstudiante(estudiante.id, record.id);
-    };
-
-    return <Button onClick={handleClick}>Eliminar idioma</Button>;
+    const idiomaestudiante = registrosIdiomasEstudiante.find(registro => registro.idioma_id === record.id);
+    return (
+        <SimpleForm onSubmit={addIdiomaToEstudiante} toolbar={IdiomaEstudianteToolBar({ idiomaestudiante})} id="add_idioma_estudiante" validate={validateIdioma2Estudiante}>
+          <TextInput source="estudiante_id" defaultValue={permisos.permissions.id} value="{permisos.permissions.id}" type="hidden"/>
+          <TextInput source="idioma_id" defaultValue={record.id} value="{record.id}" type="hidden"/>
+          <SelectInput source="nivel" choices={[
+              { id: 'A1', name: 'A1' },
+              { id: 'A2', name: 'A2' },
+              { id: 'B1', name: 'B1' },
+              { id: 'B2', name: 'B2' },
+              { id: 'C1', name: 'C1' },
+              { id: 'C2', name: 'C2' },
+            ]} defaultValue={ idiomaestudiante?.nivel }/>
+            <BooleanInput source="certificado" defaultValue={ !!idiomaestudiante?.certificado }/>
+      </SimpleForm>
+    );
 };
 
 export const IdiomaListMiniSelected = () => {
@@ -144,7 +179,22 @@ const IdiomasFilters = [
 ];
 
 export const IdiomaList = () => {
+  const [idiomasEstudiante, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
   const isSmall = useMediaQuery((theme) => theme.breakpoints.down('sm'));
+  const permisos = usePermissions();
+
+  useEffect(() => {
+    dataProvider.getIdiomasEstudiante(permisos.permissions.id).then((data) => {
+      setData(data.json);
+      setLoading(false);
+    });
+  }, []);
+
+  if (loading) {
+    return <Loading />;
+  }
+
   return (
     <List filters={IdiomasFilters} actions={<ListActions />} >
       {isSmall ? (
@@ -164,7 +214,7 @@ export const IdiomaList = () => {
           <ShowButton />
           <RenderEditButton />
           <RenderDeleteButton />
-            <FormAddIdiomaEstudiante />
+            <FormAddIdiomaEstudiante registrosIdiomasEstudiante={idiomasEstudiante} />
         </Datagrid>
       )}
     </List>
