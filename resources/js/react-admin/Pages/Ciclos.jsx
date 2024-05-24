@@ -127,7 +127,7 @@ export const CicloListMini = () => {
     const record = useRecordContext();
     if (permisos.permissions.role != 'estudiante' && permisos.permissions.role != 'admin' ) return null;
     return (
-        <List filters={CicloFiltersMini} actions={""} resource="ciclos" title={" "}>
+        <List filters={CicloFiltersMini} actions={false} resource="ciclos" title={" "}>
             {isSmall ? (
                 <SimpleList
                 primaryText={(record) => record.nombre}
