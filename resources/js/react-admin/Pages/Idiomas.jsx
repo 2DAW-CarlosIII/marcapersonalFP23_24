@@ -28,7 +28,7 @@ import {
   } from 'react-admin';
 
 import { useRecordContext, useGetList} from 'react-admin';
-import { useMediaQuery } from '@mui/material';
+import { useMediaQuery, Box } from '@mui/material';
 import { RenderCreateButton, RenderEditButton, RenderDeleteButton } from '../Components/BotonesPermissions';
 import { dataProvider } from '../dataProvider';
 import React, { useState, useEffect } from 'react';
@@ -127,18 +127,20 @@ export const FormAddIdiomaEstudiante = ({registrosIdiomasEstudiante}) => {
 
     const idiomaestudiante = registrosIdiomasEstudiante.find(registro => registro.idioma_id === record.id);
     return (
-        <SimpleForm onSubmit={addIdiomaToEstudiante} toolbar={IdiomaEstudianteToolBar({ idiomaestudiante})} id="add_idioma_estudiante" validate={validateIdioma2Estudiante}>
-          <TextInput source="estudiante_id" defaultValue={permisos.permissions.id} value="{permisos.permissions.id}" type="hidden"/>
-          <TextInput source="idioma_id" defaultValue={record.id} value="{record.id}" type="hidden"/>
-          <SelectInput source="nivel" choices={[
-              { id: 'A1', name: 'A1' },
-              { id: 'A2', name: 'A2' },
-              { id: 'B1', name: 'B1' },
-              { id: 'B2', name: 'B2' },
-              { id: 'C1', name: 'C1' },
-              { id: 'C2', name: 'C2' },
-            ]} defaultValue={ idiomaestudiante?.nivel }/>
-            <BooleanInput source="certificado" defaultValue={ !!idiomaestudiante?.certificado }/>
+        <SimpleForm onSubmit={addIdiomaToEstudiante} toolbar={IdiomaEstudianteToolBar({ idiomaestudiante})} id="add_idioma_estudiante" validate={validateIdioma2Estudiante} >
+          <TextInput source="estudiante_id" defaultValue={permisos.permissions.id} value="{permisos.permissions.id}" type="hidden" sx={{ display: 'none' }} />
+          <TextInput source="idioma_id" defaultValue={record.id} value="{record.id}" type="hidden" sx={{ display: 'none' }} />
+          <Box  display="flex" justifyContent="space-between" gap={4} bgcolor={idiomaestudiante ? 'lightgreen' : undefined}>
+            <SelectInput source="nivel" choices={[
+                { id: 'A1', name: 'A1' },
+                { id: 'A2', name: 'A2' },
+                { id: 'B1', name: 'B1' },
+                { id: 'B2', name: 'B2' },
+                { id: 'C1', name: 'C1' },
+                { id: 'C2', name: 'C2' },
+              ]} defaultValue={ idiomaestudiante?.nivel }/>
+              <BooleanInput source="certificado" defaultValue={ !!idiomaestudiante?.certificado }/>
+          </Box>
       </SimpleForm>
     );
 };
@@ -160,8 +162,6 @@ export const IdiomaListMiniSelected = () => {
             </Datagrid>
         </ArrayField>
         </SimpleShowLayout>
-
-
     );
 };
 
