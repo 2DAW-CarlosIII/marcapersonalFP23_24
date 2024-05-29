@@ -27,7 +27,7 @@ import {
   } from 'react-admin';
 
 import { useRecordContext} from 'react-admin';
-import { useMediaQuery } from '@mui/material';
+import { useMediaQuery, Button, Box } from '@mui/material';
 import { RenderCreateButton, RenderEditButton, RenderDeleteButton } from '../Components/BotonesPermissions';
 import useDropUpDown from '../../Pages/front/src/hooks/useDropUpDown';
 const ListActions = () => (
@@ -99,6 +99,18 @@ export const ProyectoTitle = () => {
   return <span>Proyecto {record ? `"${record.nombre}"` : ''}</span>;
 };
 
+export const DownloadTemplateProject = () => {
+  const fileUrl = import.meta.env.VITE_PROJECT_TEMPLATE_URL;
+
+  return (
+    <a href={fileUrl} download>
+      <Button variant="contained" color="primary">
+        Descargar plantilla de proyecto
+      </Button>
+    </a>
+  );
+}
+
 export const ProyectoEdit = () => {
   const record = useRecordContext();
 
@@ -118,13 +130,17 @@ const dropPerfilC = useDropUpDown();
             <FileField  source="src" title="title" />
         </FileInput>
 
-        <UserListMiniSelected></UserListMiniSelected>
-
-        <p style={{color:'#F59432', fontSize:20}}>Busca a un estudiante y añádelo al proyecto<img onClick={dropPerfilC.desplegarLista}  id="dropdown" src={dropPerfilC.dropImgSrc} width="30" alt=""></img></p>
-        {dropPerfilC.dropImg ?<UserListMini proyecto={record}></UserListMini>
-                             : <p></p>}
-
     </SimpleForm>
+    <Box display="block" textAlign="center">
+        <DownloadTemplateProject />
+    </Box>
+    <Box display="block" textAlign="center">
+      <UserListMiniSelected></UserListMiniSelected>
+
+      <p style={{color:'#F59432', fontSize:20}}>Busca a un estudiante y añádelo al proyecto<img onClick={dropPerfilC.desplegarLista}  id="dropdown" src={dropPerfilC.dropImgSrc} width="30" alt=""></img></p>
+      {dropPerfilC.dropImg ?<UserListMini proyecto={record}></UserListMini>
+                          : <p></p>}
+    </Box>
     </Edit>
   );
 }

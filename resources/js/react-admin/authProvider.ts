@@ -41,7 +41,8 @@ export const authProvider = {
     checkError: (error) => {
         const status = error.status;
         if (status === 401 || status === 403) {
-            return Promise.reject();
+            // return Promise.reject(); // redirect to login page
+            return Promise.resolve();
         }
         return Promise.resolve();
     },
