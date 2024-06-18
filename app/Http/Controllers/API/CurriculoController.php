@@ -47,7 +47,7 @@ class CurriculoController extends Controller
     public function store(Request $request)
     {
         $curriculo = json_decode($request->getContent(), true);
- 
+
         $curriculo['user_id'] = auth()->user()->id;
 
         $curriculo = Curriculo::create($curriculo);
@@ -105,7 +105,9 @@ class CurriculoController extends Controller
         $user = Auth::user();
         if ($user->esEmpresa()) {
             Mail::to($curriculo->user->email)->send(new EmpresaQuiereVerTuCurriculo($user->empresa, $curriculo));
-            abort(401, "Se le ha solicitado permiso al estudiante. En caso de aprobación, se le enviará un correo con el enlace al archivo.");
+            return redirect()->route("home")->with([
+                "status" => "Se le ha solicitado permiso al estudiante. En caso de aprobación, se le enviará un correo con el enlace al archivo."
+            ]);
         }
         $path = $curriculo->getStoragePathPdfCurriculum();
         if (!file_exists($path)) {
@@ -120,7 +122,9 @@ class CurriculoController extends Controller
         $empresa = Empresa::findOrFail($id);
         $this->authorize('autorizar', $curriculo);
         Mail::to($empresa->user->email)->send(new EmpresaAutorizadaVerCurriculo($empresa, $curriculo));
-        return "Hemos enviado un correo a la empresa para que pueda ver tu currículo.";
+        return redirect()->route("home")->with([
+            "status" => "Hemos enviado un correo a la empresa para que pueda ver tu currículo."
+        ]);
     }
 
     public function getCurriculoByMd5($id, $md5)

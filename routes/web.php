@@ -31,12 +31,13 @@ Route::get('/', function () {
 })->name('home');
 */
 
-Route::get('/{any}', function () {
+Route::get('/{any?}', function () {
     return Inertia::render('front/src/main', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
+        'status' => session('status'),
     ]);
 })->name('home')->where('any', '.*');
 

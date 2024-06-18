@@ -14,8 +14,7 @@ const AlumnoMinCard = (props) => {
 
     function imagenAlumno() {
 
-        console.log(imagenPorDefecto);
-        return props.alumno.avatar===null?imagenPorDefecto:props.alumno.avatar;
+        return props.alumno.attachments?.src ?? imagenPorDefecto;
     }
 
     return (

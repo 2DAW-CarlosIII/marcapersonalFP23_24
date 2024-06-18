@@ -2,7 +2,7 @@
     ha autorizado a la empresa {{ $empresa->nombre }} para la descarga de su currículo.</p>
 
 <p>Para comenzar la descarga, pulse click en el siguiente enlace:<br />
-    <a href="{{ route('curriculos.getCurriculoByMd5', [$curriculo->id, $curriculo->getMd5FileFromPdfCurriculum()]) }}">
+    <a href="{{ route('curriculos.getCurriculoPDFByMd5', [$curriculo->id, $curriculo->getMd5FileFromPdfCurriculum()]) }}">
         Descargar curriculo de <strong>{{ $curriculo->user->nombre }} {{ $curriculo->user->apellidos }}</strong>
     </a>
 </p>

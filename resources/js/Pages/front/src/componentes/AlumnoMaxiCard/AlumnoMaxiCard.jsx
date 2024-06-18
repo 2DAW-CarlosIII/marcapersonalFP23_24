@@ -10,6 +10,7 @@ import AlumnoProyectosMaxiCard from "../AlumnoProyectosMaxiCard/AlumnoProyectosM
 import AlumnoActividadesMaxiCard from "../AlumnoActividadesMaxiCard/AlumnoActividadesMaxiCard";
 
 import imagenPorDefecto from '../../assets/img/student-boy-svgrepo-com.svg';
+import { Button } from '@mui/material';
 
 import './AlumnoMaxiCard.css'
 
@@ -22,9 +23,10 @@ const AlumnoMaxiCard = () => {
 
     console.log(alumno.buscando)
 
-    const pdfCV = alumno.buscando ? "" :
+/*    const pdfCV = alumno.buscando ? "" :
                         alumno.alumno.curriculo===null ? ""
                                                        :alumno.alumno.curriculo.pdf_curriculum;
+*/
     const videoCV = alumno.buscando ? "" :
                         alumno.alumno.curriculo===null ? ""
                                                        : alumno.alumno.curriculo.video_curriculum;
@@ -68,8 +70,7 @@ const AlumnoMaxiCard = () => {
 
       function imagenAlumno() {
 
-        console.log(imagenPorDefecto);
-        return alumno.alumno.avatar===null?imagenPorDefecto:alumno.alumno.avatar;
+        return alumno.alumno.attachments?.src ?? imagenPorDefecto;
     }
 
 
@@ -85,8 +86,10 @@ const AlumnoMaxiCard = () => {
                   <div className="flexMaxiCard flex-col ">
                     <span className="AlumnoMaxiCardSobreMi">Contacto.</span>
                     <p><span className="AlumnoMaxiCardSobreMi"> {alumno.alumno.email}</span></p>
-                    <span className="AlumnoMaxiCardSobreMi"> Curriculum</span>
-                    <p><span className="AlumnoMaxiCardSobreMi"> {videoCV} {pdfCV}</span></p>
+                    <Button variant="contained" color="primary" href={`${import.meta.env.VITE_JSON_SERVER_URL}/curriculos/${alumno.alumno.curriculo?.id}/pdf`}>
+                                    Descargar currículo de estudiante
+                    </Button>
+                    <p><span className="AlumnoMaxiCardSobreMi"> {videoCV} </span></p>
                     <span className="AlumnoMaxiCardSobreMi">Sobre mi.</span>
                     <p><span className="AlumnoMaxiCardSobreMi"> {alumno.alumno.sobre_mi}</span></p>
 
