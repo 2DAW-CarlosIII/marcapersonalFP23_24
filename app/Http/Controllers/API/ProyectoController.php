@@ -9,6 +9,7 @@ use App\Models\Proyecto;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Providers\GitHubServiceProvider;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 
 
@@ -68,6 +69,11 @@ class ProyectoController extends Controller
     public function update(Request $request, Proyecto $proyecto)
     {
         $proyectoData = $request->all();
+        // El estudiante puede modificar el fichero del proyecto, pero no puede modificar el docente ni la calificación
+        if(Auth::user()->esEstudiante()) {
+            unset($proyectoData['docente_id']);
+            unset($proyectoData['calificacion']);
+        }
         if ($proyectoRepoZip = $request->file('fichero')) {
             $request->validate([
                 'fichero' => 'required|mimes:zip,rar,bz,bz2,7z|max:5120', // Se permiten ficheros comprimidos de hasta 5 MB

@@ -3,6 +3,7 @@
 namespace App\Policies;
 
 use App\Models\Proyecto;
+use App\Models\ParticipanteProyecto;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
 
@@ -42,7 +43,10 @@ class ProyectoPolicy
      */
     public function update(User $user, Proyecto $proyecto): bool
     {
-        return $user->esPropietario($proyecto, 'docente_id');
+        $esParticipante = ParticipanteProyecto::where('estudiante_id', $user->id)
+                                          ->where('proyecto_id', $proyecto->id)
+                                          ->exists();
+        return $user->esPropietario($proyecto, 'docente_id') || $esParticipante;
     }
 
     /**
