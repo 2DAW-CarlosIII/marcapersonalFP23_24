@@ -10,7 +10,7 @@ function main() {
         <BrowserRouter>
         <App />
         </BrowserRouter>
-    )   
+    )
 }
 
 export default main

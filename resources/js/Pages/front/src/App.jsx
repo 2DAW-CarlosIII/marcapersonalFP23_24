@@ -20,6 +20,7 @@ import Dashboard from "../../Dashboard";
 import Register from "../../Auth/Register";
 import ForgotPassword from "../../Auth/ForgotPassword";
 import Alumnos from "./paginas/Alumnos/Alumnos";
+import FlashMessages from "./componentes/FlashMessages";
 
 
 
@@ -66,6 +67,7 @@ function App() {
 
   return (
     <div className="container-fluid">
+      <FlashMessages />
       <div className="row">
         <div className="col-md-12">
           <Cabecera seleccionarIdioma = {seleccionarIdioma}></Cabecera>

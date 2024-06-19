@@ -37,7 +37,6 @@ Route::get('/{any?}', function () {
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
-        'status' => session('status'),
     ]);
 })->name('home')->where('any', '.*');
 
