@@ -46,7 +46,7 @@ const ListActions = () => (
     <TopToolbar>
         <FilterButton/>
         <RenderCreateButton permisos={{ role: null }} />
-        <ExportButton/>
+        <ExportButton exporter={exportUsers}/>
     </TopToolbar>
 );
 
@@ -57,15 +57,6 @@ const EditActions = () => (
         <RenderDeleteButton />
       </div>
     </Toolbar>
-);
-
-
-const DesdeInput = () => (
-    <DateInput source="created_at" label="Fecha de alta desde" />
-);
-
-const HastaInput = () => (
-    <DateInput source="hasta_at" label="Fecha de alta hasta" />
 );
 
 const validatePasswordMatch = (value, allValues) => {
@@ -91,7 +82,7 @@ export const UserList = () => {
             {isSmall ? (
                 <SimpleList
                     primaryText={(record) => record.nombre}
-                    secondaryText={(record) => record.email}
+                    secondaryText={(record) => record.apellidos}
                     tertiaryText={(record) => record.created_at}
                     linkType={(record) => (record.canEdit ? 'edit' : 'show')}
                 >
@@ -104,8 +95,6 @@ export const UserList = () => {
                     <TextField source="name" label="Usuario" />
                     <TextField source="nombre" label="Nombre" />
                     <TextField source="apellidos" label="Apellidos" />
-                    <EmailField source="email" label="Email" />
-                    <DateField source="created_at" label="Fecha de alta" />
                     <ShowButton />
                     <RenderEditButton />
                     <RenderDeleteButton />
@@ -294,3 +283,17 @@ export const UserCreate = () => {
         </Create>
     );
 };
+
+const exportUsers = (users) => {
+    const usersForExport = users.map((user) => {
+        const { nombre, apellidos } = user;
+        return { nombre, apellidos };
+    });
+    const usersJson = JSON.stringify(usersForExport);
+    const blob = new Blob([usersJson], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'users.json';
+    a.click();
+}
