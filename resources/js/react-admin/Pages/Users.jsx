@@ -6,7 +6,6 @@ import {
     SimpleList,
     Datagrid,
     TextField,
-    EditButton,
     Edit,
     Create,
     SimpleForm,
@@ -18,7 +17,6 @@ import {
     ImageField,
     ImageInput,
     SimpleShowLayout,
-    DateInput,
     PasswordInput,
     SaveButton,
     ListButton,
@@ -35,18 +33,19 @@ import {
 } from 'react-admin';
 
 import AjaxLoader from '../../../js/Pages/front/src/componentes/AjaxLoader/AjaxLoader';
-
-import { useMediaQuery } from '@mui/material';
+import { useMediaQuery, Box } from '@mui/material';
 import { RenderCreateButton, RenderEditButton, RenderDeleteButton } from '../Components/BotonesPermissions';
 import { dataProvider } from '../dataProvider';
 import { CicloListMini, CicloListMiniSelected} from './Ciclos';
+import { IdiomaListMiniSelected, FormAddIdiomaEstudiante } from './Idiomas';
+import DropDownComponent from '../../Pages/front/src/componentes/DropDownComponent';
 
 
 const ListActions = () => (
     <TopToolbar>
         <FilterButton/>
         <RenderCreateButton permisos={{ role: null }} />
-        <ExportButton/>
+        <ExportButton exporter={exportUsers}/>
     </TopToolbar>
 );
 
@@ -57,15 +56,6 @@ const EditActions = () => (
         <RenderDeleteButton />
       </div>
     </Toolbar>
-);
-
-
-const DesdeInput = () => (
-    <DateInput source="created_at" label="Fecha de alta desde" />
-);
-
-const HastaInput = () => (
-    <DateInput source="hasta_at" label="Fecha de alta hasta" />
 );
 
 const validatePasswordMatch = (value, allValues) => {
@@ -91,7 +81,7 @@ export const UserList = () => {
             {isSmall ? (
                 <SimpleList
                     primaryText={(record) => record.nombre}
-                    secondaryText={(record) => record.email}
+                    secondaryText={(record) => record.apellidos}
                     tertiaryText={(record) => record.created_at}
                     linkType={(record) => (record.canEdit ? 'edit' : 'show')}
                 >
@@ -104,8 +94,6 @@ export const UserList = () => {
                     <TextField source="name" label="Usuario" />
                     <TextField source="nombre" label="Nombre" />
                     <TextField source="apellidos" label="Apellidos" />
-                    <EmailField source="email" label="Email" />
-                    <DateField source="created_at" label="Fecha de alta" />
                     <ShowButton />
                     <RenderEditButton />
                     <RenderDeleteButton />
@@ -211,7 +199,6 @@ export const UserListMiniSelected = () => {
                     <TextField source="id" disabled />
                     <TextField source="nombre" label="Nombre"/>
                     <TextField source="apellidos" label="Apellidos" />
-                    <EmailField source="email" label="Email" />
                     <BotonDeleteParticipanteProyecto proyecto={record} refrescarLista={refrescarLista}/>
             </Datagrid>)
             }
@@ -240,9 +227,19 @@ export const UserEdit = () => {
             <ImageInput source="attachments" label='Imagen de Avatar' accept="image/*">
                 <ImageField source="src" title="title" label="Foto de perfil" />
             </ImageInput>
-            <CicloListMini estudiante={record} />
-            <CicloListMiniSelected />
         </SimpleForm>
+        <Box display="block" textAlign="center">
+            <CicloListMiniSelected />
+            <DropDownComponent message="Indica los ciclos que cursas o eres titulado">
+                <CicloListMini estudiante={record} />
+            </DropDownComponent>
+        </Box>
+        <Box display="block" textAlign="center">
+            <IdiomaListMiniSelected />
+            <DropDownComponent message="Añade idiomas a tu competencia idiomática">
+                <FormAddIdiomaEstudiante />
+            </DropDownComponent>
+        </Box>
     </Edit>
 );}
 
@@ -294,3 +291,17 @@ export const UserCreate = () => {
         </Create>
     );
 };
+
+const exportUsers = (users) => {
+    const usersForExport = users.map((user) => {
+        const { nombre, apellidos } = user;
+        return { nombre, apellidos };
+    });
+    const usersJson = JSON.stringify(usersForExport);
+    const blob = new Blob([usersJson], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'users.json';
+    a.click();
+}

@@ -25,12 +25,18 @@ import {
     usePermissions,
     Button,
     ArrayField,
+    useEditContext,
+    Labeled,
+    useNotify,
+    useRefresh,
 } from 'react-admin';
 
 import { useMediaQuery } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
 import { useRecordContext } from 'react-admin';
 import { RenderCreateButton, RenderEditButton, RenderDeleteButton } from '../Components/BotonesPermissions';
 import { dataProvider } from '../dataProvider';
+import AjaxLoader from '../../Pages/front/src/componentes/AjaxLoader/AjaxLoader';
 
 const ListActions = () => (
   <TopToolbar>
@@ -101,20 +107,44 @@ export const CicloList = () => {
 
 const BotonAddCicloEstudiante = ({estudiante}) => {
     const record = useRecordContext();
+    const notify = useNotify();
+    const refresh = useRefresh();
     const handleClick = () => {
-        dataProvider.postCicloEstudiante(estudiante.id, record.id);
+        dataProvider.postCicloEstudiante(estudiante.id, record.id)
+        .then(() => {
+          refresh();
+          notify('Ciclo añadido correctamente', { type: 'success' });
+      })
+        .catch((error) => {
+          notify(`Error: ${error.message}`, { type: 'error' });
+        });
     };
 
-    return <Button onClick={handleClick}>Añadir estudios</Button>;
+    return <Button label="Añadir estudios" onClick={handleClick} />;
 };
 
 const BotonDeleteCicloEstudiante = ({estudiante}) => {
-    const record = useRecordContext();
-    const handleClick = () => {
-        dataProvider.deleteCicloEstudiante(estudiante.id, record.id);
-    };
+    const record = useRecordContext(); //ciclo
+    const notify = useNotify();
+    const refresh = useRefresh();
+      const deleteClick = (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        dataProvider.deleteCicloEstudiante(estudiante.id, record.id)
+            .then(() => {
+                refresh();
+                notify('Ciclo eliminado correctamente', { type: 'success' });
+            })
+            .catch((error) => {
+                notify(`Error: ${error.message}`, { type: 'error' });
+            });
+      };
 
-    return <Button onClick={handleClick}>Eliminar estudios</Button>;
+      return(
+        <Button label="Eliminar estudios" onClick={deleteClick} >
+            <DeleteIcon />
+        </Button>
+      )
 };
 
 const CicloFiltersMini = [
@@ -123,8 +153,8 @@ const CicloFiltersMini = [
 
 export const CicloListMini = () => {
     const isSmall = useMediaQuery((theme) => theme.breakpoints.down('sm'));
+    const record = useRecordContext(); //estudiante
     const permisos = usePermissions();
-    const record = useRecordContext();
     if (permisos.permissions.role != 'estudiante' && permisos.permissions.role != 'admin' ) return null;
     return (
         <List filters={CicloFiltersMini} actions={false} resource="ciclos" title={" "}>
@@ -142,7 +172,6 @@ export const CicloListMini = () => {
                     <TextField source="nombre" label="Nombre" />
                     <TextField source="grado" label="Grado" />
                     <BotonAddCicloEstudiante estudiante={record} />
-                    <BotonDeleteCicloEstudiante estudiante={record} />
                 </Datagrid>
             )}
         </List>
@@ -151,23 +180,25 @@ export const CicloListMini = () => {
 
 export const CicloListMiniSelected = () => {
     const isSmall = useMediaQuery((theme) => theme.breakpoints.down('sm'));
-    const permisos = usePermissions();
-    if (permisos.permissions.role != 'estudiante' && permisos.permissions.role != 'admin' ) return null;
+    const {record, isFetching} = useEditContext();
 
-// Lo haremos con ReferenceArrayField https://marmelab.com/react-admin/ReferenceArrayField.html
-// o con  ReferenceManyField https://marmelab.com/react-admin/ReferenceManyField.html
     return (
+        <Labeled label="Ciclos del estudiante">
         <SimpleShowLayout >
-        <ArrayField source = "selected">
-            <Datagrid bulkActionButtons={false}>
+        <ArrayField source="ciclos" >
+            { isFetching ? ( <AjaxLoader/>)
+            : (<Datagrid bulkActionButtons={false}>
                     <TextField source="id" disabled />
                     <TextField source="cod_ciclo" label="Código" />
                     <TextField source="nombre" label="Nombre" />
                     <TextField source="grado" label="Grado" />
-            </Datagrid>
+                    <BotonDeleteCicloEstudiante estudiante={record}/>
+            </Datagrid>)
+            }
         </ArrayField>
-        </SimpleShowLayout>
 
+        </SimpleShowLayout>
+        </Labeled>
 
     );
 };

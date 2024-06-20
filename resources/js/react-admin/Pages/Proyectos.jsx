@@ -29,7 +29,9 @@ import {
 import { useRecordContext} from 'react-admin';
 import { useMediaQuery, Button, Box } from '@mui/material';
 import { RenderCreateButton, RenderEditButton, RenderDeleteButton } from '../Components/BotonesPermissions';
-import useDropUpDown from '../../Pages/front/src/hooks/useDropUpDown';
+import { UserListMini, UserListMiniSelected} from '../Pages/Users';
+import DropDownComponent from '../../Pages/front/src/componentes/DropDownComponent';
+
 const ListActions = () => (
     <TopToolbar>
         <FilterButton/>
@@ -46,8 +48,6 @@ const EditActions = () => (
       </div>
     </Toolbar>
 );
-
-import { UserListMini, UserListMiniSelected} from '../Pages/Users';
 
 const TutorInput = () => (
     <ReferenceInput label="Tutor" source="docente_id" reference="docentes" alwaysOn >
@@ -114,8 +114,6 @@ export const DownloadTemplateProject = () => {
 export const ProyectoEdit = () => {
   const record = useRecordContext();
 
-const dropPerfilC = useDropUpDown();
-
   return (
     <Edit title={<ProyectoTitle />}>
     <SimpleForm toolbar={<EditActions />} >
@@ -136,10 +134,9 @@ const dropPerfilC = useDropUpDown();
     </Box>
     <Box display="block" textAlign="center">
       <UserListMiniSelected></UserListMiniSelected>
-
-      <p style={{color:'#F59432', fontSize:20}}>Busca a un estudiante y añádelo al proyecto<img onClick={dropPerfilC.desplegarLista}  id="dropdown" src={dropPerfilC.dropImgSrc} width="30" alt=""></img></p>
-      {dropPerfilC.dropImg ?<UserListMini proyecto={record}></UserListMini>
-                          : <p></p>}
+      <DropDownComponent message="Añade participantes al proyecto">
+          <UserListMini proyecto={record} />
+      </DropDownComponent>
     </Box>
     </Edit>
   );
