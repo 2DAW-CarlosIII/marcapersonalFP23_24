@@ -6,7 +6,6 @@ import {
     SimpleList,
     Datagrid,
     TextField,
-    EditButton,
     Edit,
     Create,
     SimpleForm,
@@ -18,7 +17,6 @@ import {
     ImageField,
     ImageInput,
     SimpleShowLayout,
-    DateInput,
     PasswordInput,
     SaveButton,
     ListButton,
@@ -35,11 +33,12 @@ import {
 } from 'react-admin';
 
 import AjaxLoader from '../../../js/Pages/front/src/componentes/AjaxLoader/AjaxLoader';
-
-import { useMediaQuery } from '@mui/material';
+import { useMediaQuery, Box } from '@mui/material';
 import { RenderCreateButton, RenderEditButton, RenderDeleteButton } from '../Components/BotonesPermissions';
 import { dataProvider } from '../dataProvider';
 import { CicloListMini, CicloListMiniSelected} from './Ciclos';
+import { IdiomaListMiniSelected, FormAddIdiomaEstudiante } from './Idiomas';
+import DropDownComponent from '../../Pages/front/src/componentes/DropDownComponent';
 
 
 const ListActions = () => (
@@ -200,7 +199,6 @@ export const UserListMiniSelected = () => {
                     <TextField source="id" disabled />
                     <TextField source="nombre" label="Nombre"/>
                     <TextField source="apellidos" label="Apellidos" />
-                    <EmailField source="email" label="Email" />
                     <BotonDeleteParticipanteProyecto proyecto={record} refrescarLista={refrescarLista}/>
             </Datagrid>)
             }
@@ -229,9 +227,19 @@ export const UserEdit = () => {
             <ImageInput source="attachments" label='Imagen de Avatar' accept="image/*">
                 <ImageField source="src" title="title" label="Foto de perfil" />
             </ImageInput>
-            <CicloListMini estudiante={record} />
-            <CicloListMiniSelected />
         </SimpleForm>
+        <Box display="block" textAlign="center">
+            <CicloListMiniSelected />
+            <DropDownComponent message="Indica los ciclos que cursas o eres titulado">
+                <CicloListMini estudiante={record} />
+            </DropDownComponent>
+        </Box>
+        <Box display="block" textAlign="center">
+            <IdiomaListMiniSelected />
+            <DropDownComponent message="Añade idiomas a tu competencia idiomática">
+                <FormAddIdiomaEstudiante />
+            </DropDownComponent>
+        </Box>
     </Edit>
 );}
 

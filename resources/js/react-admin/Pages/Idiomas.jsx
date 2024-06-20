@@ -23,8 +23,8 @@ import {
     BooleanInput,
     useNotify,
     useRefresh,
-    Loading,
-    DeleteButton,
+    Labeled,
+    useEditContext,
   } from 'react-admin';
 
 import { useRecordContext, useGetList} from 'react-admin';
@@ -33,6 +33,7 @@ import { RenderCreateButton, RenderEditButton, RenderDeleteButton } from '../Com
 import { dataProvider } from '../dataProvider';
 import React, { useState, useEffect } from 'react';
 import DeleteIcon from '@mui/icons-material/Delete';
+import AjaxLoader from '../../Pages/front/src/componentes/AjaxLoader/AjaxLoader';
 
 const ListActions = () => (
     <TopToolbar>
@@ -69,15 +70,14 @@ const IdiomaInput = () => {
   );
 }
 
-const BotonDeleteIdiomaEstudiante = () => {
+const BotonDeleteIdiomaEstudiante = ({estudiante}) => {
   const record = useRecordContext(); //idioma
-  const permisos = usePermissions();
   const notify = useNotify();
   const refresh = useRefresh();
     const deleteClick = (event) => {
       event.preventDefault();
       event.stopPropagation();
-      dataProvider.deleteIdiomaEstudiante(permisos.permissions.id, record.id)
+      dataProvider.deleteIdiomaEstudiante(estudiante.id, record.id)
           .then(() => {
               refresh();
               notify('Idioma eliminado correctamente', { type: 'success' });
@@ -94,22 +94,14 @@ const BotonDeleteIdiomaEstudiante = () => {
     )
 };
 
-const IdiomaEstudianteToolBar = props => {
-  return props?.idiomaestudiante ? (
-  <Toolbar {...props} >
-      <SaveButton />
-      <BotonDeleteIdiomaEstudiante />
-  </Toolbar>
-  )
-  : (
+const IdiomaEstudianteToolBar = props => (
       <Toolbar {...props} >
           <SaveButton />
       </Toolbar>
   );
-}
 
 export const FormAddIdiomaEstudiante = ({registrosIdiomasEstudiante}) => {
-  const record = useRecordContext(); //idioma
+  const record = useRecordContext(); //estudiante
   const permisos = usePermissions();
   const notify = useNotify();
   const refresh = useRefresh();
@@ -125,12 +117,11 @@ export const FormAddIdiomaEstudiante = ({registrosIdiomasEstudiante}) => {
   };
   if (permisos.permissions.role != 'estudiante' && permisos.permissions.role != 'admin' ) return null;
 
-    const idiomaestudiante = registrosIdiomasEstudiante.find(registro => registro.idioma_id === record.id);
     return (
-        <SimpleForm onSubmit={addIdiomaToEstudiante} toolbar={IdiomaEstudianteToolBar({ idiomaestudiante})} id="add_idioma_estudiante" validate={validateIdioma2Estudiante} >
-          <TextInput source="estudiante_id" defaultValue={permisos.permissions.id} value="{permisos.permissions.id}" type="hidden" sx={{ display: 'none' }} />
-          <TextInput source="idioma_id" defaultValue={record.id} value="{record.id}" type="hidden" sx={{ display: 'none' }} />
-          <Box  display="flex" justifyContent="space-between" gap={4} bgcolor={idiomaestudiante ? 'lightgreen' : undefined}>
+        <SimpleForm onSubmit={addIdiomaToEstudiante} toolbar={<IdiomaEstudianteToolBar />} id="add_idioma_estudiante" validate={validateIdioma2Estudiante} >
+          <TextInput source="estudiante_id" defaultValue={record.id} value="{record.id}" type="hidden" sx={{ display: 'none' }} />
+          <Box  display="flex" justifyContent="space-between" gap={4} >
+            <IdiomaInput />
             <SelectInput source="nivel" choices={[
                 { id: 'A1', name: 'A1' },
                 { id: 'A2', name: 'A2' },
@@ -138,8 +129,8 @@ export const FormAddIdiomaEstudiante = ({registrosIdiomasEstudiante}) => {
                 { id: 'B2', name: 'B2' },
                 { id: 'C1', name: 'C1' },
                 { id: 'C2', name: 'C2' },
-              ]} defaultValue={ idiomaestudiante?.nivel }/>
-              <BooleanInput source="certificado" defaultValue={ !!idiomaestudiante?.certificado }/>
+              ]} />
+              <BooleanInput source="certificado"/>
           </Box>
       </SimpleForm>
     );
@@ -147,21 +138,25 @@ export const FormAddIdiomaEstudiante = ({registrosIdiomasEstudiante}) => {
 
 export const IdiomaListMiniSelected = () => {
     const isSmall = useMediaQuery((theme) => theme.breakpoints.down('sm'));
-    const permisos = usePermissions();
-    if (permisos.permissions.role != 'estudiante' && permisos.permissions.role != 'admin' ) return null;
+    const {record, isFetching} = useEditContext();
 
-// Lo haremos con ReferenceArrayField https://marmelab.com/react-admin/ReferenceArrayField.html
-// o con  ReferenceManyField https://marmelab.com/react-admin/ReferenceManyField.html
     return (
+        <Labeled label="Idiomas del estudiante">
         <SimpleShowLayout >
-        <ArrayField source = "selected">
-            <Datagrid bulkActionButtons={false}>
+        <ArrayField source="idiomas" >
+            { isFetching ? ( <AjaxLoader/>)
+            : (<Datagrid bulkActionButtons={false}>
                 <TextField source="id" disabled />
                 <TextField source="english_name" />
                 <TextField source="native_name" />
-            </Datagrid>
+                    <BotonDeleteIdiomaEstudiante estudiante={record}/>
+            </Datagrid>)
+            }
         </ArrayField>
+
         </SimpleShowLayout>
+        </Labeled>
+
     );
 };
 
@@ -179,21 +174,7 @@ const IdiomasFilters = [
 ];
 
 export const IdiomaList = () => {
-  const [idiomasEstudiante, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
   const isSmall = useMediaQuery((theme) => theme.breakpoints.down('sm'));
-  const permisos = usePermissions();
-
-  useEffect(() => {
-    dataProvider.getIdiomasEstudiante(permisos.permissions.id).then((data) => {
-      setData(data.json);
-      setLoading(false);
-    });
-  }, []);
-
-  if (loading) {
-    return <Loading />;
-  }
 
   return (
     <List filters={IdiomasFilters} actions={<ListActions />} >
@@ -214,7 +195,6 @@ export const IdiomaList = () => {
           <ShowButton />
           <RenderEditButton />
           <RenderDeleteButton />
-            <FormAddIdiomaEstudiante registrosIdiomasEstudiante={idiomasEstudiante} />
         </Datagrid>
       )}
     </List>
