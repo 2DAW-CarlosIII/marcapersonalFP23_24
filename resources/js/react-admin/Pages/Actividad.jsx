@@ -25,13 +25,13 @@ import {
 
 import { useMediaQuery } from '@mui/material';
 
-import { RenderCreateButton, RenderEditButton, RenderDeleteButton, MySelf } from '../Components/BotonesPermissions';
+import { RenderCreateButton, RenderEditButton, RenderDeleteButton, MySelf, RenderExportButton } from '../Components/BotonesPermissions';
 
 const ListActions = () => (
   <TopToolbar>
       <FilterButton/>
       <RenderCreateButton permisos={{ role: 'docente' }} />
-      <ExportButton/>
+      <RenderExportButton permisos={{ role: "docente" }}/>
   </TopToolbar>
 );
 

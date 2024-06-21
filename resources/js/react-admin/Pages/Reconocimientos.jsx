@@ -25,13 +25,13 @@ import {
 
 import { useRecordContext} from 'react-admin';
 import { useMediaQuery } from '@mui/material';
-import { RenderCreateButton, RenderEditButton, RenderDeleteButton } from '../Components/BotonesPermissions';
+import { RenderCreateButton, RenderEditButton, RenderDeleteButton, RenderExportButton } from '../Components/BotonesPermissions';
 
 const ListActions = () => (
     <TopToolbar>
         <FilterButton/>
-        <RenderCreateButton permisos={{ role: null }} />
-        <ExportButton/>
+        <RenderCreateButton permisos={{ role: "estudiante" }} />
+        <RenderExportButton permisos={{ role: "docente" }}/>
     </TopToolbar>
 );
 

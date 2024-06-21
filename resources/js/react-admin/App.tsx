@@ -1,4 +1,4 @@
-import { Admin, Resource, ListGuesser, EditGuesser, ShowGuesser } from 'react-admin';
+import { Admin, Resource } from 'react-admin';
 import { dataProvider } from './dataProvider';
 import { authProvider } from './authProvider';
 import { MPFPLayout } from './Layouts/mpfpLayout';
@@ -41,88 +41,100 @@ export const App = () => (
         loginPage={MPFPLogin}
         requireAuth
     >
-        <Resource
-            name="users"
-            icon={UserIcon}
-            list={UserList}
-            edit={UserEdit}
-            show={UserShow}
-            create={UserCreate} />
-        <Resource
-            name="curriculos"
-            list={CurriculoList}
-            edit={CurriculoEdit}
-            show={CurriculoShow}
-            create={CurriculoCreate}
-            icon={CurriculoIcon}
-        />
-        <Resource
-            name="proyectos"
-            icon={ProyectoIcon}
-            list={ProyectoList}
-            edit={ProyectoEdit}
-            show={ProyectoShow}
-            create={ProyectoCreate}
-        />
-        <Resource
-            name="ciclos"
-            list={CicloList}
-            edit={CicloEdit}
-            show={CicloShow}
-            create={CicloCreate}
-            icon={CicloIcon}
-        />
-        <Resource
-            name="familias_profesionales"
-            list={FamiliaProfesionalList}
-            edit={FamiliaProfesionalEdit}
-            show={FamiliaProfesionalShow}
-            create={FamiliaProfesionalCreate}
-            icon={FamiliaIcon}
-        />
-        <Resource
-            name="actividades"
-            list={ActividadList}
-            edit={ActividadEdit}
-            show={ActividadShow}
-            create={ActividadCreate}
-            icon={ActivityIcon}
-        />
-        <Resource
-            name="reconocimientos"
-            icon={ReconocimientoIcon}
-            list={ReconocimientoList}
-            edit={ReconocimientoEdit}
-            show={ReconocimientoShow}
-            create={ReconocimientoCreate}
-        />
+            { permissions => (
+            <>
+                <Resource
+                    name="users"
+                    icon={UserIcon}
+                    list={UserList}
+                    edit={UserEdit}
+                    show={UserShow}
+                    create={UserCreate} />
+                <Resource
+                    name="curriculos"
+                    list={CurriculoList}
+                    edit={CurriculoEdit}
+                    show={CurriculoShow}
+                    create={CurriculoCreate}
+                    icon={CurriculoIcon}
+                />
+                <Resource
+                    name="proyectos"
+                    icon={ProyectoIcon}
+                    list={ProyectoList}
+                    edit={ProyectoEdit}
+                    show={ProyectoShow}
+                    create={ProyectoCreate}
+                />
+                <Resource
+                    name="actividades"
+                    list={ActividadList}
+                    edit={ActividadEdit}
+                    show={ActividadShow}
+                    create={ActividadCreate}
+                    icon={ActivityIcon}
+                />
+                <Resource
+                    name="reconocimientos"
+                    icon={ReconocimientoIcon}
+                    list={ReconocimientoList}
+                    edit={ReconocimientoEdit}
+                    show={ReconocimientoShow}
+                    create={ReconocimientoCreate}
+                />
+                { permissions.role === 'docente' || permissions.role === 'admin' ? (
+                    <>
+                        <Resource
+                            name="empresas"
+                            icon={EmpresaIcon}
+                            list={EmpresaList}
+                            edit={EmpresaEdit}
+                            show={EmpresaShow}
+                            create={EmpresaCreate}
+                        />
+                    </>
+                    ) : null
+                }
+                { permissions.role === 'admin' ? (
+                    <>
+                        <Resource
+                            name="familias_profesionales"
+                            list={FamiliaProfesionalList}
+                            edit={FamiliaProfesionalEdit}
+                            show={FamiliaProfesionalShow}
+                            create={FamiliaProfesionalCreate}
+                            icon={FamiliaIcon}
+                        />
+                        <Resource
+                            name="ciclos"
+                            list={CicloList}
+                            edit={CicloEdit}
+                            show={CicloShow}
+                            create={CicloCreate}
+                            icon={CicloIcon}
+                        />
 
-    <Resource
-            name="empresas"
-            icon={EmpresaIcon}
-            list={EmpresaList}
-            edit={EmpresaEdit}
-            show={EmpresaShow}
-            create={EmpresaCreate}
-        />
+                        <Resource
+                            name="idiomas"
+                            icon={IdiomaIcon}
+                            list={IdiomaList}
+                            edit={IdiomaEdit}
+                            show={IdiomaShow}
+                            create={IdiomaCreate}
+                        />
 
-            <Resource
-            name="competencias"
-            list={CompetenciaList}
-            edit={CompetenciaEdit}
-            show={CompetenciaShow}
-            create={CompetenciaCreate}
-            icon={CompetenciaIcon}
-        />
-
-        <Resource
-            name="idiomas"
-            icon={IdiomaIcon}
-            list={IdiomaList}
-            edit={IdiomaEdit}
-            show={IdiomaShow}
-            create={IdiomaCreate}
-        />
-
+                        <Resource
+                            name="competencias"
+                            list={CompetenciaList}
+                            edit={CompetenciaEdit}
+                            show={CompetenciaShow}
+                            create={CompetenciaCreate}
+                            icon={CompetenciaIcon}
+                        />
+                    </>
+                    ) : null
+                }
+            </>
+        )}
     </Admin>
 );

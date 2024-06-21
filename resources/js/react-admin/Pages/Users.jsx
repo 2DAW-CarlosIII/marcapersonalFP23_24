@@ -34,7 +34,7 @@ import {
 
 import AjaxLoader from '../../../js/Pages/front/src/componentes/AjaxLoader/AjaxLoader';
 import { useMediaQuery, Box } from '@mui/material';
-import { RenderCreateButton, RenderEditButton, RenderDeleteButton } from '../Components/BotonesPermissions';
+import { RenderCreateButton, RenderEditButton, RenderDeleteButton, RenderExportButton } from '../Components/BotonesPermissions';
 import { dataProvider } from '../dataProvider';
 import { CicloListMini, CicloListMiniSelected} from './Ciclos';
 import { IdiomaListMiniSelected, FormAddIdiomaEstudiante } from './Idiomas';
@@ -45,7 +45,7 @@ const ListActions = () => (
     <TopToolbar>
         <FilterButton/>
         <RenderCreateButton permisos={{ role: null }} />
-        <ExportButton exporter={exportUsers}/>
+        <RenderExportButton permisos={{ role: null }} exporter={exportUsers}/>
     </TopToolbar>
 );
 
@@ -110,7 +110,7 @@ const BotonAddParticipanteProyecto = ({proyecto, refrescarLista}) => {
         .then(() => refrescarLista());
     };
 
-    return <Button onClick={handleClick}>Añadir</Button>;
+    return <Button onClick={handleClick}><span>Añadir</span></Button>;
 };
 
 const BotonDeleteParticipanteProyecto = ({proyecto, refrescarLista}) => {
@@ -123,7 +123,7 @@ const BotonDeleteParticipanteProyecto = ({proyecto, refrescarLista}) => {
         .then(() => refrescarLista());
     };
 
-    return <Button onClick={handleClick}>Eliminar</Button>;
+    return <Button onClick={handleClick}><span>Eliminar</span></Button>;
 };
 
 export const UserListMini = () => {
@@ -143,7 +143,7 @@ export const UserListMini = () => {
     return (
         <>
         <List filters={UserFiltersMini}
-              actions={""}
+              actions={false}
               resource="estudiantes"
               title={" "}
               perPage={5}
@@ -251,7 +251,6 @@ export const UserShow = () => (
             <TextField source="name" label="Usuario" className="bold-label" />
             <TextField source="nombre" label="Nombre" />
             <TextField source="apellidos" label="Apellidos" />
-            <EmailField source="email" label="Email" />
             <DateField source="created_at" label="Fecha de alta" />
             <DateField source="updated_at" label="Última actualización" />
         </SimpleShowLayout>

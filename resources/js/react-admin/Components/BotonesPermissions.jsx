@@ -2,6 +2,7 @@ import {
     EditButton,
     CreateButton,
     DeleteWithConfirmButton,
+    ExportButton,
     usePermissions,
     useRecordContext,
     useGetIdentity,
@@ -30,6 +31,12 @@ export const RenderDeleteButton = ({ permisos, ...props }) => {
     const record = useRecordContext();
     if (!record || isLoading) return null;
     return (permissions.role === 'admin' || (record.ownersId?.includes(permissions.id))) && <DeleteWithConfirmButton {...props} />;
+};
+
+export const RenderExportButton = ({ permisos, ...props }) => {
+    const { permissions, isLoading } = usePermissions();
+    if (isLoading) return null;
+    return ((permissions.role === permisos?.role || permissions.role === 'admin')) && <ExportButton {...props} />;
 };
 
 export const MySelf = () => {

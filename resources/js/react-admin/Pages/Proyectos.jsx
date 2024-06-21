@@ -28,7 +28,7 @@ import {
 
 import { useRecordContext} from 'react-admin';
 import { useMediaQuery, Button, Box } from '@mui/material';
-import { RenderCreateButton, RenderEditButton, RenderDeleteButton } from '../Components/BotonesPermissions';
+import { RenderCreateButton, RenderEditButton, RenderDeleteButton, RenderExportButton } from '../Components/BotonesPermissions';
 import { UserListMini, UserListMiniSelected} from '../Pages/Users';
 import DropDownComponent from '../../Pages/front/src/componentes/DropDownComponent';
 
@@ -36,7 +36,7 @@ const ListActions = () => (
     <TopToolbar>
         <FilterButton/>
         <RenderCreateButton permisos={{ role: 'docente' }} />
-        <ExportButton/>
+        <RenderExportButton permisos={{ role: "docente" }}/>
     </TopToolbar>
 );
 
