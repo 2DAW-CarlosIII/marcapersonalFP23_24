@@ -29,7 +29,8 @@ import {
     useRecordContext,
     useEditContext,
     usePermissions,
-    Labeled
+    Labeled,
+    useRedirect
 } from 'react-admin';
 
 import AjaxLoader from '../../../js/Pages/front/src/componentes/AjaxLoader/AjaxLoader';
@@ -75,7 +76,12 @@ const UserFiltersMini = [
 
 export const UserList = () => {
     const isSmall = useMediaQuery((theme) => theme.breakpoints.down('sm'));
-
+    const { permissions } = usePermissions();
+    const redirect = useRedirect();
+    if(permissions.role === 'estudiante') {
+        redirect(`/dashboard/users/${permissions.id}`);
+        return null;
+    }
     return (
         <List filters={UserFilters} actions={<ListActions />} >
             {isSmall ? (
