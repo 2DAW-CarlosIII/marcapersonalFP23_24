@@ -6,7 +6,9 @@
     <li>NIF: {{ $empresa->nif }}</li>
 </ul>
 
-<p>Si <strong>aceptas</strong> que la empresa <strong>{{ $empresa->nombre }}</strong> vea tu currículo en pdf, haz click en el siguiente enlace:<br />
+<p>Si <strong>aceptas</strong> que la empresa <strong>{{ $empresa->nombre }}</strong> vea tu currículo en pdf,
+    autentícate en {{ route('home') }} y autoriza la descarga de tu currículo,
+    haciendo click en el siguiente enlace:<br />
     <a href="{{ route('curriculos.autorizar', $empresa->id) }}">
         Acepto compartir mi currículo con la empresa <strong>{{ $empresa->nombre }}</strong>
     </a>

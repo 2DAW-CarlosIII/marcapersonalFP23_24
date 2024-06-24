@@ -3,7 +3,6 @@
 <ul>
     <li>Nombre: {{ $empresa->nombre }}</li>
     <li>Correo electrónico: {{ $empresa->email }}</li>
-    <li>Teléfono: {{ $empresa->telefono }}</li>
 </ul>
 <p>Para visitarnos, por favor, haga clic en el siguiente enlace:
     <a href="{{ route('empresas.acceso', $empresa->token) }}">Registro en Marca Personal F.P.</a></p>

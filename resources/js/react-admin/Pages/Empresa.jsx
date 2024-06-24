@@ -52,7 +52,8 @@ export const EmpresaList = () => {
           {isSmall ? (
             <SimpleList
               primaryText="%{nif}"
-              secondaryText="%{email}"
+              secondaryText="%{nombre}"
+              tertiaryText="%{email}"
               linkType={(record) => (record.canEdit ? 'edit' : 'show')}
             >
               <RenderEditButton />
@@ -62,7 +63,7 @@ export const EmpresaList = () => {
             <Datagrid bulkActionButtons={false} >
               <TextField source="id" />
               <TextField source="nif" />
-{/*}              <TextField source="nombre" /> */}
+              <TextField source="nombre" />
               <TextField source="email" />
               <ShowButton />
               <RenderEditButton permisos={{ role: 'docente' }} />
@@ -85,6 +86,7 @@ export const EmpresaEdit = () => (
         <SimpleForm toolbar={<EditActions />}>
             <NumberField label="ID" source="id" />
             <TextInput source="nif" />
+            <TextInput source="nombre" />
             <TextInput source="email" />
         </SimpleForm>
     </Edit>
@@ -96,6 +98,7 @@ export const EmpresaShow = () => (
     <Show actions={<ListButton />} >
         <SimpleShowLayout>
             <NumberField label="ID" source="id" />
+            <TextField source="nombre" />
             <TextField source="nif" />
             <TextField source="email" />
         </SimpleShowLayout>
@@ -105,6 +108,7 @@ export const EmpresaShow = () => (
 export const EmpresaCreate = () => (
     <Create>
         <SimpleForm>
+            <TextInput source="nombre" />
             <TextInput source="nif" />
             <TextInput source="email" />
         </SimpleForm>

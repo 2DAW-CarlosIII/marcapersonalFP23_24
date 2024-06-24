@@ -41,7 +41,7 @@ class Empresa extends Model
                 'name' => Str::slug($empresa->nif),
                 'nombre' => substr($empresa->nombre, 0, 50),
                 'email' => $empresa->email,
-                'password' => bcrypt('token'),
+                'password' => bcrypt($empresa->token),
             ]);
 
             $empresa->user()->associate($usuario);
