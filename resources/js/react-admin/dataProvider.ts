@@ -166,8 +166,9 @@ dataProvider.deleteParticipanteProyecto = (proyectoId, userId) => {
     });
 }
 
-dataProvider.postCicloEstudiante = (estudianteId, cicloId) => {
-    return httpClient(`${apiUrl}/estudiantes/${estudianteId}/ciclos`, {
+dataProvider.postCicloEstudianteProyecto = (record, cicloId) => {
+    let tablaPrincipal = record.docente_id ? 'proyectos' : 'estudiantes';
+    return httpClient(`${apiUrl}/${tablaPrincipal}/${record.id}/ciclos`, {
         method: 'POST',
         body: JSON.stringify({ciclo_id: cicloId}),
         headers: new Headers({
@@ -177,8 +178,9 @@ dataProvider.postCicloEstudiante = (estudianteId, cicloId) => {
     });
 }
 
-dataProvider.deleteCicloEstudiante = (estudianteId, cicloId) => {
-    return httpClient(`${apiUrl}/estudiantes/${estudianteId}/ciclos/${cicloId}`, {
+dataProvider.deleteCicloEstudianteProyecto = (record, cicloId) => {
+    let tablaPrincipal = record.docente_id ? 'proyectos' : 'estudiantes';
+    return httpClient(`${apiUrl}/${tablaPrincipal}/${record.id}/ciclos/${cicloId}`, {
         method: 'DELETE',
         headers: new Headers({
             'Content-Type': 'application/json',

@@ -31,6 +31,7 @@ import { useMediaQuery, Button, Box } from '@mui/material';
 import { RenderCreateButton, RenderEditButton, RenderDeleteButton, RenderExportButton } from '../Components/BotonesPermissions';
 import { UserListMini, UserListMiniSelected} from '../Pages/Users';
 import DropDownComponent from '../../Pages/front/src/componentes/DropDownComponent';
+import { CicloListMini, CicloListMiniSelected } from './Ciclos';
 
 const ListActions = () => (
     <TopToolbar>
@@ -138,6 +139,12 @@ export const ProyectoEdit = () => {
           <UserListMini proyecto={record} />
       </DropDownComponent>
     </Box>
+        <Box display="block" textAlign="center">
+            <CicloListMiniSelected />
+            <DropDownComponent message="Indica los ciclos asociados al proyecto">
+                <CicloListMini />
+            </DropDownComponent>
+        </Box>
     </Edit>
   );
 }

@@ -237,7 +237,7 @@ export const UserEdit = () => {
         <Box display="block" textAlign="center">
             <CicloListMiniSelected />
             <DropDownComponent message="Indica los ciclos que cursas o eres titulado">
-                <CicloListMini estudiante={record} />
+                <CicloListMini />
             </DropDownComponent>
         </Box>
         <Box display="block" textAlign="center">

@@ -105,12 +105,12 @@ export const CicloList = () => {
 
 };
 
-const BotonAddCicloEstudiante = ({estudiante}) => {
+const BotonAddCiclo = ({registro}) => {
     const record = useRecordContext();
     const notify = useNotify();
     const refresh = useRefresh();
     const handleClick = () => {
-        dataProvider.postCicloEstudiante(estudiante.id, record.id)
+        dataProvider.postCicloEstudianteProyecto(registro, record.id)
         .then(() => {
           refresh();
           notify('Ciclo añadido correctamente', { type: 'success' });
@@ -123,14 +123,14 @@ const BotonAddCicloEstudiante = ({estudiante}) => {
     return <Button label="Añadir estudios" onClick={handleClick} />;
 };
 
-const BotonDeleteCicloEstudiante = ({estudiante}) => {
+const BotonDeleteCiclo = ({registro}) => {
     const record = useRecordContext(); //ciclo
     const notify = useNotify();
     const refresh = useRefresh();
       const deleteClick = (event) => {
         event.preventDefault();
         event.stopPropagation();
-        dataProvider.deleteCicloEstudiante(estudiante.id, record.id)
+        dataProvider.deleteCicloEstudianteProyecto(registro, record.id)
             .then(() => {
                 refresh();
                 notify('Ciclo eliminado correctamente', { type: 'success' });
@@ -153,9 +153,10 @@ const CicloFiltersMini = [
 
 export const CicloListMini = () => {
     const isSmall = useMediaQuery((theme) => theme.breakpoints.down('sm'));
-    const record = useRecordContext(); //estudiante
+    const record = useRecordContext(); //estudiante o proyecto
     const permisos = usePermissions();
-    if (permisos.permissions.role != 'estudiante' && permisos.permissions.role != 'admin' ) return null;
+    let role = record.docente_id ? 'docente' : 'estudiante';
+    if (permisos.permissions.role != role && permisos.permissions.role != 'admin' ) return null;
     return (
         <List filters={CicloFiltersMini} actions={false} resource="ciclos" title={" "}>
             {isSmall ? (
@@ -171,7 +172,7 @@ export const CicloListMini = () => {
                     <TextField source="cod_ciclo" label="Código" />
                     <TextField source="nombre" label="Nombre" />
                     <TextField source="grado" label="Grado" />
-                    <BotonAddCicloEstudiante estudiante={record} />
+                    <BotonAddCiclo registro={record} />
                 </Datagrid>
             )}
         </List>
@@ -183,7 +184,7 @@ export const CicloListMiniSelected = () => {
     const {record, isFetching} = useEditContext();
 
     return (
-        <Labeled label="Ciclos del estudiante">
+        <Labeled label="Ciclos asociados">
         <SimpleShowLayout >
         <ArrayField source="ciclos" >
             { isFetching ? ( <AjaxLoader/>)
@@ -192,7 +193,7 @@ export const CicloListMiniSelected = () => {
                     <TextField source="cod_ciclo" label="Código" />
                     <TextField source="nombre" label="Nombre" />
                     <TextField source="grado" label="Grado" />
-                    <BotonDeleteCicloEstudiante estudiante={record}/>
+                    <BotonDeleteCiclo registro={record}/>
             </Datagrid>)
             }
         </ArrayField>

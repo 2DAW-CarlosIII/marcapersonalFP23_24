@@ -3,6 +3,7 @@
 use App\Http\Controllers\API\ActividadController;
 use App\Http\Controllers\API\CicloController;
 use App\Http\Controllers\API\CicloEstudianteController;
+use App\Http\Controllers\API\CicloProyectoController;
 use App\Http\Controllers\API\CompetenciaController;
 use App\Http\Controllers\API\ReconocimientoController;
 use App\Http\Controllers\API\UserController;
@@ -93,6 +94,8 @@ Route::prefix('v1')->group(function () {
         Route::post('proyectos/copyrepo/{user}/{reponame}', [ProyectoController::class, 'copyRepo']);
 
     Route::apiResource('proyectos.participantes', ParticipanteController::class)
+        ->except(['update']);
+    Route::apiResource('proyectos.ciclos', CicloProyectoController::class)
         ->except(['update']);
 
     Route::apiResource('reconocimientos', ReconocimientoController::class);
