@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('nif', 15)->unique();
             $table->string('email')->unique();
-            $table->string('nombre', 50);
             $table->string('token', 100);
             $table->timestamps();
         });

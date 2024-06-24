@@ -21,6 +21,10 @@ import {
     FilterButton,
     Toolbar,
     AutocompleteInput,
+    usePermissions,
+    useNotify,
+    Button,
+    useRefresh,
   } from 'react-admin';
 
 import { useRecordContext} from 'react-admin';
@@ -110,6 +114,40 @@ const reconocimientosFilters = [
     DocentesFilter(),
 ];
 
+const ValidarButton = () => {
+    const permisos = usePermissions();
+    const notify = useNotify();
+    const refresh = useRefresh();
+    const registro = useRecordContext();
+    if(
+        (permisos.permissions.role != 'docente' && permisos.permissions.role != 'admin')
+        ||
+        registro.docente_validador
+    ) return null;
+
+    const handleClick = () => {
+        fetch(`${import.meta.env.VITE_JSON_SERVER_URL}/reconocimientos/${registro.id}/validar`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+        .then(() => {
+            notify('Reconocimiento validado');
+            refresh();
+        })
+        .catch((error) => {
+            notify(error, 'error');
+        });
+    };
+
+    return (
+        <Button variant="contained" color="primary" onClick={handleClick}>
+            Validar Reconocimiento del Estudiante
+        </Button>
+    )
+}
+
 export const ReconocimientoList = (props) => {
     const isSmall = useMediaQuery((theme) => theme.breakpoints.down('sm'));
     return (
@@ -127,16 +165,17 @@ export const ReconocimientoList = (props) => {
             ) : (
                 <Datagrid bulkActionButtons={false} >
                     <TextField source="id" />
-                    <ReferenceField label="Estudiante" source="estudiante_id" reference="users">
+                    <ReferenceField label="Estudiante" source="estudiante_id" reference="estudiantes">
                         <FunctionField render={record => record && `${record.nombre} ${record.apellidos}`} />
                     </ReferenceField>
                     <ReferenceField label="Actividad" source="actividad_id" reference="actividades">
                         <FunctionField render={record => record && `${record.nombre}`} />
                     </ReferenceField>
-                    <ReferenceField label="Docente" source="docente_validador" reference="users">
+                    <ReferenceField label="Docente" source="docente_validador" reference="docentes">
                         <FunctionField render={record => record && `${record.nombre} ${record.apellidos}`} />
                     </ReferenceField>
                     <DateField source="fecha" />
+                    <ValidarButton />
                     <ShowButton />
                     <RenderEditButton />
                     <RenderDeleteButton />
