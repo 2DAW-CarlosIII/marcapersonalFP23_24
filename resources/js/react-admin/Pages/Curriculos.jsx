@@ -157,7 +157,7 @@ export const CurriculoCreate = () => (
         <SimpleForm>
             <MySelf />
             <TextInput source="video_curriculum" />
-            <TextInput source="pdf_curriculum" />
+            <TextInput source="sobre_mi"  multiline fullWidth />
         </SimpleForm>
     </Create>
 );
