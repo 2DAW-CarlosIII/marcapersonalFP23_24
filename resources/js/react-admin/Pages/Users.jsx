@@ -40,6 +40,8 @@ import { dataProvider } from '../dataProvider';
 import { CicloListMini, CicloListMiniSelected} from './Ciclos';
 import { IdiomaListMiniSelected, FormAddIdiomaEstudiante } from './Idiomas';
 import DropDownComponent from '../../Pages/front/src/componentes/DropDownComponent';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 
 const ListActions = () => (
@@ -77,11 +79,12 @@ const UserFiltersMini = [
 export const UserList = () => {
     const isSmall = useMediaQuery((theme) => theme.breakpoints.down('sm'));
     const { permissions } = usePermissions();
-    const redirect = useRedirect();
-    if(permissions.role === 'estudiante') {
-        redirect(`/dashboard/users/${permissions.id}`);
-        return null;
-    }
+    const navigate = useNavigate();
+    useEffect(() => {
+        if(permissions.role === 'estudiante') {
+            navigate(`/dashboard/users/${permissions.id}`);
+        }
+    }, [permissions, navigate]);
     return (
         <List filters={UserFilters} actions={<ListActions />} >
             {isSmall ? (
