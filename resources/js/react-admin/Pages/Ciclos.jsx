@@ -158,7 +158,11 @@ export const CicloListMini = () => {
     let role = record.docente_id ? 'docente' : 'estudiante';
     if (permisos.permissions.role != role && permisos.permissions.role != 'admin' ) return null;
     return (
-        <List filters={CicloFiltersMini} actions={false} resource="ciclos" title={" "}>
+        <List filters={CicloFiltersMini}
+              actions={false}
+              resource="ciclos"
+              title={" "}
+              sx={{background:'#F7F7F7'}}>
             {isSmall ? (
                 <SimpleList
                 primaryText={(record) => record.nombre}
@@ -167,7 +171,15 @@ export const CicloListMini = () => {
                 linkType={(record) => (record.canEdit ? 'edit' : 'show')}
                 />
             ) : (
-                <Datagrid bulkActionButtons={false}>
+                <Datagrid bulkActionButtons={false}
+                sx={{
+                    "& .RaDatagrid-table": {
+                        backgroundColor: "#F7F7F7",
+                    },
+                    "& .RaDatagrid-headerCell": {
+                        backgroundColor: "#F7F7F7",
+                    }
+                }}>
                     <TextField source="id" disabled />
                     <TextField source="cod_ciclo" label="Código" />
                     <TextField source="nombre" label="Nombre" />

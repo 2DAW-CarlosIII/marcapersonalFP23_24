@@ -118,7 +118,11 @@ export const FormAddIdiomaEstudiante = ({registrosIdiomasEstudiante}) => {
   if (permisos.permissions.role != 'estudiante' && permisos.permissions.role != 'admin' ) return null;
 
     return (
-        <SimpleForm onSubmit={addIdiomaToEstudiante} toolbar={<IdiomaEstudianteToolBar />} id="add_idioma_estudiante" validate={validateIdioma2Estudiante} >
+        <SimpleForm onSubmit={addIdiomaToEstudiante}
+                    toolbar={<IdiomaEstudianteToolBar />}
+                    id="add_idioma_estudiante"
+                    validate={validateIdioma2Estudiante}
+                    sx={{background:'#F7F7F7'}}>
           <TextInput source="estudiante_id" defaultValue={record.id} value="{record.id}" type="hidden" sx={{ display: 'none' }} />
           <Box  display="flex" justifyContent="space-between" gap={4} >
             <IdiomaInput />

@@ -38,7 +38,8 @@ const BusquedaProyectos = () => {
                             <div className="card-body">
                                 <p className="card-title">{idiomas[idioma].filtros.op3}<img onClick={dropFamilia.desplegarLista}  id="dropdown" src={dropFamilia.dropImgSrc} width="30" alt=""></img></p>
                                 <p className="card-text">{dropFamilia.dropImg ? <ListaFamiliaProfesionales dameFamiliasSeleccionadas = {dameFamiliasSeleccionadas} visible="listaVisible"></ListaFamiliaProfesionales>
-                                                                  : <ListaFamiliaProfesionales dameFamiliasSeleccionadas = {dameFamiliasSeleccionadas} visible="listaOculta"></ListaFamiliaProfesionales>}</p>
+                                                                  : <ListaFamiliaProfesionales dameFamiliasSeleccionadas = {dameFamiliasSeleccionadas} visible="listaOculta"></ListaFamiliaProfesionales>}
+                                </p>
                             </div>
                     </div>
                 </div>
