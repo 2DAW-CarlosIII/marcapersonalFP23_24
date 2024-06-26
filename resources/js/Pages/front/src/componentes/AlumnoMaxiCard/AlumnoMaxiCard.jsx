@@ -86,12 +86,15 @@ const AlumnoMaxiCard = () => {
                   <div className="flexMaxiCard flex-col ">
                     <span className="AlumnoMaxiCardSobreMi">Contacto.</span>
                     <p><span className="AlumnoMaxiCardSobreMi"> {alumno.alumno.email}</span></p>
-                    <Button variant="contained" color="primary" href={`${import.meta.env.VITE_JSON_SERVER_URL}/curriculos/${alumno.alumno.curriculo?.id}/pdf`}>
+                    <Button variant="contained"
+                            sx={{backgroundColor:"#CE7D2D!important",
+                                 color:"#ffffff!important"}}
+                            href={`${import.meta.env.VITE_JSON_SERVER_URL}/curriculos/${alumno.alumno.curriculo?.id}/pdf`}>
                                     Descargar currículo de estudiante
                     </Button>
                     <p><span className="AlumnoMaxiCardSobreMi"> {videoCV} </span></p>
                     <span className="AlumnoMaxiCardSobreMi">Sobre mi.</span>
-                    <p><span className="AlumnoMaxiCardSobreMi"> {alumno.alumno.sobre_mi}</span></p>
+                    <p><span className="AlumnoMaxiCardSobreMi"> {alumno.alumno.curriculo?.sobre_mi}</span></p>
 
                   </div>
 
