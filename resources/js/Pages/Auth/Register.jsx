@@ -7,6 +7,7 @@ import TextInput from '@/Components/TextInput';
 import { Head, useForm } from '@inertiajs/react';
 import { useNavigate, Link } from 'react-router-dom';
 import { dataProvider } from '../../react-admin/dataProvider';
+import EmailDomains from '@/Components/EmailDomains';
 
 export default function Register() {
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -91,6 +92,7 @@ export default function Register() {
                         onChange={(e) => setData('email', e.target.value)}
                         required
                     />
+                    <EmailDomains className="mt-2" />
 
                     <InputError message={errors.email} className="mt-2" />
                 </div>

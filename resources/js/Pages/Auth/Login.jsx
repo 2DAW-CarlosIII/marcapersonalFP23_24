@@ -8,6 +8,7 @@ import TextInput from '@/Components/TextInput';
 import { Head, useForm } from '@inertiajs/react';
 import { useNavigate, Link } from 'react-router-dom';
 import {useCheckAuth, useLogin, useNotify, useSafeSetState, } from 'ra-core';
+import EmailDomains from '@/Components/EmailDomains';
 
 export const Login = (props) => {
 
@@ -96,7 +97,7 @@ export const Login = (props) => {
                         isFocused={true}
                         onChange={(e) => setData('email', e.target.value)}
                     />
-
+                    <EmailDomains className="mt-2" />
                     <InputError message={errors.email} className="mt-2" />
                 </div>
 
