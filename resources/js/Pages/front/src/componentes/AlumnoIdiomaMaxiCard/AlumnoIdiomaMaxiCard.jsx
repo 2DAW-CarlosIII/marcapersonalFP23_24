@@ -15,12 +15,12 @@ const AlumnoIdiomaMaxiCard = (props) => {
 
         return (
 
-            <p  className="flexAlumnoIdiomaMaxiCard flex-col" key={"bandera " + index}>
+            <div  className="flexAlumnoIdiomaMaxiCard flex-col" key={"bandera " + index}>
             <abbr title={idioma.native_name}><img src={url} width="60" alt=""></img></abbr>
             <h2><span className="idiomaMaxiCard colorTextoMaxiCard">{idioma.nombre} </span></h2>
             <h6><span className="colorTextoMaxiCard">Nivel <span className="destacadoRojo">{idioma.nivel}</span> </span></h6>
             <span className="destacadoColor">{textoCertificado} </span>
-            </p>
+            </div>
 
 
         )

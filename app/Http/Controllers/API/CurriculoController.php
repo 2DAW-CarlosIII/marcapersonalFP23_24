@@ -101,7 +101,12 @@ class CurriculoController extends Controller
     public function getCurriculo($id)
     {
         $curriculo = Curriculo::findOrFail($id);
-        $this->authorize('getCurriculo', $curriculo);
+        try {
+            $this->authorize('getCurriculo', $curriculo);
+        } catch (\Exception $e) {
+            return redirect()->route('home')->with('status', 'Necesita autenticarse como empresa para ver el currículo.');
+        }
+
         $user = Auth::user();
         if ($user->esEmpresa()) {
             Mail::to($curriculo->user->email)->send(new EmpresaQuiereVerTuCurriculo($user->empresa, $curriculo));
