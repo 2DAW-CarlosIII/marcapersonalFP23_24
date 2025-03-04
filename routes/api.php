@@ -113,6 +113,8 @@ Route::prefix('v1')->group(function () {
 
     Route::get('{tabla}/count', [CountController::class, 'count']);
     Route::get('totales', [CountController::class, 'totales']);
+
+    include __DIR__ . '/bfi2.php';
 });
 
 // Ya no las utilizamos

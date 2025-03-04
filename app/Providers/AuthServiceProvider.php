@@ -32,6 +32,12 @@ use App\Policies\ReconocimientoPolicy;
 use App\Models\User;
 use App\Policies\ParticipantePolicy;
 use App\Policies\UsersPolicy;
+use App\Models\BFI2\Domain;
+use App\Models\BFI2\Facet;
+use App\Models\BFI2\Question;
+use App\Policies\BFI2\DomainPolicy;
+use App\Policies\BFI2\FacetPolicy;
+use App\Policies\BFI2\QuestionPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
@@ -56,6 +62,9 @@ class AuthServiceProvider extends ServiceProvider
         CicloEstudiado::class => CicloEstudiantePolicy::class,
         IdiomaConocido::class => IdiomaEstudiantePolicy::class,
         CicloProyecto::class => CicloProyectoPolicy::class,
+        Domain::class => DomainPolicy::class,
+        Facet::class => FacetPolicy::class,
+        Question::class => QuestionPolicy::class,
     ];
 
     /**
