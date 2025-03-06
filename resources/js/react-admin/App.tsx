@@ -28,6 +28,7 @@ import { ActividadCreate, ActividadEdit, ActividadList, ActividadShow } from './
 import { FamiliaProfesionalCreate, FamiliaProfesionalEdit, FamiliaProfesionalList, FamiliaProfesionalShow } from './Pages/FamiliaProfesional';
 import { CompetenciaCreate, CompetenciaEdit, CompetenciaList, CompetenciaShow } from './Pages/Competencias'
 import { IdiomaCreate, IdiomaEdit, IdiomaList, IdiomaShow } from './Pages/Idiomas';
+import { BFI2Resources } from '../Components/BFI2/Resource';
 
 import marcaPersonalTheme from './Theme/marcaPersonalTheme';
 
@@ -92,6 +93,12 @@ export const App = () => (
                             show={EmpresaShow}
                             create={EmpresaCreate}
                         />
+                    </>
+                    ) : null
+                }
+                { permissions.role === 'estudiante' ? (
+                    <>
+                        {BFI2Resources}
                     </>
                     ) : null
                 }
