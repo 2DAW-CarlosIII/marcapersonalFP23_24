@@ -241,5 +241,29 @@ function asignarFichero (resource, formData, params) {
     })
 }
 
+// BFI-2
+
+dataProvider.createResponses = (assessmentId, data) => {
+    return httpClient(`${apiUrl}/assessments/${assessmentId}/responses`, {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: new Headers({
+            'Content-Type': 'application/json',
+            'accept': 'application/json',
+        }),
+    });
+}
+
+dataProvider.getResults = (assessmentId) => {
+    return httpClient(`${apiUrl}/assessments/${assessmentId}/results`, {
+        method: 'GET',
+        headers: new Headers({
+            'Content-Type': 'application/json',
+            'accept': 'application/json',
+        }),
+    }).then(({ json }) => {
+        return json;
+    });
+}
 
 export { dataProvider };

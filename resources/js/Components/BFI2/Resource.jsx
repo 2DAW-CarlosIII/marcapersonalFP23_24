@@ -2,18 +2,26 @@
 import React from 'react';
 import {
   Resource,
-  ListGuesser,
+  List,
+  Datagrid,
+  TextField,
+  DateField,
+  ShowButton,
+  EditButton,
+  ChipField,
+  Button,
+  useTranslate,
+  useRecordContext,
   ShowGuesser,
   EditGuesser,
   Create,
   SimpleForm,
-  TextInput,
   ReferenceInput,
   SelectInput,
   NumberInput,
-  BooleanInput
 } from 'react-admin';
-import AssessmentIcon from '@mui/icons-material/Assessment';
+import { useNavigate } from 'react-router-dom';
+import VisibilityIcon from '@mui/icons-material/Visibility';
 import PsychologyIcon from '@mui/icons-material/Psychology';
 import BFI2Assessment from './Assessment';
 import BFI2Results from './Results';
@@ -43,6 +51,70 @@ const AssessmentCreate = (props) => (
   </Create>
 );
 
+// Botón de Ver Resultados
+const ViewResultsButton = () => {
+  const record = useRecordContext();
+  const navigate = useNavigate();
+  const translate = useTranslate();
+
+  // Solo mostrar botón para evaluaciones completadas
+  if (record.status !== 'completed') {
+    return null;
+  }
+
+  return (
+    <Button
+      onClick={() => navigate(`/dashboard/results/${record.id}`)}
+      label={translate('Ver resultados')}
+      color="primary"
+      startIcon={<VisibilityIcon />}
+    />
+  );
+};
+
+// Componente personalizado para renderizar el chip de estado
+const StatusField = () => {
+  const record = useRecordContext();
+  const statusColors = {
+    completed: 'success',
+    in_progress: 'info',
+    abandoned: 'error'
+  };
+
+  const statusLabels = {
+    completed: 'Completed',
+    in_progress: 'In Progress',
+    abandoned: 'Abandoned'
+  };
+
+  return (
+    <ChipField
+      source="status"
+      color={statusColors[record.status]}
+      record={{
+        ...record,
+        status: statusLabels[record.status]
+      }}
+    />
+  );
+};
+
+// Lista personalizada de Assessments
+const AssessmentsList = (props) => (
+  <List {...props}>
+    <Datagrid>
+      <TextField source="id" />
+      <StatusField source="status" />
+      <TextField source="language" />
+      <DateField source="created_at" />
+      <DateField source="completed_at" />
+      <ViewResultsButton />
+      <ShowButton />
+      <EditButton />
+    </Datagrid>
+  </List>
+);
+
 // Customized create form for Responses
 const ResponseCreate = (props) => (
   <Create {...props}>
@@ -64,35 +136,30 @@ const ResponseCreate = (props) => (
 );
 
 export const BFI2Resources = [
-  <Resource
-    name="bfi2"
-    icon={PsychologyIcon}
-    options={{ label: 'BFI-2 Assessment' }}
-    list={() => <BFI2Assessment />}
-  />,
 
   <Resource
     name="assessments"
-    icon={AssessmentIcon}
-    list={ListGuesser}
+    icon={PsychologyIcon}
+    list={AssessmentsList}
+    options={{ label: 'Personalidad BFI-2' }}
     show={ShowGuesser}
     edit={EditGuesser}
-    create={AssessmentCreate}
+    create={() => <BFI2Assessment />}
   />,
 
   <Resource
     name="responses"
-    list={ListGuesser}
     show={ShowGuesser}
     edit={EditGuesser}
     create={ResponseCreate}
+    options={{ label: 'Responses' }}
   />,
 
+  // Results como recurso sin mostrar en el menú
   <Resource
     name="results"
-    list={ListGuesser}
     show={BFI2Results}
-    edit={EditGuesser}
+    options={{ label: 'Results' }}
   />,
 
   <Resource name="domains" />,

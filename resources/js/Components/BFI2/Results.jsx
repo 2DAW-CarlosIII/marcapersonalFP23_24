@@ -5,9 +5,11 @@ import {
   Loading,
   useNotify,
   useGetOne,
-  Title
+  Title,
+  Button
 } from 'react-admin';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import {
   Radar,
   RadarChart,
@@ -42,6 +44,7 @@ import {
 
 const BFI2Results = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [tabValue, setTabValue] = useState(0);
   const [domainResults, setDomainResults] = useState([]);
   const [facetResults, setFacetResults] = useState([]);
@@ -52,6 +55,10 @@ const BFI2Results = () => {
   const dataProvider = useDataProvider();
   const notify = useNotify();
 
+  const handleBack = () => {
+    navigate('/assessments');
+  };
+
   // Obtener datos de la evaluación
   const { data: assessment, isLoading: isAssessmentLoading } = useGetOne(
     'assessments',
@@ -59,7 +66,7 @@ const BFI2Results = () => {
     { enabled: !!id }
   );
 
-  const selectedLanguage = assessment?.language || 'en';
+  const selectedLanguage = assessment?.language || 'es';
 
   useEffect(() => {
     const loadResults = async () => {
@@ -85,26 +92,9 @@ const BFI2Results = () => {
         setFacets(facetsData);
 
         // Cargar resultados de dominios
-        const { data: domainResultsData } = await dataProvider.getList('results', {
-          pagination: { page: 1, perPage: 10 },
-          sort: { field: 'id', order: 'ASC' },
-          filter: {
-            assessment_id: assessment.id,
-            type: 'domain'
-          }
-        });
-        setDomainResults(domainResultsData);
-
-        // Cargar resultados de facetas
-        const { data: facetResultsData } = await dataProvider.getList('results', {
-          pagination: { page: 1, perPage: 50 },
-          sort: { field: 'id', order: 'ASC' },
-          filter: {
-            assessment_id: assessment.id,
-            type: 'facet'
-          }
-        });
-        setFacetResults(facetResultsData);
+        const resultsData = await dataProvider.getResults(assessment.id);
+        setDomainResults(resultsData.domain_results);
+        setFacetResults(resultsData.facet_results);
 
         setLoading(false);
       } catch (error) {
@@ -121,16 +111,13 @@ const BFI2Results = () => {
   // Preparar datos para el gráfico radar de dominios
   const prepareRadarData = () => {
     if (!domainResults.length || !domains.length) return [];
-
-    return [
-      domainResults.reduce((acc, result) => {
+    return domainResults.map((result) => {
         const domain = domains.find(d => d.id === result.trait_id);
-        if (domain) {
-          acc[selectedLanguage === 'en' ? domain.name_en : domain.name_es] = result.score;
-        }
-        return acc;
-      }, {})
-    ];
+        return {
+            'name': selectedLanguage === 'en' ? domain.name_en : domain.name_es,
+            'value': result.score
+        };
+    }, {})
   };
 
   // Preparar datos para el gráfico de barras de facetas
@@ -189,8 +176,16 @@ const BFI2Results = () => {
   const barData = prepareBarData();
 
   return (
-    <Box sx={{ maxWidth: 1000, margin: '0 auto' }}>
+    <Box sx={{ maxWidth: 1000 }}>
       <Title title={selectedLanguage === 'en' ? 'BFI-2 Assessment Results' : 'Resultados de Evaluación BFI-2'} />
+
+      <Box sx={{ mb: 2 }}>
+        <Button
+          onClick={handleBack}
+          label="Volver a Assessments"
+          startIcon={<ArrowBackIcon />}
+        />
+      </Box>
 
       <Card>
         <CardContent>
@@ -215,16 +210,11 @@ const BFI2Results = () => {
 
               <Box sx={{ height: 400, mb: 4 }}>
                 <ResponsiveContainer width="100%" height="100%">
-                  <RadarChart data={radarData} margin={{ top: 10, right: 30, bottom: 10, left: 30 }}>
+                  <RadarChart data={radarData}>
                     <PolarGrid />
                     <PolarAngleAxis
                       dataKey="name"
                       tick={{ fill: '#666', fontSize: 14 }}
-                      tickFormatter={(value) => {
-                        // Get first part of the domain name to avoid long labels
-                        const parts = value.split(' ');
-                        return parts[0];
-                      }}
                     />
                     <PolarRadiusAxis domain={[0, 5]} />
                     <Radar
@@ -302,7 +292,7 @@ const BFI2Results = () => {
                               {selectedLanguage === 'en' ? domain.name_en : domain.name_es}
                             </Typography>
                           </TableCell>
-                          <TableCell align="center">{result.score.toFixed(2)}</TableCell>
+                          <TableCell align="center">{result.score}</TableCell>
                           <TableCell align="center">{interpretScore(result.score)}</TableCell>
                           <TableCell>
                             {selectedLanguage === 'en' ? domain.description_en : domain.description_es}
@@ -362,7 +352,7 @@ const BFI2Results = () => {
                                     {selectedLanguage === 'en' ? facet.name_en : facet.name_es}
                                   </Typography>
                                 </TableCell>
-                                <TableCell align="center">{result.score.toFixed(2)}</TableCell>
+                                <TableCell align="center">{result.score}</TableCell>
                                 <TableCell align="center">{interpretScore(result.score)}</TableCell>
                                 <TableCell>
                                   {selectedLanguage === 'en' ? facet.description_en : facet.description_es}

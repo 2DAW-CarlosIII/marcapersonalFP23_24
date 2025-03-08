@@ -33,7 +33,7 @@ const BFI2Assessment = () => {
   const [responses, setResponses] = useState({});
   const [currentStep, setCurrentStep] = useState(0);
   const [activeSection, setActiveSection] = useState(0);
-  const [language, setLanguage] = useState('en');
+  const [language, setLanguage] = useState('es');
   const [assessment, setAssessment] = useState(null);
 
   const dataProvider = useDataProvider();
@@ -123,20 +123,9 @@ const BFI2Assessment = () => {
       }));
 
       // Enviar respuestas en lotes
-      for (const response of responsesToSubmit) {
-        await dataProvider.create('responses', {
-          data: response
-        });
-      }
-
-      // Marcar la evaluación como completada
-      await dataProvider.update('assessments', {
-        id: assessment.id,
-        data: {
-          status: 'completed',
-          completed_at: new Date().toISOString()
-        }
-      });
+    await dataProvider.createResponses(assessment.id, {
+        responses: responsesToSubmit
+    });
 
       notify('Assessment completed successfully', 'success');
       redirect('show', 'results', assessment.id);
