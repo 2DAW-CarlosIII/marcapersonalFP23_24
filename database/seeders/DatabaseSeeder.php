@@ -26,6 +26,11 @@ class DatabaseSeeder extends Seeder
         $this->call(CompetenciasTableSeeder::class);
         $this->call(IdiomasTableSeeder::class);
 
+        // BFI-2
+        $this->call(\Database\Seeders\BFI2\DomainsTableSeeder::class);
+        $this->call(\Database\Seeders\BFI2\FacetsTableSeeder::class);
+        $this->call(\Database\Seeders\BFI2\QuestionsTableSeeder::class);
+
         if(env('APP_DEBUG') === true) {
             $this->call(ReconocimientosTableSeeder::class);
             $this->call(CurriculosTableSeeder::class);

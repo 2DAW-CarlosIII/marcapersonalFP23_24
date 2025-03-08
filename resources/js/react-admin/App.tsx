@@ -1,4 +1,5 @@
-import { Admin, Resource } from 'react-admin';
+import { Admin, Resource, CustomRoutes } from 'react-admin';
+import { Route } from 'react-router-dom';
 import { dataProvider } from './dataProvider';
 import { authProvider } from './authProvider';
 import { MPFPLayout } from './Layouts/mpfpLayout';
@@ -28,6 +29,8 @@ import { ActividadCreate, ActividadEdit, ActividadList, ActividadShow } from './
 import { FamiliaProfesionalCreate, FamiliaProfesionalEdit, FamiliaProfesionalList, FamiliaProfesionalShow } from './Pages/FamiliaProfesional';
 import { CompetenciaCreate, CompetenciaEdit, CompetenciaList, CompetenciaShow } from './Pages/Competencias'
 import { IdiomaCreate, IdiomaEdit, IdiomaList, IdiomaShow } from './Pages/Idiomas';
+import { BFI2Resources } from '../Components/BFI2/Resource';
+import BFI2Results from '../Components/BFI2/Results';
 
 import marcaPersonalTheme from './Theme/marcaPersonalTheme';
 
@@ -92,6 +95,18 @@ export const App = () => (
                             show={EmpresaShow}
                             create={EmpresaCreate}
                         />
+                    </>
+                    ) : null
+                }
+                { permissions.role === 'estudiante' ? (
+                    <>
+                        {/* Your existing resources */}
+                        {BFI2Resources}
+                        {/* Custom route para los resultados */}
+                        <CustomRoutes>
+                            <Route path="/results/:id" element={<BFI2Results />} />
+                        </CustomRoutes>
+
                     </>
                     ) : null
                 }
