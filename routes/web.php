@@ -31,6 +31,10 @@ Route::get('/', function () {
 })->name('home');
 */
 
+Route::prefix('taskManager')->group(function () {
+    require __DIR__.'/taskManager.php';
+});
+
 Route::get('/{any?}', function () {
     return Inertia::render('front/src/main', [
         'canLogin' => Route::has('login'),
