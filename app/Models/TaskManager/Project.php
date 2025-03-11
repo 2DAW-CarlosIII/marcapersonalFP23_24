@@ -3,6 +3,7 @@ namespace App\Models\TaskManager;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
 use Carbon\Carbon;
 
 class Project extends Model
