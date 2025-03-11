@@ -3,6 +3,13 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use App\Models\TaskManager\File;
+use App\Models\TaskManager\Note;
+use App\Models\TaskManager\Project;
+use App\Models\TaskManager\Reminder;
+use App\Models\TaskManager\Routine;
+use App\Models\TaskManager\Task;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -159,6 +166,56 @@ class User extends Authenticatable
     {
         $dominio = explode('@', $this->email)[1];
         return $dominio;
+    }
+
+    /**
+     * Get the projects for the user.
+     */
+    public function projects()
+    {
+        return $this->hasMany(Project::class);
+    }
+
+    /**
+     * Get the tasks for the user.
+     */
+    public function tasks()
+    {
+        return $this->hasMany(Task::class);
+    }
+
+    /**
+     * Get the routines for the user.
+     */
+    public function routines()
+    {
+        return $this->hasMany(Routine::class);
+    }
+
+    /**
+     * Get the notes for the user.
+     */
+    public function notes()
+    {
+        return $this->hasMany(Note::class);
+    }
+
+    /**
+     * Get the calendar events for the user.
+     */
+    public function files()
+    {
+        return $this->hasMany(File::class);
+    }
+
+    public function reminders()
+    {
+        return $this->hasMany(Reminder::class);
+    }
+
+    public function projectMembers()
+    {
+        return $this->belongsToMany(Project::class, 'project_teams', 'user_id', 'project_id');
     }
 
 }
