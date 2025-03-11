@@ -19,12 +19,12 @@ class ProjectController extends Controller
             $query->where('status', 'completed');
         }])->get();
 
-        return view('taskManager.projects.index', compact('projects'));
+        return view('taskmanager.projects.index', compact('projects'));
     }
 
     public function create()
     {
-        return view('taskManager.projects.create');
+        return view('taskmanager.projects.create');
     }
 
     public function store(Request $request)
@@ -47,11 +47,11 @@ class ProjectController extends Controller
     {
         $teamMembers = $project->users()->get();
         $users = User::all();
-        return view('taskManager.projects.show', compact('project', 'teamMembers', 'users'));
+        return view('taskmanager.projects.show', compact('project', 'teamMembers', 'users'));
     }
     public function edit(Project $project)
     {
-        return view('taskManager.projects.edit', compact('project'));
+        return view('taskmanager.projects.edit', compact('project'));
     }
 
     public function update(Request $request, Project $project)

@@ -30,12 +30,12 @@ class RoutineController extends Controller
             ->take(2)
             ->get();
 
-        return view('taskManager.routines.index', compact('upcomingDailyRoutines', 'upcomingWeeklyRoutines', 'upcomingMonthlyRoutines'));
+        return view('taskmanager.routines.index', compact('upcomingDailyRoutines', 'upcomingWeeklyRoutines', 'upcomingMonthlyRoutines'));
     }
 
     public function create()
     {
-        return view('taskManager.routines.create');
+        return view('taskmanager.routines.create');
     }
 
     public function store(Request $request)
@@ -69,7 +69,7 @@ class RoutineController extends Controller
 
     public function edit(Routine $routine)
     {
-        return view('taskManager.routines.edit', compact('routine'));
+        return view('taskmanager.routines.edit', compact('routine'));
     }
 
     public function update(Request $request, Routine $routine)
@@ -113,24 +113,24 @@ class RoutineController extends Controller
         $weeklyRoutines = Auth::user()->routines()->where('frequency', 'weekly')->get();
         $monthlyRoutines = Auth::user()->routines()->where('frequency', 'monthly')->get();
 
-        return view('taskManager.routines.all', compact('dailyRoutines', 'weeklyRoutines', 'monthlyRoutines'));
+        return view('taskmanager.routines.all', compact('dailyRoutines', 'weeklyRoutines', 'monthlyRoutines'));
     }
 
     public function showDaily()
     {
         $dailyRoutines = Auth::user()->routines()->where('frequency', 'daily')->get();
-        return view('taskManager.routines.daily', compact('dailyRoutines'));
+        return view('taskmanager.routines.daily', compact('dailyRoutines'));
     }
 
     public function showWeekly()
     {
         $weeklyRoutines = Auth::user()->routines()->where('frequency', 'weekly')->get();
-        return view('taskManager.routines.weekly', compact('weeklyRoutines'));
+        return view('taskmanager.routines.weekly', compact('weeklyRoutines'));
     }
 
     public function showMonthly()
     {
         $monthlyRoutines = Auth::user()->routines()->where('frequency', 'monthly')->get();
-        return view('taskManager.routines.monthly', compact('monthlyRoutines'));
+        return view('taskmanager.routines.monthly', compact('monthlyRoutines'));
     }
 }

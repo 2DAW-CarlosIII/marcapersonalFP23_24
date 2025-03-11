@@ -12,12 +12,12 @@ class FileController extends Controller
     public function index()
     {
         $files = Auth::user()->files()->latest()->get();
-        return view('taskManager.files.index', compact('files'));
+        return view('taskmanager.files.index', compact('files'));
     }
 
     public function create()
     {
-        return view('taskManager.files.create');
+        return view('taskmanager.files.create');
     }
 
     public function store(Request $request)
@@ -41,7 +41,7 @@ class FileController extends Controller
 
     public function edit(File $file)
     {
-        return view('taskManager.files.edit', compact('file'));
+        return view('taskmanager.files.edit', compact('file'));
     }
 
     public function update(Request $request, File $file)

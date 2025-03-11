@@ -13,7 +13,7 @@ class TaskController extends Controller
     {
         $tasks = $project->tasks()->get()->groupBy('status');
         $users = $project->users()->get();
-        return view('taskManager.tasks.index', compact('project', 'tasks', 'users'));
+        return view('taskmanager.tasks.index', compact('project', 'tasks', 'users'));
     }
 
     public function store(Request $request, Project $project)
@@ -33,7 +33,7 @@ class TaskController extends Controller
 
     public function show(Task $task)
     {
-        return view('taskManager.tasks.show', compact('task'));
+        return view('taskmanager.tasks.show', compact('task'));
     }
 
     public function update(Request $request, Task $task)

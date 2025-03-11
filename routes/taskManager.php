@@ -10,7 +10,7 @@ use App\Http\Controllers\TaskManager\RoutineController;
 use App\Http\Controllers\TaskManager\TaskController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-
+Route::prefix('taskmanager')->group(function () {
 Route::middleware(['auth'])->group(function () {
     Route::controller(MailController::class)->prefix('mail')->name('mail.')->group(function () {
         Route::get('/', 'index')->name('inbox');
@@ -47,7 +47,7 @@ Route::middleware(['auth'])->group(function () {
 
         $upcomingReminders = $user->reminders()->where('date', '>=', now())->orderBy('date')->take(5)->get();
 
-        return view('dashboard', compact(
+        return view('taskmanager.dashboard', compact(
             'tasksCount',
             'routinesCount',
             'notesCount',
@@ -59,4 +59,6 @@ Route::middleware(['auth'])->group(function () {
             'upcomingReminders'
         ));
     })->name('dashboard');
+});
+
 });

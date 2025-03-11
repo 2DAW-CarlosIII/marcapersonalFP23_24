@@ -12,12 +12,12 @@ class NoteController extends Controller
     public function index()
     {
         $notes = Auth::user()->notes()->latest()->get();
-        return view('taskManager.notes.index', compact('notes'));
+        return view('taskmanager.notes.index', compact('notes'));
     }
 
     public function create()
     {
-        return view('taskManager.notes.create');
+        return view('taskmanager.notes.create');
     }
 
     public function store(Request $request)
@@ -36,7 +36,7 @@ class NoteController extends Controller
 
     public function edit(Note $note)
     {
-        return view('taskManager.notes.edit', compact('note'));
+        return view('taskmanager.notes.edit', compact('note'));
     }
 
     public function update(Request $request, Note $note)

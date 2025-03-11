@@ -12,12 +12,12 @@ class ReminderController extends Controller
     public function index()
     {
         $reminders = Auth::user()->reminders()->latest()->get();
-        return view('taskManager.reminders.index', compact('reminders'));
+        return view('taskmanager.reminders.index', compact('reminders'));
     }
 
     public function create()
     {
-        return view('taskManager.reminders.create');
+        return view('taskmanager.reminders.create');
     }
 
     public function store(Request $request)
@@ -36,7 +36,7 @@ class ReminderController extends Controller
 
     public function edit(Reminder $reminder)
     {
-        return view('taskManager.reminders.edit', compact('reminder'));
+        return view('taskmanager.reminders.edit', compact('reminder'));
     }
 
     public function update(Request $request, Reminder $reminder)
