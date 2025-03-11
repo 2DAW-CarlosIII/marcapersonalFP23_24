@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api\BFI2;
+namespace App\Http\Controllers\API\BFI2;
 
 use App\Helpers\FilterHelper;
 use App\Http\Controllers\Controller;
