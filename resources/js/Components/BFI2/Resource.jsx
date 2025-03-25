@@ -141,7 +141,7 @@ export const BFI2Resources = [
     name="assessments"
     icon={PsychologyIcon}
     list={AssessmentsList}
-    options={{ label: 'Personalidad BFI-2' }}
+    options={{ label: 'Competencias' }}
     show={ShowGuesser}
     edit={EditGuesser}
     create={() => <BFI2Assessment />}

@@ -13,425 +13,399 @@ class QuestionsTableSeeder extends Seeder
     public function run(): void
     {
         $questions = [
-            // Pregunta 1 - Sociability (Facet 1)
+            // Domain 1: Adaptability and Change Management
+            // Facet 1: Openness to Change
             [
                 'id' => 1,
                 'facet_id' => 1,
-                'text_en' => 'I am someone who is outgoing, sociable.',
-                'text_es' => 'Soy alguien extrovertido y sociable.'
+                'text_en' => 'I feel comfortable with unexpected changes in my work or study environment.',
+                'text_es' => 'Me siento cómodo/a con cambios inesperados en mi entorno de trabajo o estudio.'
             ],
-            // Pregunta 2 - Compassion (Facet 4)
             [
                 'id' => 2,
-                'facet_id' => 4,
-                'text_en' => 'I am someone who is compassionate, has a soft heart.',
-                'text_es' => 'Soy alguien compasivo, con un corazón sensible.'
+                'facet_id' => 1,
+                'text_en' => 'I easily adapt to new work methods, even if they require stepping out of my comfort zone.',
+                'text_es' => 'Me adapto con facilidad a nuevos métodos de trabajo, incluso si implican salir de mi zona de confort.'
             ],
-            // Pregunta 3 - Organization (Facet 7)
             [
                 'id' => 3,
-                'facet_id' => 7,
-                'text_en' => 'I am someone who tends to be disorganized.',
-                'text_es' => 'Soy alguien que tiende a ser desorganizado.'
+                'facet_id' => 1,
+                'text_en' => 'I am motivated by the opportunity to acquire new skills when facing changes in my environment.',
+                'text_es' => 'Me motiva la oportunidad de adquirir nuevas habilidades ante cambios en mi entorno.'
             ],
-            // Pregunta 4 - Anxiety (Facet 10)
             [
                 'id' => 4,
-                'facet_id' => 10,
-                'text_en' => 'I am someone who remains calm in tense situations.',
-                'text_es' => 'Soy alguien que permanece tranquilo en situaciones tensas.'
+                'facet_id' => 1,
+                'text_en' => 'I prefer things to remain the same and am uncomfortable with novelty.',
+                'text_es' => 'Prefiero que las cosas se mantengan iguales y me incomoda la novedad.'
             ],
-            // Pregunta 5 - Aesthetic Sensitivity (Facet 14)
+
+            // Facet 2: Flexibility
             [
                 'id' => 5,
-                'facet_id' => 14,
-                'text_en' => 'I am someone who has few artistic interests.',
-                'text_es' => 'Soy alguien con pocos intereses artísticos.'
+                'facet_id' => 2,
+                'text_en' => 'I learn new technologies or tools quickly and autonomously.',
+                'text_es' => 'Aprendo nuevas tecnologías o herramientas de forma rápida y autónoma.'
             ],
-            // Pregunta 6 - Assertiveness (Facet 2)
             [
                 'id' => 6,
                 'facet_id' => 2,
-                'text_en' => 'I am someone who has an assertive personality.',
-                'text_es' => 'Soy alguien con una personalidad asertiva.'
+                'text_en' => 'When assigned tasks are modified, I can reorganize my priorities without difficulty.',
+                'text_es' => 'Cuando las tareas asignadas se modifican, puedo reorganizar mis prioridades sin dificultad.'
             ],
-            // Pregunta 7 - Respectfulness (Facet 5)
             [
                 'id' => 7,
-                'facet_id' => 5,
-                'text_en' => 'I am someone who is respectful, treats others with respect.',
-                'text_es' => 'Soy alguien respetuoso, trata a los demás con respeto.'
+                'facet_id' => 2,
+                'text_en' => 'I accept and use feedback to improve my performance.',
+                'text_es' => 'Acepto y utilizo el feedback recibido para mejorar mi desempeño.'
             ],
-            // Pregunta 8 - Productiveness (Facet 8)
             [
                 'id' => 8,
-                'facet_id' => 8,
-                'text_en' => 'I am someone who tends to be lazy.',
-                'text_es' => 'Soy alguien que tiende a ser perezoso.'
+                'facet_id' => 2,
+                'text_en' => 'I struggle to reorganize my tasks when unexpected events arise.',
+                'text_es' => 'Me cuesta reorganizar mis tareas cuando surgen imprevistos.'
             ],
-            // Pregunta 9 - Depression (Facet 11)
+
+            // Facet 3: Resilience
             [
                 'id' => 9,
-                'facet_id' => 11,
-                'text_en' => 'I am someone who stays optimistic after experiencing a setback.',
-                'text_es' => 'Soy alguien que se mantiene optimista después de experimentar un revés.'
+                'facet_id' => 3,
+                'text_en' => 'When faced with unforeseen problems, I seek solutions calmly and effectively.',
+                'text_es' => 'Frente a problemas imprevistos, busco soluciones de forma calmada y efectiva.'
             ],
-            // Pregunta 10 - Intellectual Curiosity (Facet 13)
             [
                 'id' => 10,
-                'facet_id' => 13,
-                'text_en' => 'I am someone who is curious about many different things.',
-                'text_es' => 'Soy alguien curioso sobre muchas cosas diferentes.'
+                'facet_id' => 3,
+                'text_en' => 'I find the positive side in situations of change and see them as learning opportunities.',
+                'text_es' => 'Encuentro el lado positivo en las situaciones de cambio y las veo como oportunidades de aprendizaje.'
             ],
-            // Pregunta 11 - Energy Level (Facet 3)
             [
                 'id' => 11,
                 'facet_id' => 3,
-                'text_en' => 'I am someone who rarely feels excited or eager.',
-                'text_es' => 'Soy alguien que raramente se siente emocionado o entusiasmado.'
+                'text_en' => 'I maintain control and concentration even in uncertain circumstances.',
+                'text_es' => 'Mantengo el control y la concentración incluso en circunstancias inciertas.'
             ],
-            // Pregunta 12 - Trust (Facet 6)
             [
                 'id' => 12,
-                'facet_id' => 6,
-                'text_en' => 'I am someone who is suspicious of others\' intentions.',
-                'text_es' => 'Soy alguien que desconfía de las intenciones de los demás.'
+                'facet_id' => 3,
+                'text_en' => 'I find it very difficult to adapt to unexpected changes.',
+                'text_es' => 'Me resulta muy difícil adaptarme a cambios inesperados.'
             ],
-            // Pregunta 13 - Responsibility (Facet 9)
+
+            // Domain 2: Effective Communication
+            // Facet 4: Expression Clarity
             [
                 'id' => 13,
-                'facet_id' => 9,
-                'text_en' => 'I am someone who is reliable, can always be counted on.',
-                'text_es' => 'Soy alguien confiable, siempre se puede contar conmigo.'
+                'facet_id' => 4,
+                'text_en' => 'I explain my ideas clearly and in a structured way, both orally and in writing.',
+                'text_es' => 'Explico mis ideas de forma clara y estructurada, tanto oral como escrita.'
             ],
-            // Pregunta 14 - Emotional Volatility (Facet 12)
-            [
-                'id' => 14,
-                'facet_id' => 12,
-                'text_en' => 'I am someone who tends to feel upset easily.',
-                'text_es' => 'Soy alguien que tiende a molestarse con facilidad.'
-            ],
-            // Pregunta 15 - Creative Imagination (Facet 15)
-            [
-                'id' => 15,
-                'facet_id' => 15,
-                'text_en' => 'I am someone who is original, comes up with new ideas.',
-                'text_es' => 'Soy alguien original, se me ocurren ideas nuevas.'
-            ],
-            // Pregunta 16 - Sociability (Facet 1)
             [
                 'id' => 16,
-                'facet_id' => 1,
-                'text_en' => 'I am someone who keeps to myself.',
-                'text_es' => 'Soy alguien reservado.'
-            ],
-            // Pregunta 17 - Compassion (Facet 4)
-            [
-                'id' => 17,
                 'facet_id' => 4,
-                'text_en' => 'I am someone who can be cold and uncaring.',
-                'text_es' => 'Soy alguien que puede ser frío e indiferente.'
+                'text_en' => 'I have difficulties expressing my ideas coherently.',
+                'text_es' => 'Tengo dificultades para expresar mis ideas de forma coherente.'
             ],
-            // Pregunta 18 - Organization (Facet 7)
-            [
-                'id' => 18,
-                'facet_id' => 7,
-                'text_en' => 'I am someone who keeps things neat and tidy.',
-                'text_es' => 'Soy alguien que mantiene las cosas limpias y ordenadas.'
-            ],
-            // Pregunta 19 - Anxiety (Facet 10)
             [
                 'id' => 19,
-                'facet_id' => 10,
-                'text_en' => 'I am someone who worries a lot.',
-                'text_es' => 'Soy alguien que se preocupa mucho.'
+                'facet_id' => 4,
+                'text_en' => 'I use concrete examples to facilitate understanding of my ideas.',
+                'text_es' => 'Utilizo ejemplos concretos para facilitar la comprensión de mis ideas.'
             ],
-            // Pregunta 20 - Aesthetic Sensitivity (Facet 14)
-            [
-                'id' => 20,
-                'facet_id' => 14,
-                'text_en' => 'I am someone who values art and beauty.',
-                'text_es' => 'Soy alguien que valora el arte y la belleza.'
-            ],
-            // Pregunta 21 - Assertiveness (Facet 2)
-            [
-                'id' => 21,
-                'facet_id' => 2,
-                'text_en' => 'I am someone who tends to be dominant.',
-                'text_es' => 'Soy alguien que tiende a ser dominante.'
-            ],
-            // Pregunta 22 - Respectfulness (Facet 5)
-            [
-                'id' => 22,
-                'facet_id' => 5,
-                'text_en' => 'I am someone who starts arguments with others.',
-                'text_es' => 'Soy alguien que inicia discusiones con otros.'
-            ],
-            // Pregunta 23 - Productiveness (Facet 8)
-            [
-                'id' => 23,
-                'facet_id' => 8,
-                'text_en' => 'I am someone who has difficulty getting started on tasks.',
-                'text_es' => 'Soy alguien que tiene dificultad para comenzar tareas.'
-            ],
-            // Pregunta 24 - Depression (Facet 11)
             [
                 'id' => 24,
-                'facet_id' => 11,
-                'text_en' => 'I am someone who feels blue, down.',
-                'text_es' => 'Soy alguien que se siente melancólico, decaído.'
+                'facet_id' => 4,
+                'text_en' => 'I struggle to adapt my message to different audiences.',
+                'text_es' => 'Me cuesta adaptar mi mensaje a diferentes audiencias.'
             ],
-            // Pregunta 25 - Intellectual Curiosity (Facet 13)
+
+            // Facet 5: Active Listening
+            [
+                'id' => 14,
+                'facet_id' => 5,
+                'text_en' => 'I actively listen to people when they communicate their ideas to me.',
+                'text_es' => 'Escucho activamente a las personas cuando me comunican sus ideas.'
+            ],
+            [
+                'id' => 20,
+                'facet_id' => 5,
+                'text_en' => 'I often interrupt others without allowing them to finish their thoughts.',
+                'text_es' => 'A menudo interrumpo a otros sin permitirles terminar sus pensamientos.'
+            ],
+            [
+                'id' => 21,
+                'facet_id' => 5,
+                'text_en' => 'I recognize the importance of listening before responding in a conversation.',
+                'text_es' => 'Reconozco la importancia de escuchar antes de responder en una conversación.'
+            ],
+            [
+                'id' => 23,
+                'facet_id' => 5,
+                'text_en' => 'I avoid interrupting people while they are speaking.',
+                'text_es' => 'Evito interrumpir a las personas mientras están hablando.'
+            ],
+
+            // Facet 6: Communication Adaptability
+            [
+                'id' => 15,
+                'facet_id' => 6,
+                'text_en' => 'I adapt my communication style according to the characteristics and needs of my audience.',
+                'text_es' => 'Adapto mi forma de comunicarme según las características y necesidades de mi interlocutor.'
+            ],
+            [
+                'id' => 17,
+                'facet_id' => 6,
+                'text_en' => 'I immediately ask for clarification when I don\'t understand something.',
+                'text_es' => 'Pido aclaraciones de inmediato cuando no entiendo algo.'
+            ],
+            [
+                'id' => 18,
+                'facet_id' => 6,
+                'text_en' => 'I feel comfortable participating in presentations and group meetings.',
+                'text_es' => 'Me siento cómodo/a participando en presentaciones y reuniones de grupo.'
+            ],
+            [
+                'id' => 22,
+                'facet_id' => 6,
+                'text_en' => 'I maintain a respectful tone in all my interactions.',
+                'text_es' => 'Mantengo un tono respetuoso en todas mis interacciones.'
+            ],
+
+            // Domain 3: Critical Thinking and Problem Solving
+            // Facet 7: Information Analysis
             [
                 'id' => 25,
-                'facet_id' => 13,
-                'text_en' => 'I am someone who has little interest in abstract ideas.',
-                'text_es' => 'Soy alguien que tiene poco interés en ideas abstractas.'
+                'facet_id' => 7,
+                'text_en' => 'I carefully analyze a problem before making a decision.',
+                'text_es' => 'Analizo detenidamente un problema antes de tomar una decisión.'
             ],
-            // Pregunta 26 - Energy Level (Facet 3)
-            [
-                'id' => 26,
-                'facet_id' => 3,
-                'text_en' => 'I am someone who is less active than other people.',
-                'text_es' => 'Soy alguien menos activo que otras personas.'
-            ],
-            // Pregunta 27 - Trust (Facet 6)
             [
                 'id' => 27,
-                'facet_id' => 6,
-                'text_en' => 'I am someone who assumes the best about people.',
-                'text_es' => 'Soy alguien que asume lo mejor de las personas.'
+                'facet_id' => 7,
+                'text_en' => 'I question the information I receive and seek to confirm it before accepting it.',
+                'text_es' => 'Cuestiono la información que recibo y busco confirmarla antes de aceptarla.'
             ],
-            // Pregunta 28 - Responsibility (Facet 9)
             [
                 'id' => 28,
-                'facet_id' => 9,
-                'text_en' => 'I am someone who can be somewhat careless.',
-                'text_es' => 'Soy alguien que puede ser algo descuidado.'
+                'facet_id' => 7,
+                'text_en' => 'I struggle to question the information presented to me.',
+                'text_es' => 'Me cuesta cuestionar la información que se me presenta.'
             ],
-            // Pregunta 29 - Emotional Volatility (Facet 12)
-            [
-                'id' => 29,
-                'facet_id' => 12,
-                'text_en' => 'I am someone who keeps their emotions under control.',
-                'text_es' => 'Soy alguien que mantiene sus emociones bajo control.'
-            ],
-            // Pregunta 30 - Creative Imagination (Facet 15)
-            [
-                'id' => 30,
-                'facet_id' => 15,
-                'text_en' => 'I am someone who has difficulty imagining things.',
-                'text_es' => 'Soy alguien que tiene dificultad para imaginar cosas.'
-            ],
-            // Pregunta 31 - Sociability (Facet 1)
-            [
-                'id' => 31,
-                'facet_id' => 1,
-                'text_en' => 'I am someone who is talkative.',
-                'text_es' => 'Soy alguien hablador.'
-            ],
-            // Pregunta 32 - Compassion (Facet 4)
             [
                 'id' => 32,
-                'facet_id' => 4,
-                'text_en' => 'I am someone who is helpful and unselfish with others.',
-                'text_es' => 'Soy alguien servicial y desinteresado con los demás.'
+                'facet_id' => 7,
+                'text_en' => 'I prefer to make decisions quickly without thoroughly analyzing the situation.',
+                'text_es' => 'Prefiero tomar decisiones rápidamente sin analizar a fondo la situación.'
             ],
-            // Pregunta 33 - Organization (Facet 7)
+
+            // Facet 8: Creative Problem-Solving
+            [
+                'id' => 29,
+                'facet_id' => 8,
+                'text_en' => 'I identify both positive and negative aspects in complex situations.',
+                'text_es' => 'Identifico tanto los aspectos positivos como negativos en situaciones complejas.'
+            ],
+            [
+                'id' => 30,
+                'facet_id' => 8,
+                'text_en' => 'I find creative solutions to the challenges I face.',
+                'text_es' => 'Encuentro soluciones creativas a los desafíos que enfrento.'
+            ],
             [
                 'id' => 33,
-                'facet_id' => 7,
-                'text_en' => 'I am someone who is systematic, likes to keep things in order.',
-                'text_es' => 'Soy alguien sistemático, me gusta mantener las cosas en orden.'
+                'facet_id' => 8,
+                'text_en' => 'I thoroughly investigate the causes of a failure rather than seeking hasty solutions.',
+                'text_es' => 'Investigo a fondo las causas de un fallo en lugar de buscar soluciones apresuradas.'
             ],
-            // Pregunta 34 - Anxiety (Facet 10)
-            [
-                'id' => 34,
-                'facet_id' => 10,
-                'text_en' => 'I am someone who is easily stressed.',
-                'text_es' => 'Soy alguien que se estresa con facilidad.'
-            ],
-            // Pregunta 35 - Aesthetic Sensitivity (Facet 14)
-            [
-                'id' => 35,
-                'facet_id' => 14,
-                'text_en' => 'I am someone who is fascinated by art, music, or literature.',
-                'text_es' => 'Soy alguien fascinado por el arte, la música o la literatura.'
-            ],
-            // Pregunta 36 - Assertiveness (Facet 2)
             [
                 'id' => 36,
-                'facet_id' => 2,
-                'text_en' => 'I am someone who prefers to have others take charge.',
-                'text_es' => 'Soy alguien que prefiere que otros tomen el mando.'
+                'facet_id' => 8,
+                'text_en' => 'I rarely evaluate the possible consequences of my decisions.',
+                'text_es' => 'Rara vez evalúo las posibles consecuencias de mis decisiones.'
             ],
-            // Pregunta 37 - Respectfulness (Facet 5)
+
+            // Facet 9: Decision-Making
+            [
+                'id' => 26,
+                'facet_id' => 9,
+                'text_en' => 'I consider various alternatives and evaluate their consequences before choosing a solution.',
+                'text_es' => 'Considero diversas alternativas y evalúo sus consecuencias antes de elegir una solución.'
+            ],
+            [
+                'id' => 31,
+                'facet_id' => 9,
+                'text_en' => 'I evaluate different points of view before making important decisions.',
+                'text_es' => 'Evalúo diferentes puntos de vista antes de tomar decisiones importantes.'
+            ],
+            [
+                'id' => 34,
+                'facet_id' => 9,
+                'text_en' => 'I reflect on the short and long-term consequences of my decisions.',
+                'text_es' => 'Reflexiono sobre las consecuencias de mis decisiones a corto y largo plazo.'
+            ],
+            [
+                'id' => 35,
+                'facet_id' => 9,
+                'text_en' => 'I maintain objectivity and avoid letting my emotions influence my decisions.',
+                'text_es' => 'Mantengo la objetividad y evito que mis emociones influyan en mis decisiones.'
+            ],
+
+            // Domain 4: Teamwork and Collaboration
+            // Facet 10: Team Integration
             [
                 'id' => 37,
-                'facet_id' => 5,
-                'text_en' => 'I am someone who is sometimes rude to others.',
-                'text_es' => 'Soy alguien que a veces es grosero con los demás.'
+                'facet_id' => 10,
+                'text_en' => 'I enjoy working in teams to achieve common goals.',
+                'text_es' => 'Disfruto trabajar en equipo para alcanzar objetivos comunes.'
             ],
-            // Pregunta 38 - Productiveness (Facet 8)
-            [
-                'id' => 38,
-                'facet_id' => 8,
-                'text_en' => 'I am someone who is efficient, gets things done.',
-                'text_es' => 'Soy alguien eficiente, consigue hacer las cosas.'
-            ],
-            // Pregunta 39 - Depression (Facet 11)
-            [
-                'id' => 39,
-                'facet_id' => 11,
-                'text_en' => 'I am someone who often feels sad.',
-                'text_es' => 'Soy alguien que a menudo se siente triste.'
-            ],
-            // Pregunta 40 - Intellectual Curiosity (Facet 13)
             [
                 'id' => 40,
-                'facet_id' => 13,
-                'text_en' => 'I am someone who loves to read challenging material.',
-                'text_es' => 'Soy alguien que ama leer material desafiante.'
+                'facet_id' => 10,
+                'text_en' => 'I prefer to work alone rather than collaborate with others.',
+                'text_es' => 'Prefiero trabajar solo/a en lugar de colaborar con otros.'
             ],
-            // Pregunta 41 - Energy Level (Facet 3)
-            [
-                'id' => 41,
-                'facet_id' => 3,
-                'text_en' => 'I am someone who is full of energy.',
-                'text_es' => 'Soy alguien lleno de energía.'
-            ],
-            // Pregunta 42 - Trust (Facet 6)
             [
                 'id' => 42,
-                'facet_id' => 6,
-                'text_en' => 'I am someone who suspects hidden motives in others.',
-                'text_es' => 'Soy alguien que sospecha de motivos ocultos en los demás.'
+                'facet_id' => 10,
+                'text_en' => 'I adapt to different roles within the team according to the project\'s needs.',
+                'text_es' => 'Me adapto a diferentes roles dentro del equipo según las necesidades del proyecto.'
             ],
-            // Pregunta 43 - Responsibility (Facet 9)
-            [
-                'id' => 43,
-                'facet_id' => 9,
-                'text_en' => 'I am someone who is dependable, steady.',
-                'text_es' => 'Soy alguien fiable, constante.'
-            ],
-            // Pregunta 44 - Emotional Volatility (Facet 12)
-            [
-                'id' => 44,
-                'facet_id' => 12,
-                'text_en' => 'I am someone who is emotionally stable, not easily upset.',
-                'text_es' => 'Soy alguien emocionalmente estable, no se altera con facilidad.'
-            ],
-            // Pregunta 45 - Creative Imagination (Facet 15)
-            [
-                'id' => 45,
-                'facet_id' => 15,
-                'text_en' => 'I am someone who has little creativity.',
-                'text_es' => 'Soy alguien con poca creatividad.'
-            ],
-            // Pregunta 46 - Sociability (Facet 1)
-            [
-                'id' => 46,
-                'facet_id' => 1,
-                'text_en' => 'I am someone who is outgoing, sociable.',
-                'text_es' => 'Soy alguien extrovertido y sociable.'
-            ],
-            // Pregunta 47 - Compassion (Facet 4)
             [
                 'id' => 47,
-                'facet_id' => 4,
-                'text_en' => 'I am someone who feels little sympathy for others.',
-                'text_es' => 'Soy alguien que siente poca simpatía por los demás.'
+                'facet_id' => 10,
+                'text_en' => 'I fulfill my responsibilities, actively contributing to the team\'s success.',
+                'text_es' => 'Cumplo con mis responsabilidades, contribuyendo activamente al éxito del equipo.'
             ],
-            // Pregunta 48 - Organization (Facet 7)
+
+            // Facet 11: Perspective Respect
+            [
+                'id' => 38,
+                'facet_id' => 11,
+                'text_en' => 'I value and respect my teammates\' ideas, even when they differ from mine.',
+                'text_es' => 'Valoro y respeto las ideas de mis compañeros, aunque sean diferentes a las mías.'
+            ],
+            [
+                'id' => 44,
+                'facet_id' => 11,
+                'text_en' => 'I find it difficult to accept my teammates\' ideas.',
+                'text_es' => 'Me cuesta aceptar las ideas de mis compañeros.'
+            ],
+            [
+                'id' => 45,
+                'facet_id' => 11,
+                'text_en' => 'I communicate openly and respectfully with the team.',
+                'text_es' => 'Me comunico de forma abierta y respetuosa con el equipo.'
+            ],
             [
                 'id' => 48,
-                'facet_id' => 7,
-                'text_en' => 'I am someone who leaves a mess, doesn\'t clean up.',
-                'text_es' => 'Soy alguien que deja desorden, no limpia.'
+                'facet_id' => 11,
+                'text_en' => 'I find it difficult to resolve conflicts and generate consensus in the group.',
+                'text_es' => 'Encuentro difícil resolver conflictos y generar consenso en el grupo.'
             ],
-            // Pregunta 49 - Anxiety (Facet 10)
+
+            // Facet 12: Supportive Behavior
+            [
+                'id' => 39,
+                'facet_id' => 12,
+                'text_en' => 'I strive to resolve conflicts within the team in a fair and constructive manner.',
+                'text_es' => 'Me esfuerzo por resolver conflictos dentro del equipo de manera justa y constructiva.'
+            ],
+            [
+                'id' => 41,
+                'facet_id' => 12,
+                'text_en' => 'I share my knowledge and experience to enrich the group\'s work.',
+                'text_es' => 'Comparto mi conocimiento y experiencia para enriquecer el trabajo del grupo.'
+            ],
+            [
+                'id' => 43,
+                'facet_id' => 12,
+                'text_en' => 'I encourage and support my teammates when we face difficulties.',
+                'text_es' => 'Animo y apoyo a mis compañeros cuando enfrentamos dificultades.'
+            ],
+            [
+                'id' => 46,
+                'facet_id' => 12,
+                'text_en' => 'I am willing to ask for and offer help when necessary.',
+                'text_es' => 'Estoy dispuesto/a a pedir y ofrecer ayuda cuando es necesario.'
+            ],
+
+            // Domain 5: Time Management and Organization
+            // Facet 13: Planning and Prioritization
             [
                 'id' => 49,
-                'facet_id' => 10,
-                'text_en' => 'I am someone who rarely feels anxious or afraid.',
-                'text_es' => 'Soy alguien que raramente se siente ansioso o temeroso.'
+                'facet_id' => 13,
+                'text_en' => 'I plan my time effectively before starting important tasks.',
+                'text_es' => 'Planifico mi tiempo de manera efectiva antes de iniciar tareas importantes.'
             ],
-            // Pregunta 50 - Aesthetic Sensitivity (Facet 14)
-            [
-                'id' => 50,
-                'facet_id' => 14,
-                'text_en' => 'I am someone who thinks poetry and plays are boring.',
-                'text_es' => 'Soy alguien que piensa que la poesía y el teatro son aburridos.'
-            ],
-            // Pregunta 51 - Assertiveness (Facet 2)
             [
                 'id' => 51,
-                'facet_id' => 2,
-                'text_en' => 'I am someone who finds it hard to influence people.',
-                'text_es' => 'Soy alguien que encuentra difícil influir en las personas.'
+                'facet_id' => 13,
+                'text_en' => 'I establish clear priorities when I have multiple tasks to attend to.',
+                'text_es' => 'Establezco prioridades claras cuando tengo múltiples tareas que atender.'
             ],
-            // Pregunta 52 - Respectfulness (Facet 5)
-            [
-                'id' => 52,
-                'facet_id' => 5,
-                'text_en' => 'I am someone who is polite, courteous to others.',
-                'text_es' => 'Soy alguien educado, cortés con los demás.'
-            ],
-            // Pregunta 53 - Productiveness (Facet 8)
             [
                 'id' => 53,
-                'facet_id' => 8,
-                'text_en' => 'I am someone who is persistent, works until the task is finished.',
-                'text_es' => 'Soy alguien persistente, trabaja hasta terminar la tarea.'
-            ],
-            // Pregunta 54 - Depression (Facet 11)
-            [
-                'id' => 54,
-                'facet_id' => 11,
-                'text_en' => 'I am someone who rarely feels depressed.',
-                'text_es' => 'Soy alguien que raramente se siente deprimido.'
-            ],
-            // Pregunta 55 - Intellectual Curiosity (Facet 13)
-            [
-                'id' => 55,
                 'facet_id' => 13,
-                'text_en' => 'I am someone who avoids intellectual discussions.',
-                'text_es' => 'Soy alguien que evita discusiones intelectuales.'
+                'text_en' => 'I meet established deadlines without needing reminders.',
+                'text_es' => 'Cumplo con los plazos establecidos sin necesidad de recordatorios.'
             ],
-            // Pregunta 56 - Energy Level (Facet 3)
             [
                 'id' => 56,
-                'facet_id' => 3,
-                'text_en' => 'I am someone who shows a lot of enthusiasm.',
-                'text_es' => 'Soy alguien que muestra mucho entusiasmo.'
+                'facet_id' => 13,
+                'text_en' => 'I find it difficult to establish clear priorities in my daily work.',
+                'text_es' => 'Me resulta difícil establecer prioridades claras en mi trabajo diario.'
             ],
-            // Pregunta 57 - Trust (Facet 6)
+
+            // Facet 14: Task Execution
+            [
+                'id' => 52,
+                'facet_id' => 14,
+                'text_en' => 'I tend to leave my tasks until the last minute and struggle to meet deadlines.',
+                'text_es' => 'Suelo dejar mis tareas para el último momento y me cuesta cumplir los plazos.'
+            ],
+            [
+                'id' => 54,
+                'facet_id' => 14,
+                'text_en' => 'I avoid distractions and focus on tasks that require attention.',
+                'text_es' => 'Evito distracciones y me concentro en tareas que requieren atención.'
+            ],
             [
                 'id' => 57,
-                'facet_id' => 6,
-                'text_en' => 'I am someone who trusts others.',
-                'text_es' => 'Soy alguien que confía en los demás.'
+                'facet_id' => 14,
+                'text_en' => 'I strive to be punctual in my commitments and responsibilities.',
+                'text_es' => 'Me esfuerzo por ser puntual en mis compromisos y responsabilidades.'
             ],
-            // Pregunta 58 - Responsibility (Facet 9)
             [
                 'id' => 58,
-                'facet_id' => 9,
-                'text_en' => 'I am someone who sometimes behaves irresponsibly.',
-                'text_es' => 'Soy alguien que a veces se comporta de manera irresponsable.'
+                'facet_id' => 14,
+                'text_en' => 'I regularly review my progress to ensure I\'m on the right track.',
+                'text_es' => 'Reviso regularmente mi progreso para asegurarme de estar en el camino correcto.'
             ],
-            // Pregunta 59 - Emotional Volatility (Facet 12)
+
+            // Facet 15: Organization
+            [
+                'id' => 50,
+                'facet_id' => 15,
+                'text_en' => 'I use tools such as calendars or task lists to organize my activities.',
+                'text_es' => 'Utilizo herramientas como agendas o listas de tareas para organizar mis actividades.'
+            ],
+            [
+                'id' => 55,
+                'facet_id' => 15,
+                'text_en' => 'I break down complex projects into smaller, more manageable steps.',
+                'text_es' => 'Divido proyectos complejos en pasos más pequeños y manejables.'
+            ],
             [
                 'id' => 59,
-                'facet_id' => 12,
-                'text_en' => 'I am someone who changes my mood a lot.',
-                'text_es' => 'Soy alguien que cambia de humor a menudo.'
+                'facet_id' => 15,
+                'text_en' => 'I organize my work in a way that avoids accumulating pending tasks.',
+                'text_es' => 'Organizo mi trabajo de manera que evite la acumulación de tareas pendientes.'
             ],
-            // Pregunta 60 - Creative Imagination (Facet 15)
             [
                 'id' => 60,
                 'facet_id' => 15,
-                'text_en' => 'I am someone who is inventive, finds clever ways to do things.',
-                'text_es' => 'Soy alguien inventivo, encuentra formas inteligentes de hacer las cosas.'
+                'text_en' => 'I struggle to organize my activities, which creates confusion in my time management.',
+                'text_es' => 'Me cuesta organizar mis actividades, lo que genera confusión en mi gestión del tiempo.'
             ],
         ];
 

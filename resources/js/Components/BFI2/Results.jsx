@@ -190,7 +190,7 @@ const BFI2Results = () => {
       <Card>
         <CardContent>
           <Typography variant="h5" gutterBottom sx={{ mb: 3 }}>
-            {selectedLanguage === 'en' ? 'Your Personality Profile' : 'Tu Perfil de Personalidad'}
+            {selectedLanguage === 'en' ? 'Your Skills Profile' : 'Tu Perfil de Competencias'}
           </Typography>
 
           <Tabs value={tabValue} onChange={handleTabChange} sx={{ mb: 3 }}>
