@@ -409,6 +409,8 @@ class QuestionsTableSeeder extends Seeder
             ],
         ];
 
+        DB::table('questions')->truncate();
+
         foreach ($questions as $question) {
             DB::table('questions')->insert($question);
         }

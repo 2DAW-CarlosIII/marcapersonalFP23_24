@@ -30,7 +30,7 @@ const Cabecera = (props) => {
             </ul>
             <ul className="navbar-nav">
               <Idioma seleccionarIdioma = {seleccionarIdioma}></Idioma>
-              <a href="/taskmanager">TM</a>
+              {/* <a href="/taskmanager">TM</a> */}
             </ul>
         </div>
     </nav>
