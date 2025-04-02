@@ -16,6 +16,7 @@ const ListaFamiliaProfesionales = (props) => {
     const hasFamilias = familias.listaFamilias?.length > 0;
     const sinFamilias = "No existen familias profesionales";
 
+
     function dameFamiliasSeleccionadas (id, marcado) {
 
         if (marcado) {

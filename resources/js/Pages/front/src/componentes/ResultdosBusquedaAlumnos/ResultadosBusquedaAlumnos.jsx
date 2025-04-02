@@ -12,6 +12,7 @@ import './ResultadosBusquedaAlumnos.css'
 
 import useAlumnos from '../../hooks/useAlumnos';
 import useFiltroFamilia from '../../hooks/useFiltroFamilia';
+import useFiltroPerfil from '../../hooks/useFiltroPerfil';
 
 const ResultadosBusquedaAlumnos = (props) => {
 
@@ -19,7 +20,12 @@ const ResultadosBusquedaAlumnos = (props) => {
 
     const alumnos = useAlumnos();
 
-    const listaAlumnos = useFiltroFamilia(alumnos.listaAlumnos, props.familiasSeleccionadas);
+
+    // Filtro primero por familia
+    const listaAlumnosFiltradosFamilia = useFiltroFamilia(alumnos.listaAlumnos, props.familiasSeleccionadas);
+
+    // Ahora filtro por perfil competencial sobre la lista ya filtrada por familia
+    const listaAlumnos = useFiltroPerfil(listaAlumnosFiltradosFamilia, props.perfilesSeleccionados)
     const hasAlumnos   = listaAlumnos?.length > 0;
     const sinAlumnos   = "Sin Alumnos";
 
