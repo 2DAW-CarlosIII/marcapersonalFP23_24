@@ -5,6 +5,7 @@ namespace App\Http\Resources;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Http\Resources\BFI2\DomainResource;
 
 class UserResource extends JsonResource
 {
@@ -15,13 +16,12 @@ class UserResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-
         $jsonToReturn = array_merge(parent::toArray($request), [
             'curriculo' => new CurriculoResource($this->curriculo),
             'idiomas' => $this->getIdiomasFromUser(),
             'actividades' => ActividadResource::collection($this->actividades),
             'proyectos' => ProyectoResource::collection($this->proyectos),
-            'competencias' => CompetenciaResource::collection($this->competencias),
+            'competencias' => $this->esEstudiante() ? $this->featuredDomains : [],
             'ciclos' => CicloResource::collection($this->ciclos),
             'attachments' => $this->avatar
                 ? [

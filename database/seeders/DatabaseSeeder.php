@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
         $this->call(UsersTableSeeder::class);
         $this->call(FamiliasProfesionalesSeeder::class);
         $this->call(CiclosSeeder::class);
-        $this->call(CompetenciasTableSeeder::class);
+//        $this->call(CompetenciasTableSeeder::class);
         $this->call(IdiomasTableSeeder::class);
 
         // BFI-2
@@ -38,7 +38,7 @@ class DatabaseSeeder extends Seeder
             self::seedProyectos();
             $this->call(ParticipantesProyectosTableSeeder::class);
             $this->call(Users_ciclosTableSeeder::class);
-            $this->call(UsersCompetenciasTableSeeder::class);
+//            $this->call(UsersCompetenciasTableSeeder::class);
             $this->call(UsersIdiomasTableSeeder::class);
 
             $this->call(ProyectoCicloTableSeeder::class);

@@ -4,13 +4,13 @@ namespace App\Http\Controllers\API;
 
 use App\Helpers\FilterHelper;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\CompetenciaResource;
-use App\Models\Competencia;
+use App\Http\Resources\BFI2\DomainResource;
+use App\Models\BFI2\Domain;
 use Illuminate\Http\Request;
 
 class CompetenciaController extends Controller
 {
-    public $modelclass = Competencia::class;
+    public $modelclass = Domain::class;
 
     public function __construct()
     {
@@ -26,7 +26,7 @@ class CompetenciaController extends Controller
         $query = FilterHelper::applyFilter($request, $campos);
         $request->attributes->set('total_count', $query->count());
         $queryOrdered = FilterHelper::applyOrder($query, $request);
-        return CompetenciaResource::collection($queryOrdered->paginate($request->perPage));
+        return DomainResource::collection($queryOrdered->paginate($request->perPage));
     }
 
     /**
